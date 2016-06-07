@@ -5,7 +5,14 @@
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="./css/reset.css"/>
 		<link rel="stylesheet" type="text/css" href="./css/index.css"/>
-		
+		<style type="text/css">
+			.collision{
+				background: red;
+				position: absolute;
+				left: 0;
+				top:0;
+			}
+		</style>
 	</head>
 	<body>
 		
@@ -24,15 +31,15 @@
 			</section>
 			<div class="content">
 				<ul class="clearFix filesSet">
-					<li>
+					<!-- <li>
 						<div class="icon">
 							<input type="checkbox"  class="checkInput" />
 						</div>
 						<strong style="display:block;">123</strong>
 						<div class="clearFix edtor"  style="display:none;">
-							<input type="text" value="123" class="createInputBtn"  />
-							<input type="button" value="√" />
-							<input type="button" value="×" />
+							<input type="text" value="新建文件夹" class="names"  />
+							<input type="button" value="√" class="ok" />
+							<input type="button" value="×" class="cancel" />
 						</div>
 					</li>
 					<li>
@@ -41,15 +48,17 @@
 						</div>
 						<strong style="display:block;">456</strong>
 						<div class="clearFix edtor"  style="display:none;">
-							<input type="text" value="456" class="createInputBtn"  />
-							<input type="button" value="√" />
-							<input type="button" value="×" />
+							<input type="text" value="新建文件夹" class="names"  />
+							<input type="button" value="√" class="ok" />
+							<input type="button" value="×" class="cancel" />
 						</div>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 		</div>
+		<input type="hidden" class="hiddenInput" value="0" />
+		<!-- <script src="./js/data.js"></script> -->
 		<script src="./js/tools.js"></script>
-		<script src="./js/index5.js"></script>
+		<script src="./js/index4.js"></script>
 	</body>
 </html>

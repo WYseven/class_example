@@ -63,7 +63,6 @@ body{
 .content {
 	height: 100%;
 	margin-top: 2px;
-	background: #ccc;
 }
 
 .info a {
@@ -89,6 +88,12 @@ body{
 	/*border: 2px solid #2e80dc;*/
 	border: 2px solid #fff;
 	position: relative;
+}
+.showInput{
+	border: 2px solid #fff;
+}
+.showInput .checkInput{
+	display:block;
 }
 .icon input{
 	width: 20px;

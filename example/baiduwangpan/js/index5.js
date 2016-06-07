@@ -114,16 +114,19 @@
 			
 		});
 		tools.addEvent(edtorInput[2],"click",function(){
+			createFile.isCreateFile = false;
+			console.log( rename.isRename );
 			if( rename.isRename ) {
 				edtor.style.display = "none";
 				strong.style.display = "block";
 				allSelected.disabled = false;
 				tools.$(".checkInput",tools.parents(this,"LI"))[0].disabled = false;
 				rename.isRename = false;
-				return;
-			};
-			filesSet.removeChild(currentLi);
-			createFile.isCreateFile = false;
+			}else{
+				filesSet.removeChild(currentLi);
+			}
+			
+			
 			allSelected.disabled = !whoSelect().length;
 			
 		});
@@ -156,6 +159,9 @@
 				}else{
 					checkedNum--;
 					allSelected.checked = false;
+					if( checkedNum <= 0  ){
+						info.style.display = "none";
+					}
 				}
 				
 				selectNum.innerHTML = checkedNum;
@@ -207,24 +213,29 @@
 	});
 	
 	//重命名,那必须直选中一项才能重命名,否则为灰色,不能点击
-	
 	tools.addEvent(rename,"click",function(){
 		var selectArr = whoSelect();
 		if( selectArr.length === 1 ){
-			tools.$("strong",tools.parents(selectArr[0],"LI"))[0].style.display = "none";
-			tools.$(".edtor",tools.parents(selectArr[0],"LI"))[0].style.display = "block";
-			tools.$(".createInputBtn",tools.parents(selectArr[0],"LI"))[0].select();
-			tools.$("input",tools.parents(selectArr[0],"LI"))[0].disabled = true;
-			allSelected.disabled = true;
-						
-			edtor = tools.$(".edtor",tools.parents(selectArr[0],"LI"))[0];
-			
-			this.isRename = true;
-			createFile.isCreateFile = true;
-			//初始重命名的时候,要保存一下要重命名的input
-			edtorInput = tools.$("input",tools.$(".edtor",tools.parents(selectArr[0],"LI"))[0]);
+			renamehandle.call(this,selectArr[0]);
 		}
-	})
+	});
+	
+	//当重命名时候要对某些元素的操作
+	function renamehandle(renameLi){
+		console.log( tools.$("strong",tools.parents(renameLi,"LI"))[0] );
+		tools.$("strong",tools.parents(renameLi,"LI"))[0].style.display = "none";
+		tools.$(".edtor",tools.parents(renameLi,"LI"))[0].style.display = "block";
+		tools.$(".createInputBtn",tools.parents(renameLi,"LI"))[0].select();
+		tools.$("input",tools.parents(renameLi,"LI"))[0].disabled = true;
+		allSelected.disabled = true;
+					
+		edtor = tools.$(".edtor",tools.parents(renameLi,"LI"))[0];
+		
+		this.isRename = true;
+		createFile.isCreateFile = true;
+		//初始重命名的时候,要保存一下要重命名的input
+		edtorInput = tools.$("input",tools.$(".edtor",tools.parents(renameLi,"LI"))[0]);
+	}
 	
 	//判断有多少个被选中了
 	function whoSelect(){
@@ -235,5 +246,86 @@
 			};
 		}
 		return arr;
-	}
+	};
+	
+	//右击菜单绑定事件
+	var content = tools.$(".content")[0];
+	var contextmenu = tools.$(".contextmenu")[0];
+	var prevLi = null;
+	tools.addEvent(content,"contextmenu",function(ev){
+		
+		
+		var target = tools.parents(ev.target,"LI");  //找到目标的li
+		//如果是正在重命名,那么不能再出现右击菜单
+		console.log( target );
+		rename.isRename = false;
+		if( target && target.nodeName === "LI" ){
+			var left = tools.getEleRect(content).left;
+			var top = tools.getEleRect(content).top;
+			contextmenu.style.style = "block";
+			contextmenu.style.left = ev.clientX - left + 1 + "px";
+			contextmenu.style.top = ev.clientY - top + 1 + "px";
+			contextmenu.style.display = "block";
+			if( target.isRename ) {
+				ev.preventDefault();
+				return;
+			}
+		
+			if( whoSelect().length > 1 ){
+				tools.$(".menu_rename",contextmenu)[0].style.background = "#ccc";
+				ev.preventDefault();
+				
+				return;
+			}
+			if(prevLi){
+				tools.$("strong",prevLi)[0].style.display = "block";
+				tools.$(".edtor",prevLi)[0].style.display = "none";
+				tools.$(".icon",prevLi)[0].style.borderColor = "#fff";
+				tools.$(".checkInput",prevLi)[0].style.display = "none";
+				tools.$(".checkInput",prevLi)[0].checked = false;
+				tools.$(".checkInput",prevLi)[0].disabled = false;
+				prevLi.isRename = false;
+			}
+			tools.$(".icon",target)[0].style.borderColor = "#2e80dc";
+			tools.$(".checkInput",target)[0].checked = true;
+			tools.$(".checkInput",target)[0].style.display = "block";
+			tools.$(".checkInput",target)[0].disabled = false;
+			info.style.display = "block";
+			
+			rename.isRename = true;
+			allSelected.disabled = false;
+			
+			target.isRename = true;
+			
+			selectNum.innerHTML = 1;
+			checkedNum = 1;
+			
+			prevLi = target;
+		}
+		
+		ev.preventDefault();
+		
+	});
+	
+	//右击菜单统一做事件委托处理
+	tools.addEvent(contextmenu,"click",function(ev){
+		var target = ev.target  //找到目标的li
+		console.log( tools.containClass(target,".menu_rename") );
+		if( target && tools.containClass(target,".menu_rename") ){
+			//this.style.display = "none";
+			var selectArr = whoSelect();
+			rename.isRename = true;
+			console.log(1111);
+			console.log( prevLi );
+			renamehandle(prevLi);
+		};
+		ev.preventDefault();
+		
+	});
+	
+	tools.addEvent(document,"click",function(ev){
+		contextmenu.style.display = "none";
+		
+	})
+	
 })()

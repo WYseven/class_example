@@ -1,0 +1,29 @@
+var data = {
+	files:[
+		{
+			id:1,
+			pid:0,
+			"name":"音乐"
+		},
+		{
+			id:2,
+			pid:0,
+			"name":"技术"
+		},
+		{
+			id:3,
+			pid:0,
+			"name":"电影"
+		},
+		{
+			id:4,
+			pid:1,
+			"name":"发如雪"
+		},
+		{
+			id:5,
+			pid:1,
+			"name":"夜曲"
+		}
+	]
+}
