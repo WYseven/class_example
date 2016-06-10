@@ -123,6 +123,13 @@ body{
 	margin: 2px 3px 0 4px;
 }
 
+.nav_level{
+	color: #06c;
+}
+.nav_level:hover{
+	text-decoration: underline;
+}
+
 
 
 

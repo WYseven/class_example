@@ -88,11 +88,11 @@
 		//获取到修改名字的输入框
 		names = tools.$(".names",newLi)[0];
 
-		/*//新建的时候，让输入框显示
+		//新建的时候，让输入框显示
 		var strong = tools.$("strong",newLi)[0];
 		var edtor = tools.$(".edtor",newLi)[0];
 		strong.style.display = "none";
-		edtor.style.display = "block";*/
+		edtor.style.display = "block";
 
 
 		names.select();
