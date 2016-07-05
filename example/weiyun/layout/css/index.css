@@ -1,0 +1,248 @@
+.main{
+    width: 1760px;
+    height: 1000px;
+    border:1px solid #d8dce5;
+    border-top: none;
+    margin:20px auto;
+}
+.nav{
+    width: 100%;
+    height: 62px;
+    border:1px solid #d8dce5;
+    background: #f5f6f9;
+}
+.navCollects {
+    font-size: 13px;
+    margin-left: 7px;
+}
+.navCollects a{
+    height: 34px;
+    line-height: 34px;
+    float: left;
+    padding: 0px 18px;
+    border: 1px solid #c7c9cf;
+    margin: 13px 0 0 5px;
+
+}
+
+.navCollects a i{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-top: 7px;
+    opacity: .6;
+    background: url("../img/ico-message.png") no-repeat;
+}
+.navCollects a:hover{
+    border: 1px solid #a7adb7;
+}
+.navCollects a:hover i{
+    opacity: 1;
+}
+.navCollects a.move i{
+    background-position: 0px -455px;
+}
+.navCollects a.rename i{
+    background-position: 0px -518px;
+}
+.navCollects a.delect i{
+    background-position: 0px -326px;
+}
+.navCollects a.create i{
+    background-position: 0px -550px;
+}
+.navCollects a.reload i{
+    background-position: 3px -711px;
+}
+.navCollects a.reload {
+    padding: 0 10px;
+}
+.navCollects a span{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.content {
+    height: 1000px;
+}
+
+.tree-menu {
+    width: 160px;
+    height: 100%;
+    padding: 0px 12px;
+    border-right: 1px solid #e6e9f0;
+    float: left;
+}
+.file-show {
+    width: 80%;
+    height: 100%;
+    float: left;
+}
+.path-nav-box {
+    height: 30px;
+    border-bottom: 1px solid #e6e9f0;
+}
+.checked-all {
+    display: inline-block;
+    width: 34px;
+    height: 30px;
+    cursor: pointer;
+    background: url('../img/ico.png') no-repeat 10px -260px;
+    border-right: 1px #d7d9e0 solid;
+    float: left;
+}
+.checked{
+    background-position: 10px -310px;
+}
+.path-nav{
+    float: left;
+    height: 100%;
+    overflow: hidden;
+}
+.path-nav a{
+    float: left;
+    position: relative;
+    margin-left: -19px;
+    padding: 0 18px 0 25px;
+    height: 100%;
+    line-height: 30px;
+    background: url(../img/main-path.png) no-repeat right -50px;
+}
+.path-nav a span{
+    display: inline-block;
+}
+
+.tree-nav {
+    background: #e7f2fe;
+    border: 1px solid #bfdaf4;
+    padding-left: 14px;
+    margin-top:1px;
+    margin-left: 0px;
+}
+
+.tree-menu span{
+    display: block;
+
+    font-size: 12px;
+    position: relative;
+}
+
+.tree-menu span strong{
+    display: block;
+    width: 82%;
+    position: relative;
+    line-height: 22px;
+    padding: 2px 0;
+    padding-left: 24px;
+    color: #161719;
+    background: url(../img/folder-tree.png) no-repeat 3px 6px;
+}
+
+.ico {
+    position: absolute;
+    left: -13px;
+    top: 0;
+    width: 15px;
+    height: 26px;
+    background: url(../img/folder-tree.png) no-repeat 4px -43px;
+    opacity: 0.8;
+}
+
+.tree-contro .ico{
+    background-position: 3px -92px;
+}
+
+
+
+.file-list {
+     padding: 4px 0 0 4px;
+}
+
+.file-item {
+    height: 123px;
+    width: 118px;
+    float: left;
+    overflow: hidden;
+}
+.item{
+    width: 110px;
+    height: auto;
+    background: #f3f9fe;
+    position: relative;
+    border: 1px solid #ffffff;
+    box-sizing: border-box;
+    cursor: pointer;
+
+}
+
+.checkbox{
+    background: url(../img/ico.png) no-repeat 0px -370px;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: -1px;
+    top: -1px;
+}
+.file-checked  .checkbox{
+    background-position: 0px -420px;
+}
+.file-checked .item{
+    border: 1px solid #c3d8f0;
+}
+
+.file-img {
+    width: 100%;
+    height: 64px;
+    padding: 6px 2px 2px 2px;
+    text-align: center;
+}
+.file-img i {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
+    background: url(../img/file.png) no-repeat 0px 2px;;
+}
+
+.file-title-box {
+    text-align: center;
+    padding: 5px;
+}
+
+
+.file-title-box span{
+    display: block;
+    white-space: normal;
+    word-break: break-all;
+    word-wrap: break-word;
+    padding-top: 5px;
+    line-height: 17px;
+    max-height: 34px;
+    overflow: hidden;
+
+}
+
+.file-title-box .file-edtor {
+    line-height: 17px;
+    display: none;
+}
+.edtor {
+    width: 95%;
+    outline: none;
+    border: 1px #3091f2 solid;
+    height: 22px;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
