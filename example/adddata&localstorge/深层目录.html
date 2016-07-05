@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="./css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="./css/index.css"/>
+		<style type="text/css">
+			.collision {
+				width:0px;
+				height: 0px;
+				background: #c5dffc;
+				border: 1px solid #85add6;
+				position: absolute;
+				left: 0;
+				top:0;
+				opacity: .5;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="main">
+			<header class="header">
+				<a class="info_a createFile" href="javascript:;">新建文件夹</a>
+			</header>
+			<p class="all_files files_nav">
+				<span>全部文件</span>
+				
+				<!-- <a href="javascript:;">返回上一级</a>|
+				<span>全部文件</span>
+				
+				<a href="javascript:;">返回上一级</a>|
+				<a href="javascript:;">全部文件</a>>>>
+				<span>miaov</span> -->
+			</p>
+			<section class="clearFix cheeckBox">
+				<input type="checkbox" class="allSelected" />
+				<div class="clearFix info">
+					<p class="selectNum">已选中<span>0</span></span>个文件夹</p>
+					<a class="info_a delectItem" href="javascript:;">删除</a>
+					<a class="info_a rename" href="javascript:;">重命名</a>
+				</div>
+			</section>
+			<div class="content">
+				<ul class="clearFix filesSet">
+					<!-- <li>
+						<div class="icon">
+							<input type="checkbox"  class="checkInput" />
+						</div>
+						<strong style="display:block;">123</strong>
+						<div class="clearFix edtor"  style="display:none;">
+							<input type="text" value="新建文件夹" class="names"  />
+							<input type="button" value="√" class="ok" />
+							<input type="button" value="×" class="cancel" />
+						</div>
+					</li>
+					<li>
+						<div class="icon">
+							<input type="checkbox"  class="checkInput" />
+						</div>
+						<strong style="display:block;">456</strong>
+						<div class="clearFix edtor"  style="display:none;">
+							<input type="text" value="新建文件夹" class="names"  />
+							<input type="button" value="√" class="ok" />
+							<input type="button" value="×" class="cancel" />
+						</div>
+					</li> -->
+				</ul>
+			</div>
+		</div>
+		<input type="hidden" class="hiddenInput" value="0" />
+		<script src="./js/data.js"></script>
+		<script src="./js/tools.js"></script>
+		<script src="./js/index8.js"></script>
+	</body>
+</html>

@@ -1,0 +1,167 @@
+html{
+	height: 100%;
+}
+body{
+	height: 100%;
+}
+.main {
+	height: 100%;
+	width: 80%;
+	margin: 20px auto;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+.header {
+	height: 50px;
+	width:99%;
+	background: #f7f7f7;
+	border: 1px solid #d2d2d2;
+}
+.info_a{
+	width: 113px;
+	height: 25px;
+	display: block;
+	padding: 0px 5px;
+	line-height: 25px;
+	border-radius: 2px;
+	border:1px solid #d2d2d2;
+	margin: 10px 0 0 10px;
+	text-align: center;
+}
+.all_files {
+	height: 28px;
+	line-height: 28px;
+	padding-left: 20px;
+}
+.cheeckBox {
+	height: 41px;
+	background: #f7f7f7;
+	border: 1px solid #d2d2d2;
+	width: 100%;
+	
+	margin-left: 20px;
+}
+.allSelected{
+	width: 20px;
+	height: 20px;
+	margin: 10px 0 0 20px;
+	float: left;
+}
+
+.info{
+	float: left;
+	display: none;
+}
+.info a,.info p{
+	float: left;
+	margin: 0px 10px;
+}
+.info p{
+	line-height: 40px;
+}
+
+.content {
+	height: 100%;
+	margin-top: 2px;
+	position: relative;
+}
+
+.info a {
+	margin-top: 7px;
+}
+
+.filesSet li {
+	width: 144px;
+	height: 126px;
+	float:left;
+	text-align: center;
+	font-size: 12px;
+}
+.filesSet li strong{
+	line-height: 30px;
+}
+
+.icon {
+	width:90px;
+	height: 92px;
+	margin: 0 auto;
+	background: url(../img/icon.png) no-repeat 16px -77px;
+	/*border: 2px solid #2e80dc;*/
+	border: 2px solid #fff;
+	position: relative;
+}
+.icon input{
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	left: 0;
+	top:0;
+	display: none;
+}
+.edtor {
+	text-align: left;
+	margin: 2px -4px 0 0;
+	display: none;
+}
+.edtor input{
+	float: left;
+}
+.edtor input[type="text"]{
+	width: 82px;
+	height: 22px;
+	border: 2px solid #8eb0e7;
+	padding-left: 3px;
+}
+.edtor input[type="button"]{
+	width: 22px;
+	height: 22px;
+	margin: 2px 3px 0 4px;
+}
+
+.contextmenu {
+	width: 100px;
+	height: 200px;
+	border: 1px solid #BABABA;
+	background: #fff;
+	position: absolute;
+	left: 0;
+	top:0;
+	display: none;
+}
+
+.contextmenu li{
+	height: 20px;
+	text-align: center;
+}
+.contextmenu li:hover{
+	background: #2e80dc;
+}
+
+.collision {
+	width:0px;
+	height: 0px;
+	background: #c5dffc;
+	border: 1px solid #85add6;
+	position: absolute;
+	left: 0;
+	top:0;
+	opacity: .5;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

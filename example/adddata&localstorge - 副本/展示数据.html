@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="./css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="./css/index.css"/>
+		<script src="js/tools.js"></script>
+		<style type="text/css">
+			.collision {
+				width:0px;
+				height: 0px;
+				background: #c5dffc;
+				border: 1px solid #85add6;
+				position: absolute;
+				left: 0;
+				top:0;
+				opacity: .5;
+			}
+			ul li{
+				padding-left: 20px;
+			}
+			ul ul{
+				-display: none;
+			}
+			.data_structure{
+				width: 200px;
+				float: left;
+			}
+			.htmls {
+				float: left;
+
+			}
+			.main {
+				width: 1200px;
+				margin:0px auto;
+			}
+			.addItem {
+				margin-top: 30px;
+			}
+			.con{
+				margin-top: 50px;
+
+			}
+			.clearFix:after{
+				content: "";
+				display: block;
+				clear: both;
+			}
+			.con>div{
+				padding: 0 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="main">
+			<div class="addItem">
+				<input type="text" id="names" />
+				<input type="button" value="添加一条" id="add" />
+				<p>
+					请输入id：<input type="text" id="pidInput" />
+					<input type="button" value="复制数据" id="copy" />
+				</p>
+				<p>
+					请输入id：<input type="text" id="removeIdInput" />
+					<input type="button" value="移动数据" id="remove" />
+				</p>
+				<p>
+					
+					<input type="button" value="删除数据" id="delectData" />
+				</p>
+			</div>
+			<div class="con clearFix">
+				<div class="nav">
+					<span>全部文件</span>
+				</div>
+				<div class="data_structure" id="main">
+					<h2>数据结构</h2>
+					<!-- <ul>
+						<li>
+							<span>0:Object</span>
+							<ul>
+								<li>id:1</li>
+								<li>id:1</li>
+								<li>id:1</li>
+							</ul>
+							<span>1:Object</span>
+							<ul>
+								<li>id:1</li>
+								<li>id:1</li>
+								<li>id:1</li>
+							</ul>
+						</li>
+					</ul> -->
+				</div>
+				<div class="htmls" id="htmls">
+					<h2>树形菜单</h2>
+				</div>
+				<div class="content">
+					<ul class="clearFix filesSet">
+						<li>
+							<div class="icon">
+								<input type="checkbox"  class="checkInput" />
+							</div>
+							<strong style="display:block;" class="fileTitle">123</strong>
+							<div class="clearFix edtor"  style="display:none;">
+								<input type="text" value="新建文件夹" class="fileNameInput"  />
+								<input type="button" value="√" class="ok" />
+								<input type="button" value="×" class="cancel" />
+							</div>
+						</li>
+						<li>
+							<div class="icon">
+								<input type="checkbox"  class="checkInput" />
+							</div>
+							<strong style="display:block;" class="fileTitle">456</strong>
+							<div class="clearFix edtor"  style="display:none;">
+								<input type="text" value="新建文件夹" class="fileNameInput"  />
+								<input type="button" value="√" class="ok" />
+								<input type="button" value="×" class="cancel" />
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="./js/data.js"></script>
+		<script>
+			function getChildByPid(arr,pid){
+				var newArr = [];
+				for( var i = 0; i < arr.length; i++ ){
+					if( arr[i].pid == pid ){
+						newArr.push(arr[i]);
+					}		
+				};
+				
+				return newArr;
+			};
+			//找到当前数据的所有父级的name名字
+			function getParentsNameAll(currentId){
+				return getParents(currentId).map(function (item){
+					return item.name	
+				});
+			};
+			//获取当前id的所有的父级
+			function getParents(data,currentId,arr){
+				var arr = arr || [];
+				for( var i = 0; i < data.length; i++ ){
+					if( data[i].id == currentId ){
+						arr.push(data[i]);
+						getParents(data[i].pid,arr)
+						break;
+					}
+				}
+				return arr;	
+			}
+			function getChilds(data,currentId,arr,bl){
+				/*
+					bl代表是否包含当前元素
+				*/
+				if( arr.constructor === Boolean ){
+					bl = arr;
+					arr = null;
+				}
+				var arr = arr || [];
+				
+				var childs = getChildByPid(data,currentId);
+				if( bl ){
+					for( var j = 0; j < data.length; j++ ){
+						if( data[j].id == currentId ){
+							arr.push(data[j]);
+						}
+					}
+				}				
+				for( var i = 0; i < childs.length; i++ ){
+					arr.push(childs[i]);
+					getChilds(data,childs[i].id,arr)
+				}
+				return arr;
+			}
+			//修改自上而下的数据的id 数据的第一个为总的文件夹
+			function changeDataId(newChild,item,pid){
+				//改变数据的id
+				var prevId = item.id;
+				var prevPid = item.pid;
+				var newId = random();
+				var newPid = pid;
+				item.id = newId;
+				item.pid = newPid;
+				for( var i = 1; i < newChild.length; i++ ){
+					if( newChild[i].pid == prevId ){
+						changeDataId(newChild,newChild[i],newId);
+					}
+				}
+			}
+
+			function changeDataById(newChild,pid){
+				//把数据重新拷贝一份
+				var extendChild = tools.extend(newChild,true);
+				changeDataId(extendChild,extendChild[0],pid);
+				return 	extendChild;
+			}
+			function random(){
+				return new Date().getTime() + Math.round(Math.random()*10000);
+			}
+			//判断一个数组中是否包含另一个项
+			function contains(arr,item){
+				for( var j = 0; j < arr.length; j++ ){
+					if( arr[j] === item ) return true
+				}
+				return false;
+			}
+			//要删除的数据，传入一个数组
+			function delectDataByData(childs){
+				return data.files.filter(function (item){
+					return !contains(childs,item)	
+				});	
+			}
+			var data = {
+				files:[
+					{
+						id:1,
+						pid:0,
+						"name":"我的文档",
+						type:"file"
+					},
+					{
+						id:2,
+						pid:0,
+						"name":"我的音乐"
+					},
+					{
+						id:3,
+						pid:2,
+						"name":"周杰伦"
+					},
+					{
+						id:4000,
+						pid:2,
+						"name":"王杰"
+					},
+					{
+						id:4,
+						pid:3,
+						"name":"发如雪"
+					},
+					{
+						id:600,
+						pid:3,
+						"name":"夜曲"
+					},
+					{
+						id:700,
+						pid:600,
+						"name":"歌词：狼爷月"
+					}
+				]
+			}
+
+
+
+		</script>
+		<script>
+			var datas = data.files;
+			var htmlPid = 0;
+			
+			var htmls = document.getElementById("htmls");
+			var nav = document.getElementsByClassName("nav");
+
+			function fn(arr){
+				var oUl = document.createElement("ul");	
+				for( var i = 0; i < arr.length; i++ ){
+					var Li = document.createElement("li");
+					var Span = document.createElement("span");
+						Span.innerHTML = arr[i].name;
+						Span.id = arr[i].id;
+					Li.appendChild(Span);
+					var arrs = getChildByPid(data.files,arr[i].id);
+					if( arrs.length !== 0 ){
+						Li.appendChild(fn(arrs));
+					}
+					oUl.appendChild(Li);	
+				};
+				return oUl;
+			};
+
+			htmls.appendChild(fn(getChildByPid(data.files,0)));
+
+			//渲染导航 参数只需要传入一个数组
+			function renderNav(currentId,nav){
+				var parentsName = getParents(data.files,currentId).reverse();
+				var str = "";
+				if( parentsName.length>=2){
+					str += '<a href="javascript:;" data-file-id="'+parentsName[parentsName.length-2].id+'">返回上一级</a>>>>';
+				}else if(!!parentsName.length || parentsName.length == 1){
+					str += '<a href="javascript:;" data-file-id="0">返回上一级</a>>>>';
+				}
+				str += (parentsName.length ? '<a href="javascript:;" data-file-id="0">全部文件</a>>>>' : "<span>全部文件</span>");
+				for( var i = 0; i < parentsName.length-1; i++ ){
+					str += '<a href="javascript:;" data-file-id="'+parentsName[i].id+'">'+parentsName[i].name+'</a>>>>';
+				}
+				if( parentsName.length ){
+					str += '<span>'+parentsName[parentsName.length-1].name+'</span>';
+				}
+				nav.innerHTML = str;
+			}
+
+			//给导航添加事件处理 绑定在父级上
+
+			nav[0].onclick = function (ev){
+				if( ev.target.nodeName === "A" ){
+					console.dir( ev.target );
+					var id = ev.target.dataset.fileId;
+					//把获取到的数据渲染在页面中，通过id获取
+						var initFiles = getChildByPid(data.files,id);
+						htmlPid = id;
+						pid = id;
+						//初始化渲染数据
+						renderData(initFiles);
+						renderNav(id,nav[0]);
+				}
+			};
+
+			//复制数据，需要找到所有子数据
+
+			copy.onclick = function (){
+				// pid
+
+				// id
+				//获取到当前id的子元素
+				var childs = getChilds(data.files,pid,true);
+				var newChild = tools.extend(childs,true);
+				var changeAfterData = changeDataById(newChild,pidInput.value || "0");
+				data.files = data.files.concat(changeAfterData);
+
+				reRender();
+			};
+
+			//移动数据 只需要改变数据的id就可以
+			remove.onclick = function (){
+				var childs = getChilds(data.files,pid,true);
+				childs[0].pid = removeIdInput.value;
+				reRender();	
+			};
+			
+
+			//删除数据
+			delectData.onclick = function (){
+				var childs = getChilds(data.files,pid,true);
+				data.files = delectDataByData(childs);
+				reRender();	
+			};
+
+			//给菜单添加事件
+			function addHtmlsSpan(){
+				var htmlsSpan = htmls.getElementsByTagName("span");
+				for( var i = 0; i < htmlsSpan.length; i++ ){
+					htmlsSpan[i].onclick = function (){
+						for( var j = 0; j < htmlsSpan.length; j++ ){
+							htmlsSpan[j].style.background = "";
+						}
+						this.style.background = "blue";
+						//把获取到的数据渲染在页面中，通过id获取
+						var initFiles = getChildByPid(data.files,this.id);
+						htmlPid = this.id;
+						pid = this.id;
+						//初始化渲染数据
+						renderData(initFiles);
+
+						renderNav(this.id,nav[0]);
+
+					};		
+				}		
+			};
+			addHtmlsSpan();
+
+			function getType(obj){
+				if(typeof obj === "object"){
+					return obj.constructor === Array ? "Array" : "Object";
+				}else{
+					return obj;
+				}
+				return 
+			}
+			function createStructure(obj){
+				var oUl = document.createElement("ul");
+				for(var attr in obj){
+					var newLi = document.createElement("li");
+					var span = document.createElement("span");
+					newLi.appendChild(span);
+					if(typeof obj[attr] === "object"){
+						if(getType(obj[attr]) === "Array"){
+							if(attr === "files"){
+								span.id = 0;
+								span.className="addItemId";
+							}
+							span.innerHTML = "<span style='color:red;'>"+attr+"</span>"+":"+getType(obj[attr])+"["+obj[attr].length+"]";
+						}else{
+							span.innerHTML = "<span style='color:red;'>"+attr+"</span>"+":"+getType(obj[attr]);
+							span.id = obj[attr].id;
+							span.className="addItemId";
+						}
+						newLi.appendChild(createStructure(obj[attr]));
+					}else{
+						span.innerHTML = "<span style='color:red;'>"+attr+"</span>"+":"+obj[attr];
+					}
+					oUl.appendChild(newLi);
+				};
+
+				return oUl;
+			};
+			main.appendChild(createStructure(data));
+			var pid = 0;
+			addEvent();
+
+			function addEvent(){
+				var getItemIds = main.getElementsByClassName("addItemId");
+				
+				for( var i = 0; i < getItemIds.length; i++ ){
+					getItemIds[i].onclick = function (){
+						pid = this.id;
+						this.style.background = "red";
+					};
+				};	
+			}
+
+			add.onclick = function (){
+				var val = names.value;
+				data.files.push({
+					id:new Date().getTime(),
+					name:val,
+					pid:pid
+				});
+				reRender();
+			};
+
+			//重新渲染页面
+			function reRender(){
+				main.innerHTML = "";
+				htmls.innerHTML = "";
+				main.appendChild(createStructure(data));
+				htmls.appendChild(fn(getChildByPid(data.files,0)));
+				addEvent();
+				addHtmlsSpan();
+				//把获取到的数据渲染在页面中，通过id获取
+				var initFiles = getChildByPid(data.files,htmlPid); 
+				//初始化渲染数据
+				renderData(initFiles);	
+			}
+
+			var filesSet = document.getElementsByClassName("filesSet")[0];
+
+			function createLi(options){
+				options = options || {};
+				var defaults = {
+					title:options.title || "新建文件",
+					fileTitle:options.fileTitle || "none",
+					edtor:options.edtor || "block",
+					id:options.id || 0,
+				}
+
+
+
+				var li = document.createElement("li");
+				var str =   '<div class="icon">'
+									+'<input type="checkbox" class="checkInput" />'
+								+'</div>'
+								+'<strong class="fileTitle" style="display:'+defaults.fileTitle+';">'+defaults.title+'</strong>'
+								+'<div class="clearFix edtor"  style="display:'+defaults.edtor+';">'
+									+'<input type="text" value="'+defaults.title+'" class="fileNameInput"  />'
+									+'<input type="button" value="√" class="ok" />'
+									+'<input type="button" value="×" class="cancel" />'
+								+'</div>';
+						;
+				
+				li.innerHTML = str;
+				li.id = defaults.id;
+				return li;
+			};
+			//渲染获取到的数据
+			function renderData(filesArr){
+				filesSet.innerHTML = "";
+				tools.each(filesArr,function (item){
+					var newLi = createLi({
+						title:item.name,
+						fileTitle:"block",
+						edtor:"none",
+						id:item.id
+					})
+					filesSet.appendChild(newLi);
+					liHandle(newLi);
+				});
+			}
+			function liHandle(liElement){
+				var ok = tools.$(".ok",liElement)[0];
+				var cancel = tools.$(".cancel",liElement)[0];
+				var fileTitle = tools.$(".fileTitle",liElement)[0];
+				var edtor = tools.$(".edtor",liElement)[0];
+				var icon = tools.$(".icon",liElement)[0];
+				var checkInput = tools.$(".checkInput",liElement)[0];
+				var fileNameInput = tools.$(".fileNameInput",liElement)[0];
+
+				
+				tools.addEvent(liElement,"click",function (){
+					htmlPid = this.id;
+					var getPidFiles = getChildByPid(data.files,this.id);
+					renderData(getPidFiles);
+				});
+
+				
+			};
+
+			//把获取到的数据渲染在页面中，通过id获取
+			var initFiles = getChildByPid(data.files,0); 
+			//初始化渲染数据
+			renderData(initFiles);
+
+
+		</script>
+	</body>
+</html>
