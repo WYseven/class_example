@@ -127,6 +127,10 @@
     position: relative;
 }
 
+.tree-menu ul ul{
+    display: none;
+}
+
 .tree-menu span strong{
     display: block;
     width: 82%;
@@ -151,6 +155,9 @@
 .tree-contro .ico{
     background-position: 3px -92px;
 }
+.tree-contro-none .ico{
+    background-position: -999px -99px;
+}
 
 
 
@@ -163,11 +170,11 @@
     width: 118px;
     float: left;
     overflow: hidden;
+    margin-top: 5px;
 }
 .item{
     width: 110px;
     height: auto;
-    background: #f3f9fe;
     position: relative;
     border: 1px solid #ffffff;
     box-sizing: border-box;
@@ -182,11 +189,17 @@
     position: absolute;
     left: -1px;
     top: -1px;
+    display: none;
 }
 .file-checked  .checkbox{
+    display: block;
+
+}
+.file-checked  .checked{
     background-position: 0px -420px;
 }
 .file-checked .item{
+    background: #f3f9fe;
     border: 1px solid #c3d8f0;
 }
 
@@ -232,6 +245,18 @@
     border: 1px #3091f2 solid;
     height: 22px;
     text-align: center;
+}
+
+.drag-div {
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    left: 0px;
+    top:0px;
+    background: #e8f3f9;
+    border:1px dashed #000;
+    opacity: .5;
+    
 }
 
 

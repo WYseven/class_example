@@ -143,12 +143,13 @@
 				});
 			};
 			//获取当前id的所有的父级
-			function getParents(data,currentId,arr){
+			function getParents(datas,currentId,arr){
 				var arr = arr || [];
-				for( var i = 0; i < data.length; i++ ){
-					if( data[i].id == currentId ){
-						arr.push(data[i]);
-						getParents(data[i].pid,arr)
+				for( var i = 0; i < data.files.length; i++ ){
+					if( data.files[i].id == currentId ){
+						console.log(data.files[i]);
+						arr.push(data.files[i]);
+						getParents(data.files,data.files[i].pid,arr)
 						break;
 					}
 				}
@@ -289,6 +290,7 @@
 			//渲染导航 参数只需要传入一个数组
 			function renderNav(currentId,nav){
 				var parentsName = getParents(data.files,currentId).reverse();
+				console.log( getParents(data.files,currentId) );
 				var str = "";
 				if( parentsName.length>=2){
 					str += '<a href="javascript:;" data-file-id="'+parentsName[parentsName.length-2].id+'">返回上一级</a>>>>';
