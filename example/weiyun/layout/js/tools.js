@@ -1,9 +1,9 @@
 var tools = (function(){
-	
+
 	var toolsObj = {
 		$:function(selector,context){
 			/*
-			 
+
 			 * #id
 			 * .class
 			 * 标签
@@ -52,7 +52,7 @@ var tools = (function(){
 					return true;
 				}
 			}
-			
+
 			return false;
 		},
 		toggleClass:function (ele,classNames){
@@ -62,35 +62,36 @@ var tools = (function(){
 			}else{
 				tools.addClass(ele,classNames);
 				return true;
-			}	
+			}
 		},
 		isClassName:function (){
-			return tools.containClass.apply(tools,arguments)		
+			return tools.containClass.apply(tools,arguments)
 		},
 		parents:function(obj,selector){
 			/*
-			 
+
 			 * selector
 			 * id
 			 * class
 			 * 标签
 			 * */
-			
+
 			if( selector.charAt(0) === "#" ){
 				while(obj.id !== selector.slice(1)){
 					obj = obj.parentNode;
 				}
 			}else if( selector.charAt(0) === "." ){
-				while(!tools.containClass(obj,selector.slice(1))){
+				while(obj && obj.nodeType !== 9 && !tools.containClass(obj,selector.slice(1))){
 					obj = obj.parentNode;
+
 				}
 			}else{
-				while(obj && obj.nodeName !== selector){
+				while(obj && obj.nodeType !== 9 && obj.nodeName !== selector){
 					obj = obj.parentNode;
 				}
 			}
-			
-			return obj;
+
+			return obj && obj.nodeType === 9  ? null : obj;
 		},
 		each:function(obj,callBack){
 			for( var i = 0; i < obj.length; i++ ){
@@ -103,7 +104,7 @@ var tools = (function(){
 		collisionRect:function(obj1,obj2){
 			var obj1Rect = tools.getEleRect(obj1);
 			var obj2Rect = tools.getEleRect(obj2);
-			
+
 			var obj1W = obj1Rect.width;
 			var obj1H = obj1Rect.height;
 			var obj1L = obj1Rect.left;
@@ -135,28 +136,28 @@ var tools = (function(){
 					newArr[attr] = tools.extend(obj[attr]);
 				}else{
 					newArr[attr] = obj[attr];
-				}	
+				}
 			}
 			return newArr;
 		},
 		insertFirst:function (parent,element){
-			 var firstElement = parent.firstElementChild;
-			return parent.insertBefore(element,firstElement);	
+			var firstElement = parent.firstElementChild;
+			return parent.insertBefore(element,firstElement);
 		},
 		removeChild:function (parent,element){
-			return parent.removeChild(element);	
+			return parent.removeChild(element);
 		},
 		hide:function (element){
-			return element.style.display = "none";	
+			return element.style.display = "none";
 		},
 		show:function (element){
-			return element.style.display = "block";	
+			return element.style.display = "block";
 		},
 		chaceData:{
 			selectNum:0
 		}
 	}
-	
+
 	return toolsObj;
-	
+
 }())

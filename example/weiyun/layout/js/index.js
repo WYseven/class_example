@@ -5,8 +5,8 @@
 (function(){
     //要生成的结构
     /*
-    *
-    * */
+     *
+     * */
     function createStructrue(options){
         //这个地方需要调整
         options = options || {};
@@ -50,6 +50,8 @@
 
     var renderNum = 0;
 
+    var pid = 0;
+
     //使用数据生成文件
     function renderHtml(id){
         var arr = getChildById(data.files,id);
@@ -84,34 +86,34 @@
     var treeMenu = tools.$(".tree-menu")[0];
     var treeDiv = tools.$("div",treeMenu);
     var m = 0;
-    function treeHtml(id,blockId){
+    function treeHtml(id){
         var arr = getChildById(data.files,id);
         if( arr.length === 0 ) return null;
         var newUl = document.createElement("ul");
         //tree-nav tree-contro
-       tools.each(arr,function(item){
-           var newLi = document.createElement("li");
-           var str = "";
-           //获取当前元素在第几层，然后给定padding
-          var level = getLevelById(data.files,item.id);
-           var arr = treeHtml(item.id);
+        tools.each(arr,function(item){
+            var newLi = document.createElement("li");
+            var str = "";
+            //获取当前元素在第几层，然后给定padding
+            var level = getLevelById(data.files,item.id);
+            var arr = treeHtml(item.id);
 
-           var titleNone = arr ? "" : "tree-contro-none";
+            var titleNone = arr ? "" : "tree-contro-none";
             str = '<div class="tree_title '+titleNone+'" style="padding-left: '+level*14+'px;" data-file-id="'+item.id+'">'+
-                        '<span><strong class="ellipsis">'+item.name+'</strong> <i class="ico"></i></span>'
-                    +'</div>';
+                '<span><strong class="ellipsis">'+item.name+'</strong> <i class="ico"></i></span>'
+                +'</div>';
             newLi.innerHTML = str;
-           if(arr) newLi.appendChild(arr);
+            if(arr) newLi.appendChild(arr);
             newUl.appendChild(newLi);
 
-       })
+        })
         return newUl;
     }
     //渲染tree形结构
     function renderTree(id){
         treeMenu.innerHTML = "";
-        treeMenu.appendChild(treeHtml(-1,id));
-       //postionLevel(id);
+        treeMenu.appendChild(treeHtml(-1));
+        postionLevel(id);
     }
     //让第一个为选中状态
     renderTree(0)
@@ -119,37 +121,62 @@
 
     //选中那一层
     //通过id直接定位到那一层上
-    /*var prev = 0;
+    var prev = 0;
     function postionLevel(id){
+        var parents = getParents(data.files,id);
+
         for( var i = 0; i < treeDiv.length; i++ ){
             if( id == treeDiv[i].dataset.fileId ){
                 tools.addClass(treeDiv[i],"tree-nav");
                 prev = treeDiv[i].dataset.fileId;
-                break;
+            }
+            for( var j = 0; j < parents.length; j++ ){
+                if(treeDiv[i].dataset.fileId == parents[j].id && treeDiv[i].nextElementSibling){
+                    treeDiv[i].nextElementSibling.style.display = "block";
+                }
             }
         }
-    }*/
+    }
 
-
-
-    tools.each(treeDiv,function(item){
-        //给树形结构来一个事件
-        tools.addEvent(item,"click",function(ev){
-            tools.addClass(this,"tree-contro");
-            if(this.nextElementSibling){
-                this.nextElementSibling.style.display = "block";
+    //这个地方需要改进？？？？？
+    tools.addEvent(treeMenu,"click",function(ev){
+        var target = ev.target;
+        if(tools.parents(target,".ico")){
+            target = tools.parents(target,".tree_title");
+            tools.addClass(target,".tree-contro");
+            if(target.nextElementSibling && target.nextElementSibling.style.display == "block"){
+                target.nextElementSibling.style.display = "none";
+            }else{
+                target.nextElementSibling.style.display = "block";
             }
+        }else if( target = tools.parents(target,".tree_title") ){
+            var fileId = target.dataset.fileId;
+            render(fileId)
+        }
 
-        })
     })
 
 
-
-
     function render(fileId){
+        pid = fileId;
         renderHtml(fileId);
         renderNav(fileId);
-        renderTree(fileId);
+        positionTree(fileId);
+    }
+    //定位在具体的一个标题上
+    function positionTree(fileId){
+        for( var i = 0; i < treeDiv.length; i++ ){
+            tools.removeClass(treeDiv[i],"tree-nav");
+            if( fileId == treeDiv[i].dataset.fileId ){
+                tools.addClass(treeDiv[i],"tree-contro");
+                tools.addClass(treeDiv[i],"tree-nav");
+                if(treeDiv[i].nextElementSibling){
+                    treeDiv[i].nextElementSibling.style.display = "block";
+                }
+            }
+        }
+        //让当前之上所有的ul显示出来
+        postionLevel(fileId);
     }
 
     //路径点击事件
@@ -157,6 +184,8 @@
         if( ev.target.nodeName.toLowerCase() === "a" ){
             var fileId = ev.target.dataset.fileId;
             render(fileId);
+            //取消掉全选
+            tools.removeClass(checkedAll,"checked");
         }
     })
 
@@ -207,6 +236,15 @@
             tools.hide(edtor);
             fileTitle.innerHTML = edtor.value;
             itemAddEvent(newStructrue);
+            data.files.push({
+                name:edtor.value,
+                id:new Date().getTime(),
+                pid:pid
+            });
+
+            edtor = null;
+            //渲染一下树形结构
+            renderTree(pid);
         }
     });
 
@@ -241,6 +279,24 @@
         }
     });
 
+    //点击删除
+    var delects = tools.$(".delect")[0];
+    tools.addEvent(delects,"click",function(){
+        var select = whoSelect();
+        //这个地方需要改进？？？？？？？？？？
+        for( var i = 0; i < data.files.length; i++ ){
+            for( var j = 0; j < select.length; j++ ){
+                if( data.files[i].id == select[j].dataset.fileId ){
+                    data.files.splice(i,1);
+                    i--;
+                }
+            }
+        }
+
+        render(pid);
+        renderTree(pid);
+    })
+
     //有多少给文件被选中了
     function whoSelect(){
         var selectItem = [];
@@ -256,14 +312,13 @@
     tools.addEvent(fileList,"click",function(ev){
         var target = ev.target;
         if( target.nodeName.toLowerCase() !== "lable" ){
-            console.log(target);
             target = tools.parents(target,".file-item");
             //找到当前点击的文件的id
-            console.log(target);
             if(target){
                 var fileId = target.dataset.fileId;
                 //获取当前id渲染这个id下的子元素
                 render(fileId);
+
             }
         }
     });
@@ -300,7 +355,7 @@
         var w = ev.clientX - disX;
         var h = ev.clientY - disY;
 
-        if( whoSelect().length === listDiv.length ){
+        if( listDiv.length && (whoSelect().length === listDiv.length) ){
             tools.addClass(checkedAll,"checked");
         }else{
             tools.removeClass(checkedAll,"checked");
