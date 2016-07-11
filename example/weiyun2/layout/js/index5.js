@@ -134,8 +134,6 @@
     var prev = 0;
     function postionLevel(treeDiv,id){
         var parents = getParents(data.files,id);
-       // ul[data-file-id=id]
-
         for( var i = 0; i < treeDiv.length; i++ ){
             if( id == treeDiv[i].dataset.fileId ){
                 tools.addClass(treeDiv[i],"tree-nav");
@@ -206,7 +204,6 @@
             fullTip("warn","请选择文件");
             return;
         }
-        moveFile.isMove = true;
         var popup = new PopUp();
         var newDiv = document.createElement("div");
         newDiv.className = "tree-menu dialog-tree-menu";
@@ -247,15 +244,11 @@
                 }
                 render(pid);
                 renderTree(pid)
-
-                moveFile.isMove = false;
             }
+
+
             return !error.innerHTML;
         };
-        popup.onclose = function(){
-            moveFile.isMove = false;
-        }
-
     }
 
     function dialogTreeEvents(){
@@ -356,7 +349,6 @@
     function itemAddEvent(item){
         tools.addEvent(item,"mouseenter",function(){
             if( !isDrag ){ //正在拖拽，鼠标移入无效
-
                 tools.addClass(this,"file-checked");
             }
         })
@@ -365,9 +357,6 @@
             if(!tools.containClass(lable,"checked")){
                 tools.removeClass(this,"file-checked");
             }
-        });
-        tools.addEvent(item,"click",function(ev){
-            var target = ev.target;
         });
     }
     //标签提示
@@ -663,7 +652,7 @@
     tools.addEvent(document,"mousedown",function(ev){
         //排除掉有右键和中键
         ev.preventDefault();
-        if(ev.which === 3 || ev.which === 2|| moveFile.isMove) return;
+        if(ev.which === 3 || ev.which === 2) return;
 
         var target = ev.target;
 

@@ -156,13 +156,6 @@
 				return arr;	
 			}
 			function getChilds(data,currentId,arr,bl){
-				/*
-					bl代表是否包含当前元素
-				*/
-				if( arr.constructor === Boolean ){
-					bl = arr;
-					arr = null;
-				}
 				var arr = arr || [];
 				
 				var childs = getChildByPid(data,currentId);
@@ -214,7 +207,7 @@
 			//要删除的数据，传入一个数组
 			function delectDataByData(childs){
 				return data.files.filter(function (item){
-					return !contains(childs,item)	
+					return !contains(childs,item)
 				});	
 			}
 			var data = {
@@ -348,8 +341,10 @@
 
 			//删除数据
 			delectData.onclick = function (){
+
 				var childs = getChilds(data.files,pid,true);
 				data.files = delectDataByData(childs);
+				console.log( data.files );
 				reRender();	
 			};
 

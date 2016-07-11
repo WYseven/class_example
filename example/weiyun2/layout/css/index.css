@@ -504,7 +504,7 @@
 }
 
 .tree-menu ul ul{
-    display: none;
+    -display: none;
 }
 
 .tree-menu span strong{

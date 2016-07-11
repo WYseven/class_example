@@ -7,12 +7,6 @@
     /*
      *
      * */
-     tools.$(".weiyun-content")[0].style.height = document.documentElement.clientHeight-55 + "px";
-     tools.addEvent(window,"resize",function (){
-        tools.$(".weiyun-content")[0].style.height = document.documentElement.clientHeight-55 + "px";      
-     })
-    
-
     function createStructrue(options){
         //这个地方需要调整
         options = options || {};
@@ -82,8 +76,8 @@
     //渲染路径导航
     var pathNav = tools.$(".path-nav")[0];  //路径导航容器
     //初始化一下导航
-    renderNav(pathNav,0)
-    function renderNav(pathNav,id){
+    renderNav(0)
+    function renderNav(id){
         var parents = getParents(data.files,id).reverse();
         var str = '';
         tools.each(parents,function(item){
@@ -123,7 +117,7 @@
     function renderTree(id){
         treeMenu.innerHTML = "";
         treeMenu.appendChild(treeHtml(-1));
-        postionLevel(treeDiv,id);
+        postionLevel(id);
     }
     //让第一个为选中状态
     renderTree(0)
@@ -132,8 +126,9 @@
     //选中那一层
     //通过id直接定位到那一层上
     var prev = 0;
-    function postionLevel(treeDiv,id){
+    function postionLevel(id){
         var parents = getParents(data.files,id);
+
        // ul[data-file-id=id]
 
         for( var i = 0; i < treeDiv.length; i++ ){
@@ -174,11 +169,11 @@
     function render(fileId){
         pid = fileId;
         renderHtml(fileId);
-        renderNav(pathNav,fileId);
-        positionTree(treeDiv,fileId);
+        renderNav(fileId);
+        positionTree(fileId);
     }
     //定位在具体的一个标题上
-    function positionTree(treeDiv,fileId){
+    function positionTree(fileId){
         for( var i = 0; i < treeDiv.length; i++ ){
             tools.removeClass(treeDiv[i],"tree-nav");
             if( fileId == treeDiv[i].dataset.fileId ){
@@ -190,88 +185,34 @@
             }
         }
         //让当前之上所有的ul显示出来
-        postionLevel(treeDiv,fileId);
+        postionLevel(fileId);
     }
 
     //移动文件
     var moveFile = tools.$(".move")[0];
-    var moveId = "";
     tools.addEvent(moveFile,"click",function (){
-        movefileHandle();
-    });
-
-    function movefileHandle(){
         var select = whoSelect();
         if( select.length === 0 ){
             fullTip("warn","请选择文件");
             return;
         }
-        moveFile.isMove = true;
         var popup = new PopUp();
         var newDiv = document.createElement("div");
         newDiv.className = "tree-menu dialog-tree-menu";
         newDiv.appendChild(treeHtml(-1));
-        
+        postionLevel(0);
          popup.open({
             content:newDiv
          });
-         //找到弹框中div
-         var treeDiv = tools.$("div",treeMenu);
-         var dialogTreeDiv = tools.$("div",tools.$(".dialog-tree-menu")[0]);
-         //定位在具体的元素上
-         positionTree(dialogTreeDiv,0)
          dialogTreeEvents();
-         
-         popup.onconfirm = function(){
-            //点击确定时执行。
-            var error = tools.$(".error")[0];
-            if( !error.innerHTML ){  //要关闭，改变pid 重新渲染
-
-                var select = whoSelect();
-                var movePidChilds = getChildById(data.files,moveId);  
-                //找到要移动的id的所有的字数据，目的在于移动的时候判断一下，要移动的数据名字是否已经存在
-                console.log( movePidChilds );
-                a:for( var i = 0; i < select.length; i++ ){
-                    var arr = getChilds(data.files,select[i].dataset.fileId,true);
-                    
-                    var fileTitle = tools.$(".file-title",select[i])[0];
-                    for( var j = 0; j < movePidChilds.length; j++ ){
-                        if( fileTitle.innerHTML == movePidChilds[j].name ){
-                            fullTip("warn","部分文件移动失败：文件名重复");
-                            continue a;
-                        }
-                    }
-
-                    arr[0].pid = moveId;
-
-                }
-                render(pid);
-                renderTree(pid)
-
-                moveFile.isMove = false;
-            }
-            return !error.innerHTML;
-        };
-        popup.onclose = function(){
-            moveFile.isMove = false;
-        }
-
-    }
+    });
 
     function dialogTreeEvents(){
-        var select = whoSelect();  //那些事被选中的
-
         var dialogTreeMenu = tools.$(".dialog-tree-menu")[0]
         //弹框中的菜单
-        var prevDiv = tools.$("div",tools.$(".dialog-tree-menu")[0])[0];
-        //获取错误提示
-        var error = tools.$(".error")[0];
-
         tools.addEvent(dialogTreeMenu,"click",function(ev){
             var target = ev.target;
             if(target = tools.parents(target,".tree_title")){
-                tools.removeClass(prevDiv,"tree-contro");
-                tools.removeClass(prevDiv,"tree-nav");
                 tools.addClass(target,"tree-contro");
                 tools.addClass(target,"tree-nav");
                 if(target.nextElementSibling && target.nextElementSibling.style.display == "block"){
@@ -279,39 +220,7 @@
                 }else{
                     target.nextElementSibling ? target.nextElementSibling.style.display = "block" : "";
                 }
-                prevDiv = target;
-
-                
-
             }
-            var fileId = target.dataset.fileId;
-            var curDir = tools.$(".cur-dir")[0]; 
-            var parents = getParents(data.files,fileId).reverse();
-            var str = '<span>移动到：</span>';
-            tools.each(parents,function(item){
-                str += '<span>'+item.name+'</span>/';
-            });
-            curDir.innerHTML = str;
-            //错误的提示
-            error.innerHTML = "";
-            var arr = [];
-            for( var i = 0; i < select.length; i++ ){
-                arr = arr.concat(getChilds(data.files,select[i].dataset.fileId,true))
-            }
-            for( var i = 0; i < arr.length; i++ ){
-                if( fileId == arr[i].id ){
-                    error.innerHTML = "不能将文件移动到自身或其子文件夹下";
-                    break;
-                }
-            }
-            //提示当前文件夹下已有
-            if (select[0]) {  //存在的才能移动
-                var parent =  getParent(data.files,select[0].dataset.fileId);
-                if( parent.id == fileId ){
-                    error.innerHTML  = "文件已经在该文件夹下了";
-                }
-            }
-            moveId = fileId;
 
         })
         tools.addEvent(dialogTreeMenu,"mousedown",function(ev){
@@ -355,10 +264,7 @@
     //操作每一个文件文件的事件
     function itemAddEvent(item){
         tools.addEvent(item,"mouseenter",function(){
-            if( !isDrag ){ //正在拖拽，鼠标移入无效
-
-                tools.addClass(this,"file-checked");
-            }
+            tools.addClass(this,"file-checked");
         })
         tools.addEvent(item,"mouseleave",function(ev){
             var lable = tools.$("lable",this)[0];
@@ -438,6 +344,7 @@
     var allCheckbox = tools.$("lable",fileList);
     tools.addEvent(checkedAll,"click",function(){
         var isAddClassed = tools.toggleClass(this,"checked");
+        console.log( 123 );
         tools.each(listDiv,function(item,index){
             if(isAddClassed){
                 tools.addClass(item,"file-checked");
@@ -476,10 +383,7 @@
 
     //点击删除
     var delects = tools.$(".delect")[0];
-    tools.addEvent(delects,"click",delectHandle);
-
-    //删除疯转的函数
-    function delectHandle(){
+    tools.addEvent(delects,"click",function(){
         var select = whoSelect();
         if( select.length < 1 ){  //说明没有选中
             fullTip("warn","请选择文件");
@@ -491,14 +395,15 @@
                 var datas = getChilds(data.files,select[j].dataset.fileId,true);
                 data.files = delectDataByData(data.files,datas);
             }
+            console.log( data.files );
 
             //这个地方需要改进
            
             render(pid);
             renderTree(pid);
             fullTip("ok","删除文件成功");
-        }     
-    }
+        }   
+    })
     //重命名
     var rename = tools.$(".rename")[0];
     var titleIng = null;
@@ -506,10 +411,7 @@
     var edtorInput = null;
     var reNameSelect = null;
     tools.addEvent(rename,"click",function(){
-        renameHandle();
-           
-    })
-    function renameHandle(){
+        
         var select = whoSelect();
         if( select.length > 1 ){  //说明没有选中
             fullTip("warn","只能对单个文件重命名");
@@ -529,8 +431,8 @@
             console.log( rename.fileId );
             reNameSelect = select[0];
             
-        }
-    }
+        }   
+    })
     //在document上dowm，配合rename
     tools.addEvent(document,'mousedown',function(){
         //如果有修改的内容
@@ -559,8 +461,8 @@
     })
 
     //down下去document，选中的文件全部消失
+
     tools.addEvent(document,'mousedown',function(ev){
-        if( ev.which == 3 || ev.which == 2 ) return;
         var target = ev.target;
         if( !tools.parents(target,".file-item") ){
             var select = whoSelect();
@@ -570,8 +472,6 @@
             }
             tools.removeClass(checkedAll,"checked");
         }
-
-        contentMenu.style.display = "none";
     })
 
     //有多少给文件被选中了
@@ -602,68 +502,13 @@
         }
     });
 
-    //右击菜单
-    var contentMenu = tools.$(".content-menu")[0];
-    tools.addEvent(document,"contextmenu",function (ev){
-        var target = ev.target;
-        var x = ev.clientX,y = ev.clientY;
-        contentMenu.style.display = "none";
-       if( target = tools.parents(target,".file-item") ){
-
-            contentMenu.style.display = "block";
-            contentMenu.style.left = x + "px";
-            contentMenu.style.top = y + "px";
-            var select = whoSelect();
-            if( select.length <=1 ){
-                //其他的元素样式都要去掉
-                
-                for( var j = 0; j < select.length; j++ ){
-                    var selectLable = tools.$("lable",select[j])[0];
-                    tools.removeClass(selectLable,"checked");
-                    tools.removeClass(select[j],"file-checked");
-                }
-                var lable = tools.$("lable",target)[0];
-                tools.addClass(lable,"checked");
-                tools.addClass(target,"file-checked");
-                tools.removeClass(target,"file-bg");
-            }
-       }
-
-
-        ev.preventDefault();    
-    });
-
-    //给右击的菜单添加上事件
-
-    tools.addEvent(contentMenu,"click",function (ev){
-        var target = ev.target;
-        if( target = tools.parents(target,".menu_li") ){
-            if( tools.containClass(target,"delect") ){
-                delectHandle();
-            }else if( tools.containClass(target,"move") ){
-                 movefileHandle();
-            }else if( tools.containClass(target,"rename") ){
-                renameHandle();
-            }
-        }
-
-        this.style.display = "none";
-    })
-    tools.addEvent(contentMenu,"mousedown",function (ev){
-       ev.stopPropagation();
-    })
-
     //碰撞的元素
     var disX = 0,disY = 0;
     var newDiv = null;
-    var moveFileTip = null;
-    var targetFile = null;
-    var isDrag = false;
-    var pengItem = null;
     tools.addEvent(document,"mousedown",function(ev){
         //排除掉有右键和中键
         ev.preventDefault();
-        if(ev.which === 3 || ev.which === 2|| moveFile.isMove) return;
+        if(ev.which === 3 || ev.which === 2) return;
 
         var target = ev.target;
 
@@ -672,11 +517,7 @@
 
         var target = ev.target;
         //在file上不能拖拽
-        if(targetFile = tools.parents(target,".file-item") ){
-
-            tools.addEvent(document,"mousemove",movefiles);
-            tools.addEvent(document,"mouseup",upFiles);
-
+        if( tools.parents(target,".file-item") ){
             return;
         }
 
@@ -684,88 +525,6 @@
         tools.addEvent(document,"mouseup",upHandle);
 
     });
-
-    //移动文件操作
-    function movefiles(ev){
-        if( !moveFileTip ){
-            moveFileTip = document.createElement("div");
-            moveFileTip.className = "move-file-tip";
-            document.body.appendChild(moveFileTip);
-
-        }
-        isDrag = true;
-
-        var x = ev.clientX;
-        var y = ev.clientY;
-
-        if( Math.abs(x - disX)>5 || Math.abs(y - disY)>5 ){
-
-            moveFileTip.style.left = x + "px";
-            moveFileTip.style.top = y + "px";
-            
-            //是否包含class
-            if( !tools.containClass(targetFile,"file-checked") ){
-                //其他的元素样式都要去掉
-                var select = whoSelect();
-                for( var j = 0; j < select.length; j++ ){
-                    var selectLable = tools.$("lable",select[j])[0];
-                    tools.removeClass(selectLable,"checked");
-                    tools.removeClass(select[j],"file-checked");
-                }
-
-
-                var lable = tools.$("lable",targetFile)[0];
-                tools.addClass(lable,"checked");
-                tools.addClass(targetFile,"file-checked");
-                tools.removeClass(targetFile,"file-bg");
-            }
-            pengItem = null;
-            //跟所有的元素检测碰撞
-            tools.each(listDiv,function(item,index){
-                //找到碰撞的li
-                var selectLable = tools.$("lable",item)[0];
-                if(tools.collisionRect(moveFileTip,item) && !tools.containClass(selectLable,"checked") ){
-                    tools.addClass(item,"file-bg");
-                    pengItem = item;
-                }else{
-                    if( targetFile != item ){
-                        tools.removeClass(item,"file-bg");
-                    }
-                }
-            })
-        }
-        
-
-    }
-    function upFiles(ev){
-        tools.removeEvent(document,"mousemove",movefiles);
-        tools.removeEvent(document,"mouseup",upFiles); 
-        isDrag = false;  
-        var select = whoSelect();
-        if( pengItem ){
-
-            var pengItemFileId = pengItem.dataset.fileId;
-            for( var j = 0; j < select.length; j++ ){
-                var fileId = select[j].dataset.fileId;
-                for( var i = 0; i < data.files.length; i++ ){
-                    if( data.files[i].id == fileId ){
-                        data.files[i].pid = pengItemFileId;
-                        break;
-                    }
-                }
-            }
-
-            render(pid);
-            renderTree(pid);
-            fullTip("ok","文件移动成功");
-
-            pengItem = null;
-            
-        }
-        moveFileTip && document.body.removeChild(moveFileTip);
-        moveFileTip = null;
-    }
-
     function upHandle(ev){
         tools.removeEvent(document,"mousemove",moveHandle);
         tools.removeEvent(document,"mouseup",upHandle);
