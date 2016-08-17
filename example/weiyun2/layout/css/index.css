@@ -1,9 +1,11 @@
 .weiyun{
-
+    min-width: 940px;
 }
 
 .weiyun-content {
+    position: relative;
     overflow: hidden;
+
 }
 
 .header {
@@ -24,14 +26,12 @@
 }
 
 .header .diff-adright {
-    position: absolute;
-    top: 0;
-    right: 270px;
     min-width: auto;
 }
 .header .ad {
-    float: left;
+    float: right;
     height: 100%;
+    margin-right: 15px;
 }
 
 
@@ -185,7 +185,9 @@
 
 
 .lay-aside {
-    float: left;
+    position: absolute;
+    left: 0px;
+    top:0px;
     z-index: 8;
     width: 160px;
     height: 100%;
@@ -360,9 +362,9 @@
 
 /* //右下角文件夹的内容 */
 .main{
-    width: 90%;
+    padding-left: 160px;
     height: 100%;
-    float: left;
+
 }
 .nav{
     width: 100%;
@@ -439,9 +441,9 @@
     float: left;
 }
 .file-show {
-    width: 80%;
+    width: auto;
     height: 100%;
-    float: left;
+    padding-left: 160px;
 }
 .path-nav-box {
     height: 30px;
@@ -474,6 +476,11 @@
     z-index: 3;
     background: url(../img/main-path.png) no-repeat right -50px;
 }
+
+.path-nav .current-path {
+    background-position: right -200px;
+}
+
 .path-nav a span{
     display: inline-block;
 }
@@ -503,8 +510,26 @@
     position: relative;
 }
 
+.tree_title .ico {
+    position: absolute;
+    left: -13px;
+    top: 0;
+    width: 15px;
+    height: 26px;
+    background: url(../img/folder-tree.png) no-repeat 4px -43px;
+    opacity: 0.8;
+}
+
+
+.tree-contro .ico{
+    background-position: 3px -92px;
+}
+.tree-contro-none .ico{
+    background-position: -999px -99px;
+}
+
 .tree-menu ul ul{
-    -display: none;
+    display: none;
 }
 
 .tree-menu span strong{
@@ -527,22 +552,7 @@
     margin-left: 10px;
 }
 
-.ico {
-    position: absolute;
-    left: -13px;
-    top: 0;
-    width: 15px;
-    height: 26px;
-    background: url(../img/folder-tree.png) no-repeat 4px -43px;
-    opacity: 0.8;
-}
 
-.tree-contro .ico{
-    background-position: 3px -92px;
-}
-.tree-contro-none .ico{
-    background-position: -999px -99px;
-}
 
 
 
@@ -814,6 +824,155 @@ content-menu li {
     background-position: 1px -390px;
     margin-right: 2px;
 }
+
+
+
+
+.drag-helper{
+    width:50px;
+    height:50px;
+    z-index:12;
+    position:absolute;
+    display:block;
+    top:0px;
+    left:0px;
+    display: none;
+}
+.drag-helper img{border:1px solid #7c7c7c;}
+.drag-helper .icon{
+    position:absolute;
+    width:34px;
+    height:34px;
+    top:3px;
+}
+
+.drag-helper .sum{
+    position:absolute;
+    left:0px;
+    top:0px;
+    background:#57acff;
+    font-size:10px;
+    padding:2px 4px;
+    line-height:12px;
+    height:12px;
+    font-weight:600;
+    color:white;
+    z-index:16;
+    text-align:center;
+    min-width:8px;
+    border-radius:8px;
+    border: 1px #3091f2 solid;
+}
+.drag-helper .icon {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    top: 3px;
+}
+
+.drag-helper .icon0{left:3px;z-index:15;}
+.drag-helper .icon1{left:11px;top:6px;z-index:14;}
+.drag-helper .icon2{left:19px;top:9px;z-index:13;}
+.drag-helper .icon3{left:27px;top:12px;z-index:12;}
+
+.filetype, .file-ico {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/file-small.png);
+}
+.filetype {
+    background-image: url(../img/file-small.png);
+    background-position: -999px -999px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.icon-folder {
+    background-position: 1px 2px;
+}
+
+
+.drag-helper .sum {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background: #57acff;
+    font-size: 10px;
+    padding: 2px 4px;
+    line-height: 12px;
+    height: 12px;
+    font-weight: 600;
+    color: white;
+    z-index: 16;
+    text-align: center;
+    min-width: 8px;
+    border-radius: 8px;
+    border: 1px #3091f2 solid;
+}
+
+/* 空文件提示 */
+
+.g-empty {
+    display: block;
+    position: relative;
+    height: 100%;
+    display: none;
+}
+
+.g-empty .empty-box {
+    position: absolute;
+    width: 500px;
+    left: 50%;
+    top: 50%;
+    margin-top: -150px;
+    margin-left: -250px;
+    font-family: "Microsoft YaHei";
+}
+.sort-cloud-empty .empty-box, .sort-folder-empty .empty-box {
+    margin-top: -120px;
+}
+
+.g-empty .ico {
+    margin: 0 auto;
+    width: 220px;
+    height: 220px;
+    background-image: url(../img/g-empty.png);
+    background-repeat: no-repeat;
+    background-position: center 0;
+}
+.sort-cloud-empty .ico, .sort-folder-empty .ico {
+    width: 200px;
+    height: 90px;
+    background-position: center 0;
+}
+
+.g-empty .title {
+    height: 40px;
+    line-height: 40px;
+    color: #AFB5BF;
+    font-size: 32px;
+    text-align: center;
+}
+.sort-cloud-empty .title, .sort-folder-empty .title {
+    height: 30px;
+    line-height: 30px;
+    font-size: 22px;
+}
+
+.g-empty .content {
+    height: 40px;
+    line-height: 40px;
+    color: #AFB5BF;
+    font-size: 18px;
+    text-align: center;
+}
+.sort-cloud-empty .content, .sort-folder-empty .content {
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+}
+
 
 
 

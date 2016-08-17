@@ -14,14 +14,7 @@
         <header class="header">
             <a href="#" class="logo">logo</a>
             <div class="header_member"></div>
-            <div class="ad diff-adright">
-                <a class="renew-btn" href="javascript:void(0);">
-                    <i class="icon"></i> 会员中心
-                </a>
-                <a class="download-btn" href="#">
-                    <i class="icon"></i> 下载客户端
-                </a>
-            </div>
+            
             <div data-no-selection="" class="user">
                 <div class="normal">
                     <div class="inner">
@@ -29,12 +22,21 @@
                     </div>
                 </div>
             </div>
+            
             <div class="header-search">
                 <div class="beautiful-input">
                     <i class="ico"></i>
                     <label>搜索全部文件</label>
                     <input type="text" autocomplete="off" maxlength="40" aria-label="输入文件名并按下回车进行搜索" tabindex="0">
                 </div>
+            </div>
+            <div class="ad diff-adright">
+                <a class="renew-btn" href="javascript:void(0);">
+                    <i class="icon"></i> 会员中心
+                </a>
+                <a class="download-btn" href="#">
+                    <i class="icon"></i> 下载客户端
+                </a>
             </div>
         </header>
         <div class="weiyun-content">
@@ -140,6 +142,13 @@
                             <div class="path-nav clearFix">
                             </div>
                         </div>
+                        <div class="g-empty sort-folder-empty">
+                            <div class="empty-box">
+                                <div class="ico"></div>
+                                <p class="title">暂无文件</p>
+                                <p class="content">请点击左上角的“上传”按钮添加</p>
+                            </div>
+                        </div>
                         <div class="file-list clearFix">
                             <!-- <div class="file-item">
                                 <div class="item">
@@ -169,6 +178,7 @@
                                     </p>
                                 </div>
                             </div> -->
+
                         </div>
                     </div>
                 </div>
@@ -186,7 +196,7 @@
     <div class="content-menu" style="z-index: 10;">
         <ul class="large " style="">
             <li class="menu_li upload">
-                <a href="javascript:void(0);" >
+                <a href="javascript:void(0);">
                     <i class="ico"></i>
                     <span>下载</span>
                 </a>
@@ -222,11 +232,22 @@
             </li>
         </ul>
     </div>
+    <!--<div class="drag-helper ui-draggable-dragging" >
+        <div class="icons"> 
+            <i class="icon icon0 filetype icon-folder"></i> 
+             <i class="icon icon0 filetype icon-folder"></i>           
+            <i class="icon icon1 filetype icon-folder"></i>       
+            <i class="icon icon2 filetype icon-folder"></i>      
+            <i class="icon icon3 filetype icon-folder"></i>   
+        </div>
+        <span class="sum">1</span>
+    </div>-->
+
     <script src="js/data.js"></script>
     <script src="js/handledata.js"></script>
+    <script src="js/domHandle.js"></script>
     <script src="js/tools.js"></script>
     <script src="src/popup/js/popup.js"></script>
-    <script src="js/domHandle.js"></script>
     <script src="js/index.js"></script>
 </body>
 

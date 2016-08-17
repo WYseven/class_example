@@ -58,14 +58,16 @@
 
     var pid = 0;
 
+    var gEmpty = tools.$(".g-empty")[0];
     
 
     //使用数据生成文件
     function renderHtml(id){
         var arr = getChildById(data.files,id);
         fileList.innerHTML = "";
+        gEmpty.style.display = "none";
         if(arr.length === 0){
-            fileList.innerHTML = "暂无数据";
+            gEmpty.style.display = "block";
             return;
         }
         tools.each(arr,function(item){
@@ -86,9 +88,12 @@
     function renderNav(pathNav,id){
         var parents = getParents(data.files,id).reverse();
         var str = '';
-        tools.each(parents,function(item){
-            str += '<a href="javascript:;" data-file-id="'+item.id+'">'+item.name+'</a>';
-        });
+        for( var i = 0; i < parents.length-1; i++ ){
+            str += '<a href="javascript:;" data-file-id="'+parents[i].id+'">'+parents[i].name+'</a>';
+        }
+
+        str += '<a class="current-path" href="javascript:;" data-file-id="'+parents[parents.length-1].id+'">'+parents[parents.length-1].name+'</a>' 
+
         pathNav.innerHTML = str;
     }
 
@@ -134,8 +139,6 @@
     var prev = 0;
     function postionLevel(treeDiv,id){
         var parents = getParents(data.files,id);
-       // ul[data-file-id=id]
-
         for( var i = 0; i < treeDiv.length; i++ ){
             if( id == treeDiv[i].dataset.fileId ){
                 tools.addClass(treeDiv[i],"tree-nav");
@@ -206,7 +209,6 @@
             fullTip("warn","请选择文件");
             return;
         }
-        moveFile.isMove = true;
         var popup = new PopUp();
         var newDiv = document.createElement("div");
         newDiv.className = "tree-menu dialog-tree-menu";
@@ -247,15 +249,11 @@
                 }
                 render(pid);
                 renderTree(pid)
-
-                moveFile.isMove = false;
             }
+
+
             return !error.innerHTML;
         };
-        popup.onclose = function(){
-            moveFile.isMove = false;
-        }
-
     }
 
     function dialogTreeEvents(){
@@ -340,6 +338,7 @@
         if( childs.length === 0 ){
             fileList.innerHTML = "";
         }
+        gEmpty.style.display = "none";
         newStructrue = createStructrue()
         tools.insertFirst( fileList,newStructrue );
 
@@ -356,7 +355,6 @@
     function itemAddEvent(item){
         tools.addEvent(item,"mouseenter",function(){
             if( !isDrag ){ //正在拖拽，鼠标移入无效
-
                 tools.addClass(this,"file-checked");
             }
         })
@@ -365,9 +363,6 @@
             if(!tools.containClass(lable,"checked")){
                 tools.removeClass(this,"file-checked");
             }
-        });
-        tools.addEvent(item,"click",function(ev){
-            var target = ev.target;
         });
     }
     //标签提示
@@ -400,7 +395,7 @@
             tools.removeChild(fileList,newStructrue);
             var childs = getChildById(data.files,pid);
             if( childs.length === 0 ){
-                fileList.innerHTML = "暂无数据";
+                gEmpty.style.display = "block";
             }
         }else if(edtor && edtor.value.trim()){
             //如果数据中已经有这个名字了，就不用重复添加你，并且提醒
@@ -526,7 +521,6 @@
             edtorInput.select();
 
             rename.fileId = select[0].dataset.fileId;
-            console.log( rename.fileId );
             reNameSelect = select[0];
             
         }
@@ -653,6 +647,24 @@
        ev.stopPropagation();
     })
 
+    //dragfileHtml
+
+    function dragfileHtml(){
+        var newDiv = document.createElement("div");
+        newDiv.className = "drag-helper ui-draggable-dragging";
+        var str = `
+            <div class="icons"> 
+                <i class="icon icon0 filetype icon-folder"></i> 
+                <!-- <i class="icon icon0 filetype icon-folder"></i>           
+                <i class="icon icon1 filetype icon-folder"></i>       
+                <i class="icon icon2 filetype icon-folder"></i>      
+                <i class="icon icon3 filetype icon-folder"></i>   -->
+            </div>
+            <span class="sum">1</span>`;
+        newDiv.innerHTML = str;
+        return newDiv;
+    }
+
     //碰撞的元素
     var disX = 0,disY = 0;
     var newDiv = null;
@@ -660,10 +672,11 @@
     var targetFile = null;
     var isDrag = false;
     var pengItem = null;
+    var tip = null;
     tools.addEvent(document,"mousedown",function(ev){
         //排除掉有右键和中键
         ev.preventDefault();
-        if(ev.which === 3 || ev.which === 2|| moveFile.isMove) return;
+        if(ev.which === 3 || ev.which === 2) return;
 
         var target = ev.target;
 
@@ -688,20 +701,29 @@
     //移动文件操作
     function movefiles(ev){
         if( !moveFileTip ){
-            moveFileTip = document.createElement("div");
-            moveFileTip.className = "move-file-tip";
+            moveFileTip = dragfileHtml();
             document.body.appendChild(moveFileTip);
-
+            tip = document.createElement("div");
+            tip.style.cssText = "width: 20px;height:20px;position: absolute;left:0px;top:0px;"
+            document.body.appendChild(tip);
+            sum = tools.$(".sum",moveFileTip)[0];
         }
         isDrag = true;
+
+
 
         var x = ev.clientX;
         var y = ev.clientY;
 
         if( Math.abs(x - disX)>5 || Math.abs(y - disY)>5 ){
 
-            moveFileTip.style.left = x + "px";
-            moveFileTip.style.top = y + "px";
+            moveFileTip.style.display = "block";
+            moveFileTip.style.left = x+20 + "px";
+            moveFileTip.style.top = y+20 + "px";
+            tip.style.left = x+ "px";
+            tip.style.top = y + "px";
+
+
             
             //是否包含class
             if( !tools.containClass(targetFile,"file-checked") ){
@@ -714,17 +736,27 @@
                 }
 
 
+
+                
+
+
                 var lable = tools.$("lable",targetFile)[0];
                 tools.addClass(lable,"checked");
                 tools.addClass(targetFile,"file-checked");
                 tools.removeClass(targetFile,"file-bg");
             }
+            var select = whoSelect();
+             var icons = tools.$(".icons",moveFileTip)[0];
+              sum.innerHTML = select.length;
+                for( var i = 0; i < select.length; i++ ){
+                    icons.innerHTML += '<i class="icon icon'+i+' filetype icon-folder"></i>'
+                }
             pengItem = null;
             //跟所有的元素检测碰撞
             tools.each(listDiv,function(item,index){
                 //找到碰撞的li
                 var selectLable = tools.$("lable",item)[0];
-                if(tools.collisionRect(moveFileTip,item) && !tools.containClass(selectLable,"checked") ){
+                if(tools.collisionRect(tip,item) && !tools.containClass(selectLable,"checked") ){
                     tools.addClass(item,"file-bg");
                     pengItem = item;
                 }else{
@@ -763,7 +795,10 @@
             
         }
         moveFileTip && document.body.removeChild(moveFileTip);
+        console.log( tip );
+        tip && document.body.removeChild(tip);
         moveFileTip = null;
+        tip = null;
     }
 
     function upHandle(ev){

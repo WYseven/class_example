@@ -9,10 +9,10 @@
 		//弹窗
 		var fullPop = this.fullPop = document.createElement('div');
 		//设置遮罩层样式
-		mask.style.cssText = 'top: 0px; left: 0px; position: fixed; width: 100%; height: 100%; opacity: 0.65; background-color: white;';
+		mask.style.cssText = 'z-index:1000;top: 0px; left: 0px; position: fixed; width: 100%; height: 100%; opacity: 0.65; background-color: white;';
 		//设置弹窗内容和样式。
 		fullPop.className = 'full-pop';
-		fullPop.style.cssText = 'position:absolute;left:0px;top:0px;visibility:hidden';
+		fullPop.style.cssText = 'z-index:2001;position:absolute;left:0px;top:0px;visibility:hidden';
 		fullPop.innerHTML ='\
 		<h3 class = "move">\
 			<p class="title">选择存储位置</p>\
@@ -135,7 +135,7 @@
 			if(top<0){
 				top = 0;
 			}
-			this.fullPop.style.cssText = 'position:absolute;left:'+left+'px;top:'+top+'px;visibility:visible;';
+			this.fullPop.style.cssText = 'z-index:2000;position:absolute;left:'+left+'px;top:'+top+'px;visibility:visible;';
 		}
 
 	};

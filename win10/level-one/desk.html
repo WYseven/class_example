@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>win10弹框</title>
+		<link rel="stylesheet" type="text/css" href="css2/reset.css">
+		<link rel="stylesheet" type="text/css" href="css2/desk.css">
+	</head>
+
+	<body>
+		<ul id="oUl"></ul>
+		<div class="box1"></div>
+		<div class="box1"></div>
+		<div class="box1"></div>
+		<div class="box1"></div>
+		<div class="box1"></div>
+		<script src="js/tools.js"></script>
+		<script>
+		var oUl = document.getElementById("oUl");
+		var box1s = tools.$(".box1");
+		createLi();
+		function createLi(){
+			var y = Math.floor(tools.view().H/110);
+			var x = Math.floor(tools.view().W/110);
+			var n = x * y;
+			var str = "";
+			for( var i = 0; i < n; i++ ){
+				str += '<li style="left:'+(Math.floor(i/y)*110)+'px;top:'+(i % y * 110)+'px;">'+i+'</li>';
+			}
+			console.log( box1s.length );
+			for( var j = 0; j < box1s.length; j++ ){
+				box1s[j].style.left = (Math.floor(j/y)*110) + 'px';
+				box1s[j].style.top = (j % y * 110) + 'px';
+				box1s[j].innerHTML = j+1;
+			}
+			oUl.innerHTML = str;
+		}
+		window.onresize = function (){
+			jieliu(oUl,createLi);
+		};
+		function jieliu(element,callback){
+				clearTimeout(element.timers);
+				element.timers = setTimeout(function (){
+					callback.call(element);	
+				},30)
+		}
+
+		dragElement(box1s[0]);
+
+
+		function dragElement(obj){
+			obj.onmousedown  =function (ev){
+				var disX = ev.clientX - obj.offsetLeft;
+				var disY = ev.clientY - obj.offsetTop;
+				obj.style.transition = "none";
+				document.onmousemove = function (ev){
+					obj.style.left = ev.clientX - disX + 'px';
+					obj.style.top = ev.clientY - disY + 'px';
+				};
+				document.onmouseup = function (){
+					document.onmouseup = document.onmousemove = null;	
+				}
+
+				ev.preventDefault();
+			};
+		}
+
+
+		</script>
+	</body>
+</html>

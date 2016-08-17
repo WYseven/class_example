@@ -1,9 +1,9 @@
 (function (){
      
-    
-
-    
-
+     tools.$(".weiyun-content")[0].style.height = document.documentElement.clientHeight-55 + "px";
+     tools.addEvent(window,"resize",function (){
+        tools.$(".weiyun-content")[0].style.height = document.documentElement.clientHeight-55 + "px";      
+     })
     //把数据渲染在页面中
     var renderId = 0;  //初始渲染的id为0
     
@@ -23,7 +23,7 @@
 
     //路径点击事件
     tools.addEvent(pathNav,"click",function(ev){
-        if( ev.target.nodeName.toLowerCase() === "a" ){
+        if( ev.target.nodeName.toLowerCase() === "a"  && !tools.parents(ev.target,".current-path") ){
 
             var fileId = ev.target.dataset.fileId;
             renderFiles(fileList,fileId);
@@ -45,11 +45,12 @@
     var prevPathNav = null;
     postionLevel(0);
     
+    //定位某个id的DOM上，然后将其下面的ul展开
     function postionLevel(id){
         var childs = getChildById(datas,id);
         var currentDiv = document.querySelector(".tree_title[data-file-id='"+id+"']");
             if( prevPathNav ) {
-                tools.removeClass(prevPathNav,"tree-contro");
+                //tools.removeClass(prevPathNav,"tree-contro");
                 tools.removeClass(prevPathNav,"tree-nav");
             }
             tools.addClass(currentDiv,"tree-contro");
@@ -61,6 +62,26 @@
             divs.parentNode.parentNode.style.display = "block";
         }
     }
+
+    tools.addEvent(treeMenu,"click",function (ev){
+        var target = ev.target;
+
+       if(tools.parents(target,".ico")){
+            target = tools.parents(target,".tree_title");
+            if(target.nextElementSibling && target.nextElementSibling.style.display == "block"){
+                target.nextElementSibling.style.display = "none";
+                tools.removeClass(target,"tree-contro");
+            }else{
+                target.nextElementSibling.style.display = "block";
+                tools.addClass(target,"tree-contro");
+            }
+        }else if( target = tools.parents(target,".tree_title") ){
+            var fileId = target.dataset.fileId;
+            renderFiles(fileList,fileId);
+            renderPathNav(pathNav,fileId);
+            postionLevel(fileId);
+        }
+    })
 
 
     /*-------文件事件 鼠标移入移出点击--------*/
@@ -84,7 +105,6 @@
         if( target.nodeName.toLowerCase() !== "lable" ){
 
             target = tools.parents(target,".file-item");
-            console.log( target );
             //找到当前点击的文件的id
             if(target){
                 var fileId = target.dataset.fileId;
@@ -139,7 +159,7 @@
 
             //渲染一下左侧的树形菜单
             var titleDiv = document.querySelector(".tree_title[data-file-id='"+renderId+"']")
-                
+
             titleDiv.nextElementSibling.appendChild(singLi(newData,true));
             tools.removeClass(titleDiv,"tree-contro-none")
         }
@@ -149,3 +169,4 @@
     }
 
 })()
+

@@ -1,0 +1,34 @@
+/*
+Error: Invalid charset directive '@charset': expected string.
+        on line 1 of E:\git\class_example\win10\level-one\sass\dralog.sass
+
+1: @charset "utf-8" //必须设置了这个才能编译有中文的注释
+2: /* 内容区border样式  *\/
+3: 
+4: $drag-content-border-style: 1px solid #f8f8f8
+5: 
+6: .drag-f-left
+
+Backtrace:
+E:\git\class_example\win10\level-one\sass\dralog.sass:1
+D:/chrome down/koala_2.0.4_portable/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:862:in `parse_charset_directive'
+D:/chrome down/koala_2.0.4_portable/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:788:in `parse_directive'
+D:/chrome down/koala_2.0.4_portable/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:635:in `parse_line'
+D:/chrome down/koala_2.0.4_portable/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:525:in `build_tree'
+D:/chrome down/koala_2.0.4_portable/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:544:in `block in append_children'
+D:/chrome down/koala_2.0.4_portable/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:543:in `each'
+D:/chrome down/koala_2.0.4_portable/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:543:in `append_children'
+D:/chrome down/koala_2.0.4_portable/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:396:in `_to_tree'
+D:/chrome down/koala_2.0.4_portable/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:268:in `render'
+D:/chrome down/koala_2.0.4_portable/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:404:in `run'
+D:/chrome down/koala_2.0.4_portable/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:62:in `process_result'
+D:/chrome down/koala_2.0.4_portable/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:52:in `parse'
+D:/chrome down/koala_2.0.4_portable/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:19:in `parse!'
+D:/chrome down/koala_2.0.4_portable/rubygems/gems/sass-3.4.9/bin/sass:13:in `<top (required)>'
+D:/chrome down/koala_2.0.4_portable/bin/sass:18:in `load'
+D:/chrome down/koala_2.0.4_portable/bin/sass:18:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid charset directive '@charset': expected string.\A         on line 1 of E:\git\class_example\win10\level-one\sass\dralog.sass\A \A 1: @charset \"utf-8\" //必须设置了这个才能编译有中文的注释\A 2: /* 内容区border样式  */\A 3: \A 4: $drag-content-border-style: 1px solid #f8f8f8\A 5: \A 6: .drag-f-left"; }

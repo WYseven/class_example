@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			var arr = [3,7,2,9,10,5,1];
+			//selection sort，选择排序，选择排序只对最后一个被选中的元素排序。它会往后找到包括自己在内最小的一个元素，替换自己。简单来说就是把第 i 小的元素放到第 i 个序位上。
+			function selection(input) {
+				//[1, 2, 7, 9, 10, 5, 3]
+			  for(var i = 0, len = input.length; i < len - 1; i++) {
+			    var min = i;
+			    // i 0
+			    for(var j = i + 1; j < len; j++) {
+			    	/*
+						i 0 
+							j 1 2 3 4 5
+						i 1 
+							j 2 3 4 5
+						i 2 
+							j 3 4 5
+
+			    	*/
+			      if(input[j] < input[min]) {
+			        min = j;
+			      }
+			    }
+			    input[i] = [input[min], input[min] = input[i]][0];
+			    console.log( input );
+			  }
+			  return input;
+			}
+			
+
+			console.log( selection(arr) );
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

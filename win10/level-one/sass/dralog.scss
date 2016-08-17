@@ -1,0 +1,58 @@
+@charset "utf-8";//必须设置了这个才能编译有中文的注释
+
+
+//设置dralog内容区额样式
+$drag-content-border-style: 1px solid #f8f8f8;
+
+.drag-f-left {
+	float: left;
+}
+	
+.drag-box{
+	width: 1500px;
+	height: 1000px;
+	border: 1px solid #000;
+	background-color: #fff;
+	box-sizing: border-box;
+
+
+	.drag-content {
+		width: 100%;
+		height: 100%;
+		padding-top: 10px;
+		.drag-top {
+			width: 100%;
+			height: 70px;
+			border-bottom: 1px solid #d9d9d9;
+		}
+
+		.drag-left-slid {
+			width: 300px;
+			height: 100%;
+			border-right: $drag-content-border-style;
+			margin-right: -300px;
+		}
+
+		.drag-middle {
+			width: auto;
+			height: 100%;
+			margin:0 310px;
+			overflow: hidden;
+			min-width: 100px;
+		}
+
+		.drag-right-slid {
+			width: 300px;
+			height: 100%;
+			border-left: $drag-content-border-style;
+			float: right;
+			margin-left: -300px;
+		}
+	}
+}
+
+@media screen and (max-width: 880px) {  //当视口小于880的时候，右侧要消失
+   .drag-right-slid {
+   		display: none;
+   }
+}

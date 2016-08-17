@@ -1,6 +1,7 @@
 body{
 	margin:0;
 	font: 12px/1.5 Microsoft YaHei,Tahoma,SimSun,Verdana;
+	overflow-x: hidden;
 }
 a{
 	text-decoration: none;

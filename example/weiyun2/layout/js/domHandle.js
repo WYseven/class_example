@@ -31,9 +31,11 @@ function fileStructrue(options){
 
 function renderFiles(fileList,renderId){
     var childs = getChildById(datas,renderId);
+    var empty = tools.$(".g-empty")[0];
     //如果数据为空，那么显示暂无数据
+    empty.style.display = "none";
     if(childs.length === 0){
-        fileList.innerHTML = "暂无数据";
+        empty.style.display = "block";
         return;
     }
     fileList.innerHTML = "";
@@ -52,9 +54,13 @@ function renderPathNav(pathNav,id){
     //获取到renderid所有的父级数据
     var parents = getParents(datas,id).reverse();
     var str = '';
-    tools.each(parents,function(item){
-        str += '<a href="javascript:;" data-file-id="'+item.id+'">'+item.name+'</a>';
-    });
+    var m = parents.length;
+    for( var i = 0; i < parents.length-1; i++ ){
+        var item = parents[i];
+        str += '<a href="javascript:;" style="z-index: '+(--m)+'" data-file-id="'+item.id+'">'+item.name+'</a>';
+    }
+    
+    str += '<a href="javascript:;" style="z-index: '+(--m)+'" class="current-path" >'+parents[parents.length-1].name+'</a>'
     pathNav.innerHTML = str;
 }
 
