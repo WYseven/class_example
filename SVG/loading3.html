@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			circle {
+			    -webkit-transition: stroke-dasharray 5s,width .5s;
+			    transition: stroke-dasharray 5s,width .5s;
+			}
+		</style>
+	</head>
+
+	<body>
+		<svg id="svgs" width="2240" height="2240" viewbox="0 0 1240 1240">
+		     <!-- <circle cx="220" cy="220" r="170" stroke-width="50" stroke="#D1D3D7" fill="none"></circle> -->
+		     <!-- <circle cx="120" cy="120" stroke-width="50" r="50" stroke="#000" fill="none"></circle>
+		     <circle cx="120" cy="120" stroke-width="50" r="100" stroke="#000" fill="none"></circle> -->
+		   <!--  <circle cx="220" cy="220" r="170" stroke-width="50" stroke="#00A5E0" fill="none" transform="matrix(0,-1,1,0,0,440)" stroke-dasharray="0 1069"></circle> -->
+		</svg>
+		<script>
+
+			function setAtrrs(obj,options){
+				for( var attr in options ){
+					obj.setAttribute(attr,options[attr]);	
+				}	
+			}
+
+			/*
+				为什么新生成的元素添加进去不行
+			*/
+
+			svgs.innerHTML = '<circle cx="120" cy="120" stroke-width="50" r="50" stroke="#000" fill="none"></circle>'
+			var str = '';
+
+			for( var i = 1; i < 6; i++ ){
+				str += '<circle cx="220" cy="220" stroke-width="20" r="'+i*50+'" stroke="#00A5E0" fill="none" transform="matrix(0,-1,1,0,0,440)" stroke-dasharray="0 1069"></circle>'
+			}
+
+			svgs.innerHTML = str;
+
+			var circles = document.querySelectorAll("circle");
+
+
+			setTimeout(function (){
+		    	var percent = 100 / 100, perimeter = Math.PI * 2 * 50;
+		    	//for( var i = 0; i < circles.length; i++ ){
+		    		perimeter = Math.PI * 2 * 1;
+		    		console.log( perimeter );
+	            	circles[1].setAttribute('stroke-dasharray', perimeter * percent + " " + perimeter * (1- percent));	
+		    	//}
+
+
+		    },0)
+
+			/*for( var i = 1; i < 5; i++ ){
+				var circle = document.createElement("circle");
+
+				setAtrrs(circle,{
+					cx:120,
+					cy:120,
+					"stroke-width":50,
+					r:i*50,
+					stroke:"#000",
+					fill:"none"
+				});
+				svgs.appendChild(circle);
+			}*/
+
+		</script>
+	</body>
+</html>
