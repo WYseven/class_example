@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			circle {
+			    transition: stroke-dasharray 1.5s ease-in-out,r .5s cubic-bezier(.07,1.52,.11,1.93);
+			    transform:rotate(-90deg);
+			    transform-origin:600px 400px;
+			    position: absolute;
+			    left:0;
+			    top:0;
+			}
+
+			.newCircle2_class {
+				-transform:scaleY(-1) rotate(90deg);
+			}
+		</style>
+	</head>
+
+	<body>
+		<svg id="svgs" width="1000" height="1000" viewBox="0 0 1000 1000"><circle cx="600" cy="100" stroke-width="3" stroke="#fff" r="300" fill="#daeff5"></circle><circle cx="600" cy="100" stroke-width="3" stroke="#fff" r="270" fill="#daeff5"></circle><circle cx="600" cy="100" stroke-width="3" stroke="#fff" r="240" fill="#daeff5"></circle><circle cx="600" cy="100" stroke-width="3" stroke="#fff" r="210" fill="#daeff5"></circle><circle cx="600" cy="100" stroke-width="3" stroke="#fff" r="180" fill="#daeff5"></circle><circle cx="600" cy="100" stroke-width="3" stroke="#fff" r="150" fill="#daeff5"></circle><circle cx="600" cy="100" stroke-width="3" stroke="#fff" r="120" fill="#daeff5"></circle><circle cx="600" cy="100" stroke-width="3" stroke="#fff" r="90" fill="#daeff5"></circle><circle cx="600" cy="100" r="60" fill="#FFF"></circle><circle cx="600" cy="700" stroke-width="500" r="300" fill="red" stroke-dasharray="100,1884.9555921538758" stroke="blue" style="" class="newCircle2_class"></circle></svg>
+		<script>
+			//生成圆形
+			/*var str = '';
+
+			var r = 30;  //半径
+			var cW = 30;
+			var upCW = 35;
+			var downCW = 25;
+
+			var n = 8;
+			for( var i = 0; i <= n; i++ ){
+				var rr = (n+1-i)*r+30/*
+				var n = (r + (2-i)*33) * 2 * Math.PI;
+				if( i === n ){
+
+					str += '<circle cx="600" cy="100"  r="'+rr+'"  fill="#FFF" ></circle>'
+				}else{
+					str += '<circle cx="600" cy="100" stroke-width="3" stroke="#fff" r="'+rr+'"  fill="#daeff5" ></circle>'
+				}
+				
+			}
+
+			svgs.innerHTML = str;*/
+
+			var circles = document.querySelectorAll("circle");
+
+			//alert(circles.length)
+
+			/*var newCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle")
+			setAtrrs(newCircle,{
+				cx:"600",
+				cy:"700",
+				"stroke-width":"500",
+				r:"300",
+				fill:"none",
+				"stroke-dasharray":Math.PI*2*300+","+Math.PI*2*300,
+				stroke:"#fff",
+				style:"",
+				class:"newCircle2_class"
+			});
+
+			newCircle.className = "newCircle2_class"
+
+			svgs.appendChild(newCircle);*/
+
+			setTimeout(function (){
+				circles[9].setAttribute('stroke-dasharray', 0+","+Math.PI*2*300);		
+			},10)
+
+			
+
+			
+
+		    function setAtrrs(obj,options){
+				for( var attr in options ){
+					obj.setAttribute(attr,options[attr]);	
+				}	
+			}
+
+		    for( var i = 1; i < circles.length-1; i++ ){
+            	fn(circles[i])	
+	    	}
+	    	function fn(circles){
+	    		var r = circles.getAttribute("r");
+	    		var next = circles.nextElementSibling;
+	    		if( next === svgs.lastElementChild ){
+	    			next = null;
+	    		}
+	    		if( next ){
+	    			var nextR = next.getAttribute("r");
+	    		}
+
+	    		//next = null;
+	    		
+	    		circles.onmouseover = function (){
+
+            		
+            		if(next) next.setAttribute('r',parseFloat(nextR)-3);
+            		this.setAttribute('r',parseFloat(r)+7);
+            	};
+            	circles.onmouseout = function (){
+            		this.setAttribute('r',r);
+            		
+            		if(next) next.setAttribute('r',nextR);
+            			
+            	};
+	    	}
+		</script>
+	</body>
+</html>

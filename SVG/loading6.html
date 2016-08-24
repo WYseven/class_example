@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			circle {
+			    transition: stroke-dasharray 1s,stroke-width .5s cubic-bezier(0.07, 1.52, 0.11, 1.93);
+			    transform:rotate(-90deg);
+			    transform-origin:600px 400px;
+			}
+
+			.newCircle2_class {
+				transform:rotate(-90deg) scaleY(-1);
+			}
+		</style>
+	</head>
+
+	<body>
+		<svg id="svgs" width="1000" height="1000" viewbox="0 0 1000 1000">
+			<!-- <circle id="circles" cx="205" cy="205"  r = 200 fill="none" style="transform:rotate(-90deg); transform-origin:305px 305px;" stroke-dasharray="100,1256"  stroke="black" stroke-width="10"></circle>
+			<circle id="circles" cx="205" cy="205"  r = 250 fill="none" style="transform:rotate(-90deg); transform-origin:305px 305px;" stroke-dasharray="100,1556"  stroke="black" stroke-width="10"></circle>
+			<circle id="circles" cx="205" cy="205"  r = 300 fill="none" style="transform:rotate(-90deg); transform-origin:305px 305px;" stroke-dasharray="100,1884.9555921538758"  stroke="black" stroke-width="10"></circle> -->
+		</svg>
+		<script>
+			//生成圆形
+			var str = '';
+			var r = 30;  //半径
+
+			for( var i = 1; i <= 8; i++ ){
+				var rr = (8+1-i)*r+30
+				var n = rr * 2 * Math.PI;
+				str += '<circle cx="600" cy="100" stroke-width="25" r="'+rr+'" stroke="#dcf0f3" fill="none" stroke-dasharray="100 '+n+'"></circle>'
+			}
+
+			svgs.innerHTML = str;
+
+			var circles = document.querySelectorAll("circle");
+
+
+			setTimeout(function (){
+		    	
+		    	for( var i = 0; i < circles.length; i++ ){
+		    		var percent = 100 / 100,
+		    		perimeter = Math.PI * 2 * ((8-i)*r+30);
+	            	circles[i].setAttribute('stroke-dasharray', perimeter * percent + " " + perimeter);	
+		    	}
+
+		    },0);
+
+		    function setAtrrs(obj,options){
+				for( var attr in options ){
+					obj.setAttribute(attr,options[attr]);	
+				}	
+			}
+
+
+
+
+			
+
+
+
+
+
+		    for( var i = 1; i < circles.length; i++ ){
+            	fn(circles[i])	
+	    	}
+	    	function fn(circles){
+	    		var r = circles.getAttribute("stroke-width");
+	    		var next = circles.nextElementSibling;
+	    		var prev = circles.previousElementSibling;
+	    		if(next) nextR = next.getAttribute('stroke-width');
+            	if(prev) prevR = prev.getAttribute('stroke-width');
+	    		circles.onmouseover = function (){
+
+            		
+            		if(next) next.setAttribute('stroke-width',parseFloat(nextR)-3);
+            		if(prev) prev.setAttribute('stroke-width',parseFloat(nextR)-3);
+            		this.setAttribute('stroke-width',parseFloat(r)+8);
+            	};
+            	circles.onmouseout = function (){
+            		this.setAttribute('stroke-width',r);
+            		
+            		if(next) next.setAttribute('stroke-width',nextR);
+            		if(prev) prev.setAttribute('stroke-width',prevR);
+            			
+            	};
+	    	}
+		</script>
+	</body>
+</html>
