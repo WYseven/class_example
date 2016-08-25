@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			.box {
+				width: 800px;
+				height: 500px;
+				border: 1px solid #000;
+				margin:10px auto;
+				position: relative;
+			}
+			.box .item{
+				width: 50px;
+				height: 20px;
+				border: 1px dashed #ccc;
+				cursor: move;
+				text-align: center;
+				font-size: 12px;
+				line-height: 20px;
+				float: left;
+				margin: 10px 0 0 10px;
+				position: relative;
+				z-index: 2;
+			}
+			.content {
+				width: 400px;
+				height: 300px;
+				border: 1px solid red;
+				padding-top: 30px;
+			}
+			.box .mask{
+				width: 50px;
+				height: 20px;
+				border: 1px dashed red;
+				position: absolute;
+				left:0;
+				top:0;
+			}
+		</style>
+		<script src="../../src/tools.js"></script>
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="content">
+				<div class="item">订阅</div>
+				<div class="item">娱乐</div>
+				<div class="item">新闻</div>
+				<div class="item">图片</div>
+				<div class="item">呵呵</div>
+				<div class="item">哈哈</div>
+				<div class="item">啦啦</div>
+				<div class="mask"></div>
+			</div>
+		</div>
+		<script>
+			//布局转换
+
+			var items = tools.$(".item");
+			var mask = tools.$(".mask")[0];
+
+			var position = [];
+
+			for( var i = 0; i < items.length; i++ ){
+				position.push({
+					left:items[i].offsetLeft,
+					top:items[i].offsetTop,
+					originLeft:items[i].offsetLeft+items[i].offsetWidth,
+					originTop:items[i].offsetTop+items[i].offsetHeight,
+					zhongxinX:items[i].offsetLeft+items[i].offsetWidth/2,
+					zhongxinY:items[i].offsetTop+items[i].offsetHeight/2
+				})
+			}
+
+			var arr = [];
+
+			for( var i = 0; i < items.length; i++ ){
+				items[i].style.position = 'absolute';
+				items[i].style.left = position[i].left + 'px';
+				items[i].style.top = position[i].top + 'px';
+				items[i].style.margin = 0;
+				tools.attr(items[i],"index",i);
+				addEvent(items[i]);
+
+				arr.push(i);
+			}
+
+			function addEvent(item){
+				
+				var disX = 0;
+				var disY = 0;
+				var n = 0;
+				tools.addEvent(item,"mousedown",function (ev){
+					n = parseInt(tools.attr(item,"index"));
+					disX = ev.clientX - this.offsetLeft;	
+					disY = ev.clientY - this.offsetTop;	
+					tools.addEvent(document,"mousemove",moveFn);
+					tools.addEvent(document,"mouseup",upFn);
+
+					mask.style.left = position[n].left + "px";
+					mask.style.top = position[n].top + "px";
+
+					ev.preventDefault();
+				});
+				var onOff = true;
+				function moveFn(ev){
+					item.style.left = ev.clientX - disX + 'px';
+					item.style.top = ev.clientY - disY + 'px';
+					
+
+					//脱离了原来的区域
+					if( item.offsetTop > position[n].originTop || item.offsetLeft > position[n].originLeft && item.offsetTop+item.offsetHeight < position[n].offsetTop ){
+						//这个元素之后的那些元素都向前走一下
+						for( var i = n+1; i < arr.length; i++ ){
+							console.log( arr[i],arr,i );
+							items[arr[i]].style.left = position[i-1].left + 'px';
+							items[arr[i]].style.top = position[i-1].top + 'px';
+						}
+
+						mask.style.left = position[items.length-1].left + 'px';
+						mask.style.top = position[items.length-1].top + 'px';
+
+						onOff = false;
+
+					}else{
+						//在没有脱离原来区域的情况下
+						if( item.offsetLeft > position[n].zhongxinX+10 && item.offsetTop+item.offsetHeight < position[n].offsetTop ){
+							//应该和下一而交换位置
+							n = parseInt(n);
+							if( n +1 > items.length-1 ) return;
+							items[arr[n+1]].style.left = position[n].left + 'px';
+							items[arr[n+1]].style.top = position[n].top + 'px';
+							mask.style.left = position[n+1].left + 'px';
+							mask.style.top = position[n+1].top + 'px';
+
+							var kk = tools.attr(items[arr[n+1]],"index");
+								tools.attr(items[arr[n+1]],"index",n);
+								tools.attr(item,"index",kk);
+
+								
+
+							var kkk = arr[n+1];
+								arr[n+1] = arr[n];
+								arr[n] = kkk;
+
+							n = parseInt(tools.attr(item,"index"));	
+
+						}else if( item.offsetLeft < (position[n].zhongxinX-item.offsetWidth-10) && item.offsetTop+item.offsetHeight < position[n].offsetTop ){
+
+							n = parseInt(n);
+							if( n -1 < 0 ) return;
+							items[arr[n-1]].style.left = position[n].left + 'px';
+							items[arr[n-1]].style.top = position[n].top + 'px';
+							mask.style.left = position[n-1].left + 'px';
+							mask.style.top = position[n-1].top + 'px';
+
+							var kk = tools.attr(items[arr[n-1]],"index");
+								tools.attr(items[arr[n-1]],"index",n);
+								tools.attr(item,"index",kk);
+
+								
+
+							var kkk = arr[n-1];
+								arr[n-1] = arr[n];
+								arr[n] = kkk;
+
+							n = parseInt(tools.attr(item,"index"));
+						}else{
+
+							if( !onOff ){
+								for( var i = n+1; i <= arr.length-1; i++ ){
+									items[arr[i]].style.left = position[i].left + 'px';
+									items[arr[i]].style.top = position[i].top + 'px';
+								}
+
+								onOff = true;
+							}
+
+							mask.style.left = position[n].left + 'px';
+							mask.style.top = position[n].top + 'px';
+						}
+
+
+
+					}
+
+				}
+				function upFn(){
+					tools.removeEvent(document,"mousemove",moveFn);	
+					tools.removeEvent(document,"mouseup",upFn);
+
+					if( item.offsetTop < position[n].originTop && item.offsetLeft < position[n].originLeft ){
+						item.style.left = position[n].left + 'px';
+						item.style.top = position[n].top + 'px';
+					}else{
+						item.style.left = mask.offsetLeft + 'px';
+						item.style.top = mask.offsetTop + 'px';
+						
+
+						var nn = arr.splice(n,1)[0];
+						arr.push(nn);
+						for( var i = 0; i < arr.length; i++ ){
+							tools.attr(items[arr[i]],"index",i);
+						}
+						
+					}
+
+					onOff = true;
+
+				}
+			}
+
+		</script>
+	</body>
+</html>
