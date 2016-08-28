@@ -1,0 +1,23 @@
+<div class="project">
+	<div class="bts">
+			<h2 class="bt">项目池</h2>
+			<h3 class="smallbt">业余项目与公司项目相互促进</h3>
+	</div>
+	{{each projects}}
+		<div class="project_ex">
+			<dl class="pro clearfix">
+				<dt><img src="{{$value.projectThumbnail}}"/></dt>
+				<dd>
+					<h2 class="project_bt">{{$value.projectName}}</h2>
+					<p class="project_time">{{$value.startTime}}~{{$value.endTime}}</p>
+					<p class="project_dec">{{$value.projectExplain}}</p>
+					<p class="project_lable">
+						{{each $value.projectLabel}}
+							<span>{{$value}}</span>
+						{{/each}}
+					</p>
+				</dd>
+			</dl>
+		</div>
+	{{/each}}
+</div>

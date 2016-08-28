@@ -1,0 +1,55 @@
+<!--timeAxis-->
+<div class="timeAxis">
+	<div class="timecon">
+		<div class="skills_title">
+			<h3>工作时光轴</h3>
+			<p>有大型网站开发、优化经验</p>
+		</div>
+		<div class="timeline_top">
+			<div class="dot"></div>
+			<div class="line"></div>
+		</div>
+		<div class="exper_detail">
+			{{each timeAxis}}
+				{{nums = $index%2 === 0}}
+				<div class="exper">
+					<div class="exper_item {{'exper_itemL' | isAddClass:nums}}">
+						<div class="item_title">
+							<div class="ball"
+							 {{if !nums}}
+							 	style="float: right;"
+							 {{/if}}
+							>
+
+								<div class="icon 
+									{{'icon2' | isAddClass:$index%3 === 1}}
+									{{'icon3' | isAddClass:$index%3 === 2}}
+								">
+									{{if $index%2 === 0}}
+										<img src="images/expre_bgL.png" />
+									{{else if $index%2 === 1}}
+										<img src="images/expre_bgR.png" />
+									{{/if}}
+								</div>
+							</div>
+							<div class="title_word">
+								<p class="date {{'date2' | isAddClass:!nums}}">
+									{{$value.startTime}}~{{$value.endTime}}
+									<img src="images/date.png" />
+								</p>
+								<div class="company">
+									<h4>{{$value.companyNam}}</h4>
+									<p>{{$value.jobPost}}</p>
+								</div>
+							</div>
+						</div>
+						<div class="{{'item_con' | isAddClass:nums}} {{'item_con2' | isAddClass:!nums}}">
+							<p>{{$value.jonTask}}</p>
+							<p>{{$value.jobContent}}</p>
+						</div>
+					</div>
+				</div>
+		    {{/each}}
+		</div>
+	</div>
+</div>

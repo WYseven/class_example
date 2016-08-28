@@ -1,0 +1,97 @@
+<div class="hea_intro">
+	<div class="high_light">
+		<!--header-->
+		<div class="header">
+			<div class="hea_con">
+				<div class="hea_left">
+					<h3>{{userInfo.userName}}</h3>
+					<p>{{userInfo.jobWant}}</p>
+				</div>
+				<div class="hea_right">
+					<div class="hea_qq">{{userInfo.userQQ}}</div>
+					<div class="hea_mail">{{userInfo.userEmail}}</div>
+				</div>
+			</div>
+		</div>
+		<!--intro-->
+		<div class="intro clearfix">
+			<div class="intro_con clearfix">
+				<div class="intro_left">
+					<p>{{userInfo.motto}}</p>
+				</div>
+				<div class="intro_right">
+					<div class="pic"></div>
+					<div class="intro_detail">
+						<ul>
+							<li>
+								<div class="detail_left">
+									<p>手机</p>
+								</div>
+								<div class="detail_right intro_first">
+									<p class="intro_firstcon">{{userInfo.userPhone}}</p>
+								</div>
+								<div class="intro_circle"></div>
+							</li>
+							<li>
+								<div class="detail_left">
+									<p>籍贯</p>
+								</div>
+								<div class="detail_right">
+									<p>{{userInfo.userOrignPlace}}</p>
+								</div>
+								<div class="intro_circle"></div>
+							</li>
+							<li>
+								<div class="detail_left">
+									<p>所在地</p>
+								</div>
+								<div class="detail_right">
+									<p>{{userInfo.userSeatPlace}}</p>
+								</div>
+								<div class="intro_circle"></div>
+							</li>
+							<li>
+								<div class="detail_left">
+									<p>微博</p>
+								</div>
+								<div class="detail_right">
+									<p>{{userInfo.userWeibo}}</p>
+								</div>
+								<div class="intro_circle"></div>
+							</li>
+							<li>
+								<div class="detail_left">
+									<p>自我评价</p>
+								</div>
+								<div class="detail_right">
+									<p>{{userInfo.userAssessment}}</p>
+								</div>
+								<div class="intro_circle"></div>
+							</li>
+							<li>
+								<div class="detail_left">
+									<p>爱好</p>
+								</div>
+								<div class="detail_right">
+									<p>
+										{{userInfo.userHobby | arrayJoin:"、"}}
+									</p>
+								</div>
+								<div class="intro_circle"></div>
+							</li>
+							<li>
+								<div class="detail_left">
+									<p>个人奖项</p>
+								</div>
+								<div class="detail_right intro_last">
+									<p class="intro_lastcon">{{userInfo.userAward | arrayJoin:"、"}}</p>
+								</div>
+								<div class="intro_circle"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
