@@ -265,6 +265,8 @@
 }
 #black .case_sharebtn .case_btn{
 	background: #6456a9;
+	display: block;
+	text-align: center;
 }
 #black .case_sharebtn .case_btn:hover{
 	background: #8378ba;
@@ -294,6 +296,17 @@
 #black .case_listcon li:hover{
 	border-color:#23252b;
 }
+
+#black .case_listcon li.hoverStyle{
+	border-color:#23252b;
+}
+
+#black .case_listcon li.hoverStyle i{
+	border-color:#23252b;
+	background: #23252b;
+}
+
+
 #black .pro dt{
 	background: #bdbec0;
 }
@@ -575,6 +588,9 @@
 }
 #red .case_sharebtn .case_btn{
 	background: #e26c60;
+	display: block;
+	text-align: center;
+
 }
 #red .case_sharebtn .case_btn:hover{
 	background: #e6948c;
@@ -890,6 +906,8 @@
 }
 #blue .case_sharebtn .case_btn{
 	background: #1b9ef1;
+	display: block;
+	text-align: center;
 }
 #blue .case_sharebtn .case_btn:hover{
 	background: #5ab7f2;

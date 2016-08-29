@@ -1,2 +1,53 @@
-/*TMODJS:{"version":1,"md5":"4e57b13a6dd25f006c4b18f7f3c1cbb6"}*/
-template('case','<div class="case"> <div class="casecon"> <div class="case1 clearfix"> <div class="bts"> <h2 class="bt">前端知识汇总&案例展示</h2> </div> <div class="case_left"> <div class="case_list"> <h3 class="case_listbt1"><em class="unload"></em>小demo系列（3）</h3> <ul class="case_listcon"> <li class="case_li1"><a href="#">图片轮播图</a><i></i><span></span></li> <li class="case_li2"><a href="#">下拉菜单</a><i></i><span></span></li> <li class="case_li3"><a href="#">无缝滚动</a><i></i></li> </ul> </div> <div class="case_list"> <h3 class="case_listbt1"><em class="add"></em>小demo系列（3）</h3> </div> <div class="case_list"> <h3 class="case_listbt1 case_add"><em class="add"></em>小demo系列（3）</h3> </div> </div> <div class="case_right"> <h3 class="case_bt2">下拉菜单</h3> <p class="case_time">发布时间：2011-11-16 22:08</p> <p class="case_intro">这是我在学习JS时候的一个小练习，综合运用了JS的元素获取、运动框架等方式完成</p> <img src="images/exp.png" class="case_exp"/> <h3 class="case_bt2">"JQUERY风暴"推荐及配套代码下载</h3> <p class="case_time">发布时间：2011-11-16 22:08</p> <p class="case_decoration">浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为</p> <p class="case_decoration">浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为</p> <div class="case_share clearfix"> <form method="" action="" class="case_sharebtn"> <input type="submit" value="点击预览" class="case_btn" /> </form> <div class="case_sharelink clearfix"> <span>分享至：</span> <a href="#" class="weibo"></a> <a href="#" class="kongjian"></a> <a href="#" class="weixin"></a> <a href="#" class="qq"></a> <a href="#" class="douban"></a> </div> </div> </div> </div> </div> </div> </div>');
+/*TMODJS:{"version":119,"md5":"0b6094d8c48740e78bd3fb540f141c6c"}*/
+template('case',function($data,$filename
+/**/) {
+'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,casees=$data.casees,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,include=function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);$out+=text;return $out;},$out='';$out+='<div class="case"> <div class="casecon"> <div class="case1 clearfix"> <div class="bts"> <h2 class="bt">前端知识汇总&案例展示</h2> </div> <div class="case_left"> ';
+$each(casees,function($value,$index){
+$out+=' <div class="case_list"> <h3 class="case_listbt1"> <em class="';
+$out+=$escape($helpers. isAddClass('unload' , $value.isDisplay ));
+$out+=' ';
+$out+=$escape($helpers. isAddClass('add' , !$value.isDisplay));
+$out+='"></em> ';
+$out+=$escape($value.caseName);
+$out+='（';
+$out+=$escape($value.caseList.length);
+$out+='） </h3> ';
+if($value.caseList && $value.caseList.length !== 0){
+$out+=' <ul class="case_listcon" style="display:';
+$out+=$escape($helpers. isAddClass('block' , $value.isDisplay ));
+$out+=$escape($helpers. isAddClass('none' , !$value.isDisplay));
+$out+=';"> ';
+$each($value.caseList,function($value,$index){
+$out+=' <li _id=';
+$out+=$escape($value.id);
+$out+=' class="case_li1 ';
+$out+=$escape($helpers. isAddClass('hoverStyle' , $value.initShow ));
+$out+='"> <a href="javascript:;">';
+$out+=$escape($value.caseTitle);
+$out+='</a> <i></i><span></span> </li> ';
+});
+$out+=' </ul> ';
+}
+$out+=' </div> ';
+});
+$out+=' </div> <div class="case_right"> ';
+$each(casees,function($value,$index){
+$out+=' ';
+if($value.isDisplay){
+$out+=' ';
+$each($value.caseList,function($value,$index){
+$out+=' ';
+if($value.initShow){
+$out+=' ';
+include("./case_right_temp",$value);
+$out+=' ';
+}
+$out+=' ';
+});
+$out+=' ';
+}
+$out+=' ';
+});
+$out+=' </div> </div> </div> </div> </div>';
+return new String($out);
+});

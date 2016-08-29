@@ -5,50 +5,39 @@
 				<h2 class="bt">前端知识汇总&案例展示</h2>
 			</div>
 			<div class="case_left">
-				<div class="case_list">
-					<h3 class="case_listbt1"><em class="unload"></em>小demo系列（3）</h3>
-					<ul class="case_listcon">	
-						<li class="case_li1"><a href="#">图片轮播图</a><i></i><span></span></li>
-						<li class="case_li2"><a href="#">下拉菜单</a><i></i><span></span></li>
-						<li class="case_li3"><a href="#">无缝滚动</a><i></i></li>
-					</ul>
-				</div>
-				<div class="case_list">
-					<h3 class="case_listbt1"><em class="add"></em>小demo系列（3）</h3>
-				</div>
-				<div class="case_list">
-					<h3 class="case_listbt1 case_add"><em class="add"></em>小demo系列（3）</h3>
-				</div>
+				
+				{{each casees}}
+					<div class="case_list">
+						<h3 class="case_listbt1">
+							<em class="{{'unload' | isAddClass:$value.isDisplay }} {{ 'add' | isAddClass:!$value.isDisplay}}"></em>
+							{{$value.caseName}}（{{$value.caseList.length}}）
+						</h3>
+						{{if $value.caseList && $value.caseList.length !== 0}}
+
+							<ul class="case_listcon" style="display:{{'block' | isAddClass:$value.isDisplay }}{{ 'none' | isAddClass:!$value.isDisplay}};">
+								{{each $value.caseList}}
+								<li _id={{$value.id}} class="case_li1 {{'hoverStyle' | isAddClass:$value.initShow }}">
+									<a href="javascript:;">{{$value.caseTitle}}</a>
+									<i></i><span></span>
+								</li>
+								{{/each}}
+							</ul>
+						{{/if}}
+					</div>
+				{{/each}}	
 			</div>
 			<div class="case_right">
-					<h3 class="case_bt2">下拉菜单</h3>
-					<p class="case_time">发布时间：2011-11-16 22:08</p>
-					<p class="case_intro">这是我在学习JS时候的一个小练习，综合运用了JS的元素获取、运动框架等方式完成</p>
-					<img src="images/exp.png" class="case_exp"/>
-					<h3 class="case_bt2">"JQUERY风暴"推荐及配套代码下载</h3>
-					<p class="case_time">发布时间：2011-11-16 22:08</p>
-					<p class="case_decoration">浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认
-						为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可
-						以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为
-						浏览器可以被认为浏览器可以被认为</p>
-					<p class="case_decoration">浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认
-						为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可
-						以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为
-						浏览器可以被认为浏览器可以被认为</p>
-					<div class="case_share clearfix">
-						<form method="" action="" class="case_sharebtn">
-							<input type="submit" value="点击预览" class="case_btn" />
-						</form>
-						<div class="case_sharelink clearfix">
-							<span>分享至：</span>
-							<a href="#" class="weibo"></a>
-							<a href="#" class="kongjian"></a>
-							<a href="#" class="weixin"></a>
-							<a href="#" class="qq"></a>
-							<a href="#" class="douban"></a>
-						</div>
-					</div>
-				</div>
+				{{each casees}}
+					{{if $value.isDisplay}}
+						{{each $value.caseList}}
+							{{if $value.initShow}}
+								{{include "./case_right_temp" $value}}
+							{{/if}}	
+						{{/each}}
+					{{/if}}
+					
+				{{/each}}
+			</div>
 			</div>
 		</div>
 	</div>

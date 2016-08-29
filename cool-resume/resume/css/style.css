@@ -176,6 +176,8 @@ body {
 
 .skills {
 	background: #eef2f5;
+	opacity: 0;
+	transition:3s;
 }
 .skills_top {
 	width: 100%;
@@ -482,8 +484,8 @@ body {
 .case_right .case_intro{
 	font-size: 14px;
 	color:#777879;
-	line-height: 54px;
-	height: 54px;
+	line-height: 20px;
+	-height: 54px;
 }
 .case_sharebtn{
 	float:left;

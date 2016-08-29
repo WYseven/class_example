@@ -10,57 +10,24 @@
 
 	<body id="black">
 		<section id="resume_content"></section>
+		<!--工具方法-->
+		<script src="./js/tools.js"></script>
+		<!--模板文件-->
 		<script src="./build/template.js"></script>
 		<!--个人信息数据-->
 		<script src="./data/userInfo.js"></script>
 		<!--工作时光轴数据-->
 		<script src="./data/timeAxis.js"></script>
+		<!--前端知识汇总&案例展示-->
+		<script src="./data/case.js"></script>
 		<!--项目池数据-->
 		<script src="./data/project.js"></script>
-
+		<!--生成圆环数据-->
 		<script src="./src/halo.js"></script>
-
-		<script>
-			//通过某个连接符把数组转化为字符串
-			template.helper("arrayJoin",function (data,format){
-				return data.join(format);
-			});
-			//通过这个方法决定是否要添加class
-			template.helper("isAddClass",function (data,bl){
-				return bl ? data : "";
-			});
-
-			var datas = {
-				userInfo:userInfo,
-				timeAxis:timeAxisArr,
-				projects:projects
-			}
-
-			var html = template('init', datas);
-    		document.getElementById('resume_content').innerHTML = html;
-
-    		var skills_canval_circle = document.getElementsByClassName("skills_canval_circle")[0];
-
-    		var data = {
-				W:590,
-				data:[
-					['PhotoShop',0.722],
-					['Canvas',0.65],
-					['CSS3',0.44],
-					['React',0.86],
-					['Node.js',0.55],
-					['backbone',0.4],
-					['ES6',0.47],
-					['JavaScript',0.80],
-					['other',1]
-				]
-			};
-			var halo = H5_Component_Halo(data);
-			setTimeout(function (){
-				//skills_canval_circle.appendChild(halo);	
-			},500)
-
-		</script>
+		<!--渲染模板交互效果-->
+		<script src="./js/render.js"></script>
+		<!--交互行为-->
+		<script src="./js/interactive.js"></script>
 	</body>
 
 </html>
