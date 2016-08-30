@@ -19,8 +19,8 @@
 */
 
 var userInfo = {
-    userName: "宁美琪" , 
-    jobWant:  "前端工程师",
+    userName: "宁美琪123" , 
+    jobWant:  "123",
     userQQ:  "2222222",
     userEmail:   "222222@qq.com",
     motto:  "置气和悲伤的源头都在于自己，你不听不闻不看，选择权在你", 
