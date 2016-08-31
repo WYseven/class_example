@@ -101,7 +101,6 @@ var dataControl = {
 			console.log( childs[i].name , names,id );
 			if( childs[i].title === names && childs[i].id != currentId ){
 				return true;
-				break;
 			}
 		}
 		return false;

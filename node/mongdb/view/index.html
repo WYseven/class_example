@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <script src="js/jquery-2.2.1.js"></script>
+		
+	</head>
+
+	<body>
+		
+			姓名：<input type="text" name="userName" id="userName" /> <br/>
+			性别：<input type="text" name="sex" id="sex" /> <br/>
+			<input type="button" id="btn" value="提交" />
+		<script>
+			
+			btn.onclick = function (){
+				$.ajax({
+					url: '/zhuce',
+					data:{
+						userName:userName.value,
+						sex:sex.value
+					}
+				})	
+			};
+
+		</script>
+	</body>
+</html>
