@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+
+    </style>
+    <script>
+    /*
+            				栈 是一 种 遵从 后进 先出（ LIFO） 原则 的 有序 集合。 新 添加 的 或 待 删除 的 元素 都 保 存在 栈 的 末尾， 称作 栈 顶， 另一 端 就叫 栈 底。 在 栈 里， 新 元素 都 靠近 栈 顶， 旧 元素 都 接近 栈 底。
+
+            				可以使用数组数据结构模拟栈的表现。
+
+            				
+            			*/
+
+	    function Stack() {
+	        var items = [];
+	        this.push = function(element) {
+	            items.push(element);
+	        };
+	        this.pop = function() {
+	            return items.pop();
+	        };
+	        this.peek = function() {
+	            return items[items.length - 1];
+	        };
+	        this.isEmpty = function() {
+	            return items.length == 0;
+	        };
+	        this.size = function() {
+	            return items.length;
+	        };
+	        this.clear = function() {
+	            items = [];
+	        };
+	        this.print = function() {
+	            console.log(items.toString);
+	        }
+	    }
+
+	        function divideBy2( decNumber){ 
+	        	var remStack = new Stack(), rem, binaryString = ''; 
+	        	while (decNumber > 0){ 
+	        		rem = Math.floor( decNumber % 2); //{2} 
+	        		remStack. push( rem); //{3} 
+	        		decNumber = Math.floor( decNumber / 2); //{4}
+	        	}
+	        	while (!remStack.isEmpty()){ //{5} 
+	        		binaryString += remStack. pop(). toString(); 
+	        	}
+	        	return binaryString;
+	    	}
+
+	    	console.log( divideBy2(30) );
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

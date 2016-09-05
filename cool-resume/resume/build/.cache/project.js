@@ -1,4 +1,4 @@
-/*TMODJS:{"version":27,"md5":"1d565084d510feb10e12221596275829"}*/
+/*TMODJS:{"version":29,"md5":"1d565084d510feb10e12221596275829"}*/
 template('project',function($data,$filename
 /**/) {
 'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,projects=$data.projects,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,$out='';$out+='<div class="project"> <div class="bts"> <h2 class="bt">项目池</h2> <h3 class="smallbt">业余项目与公司项目相互促进</h3> </div> ';

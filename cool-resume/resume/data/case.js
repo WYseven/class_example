@@ -17,7 +17,7 @@
 
 var casees = [
 		{
-			caseName:"第一章练习",
+			caseName:"第一章练习-开始",
 			caseList:[
 				{
 					caseTitle:"图片轮播图1",
@@ -274,20 +274,26 @@ var casees = [
 					caseDescription:" liulanqi 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
 					,caseWebsite:"http:www.miaov.com"
 
-				},
-				{
-					caseTitle:"图片轮播图2",
-					publishTime:"2011-11-16 22:08",
-					caseThumbnail:"images/exp.png",
-					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
-					,caseWebsite:"http:www.miaov.com",
-
 				}
 			]
 		},
 		{
 			caseName:"第二章练习",
 			caseList:[
+				{
+					caseTitle:"上下移动",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com"
+				},
+				{
+					caseTitle:"切换来去",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com"
+				},
 				{
 					caseTitle:"上下移动",
 					publishTime:"2011-11-16 22:08",
@@ -321,13 +327,173 @@ var casees = [
 					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
 					,caseWebsite:"http:www.miaov.com",
 
+				},
+				{
+					caseTitle:"图片轮播图1",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:" liulanqi 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com"
+
+				},
+				{
+					caseTitle:"图片轮播图2",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com",
+
+				},{
+					caseTitle:"图片轮播图1",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:" liulanqi 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com"
+
+				},
+				{
+					caseTitle:"图片轮播图2",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com",
+
+				},{
+					caseTitle:"图片轮播图1",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:" liulanqi 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com"
+
+				},
+				{
+					caseTitle:"图片轮播图2",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com",
+
+				},{
+					caseTitle:"图片轮播图1",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:" liulanqi 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com"
+
+				},
+				{
+					caseTitle:"图片轮播图2",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com",
+
+				},{
+					caseTitle:"图片轮播图1",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:" liulanqi 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com"
+
+				},
+				{
+					caseTitle:"图片轮播图2",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com",
+
+				},{
+					caseTitle:"图片轮播图1",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:" liulanqi 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com"
+
+				},
+				{
+					caseTitle:"图片轮播图2",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com",
+
+				},{
+					caseTitle:"图片轮播图1",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:" liulanqi 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com"
+
+				},
+				{
+					caseTitle:"图片轮播图2",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com",
+
 				}
 			]
 		},
 		{
-			caseName:"第二章练习",
+			caseName:"第二章练习-结束",
 			caseList:[
 				{
+					caseTitle:"上下移动",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com"
+				},
+				{
+					caseTitle:"切换来去",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com"
+				},
+				{
+					caseTitle:"上下移动",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com"
+				},
+				{
+					caseTitle:"切换来去",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com"
+				},
+				{
+					caseTitle:"上下移动",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com"
+				},
+				{
+					caseTitle:"切换来去",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com"
+				},{
+					caseTitle:"上下移动",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com"
+				},
+				{
+					caseTitle:"切换来去",
+					publishTime:"2011-11-16 22:08",
+					caseThumbnail:"images/exp.png",
+					caseDescription:"浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认 为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可 以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为浏览器可以被认为 浏览器可以被认为浏览器可以被认为"
+					,caseWebsite:"http:www.miaov.com"
+				},{
 					caseTitle:"上下移动",
 					publishTime:"2011-11-16 22:08",
 					caseThumbnail:"images/exp.png",

@@ -1,7 +1,7 @@
-/*TMODJS:{"version":119,"md5":"0b6094d8c48740e78bd3fb540f141c6c"}*/
+/*TMODJS:{"version":130,"md5":"0b8b7e3f9ff13d7fe1392061ca3ef022"}*/
 template('case',function($data,$filename
 /**/) {
-'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,casees=$data.casees,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,include=function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);$out+=text;return $out;},$out='';$out+='<div class="case"> <div class="casecon"> <div class="case1 clearfix"> <div class="bts"> <h2 class="bt">前端知识汇总&案例展示</h2> </div> <div class="case_left"> ';
+'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,casees=$data.casees,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,include=function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);$out+=text;return $out;},$out='';$out+='<div class="case"> <div class="casecon"> <div class="case1 clearfix"> <div class="bts"> <h2 class="bt">前端知识汇总&案例展示</h2> </div> <div class="case_main"> <div class="case_left"> <div class="case_list_main"> ';
 $each(casees,function($value,$index){
 $out+=' <div class="case_list"> <h3 class="case_listbt1"> <em class="';
 $out+=$escape($helpers. isAddClass('unload' , $value.isDisplay ));
@@ -30,7 +30,7 @@ $out+=' </ul> ';
 }
 $out+=' </div> ';
 });
-$out+=' </div> <div class="case_right"> ';
+$out+=' </div> <div class="list_scroll"> <div class="list_bar"></div> </div> </div> <div class="case_right"> ';
 $each(casees,function($value,$index){
 $out+=' ';
 if($value.isDisplay){

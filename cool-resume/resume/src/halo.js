@@ -13,16 +13,19 @@
  */
 
 function H5_Component_Halo(data, w) {
+
 	return new H5_Component_Halo.fn.init(data, w);
 }
 
 H5_Component_Halo.fn = H5_Component_Halo.prototype = {
 	constructor: H5_Component_Halo,
+	animationEnd:null,
 	init: function(data) {
 		//每项数据
 		this.data = data.data || [
 			['JS', 0.8]
 		];
+		this.animationEnd = data.animationEnd;
 		//判断数据的长度是否超过8个，超过8个就默认只取得前8个 也就是 0 - 7
 		if(this.data.length > 8) {
 			this.data.length = 8;
@@ -52,8 +55,9 @@ H5_Component_Halo.fn = H5_Component_Halo.prototype = {
 		this.initPath(); //初始化动画
 		this.initData(); //初始化数据框
 		this.eachOther() //初始化交互
-
-		return this.component;
+	},
+	componentHtml:function (){
+		return this.component;		
 	},
 	someNum: function(n) {
 		var arr = [];
@@ -61,6 +65,9 @@ H5_Component_Halo.fn = H5_Component_Halo.prototype = {
 			arr.push(0);
 		}
 		return arr;
+	},
+	animateEnd:function (callback){
+		callback();
 	},
 	//创建所有画布
 	initDraws: function() {
@@ -120,6 +127,11 @@ H5_Component_Halo.fn = H5_Component_Halo.prototype = {
 							_this.initRd(per, (7 - i), _this.data[i][1]);
 						}
 						_this.ev++;
+
+						if( _this.ev === 100 ){
+							_this.animationEnd();
+						}
+
 					}, 200 + i * 5);
 				}
 			}

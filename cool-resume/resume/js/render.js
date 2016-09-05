@@ -6,6 +6,14 @@ template.helper("arrayJoin",function (data,format){
 template.helper("isAddClass",function (data,bl){
 	return bl ? data : "";
 });
+//向上取整,返回一个数组
+template.helper("mathCeil",function (data,bl){
+	var arr = [];
+	for( var i = 0; i < Math.ceil(data); i++ ){
+		arr.push(i);
+	}
+	return arr;
+});
 
 //给每一个案例上加一个id
 var isDisplay = true;
@@ -26,8 +34,19 @@ if( initShow ){
 	casees[0].caseList[0].initShow = true;
 }
 
+//准备技能展示的分页数据
+var pageNum = Math.ceil(skills.skillsClassify.length/3);
+
+skills.pageArr = [];
+var n = 0;
+for( var i = 0; i < pageNum; i++ ){
+	skills.pageArr = skills.pageArr.concat([skills.skillsClassify.slice(n,n+3)]);
+	n+=3;
+}
+
 var datas = {
 	userInfo:userInfo,
+	skills:skills,
 	timeAxis:timeAxisArr,
 	casees:casees,
 	projects:projects

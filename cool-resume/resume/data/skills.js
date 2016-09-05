@@ -18,17 +18,73 @@
 	*   }
 */
 
-var userInfo = {
-    userName: "宁美琪" , 
-    jobWant:  "前端工程师",
-    userQQ:  "2222222",
-    userEmail:   "222222@qq.com",
-    motto:  "置气和悲伤的源头都在于自己，你不听不闻不看，选择权在你", 
-    userPhone: 18612987054,
-    userOrignPlace:  "黑龙江" ,
-    userSeatPlace:  "北京市" ,
-    userWeibo: "weibo.sina.com",
-    userAssessment: "我干得不错我干得不错我干得不错我干得不错我干得不错我干得不错我干得不错我干得不错",   
-    userHobby: ["看书","运动"],
-    userAward: ["新概念二等奖"]
+var skills = {
+		temp:"circle",
+		skillsClassify:[
+		{
+			skillLanguage:"javacript",
+			percent:"20%",
+			skillTooltip:[
+				"移动端响应式移动端响应式移动端响应式移动端响应式移动端响应式移动端响应式移动端响应式",
+				"canvas游戏开发"
+			]
+		},
+		{
+			skillLanguage:"html5",
+			percent:"10%",
+			skillTooltip:[
+				"移动端响应式",
+				"canvas游戏开发"
+			]
+		},
+		{
+			skillLanguage:"css3",
+			percent:"50%",
+			skillTooltip:[
+				"移动端响应式",
+				"canvas游戏开发"
+			]
+		},
+		{
+			skillLanguage:"css3+html5",
+			percent:"50%",
+			skillTooltip:[
+				"移动端响应式移动端响应式移动端响应式移动端响应式移动端响应式移动端响应式移动端响应式",
+				"canvas游戏开发"
+			]
+		},
+		{
+			skillLanguage:"css3+html5",
+			percent:"50%",
+			skillTooltip:[
+				"移动端响应式",
+				"canvas游戏开发"
+			]
+		},
+		{
+			skillLanguage:"css3+html5",
+			percent:"50%",
+			skillTooltip:[
+				"移动端响应式",
+				"canvas游戏开发"
+			]
+		},
+		{
+			skillLanguage:"css3+html5",
+			percent:"50%",
+			skillTooltip:[
+				"移动端响应式",
+				"canvas游戏开发"
+			]
+		},
+		{
+			skillLanguage:"css3+html5",
+			percent:"50%",
+			skillTooltip:[
+				"移动端响应式",
+				"canvas游戏开发"
+			]
+		}
+		
+	]
 }

@@ -4,41 +4,48 @@
 			<div class="bts">
 				<h2 class="bt">前端知识汇总&案例展示</h2>
 			</div>
-			<div class="case_left">
+			<div class="case_main">
 				
-				{{each casees}}
-					<div class="case_list">
-						<h3 class="case_listbt1">
-							<em class="{{'unload' | isAddClass:$value.isDisplay }} {{ 'add' | isAddClass:!$value.isDisplay}}"></em>
-							{{$value.caseName}}（{{$value.caseList.length}}）
-						</h3>
-						{{if $value.caseList && $value.caseList.length !== 0}}
+				<div class="case_left">
+					<div class="case_list_main">
+						{{each casees}}
+							<div class="case_list">
+								<h3 class="case_listbt1">
+									<em class="{{'unload' | isAddClass:$value.isDisplay }} {{ 'add' | isAddClass:!$value.isDisplay}}"></em>
+									{{$value.caseName}}（{{$value.caseList.length}}）
+								</h3>
+								{{if $value.caseList && $value.caseList.length !== 0}}
 
-							<ul class="case_listcon" style="display:{{'block' | isAddClass:$value.isDisplay }}{{ 'none' | isAddClass:!$value.isDisplay}};">
-								{{each $value.caseList}}
-								<li _id={{$value.id}} class="case_li1 {{'hoverStyle' | isAddClass:$value.initShow }}">
-									<a href="javascript:;">{{$value.caseTitle}}</a>
-									<i></i><span></span>
-								</li>
-								{{/each}}
-							</ul>
-						{{/if}}
-					</div>
-				{{/each}}	
-			</div>
-			<div class="case_right">
-				{{each casees}}
-					{{if $value.isDisplay}}
-						{{each $value.caseList}}
-							{{if $value.initShow}}
-								{{include "./case_right_temp" $value}}
-							{{/if}}	
+									<ul class="case_listcon" style="display:{{'block' | isAddClass:$value.isDisplay }}{{ 'none' | isAddClass:!$value.isDisplay}};">
+										{{each $value.caseList}}
+										<li _id={{$value.id}} class="case_li1 {{'hoverStyle' | isAddClass:$value.initShow }}">
+											<a href="javascript:;">{{$value.caseTitle}}</a>
+											<i></i><span></span>
+										</li>
+										{{/each}}
+									</ul>
+								{{/if}}
+							</div>
 						{{/each}}
-					{{/if}}
-					
-				{{/each}}
+					</div>
+					<div class="list_scroll">
+						<div class="list_bar"></div>
+					</div>
+				</div>
+
+				<div class="case_right">
+					{{each casees}}
+						{{if $value.isDisplay}}
+							{{each $value.caseList}}
+								{{if $value.initShow}}
+									{{include "./case_right_temp" $value}}
+								{{/if}}	
+							{{/each}}
+						{{/if}}
+					{{/each}}
+				</div>
 			</div>
-			</div>
+
 		</div>
 	</div>
 </div>

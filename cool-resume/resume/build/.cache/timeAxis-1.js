@@ -1,4 +1,4 @@
-/*TMODJS:{"version":82,"md5":"73c7c8c4456e59a2d95f09d58db6adad"}*/
+/*TMODJS:{"version":86,"md5":"73c7c8c4456e59a2d95f09d58db6adad"}*/
 template('timeAxis-1',function($data,$filename
 /**/) {
 'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,timeAxis=$data.timeAxis,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,nums=$data.nums,$out='';$out+=' <div class="timeAxis"> <div class="timecon"> <div class="skills_title"> <h3>工作时光轴</h3> <p>有大型网站开发、优化经验</p> </div> <div class="timeline_top"> <div class="dot"></div> <div class="line"></div> </div> <div class="exper_detail"> ';

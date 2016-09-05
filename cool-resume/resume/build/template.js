@@ -174,10 +174,10 @@
 
     if (typeof define === 'function') {define(function() {return template;});} else if (typeof exports !== 'undefined') {module.exports = template;} else {this.template = template;}
     
-    /*v:119*/
+    /*v:130*/
 template('case',function($data,$filename
 /**/) {
-'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,casees=$data.casees,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,include=function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);$out+=text;return $out;},$out='';$out+='<div class="case"> <div class="casecon"> <div class="case1 clearfix"> <div class="bts"> <h2 class="bt">前端知识汇总&案例展示</h2> </div> <div class="case_left"> ';
+'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,casees=$data.casees,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,include=function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);$out+=text;return $out;},$out='';$out+='<div class="case"> <div class="casecon"> <div class="case1 clearfix"> <div class="bts"> <h2 class="bt">前端知识汇总&案例展示</h2> </div> <div class="case_main"> <div class="case_left"> <div class="case_list_main"> ';
 $each(casees,function($value,$index){
 $out+=' <div class="case_list"> <h3 class="case_listbt1"> <em class="';
 $out+=$escape($helpers. isAddClass('unload' , $value.isDisplay ));
@@ -206,7 +206,7 @@ $out+=' </ul> ';
 }
 $out+=' </div> ';
 });
-$out+=' </div> <div class="case_right"> ';
+$out+=' </div> <div class="list_scroll"> <div class="list_bar"></div> </div> </div> <div class="case_right"> ';
 $each(casees,function($value,$index){
 $out+=' ';
 if($value.isDisplay){
@@ -226,10 +226,10 @@ $out+=' ';
 });
 $out+=' </div> </div> </div> </div> </div>';
 return new String($out);
-});/*v:15*/
+});/*v:20*/
 template('case_right_temp',function($data,$filename
 /**/) {
-'use strict';var $utils=this,$helpers=$utils.$helpers,$escape=$utils.$escape,caseTitle=$data.caseTitle,publishTime=$data.publishTime,caseDescription=$data.caseDescription,caseThumbnail=$data.caseThumbnail,caseWebsite=$data.caseWebsite,$out='';$out+='<section> <h3 class="case_bt2">';
+'use strict';var $utils=this,$helpers=$utils.$helpers,$escape=$utils.$escape,caseTitle=$data.caseTitle,publishTime=$data.publishTime,caseDescription=$data.caseDescription,caseThumbnail=$data.caseThumbnail,caseWebsite=$data.caseWebsite,$out='';$out+='<div class="right_content"> <h3 class="case_bt2">';
 $out+=$escape(caseTitle);
 $out+='</h3> <p class="case_time">发布时间：';
 $out+=$escape(publishTime);
@@ -239,10 +239,10 @@ $out+='</p> <img src="';
 $out+=$escape(caseThumbnail);
 $out+='" class="case_exp"/> <div class="case_share clearfix"> <div class="case_sharebtn"> <a class="case_btn" target="_blank" href="';
 $out+=$escape(caseWebsite);
-$out+='" />点击预览</a> </div> <div class="case_sharelink clearfix"> <span>分享至：</span> <a href="#" class="weibo"></a> <a href="#" class="kongjian"></a> <a href="#" class="weixin"></a> <a href="#" class="qq"></a> <a href="#" class="douban"></a> </div> </div> </section>';
+$out+='" />点击预览</a> </div> <div class="case_sharelink clearfix"> <span>分享至：</span> <a href="#" class="weibo"></a> <a href="#" class="kongjian"></a> <a href="#" class="weixin"></a> <a href="#" class="qq"></a> <a href="#" class="douban"></a> </div> </div> </div>';
 return new String($out);
-});/*v:2*/
-template('footer','<div class="footer"> <div class="footcon clearfix"> <div class="footleft"> <p>最后更新于2015年7月25日</p> <p>简历模板由妙味课堂Miaov.com设计开发（使用本模板请注明此项）</p> </div> <div class="footright"> <dl> <dt><img src="images/erweima.png"/></dt> <dd> <p>您还可以使用手机或iPad</p> <p>扫描左侧二维码打开本页</p> </dd> </dl> </div> </div> </div>');/*v:54*/
+});/*v:4*/
+template('footer','<div class="footer"> <div class="footcon clearfix"> <div class="footleft"> <p>最后更新于2015年7月25日</p> <p>简历模板由妙味课堂Miaov.com设计开发（使用本模板请注明此项）</p> </div> <div class="footright"> <dl> <dt><img src="images/erweima.png"/></dt> <dd> <p>您还可以使用手机或iPad</p> <p>扫描左侧二维码打开本页</p> </dd> </dl> </div> </div> </div>');/*v:56*/
 template('hea_intro',function($data,$filename
 /**/) {
 'use strict';var $utils=this,$helpers=$utils.$helpers,$escape=$utils.$escape,userInfo=$data.userInfo,$out='';$out+='<div class="hea_intro"> <div class="high_light">  <div class="header"> <div class="hea_con"> <div class="hea_left"> <h3>';
@@ -271,7 +271,7 @@ $out+=' </p> </div> <div class="intro_circle"></div> </li> <li> <div class="deta
 $out+=$escape($helpers. arrayJoin(userInfo.userAward , "、"));
 $out+='</p> </div> <div class="intro_circle"></div> </li> </ul> </div> </div> </div> </div> </div> </div> ';
 return new String($out);
-});/*v:41*/
+});/*v:43*/
 template('init',function($data,$filename
 /**/) {
 'use strict';var $utils=this,$helpers=$utils.$helpers,include=function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);$out+=text;return $out;},timeAxis=$data.timeAxis,projects=$data.projects,$out='';$out+=' ';
@@ -296,7 +296,7 @@ $out+='  ';
 include('./footer');
 $out+=' ';
 return new String($out);
-});/*v:27*/
+});/*v:29*/
 template('project',function($data,$filename
 /**/) {
 'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,projects=$data.projects,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,$out='';$out+='<div class="project"> <div class="bts"> <h2 class="bt">项目池</h2> <h3 class="smallbt">业余项目与公司项目相互促进</h3> </div> ';
@@ -321,9 +321,44 @@ $out+=' </p> </dd> </dl> </div> ';
 });
 $out+=' </div>';
 return new String($out);
-});/*v:12*/
-template('skills-1',' <div class="skills"> <div class="skills_top"> <div class="top_con"> <div class="skills_title"> <h3>技能展示</h3> <p>7年工作经验，编写艺术般的代码</p> </div> <div class="top_detail clearfix"> <div class="left"> <div class="left_01"> <h3> <span class="circle"></span> <span>HTML5-10%</span> </h3> <div style="clear: both;"></div> <div> <ul style="margin-top: 10px;"> <li> <div class="skills_content skills_first"> <p class="first_con">移动端响应式</p> </div> <div class="skills_circle"></div> </li> <li> <div class="skills_content"> <p>canvas游戏开发</p> </div> <span class="skills_circle"></span> </li> <li> <div class="skills_content"> <p>webGL尝试移动</p> </div> <span class="skills_circle"></span> </li> <li> <div class="skills_content skills_last"> <p class="last_con">端响应式canvas游戏开发</p> </div> <span class="skills_circle"></span> </li> </ul> </div> </div> <div class="left_02"> <h3> <span class="circle circle_diff"></span> <span>CSS3-60%</span> </h3> <p>尝试写过 3D效果 阴影渐变</p> </div> <div class="left_03"> <h3> <span class="circle circle_diff"></span> <span>JS-80%</span> </h3> <p> 指弹吉他手非常喜欢应用的一个技术就是自然泛音，所谓泛音技术就是通过精确的手指控制使得吉他弦达到共鸣从而发出吉他本身音域意外的音。对于电吉他来说，有一种技术叫人工泛音，那个技术的要点是通过推弦的方法使得吉他弦的紧绷程度上升从而能够弹奏更高的音 </p> </div> <ul class="pages"> <li class="pages_select"></li> <li></li> <li></li> </ul> </div> <div class="right skills_canval_circle">  </div> </div> </div> </div> </div>');/*v:2*/
-template('skills-2',' <div class="skills"> <div class="skills_bottom"> <div class="bottom_con"> <div class="skills_title"> <h3>技能展示</h3> <p>7年工作经验，编写艺术般的代码</p> </div> <div class="bottom_detail"> <ul> <li class="detail_01"> <div class="percent">10%</div> <div class="subject"> <div class="detail" style="width:9%;padding-left:1%;"> <span>HTML</span>  </div> </div> </li> <li class="detail_02"> <div class="percent">60%</div> <div class="subject"> <div class="detail" style="width:59%;padding-left:1%;"> <span>CSS3</span>  </div> </div> </li> <li class="detail_03"> <div class="percent">80%</div> <div class="subject"> <div class="detail" style="width:79%;padding-left:1%;"> <span>JS</span> <div class="subject_circle"></div> <div class="subject_con"> <p class="boxbg"></p> <p class="word"> 指弹吉他手非常喜欢应用的一个技术就是自然泛音，所谓泛音技术就是通过精确的手指控制使得吉他弦达到共鸣从而发出吉他本身音域意外的音。对于电吉他来说，有一种技术叫人工泛音，那个技术的要点是通过推弦的方法使得吉他弦的紧绷程度上升从而能够弹奏更高的音 </p> </div> </div> </div> </li> <li class="detail_04"> <div class="percent">100%</div> <div class="subject"> <div class="detail" style="width:99%;padding-left:1%;"> <span>JAVA</span>  </div> </div> </li> <li class="detail_05"> <div class="percent">90%</div> <div class="subject"> <div class="detail" style="width:89%;padding-left:1%;"> <span>JAVA</span>  </div> </div> </li> <li class="detail_06"> <div class="percent">50%</div> <div class="subject"> <div class="detail" style="width:49%;padding-left:1%;"> <span>JS</span>  </div> </div> </li> <li class="detail_07"> <div class="percent">90%</div> <div class="subject"> <div class="detail" style="width:89%;padding-left:1%;"> <span>HTML5</span>  </div> </div> </li> <li class="detail_08"> <div class="percent">70%</div> <div class="subject"> <div class="detail" style="width:89%;padding-left:1%;"> <span>CSS3</span>  </div> </div> </li> <li class="detail_09"> <div class="percent">80%</div> <div class="subject"> <div class="detail" style="width:79%;padding-left:1%;"> <span>JS</span>  </div> </div> </li> <li class="detail_10"> <div class="percent">80%</div> <div class="subject"> <div class="detail" style="width:79%;padding-left:1%;"> <span>JS</span>  </div> </div> </li> </ul> </div> </div> </div> </div>');/*v:82*/
+});/*v:126*/
+template('skills-1',function($data,$filename
+/**/) {
+'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,skills=$data.skills,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,$out='';$out+=' <div class="skills"> <div class="skills_top"> <div class="top_con"> <div class="skills_title"> <h3>技能展示</h3> <p>7年工作经验，编写艺术般的代码</p> </div> <div class="top_detail clearfix"> <div class="left"> ';
+$each(skills.pageArr,function($value,$index){
+$out+=' <div class="skillLanguage" style="display: ';
+$out+=$escape($helpers. isAddClass('block' , $index===0 ));
+$out+=';opacity: ';
+$out+=$escape($helpers. isAddClass('1' , $index===0));
+$out+='"> ';
+$each($value,function($value,$index){
+$out+=' <div class="left_01"> <h3> <span class="circle"></span> <span>';
+$out+=$escape($value.skillLanguage);
+$out+='-';
+$out+=$escape($value.percent);
+$out+='</span> </h3> <div style="clear: both;"></div> <div> <ul style="margin-top: 10px;"> ';
+$each($value.skillTooltip,function($value,$index){
+$out+=' <li> <div class="skills_content skills_first"> <p class="first_con">';
+$out+=$escape($value);
+$out+='</p> </div> <div class="skills_circle"></div> </li> ';
+});
+$out+=' </ul> </div> </div> ';
+});
+$out+=' </div> ';
+});
+$out+='  ';
+if(skills.pageArr.length>1){
+$out+=' <ul class="pages"> ';
+$each(skills.pageArr,function($value,$index){
+$out+=' <li class="';
+$out+=$escape($helpers. isAddClass('pages_select' , $index==0));
+$out+='"></li> ';
+});
+$out+='  </ul> ';
+}
+$out+=' </div> <div class="right skills_canval_circle">  </div> </div> </div> </div> </div>';
+return new String($out);
+});/*v:86*/
 template('timeAxis-1',function($data,$filename
 /**/) {
 'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,timeAxis=$data.timeAxis,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,nums=$data.nums,$out='';$out+=' <div class="timeAxis"> <div class="timecon"> <div class="skills_title"> <h3>工作时光轴</h3> <p>有大型网站开发、优化经验</p> </div> <div class="timeline_top"> <div class="dot"></div> <div class="line"></div> </div> <div class="exper_detail"> ';
@@ -368,7 +403,6 @@ $out+='</p> </div> </div> </div> ';
 });
 $out+=' </div> </div> </div>';
 return new String($out);
-});/*v:1*/
-template('timeAxis-2',' <div class="timeAxis"> <div class="timecon"> <div class="skills_title"> <h3>工作时光轴</h3> <p>有大型网站开发、优化经验</p> </div> <div class="timeline_top"> <div class="dot dot2"></div> <div class="line line2"></div> </div> <div class="exper_detail"> <div class="exper"> <div class="exper_item exper_item2"> <div class="item_title"> <div class="ball"> <div class="icon icon2"><img src="images/expre_bgL.png" /></div> </div> <div class="title_word title_word2"> <p class="date"> 2013.12.11~2015.10.09 <img src="images/date.png" /> </p> <div class="company"> <h4>广州市千钧网络科技有限公司</h4> <p>前端开发工程师</p> </div> </div> </div> <div class="item_con"> <p>前端负责人。搭建了前端的整体构架</p> <p>包括：制定前端静态资源目录结构和代码发布流程；根据前者开发代码构建工具，简化发布操作；开发前后端中间平台，分离前后端职责，提高开发效率。此外，还负责美黛拉App内嵌页面和PC网站的开发。</p> </div> </div> </div> <div class="timeline_top"> <div class="dot_dom"></div> </div> </div> <div class="exper_detail"> <div class="exper"> <div class="exper_item exper_item2"> <div class="item_title"> <div class="ball"> <div class="icon icon2"><img src="images/expre_bgL.png" /></div> </div> <div class="title_word title_word2"> <p class="date"> 2013.12.11~2015.10.09 <img src="images/date.png" /> </p> <div class="company"> <h4>广州市千钧网络科技有限公司</h4> <p>前端开发工程师</p> </div> </div> </div> <div class="item_con"> <p>前端负责人。搭建了前端的整体构架</p> <p>包括：制定前端静态资源目录结构和代码发布流程；根据前者开发代码构建工具，简化发布操作；开发前后端中间平台，分离前后端职责，提高开发效率。此外，还负责美黛拉App内嵌页面和PC网站的开发。</p> </div> </div> </div> <div class="timeline_top"> <div class="dot_dom"></div> </div> </div> </div> </div>');
+});
 
 }()

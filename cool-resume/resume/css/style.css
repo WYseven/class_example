@@ -176,7 +176,6 @@ body {
 
 .skills {
 	background: #eef2f5;
-	opacity: 0;
 	transition:3s;
 }
 .skills_top {
@@ -204,7 +203,15 @@ body {
 	width: 362px;
 	float: left;
 	margin-right: 52px;
+	opacity: 0;
+	transition:1s;
 }
+
+.top_detail .left .skillLanguage{
+	display: none;
+	opacity: 0;
+}
+
 .top_detail .right {
 	width: 586px;
 	float: left;
@@ -379,13 +386,15 @@ body {
 
 
 .case{
+	overflow: hidden;
 	background-color: #eef2f5;
 }
 .casecon{width: 1000px;
 		margin:0 auto;
 }
 .case1{
-	padding-bottom: 50px;
+	margin-bottom: 50px;
+	overflow: hidden;
 }
 .bts{
 	height: 120px;
@@ -403,8 +412,12 @@ body {
 	margin-top: 15px;
 	text-align: center;
 }
-.case_left{float: left;
-		width: 360px;
+.case_left{
+	float: left;
+	width: 360px;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
 }
 .case_list{margin-bottom: 10px;}
 .case_list .case_listbt1{
@@ -418,6 +431,32 @@ body {
 .case_list .case_listcon{padding:8px 0;
 						background:#fff;
 }
+
+.case_list_main {
+	width: 340px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.list_scroll {
+	height: 100%;
+	width: 10px;
+	background: #d5d7db;
+	position: absolute;
+	right: 0;
+	top:0;
+}
+
+.list_bar {
+	height: 100px;
+	width: 10px;
+	background: #8a8d91;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+
 .case_listbt1 em{
 	display: block;
 	position: absolute;
@@ -447,7 +486,8 @@ body {
 	top:16px;
 	left: 44px;
 	
-}.case_listcon li span{
+}
+.case_listcon li span{
 	display: block;
 	position: absolute;
 	width: 2px;
@@ -465,10 +505,26 @@ body {
 }
 .case_right{
 	float: right;
+	height: 100%;
 	width:560px;
-	padding: 0px 30px 30px 30px;
+	padding: 0px 30px 0px 30px;
 	background: #FFFFFF;
+	overflow: hidden;
+
 }
+
+.case_right .right_content {
+	position: relative;
+	height: 100%;
+}
+
+.case_right .case_share {
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
 .case_right .case_bt2{
 	font-size:18px;
 	line-height: 28px;

@@ -1,4 +1,4 @@
-/*TMODJS:{"version":54,"md5":"090d4b4de4fd0216fc654134d54eff5b"}*/
+/*TMODJS:{"version":56,"md5":"090d4b4de4fd0216fc654134d54eff5b"}*/
 template('hea_intro',function($data,$filename
 /**/) {
 'use strict';var $utils=this,$helpers=$utils.$helpers,$escape=$utils.$escape,userInfo=$data.userInfo,$out='';$out+='<div class="hea_intro"> <div class="high_light">  <div class="header"> <div class="hea_con"> <div class="hea_left"> <h3>';
