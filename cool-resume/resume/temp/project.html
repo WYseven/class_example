@@ -6,9 +6,17 @@
 	{{each projects}}
 		<div class="project_ex">
 			<dl class="pro clearfix">
-				<dt><img src="{{$value.projectThumbnail}}"/></dt>
+				<dt>
+					<a target="_blank" href="{{$value.projectWebsite}}">
+						<img src="{{$value.projectThumbnail}}"/>
+					</a>
+				</dt>
 				<dd>
-					<h2 class="project_bt">{{$value.projectName}}</h2>
+					<h2 class="project_bt">
+						<a target="_blank" href="{{$value.projectWebsite}}">	
+							{{$value.projectName}}
+						</a>
+					</h2>
 					<p class="project_time">{{$value.startTime}}~{{$value.endTime}}</p>
 					<p class="project_dec">{{$value.projectExplain}}</p>
 					<p class="project_lable">

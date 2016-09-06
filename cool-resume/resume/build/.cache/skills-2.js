@@ -1,2 +1,24 @@
-/*TMODJS:{"version":4,"md5":"fc2f7bf2daa8155d2f6729655fd772af"}*/
-template('skills-2',' <div class="skills"> <div class="skills_bottom"> <div class="bottom_con"> <div class="skills_title"> <h3>技能展示</h3> <p>7年工作经验，编写艺术般的代码</p> </div> <div class="bottom_detail"> <ul> <li class="detail_01"> <div class="percent">10%</div> <div class="subject"> <div class="detail" style="width:9%;padding-left:1%;"> <span>HTML</span>  </div> </div> </li> <li class="detail_02"> <div class="percent">60%</div> <div class="subject"> <div class="detail" style="width:59%;padding-left:1%;"> <span>CSS3</span>  </div> </div> </li> <li class="detail_03"> <div class="percent">80%</div> <div class="subject"> <div class="detail" style="width:79%;padding-left:1%;"> <span>JS</span> <div class="subject_circle"></div> <div class="subject_con"> <p class="boxbg"></p> <p class="word"> 指弹吉他手非常喜欢应用的一个技术就是自然泛音，所谓泛音技术就是通过精确的手指控制使得吉他弦达到共鸣从而发出吉他本身音域意外的音。对于电吉他来说，有一种技术叫人工泛音，那个技术的要点是通过推弦的方法使得吉他弦的紧绷程度上升从而能够弹奏更高的音 </p> </div> </div> </div> </li> <li class="detail_04"> <div class="percent">100%</div> <div class="subject"> <div class="detail" style="width:99%;padding-left:1%;"> <span>JAVA</span>  </div> </div> </li> <li class="detail_05"> <div class="percent">90%</div> <div class="subject"> <div class="detail" style="width:89%;padding-left:1%;"> <span>JAVA</span>  </div> </div> </li> <li class="detail_06"> <div class="percent">50%</div> <div class="subject"> <div class="detail" style="width:49%;padding-left:1%;"> <span>JS</span>  </div> </div> </li> <li class="detail_07"> <div class="percent">90%</div> <div class="subject"> <div class="detail" style="width:89%;padding-left:1%;"> <span>HTML5</span>  </div> </div> </li> <li class="detail_08"> <div class="percent">70%</div> <div class="subject"> <div class="detail" style="width:89%;padding-left:1%;"> <span>CSS3</span>  </div> </div> </li> <li class="detail_09"> <div class="percent">80%</div> <div class="subject"> <div class="detail" style="width:79%;padding-left:1%;"> <span>JS</span>  </div> </div> </li> <li class="detail_10"> <div class="percent">80%</div> <div class="subject"> <div class="detail" style="width:79%;padding-left:1%;"> <span>JS</span>  </div> </div> </li> </ul> </div> </div> </div> </div>');
+/*TMODJS:{"version":53,"md5":"9a22e033dbe744e1d7b2a4e4c608f40d"}*/
+template('skills-2',function($data,$filename
+/**/) {
+'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,skills=$data.skills,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,$out='';$out+=' <div class="skills"> <div class="skills_bottom"> <div class="bottom_con"> <div class="skills_title"> <h3>技能展示</h3> <p>7年工作经验，编写艺术般的代码</p> </div> <div class="bottom_detail"> <ul> ';
+$each(skills.skillsClassify,function($value,$index){
+$out+=' <li class="detail_0';
+$out+=$escape($index+1);
+$out+='"> <div class="percent">';
+$out+=$escape($value.percent);
+$out+='</div> <div class="subject"> <div class="detail" style="width:0%;padding-left:1%;transition: .5s;" data-width=';
+$out+=$escape($value.percent);
+$out+='> <span>';
+$out+=$escape($value.skillLanguage);
+$out+='</span> <div class="subject_circle" style="display: none;opacity: 0;"></div> <div class="subject_con" style="display: none;opacity: 0;"> <p class="boxbg"></p> ';
+$each($value.skillTooltip,function($value,$index){
+$out+=' <p class="word"> ';
+$out+=$escape($value);
+$out+=' </p> ';
+});
+$out+=' </div> </div> </div> </li> ';
+});
+$out+=' </ul> </div> </div> </div> </div>';
+return new String($out);
+});

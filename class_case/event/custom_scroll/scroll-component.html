@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			*{
+				margin:0;
+				top:0;
+			}
+			.main{
+				width: 500px;
+				height: 500px;
+				position: relative;
+				margin: 50px auto;
+				border: 1px solid #000;
+				overflow: hidden;
+			}
+			.scroll {
+				height: 100%;
+				width: 10px;
+				background: #ccc;
+				position: absolute;
+				right: 0;
+				top:0;
+			}
+			.content {
+				position: absolute;
+				left:0;
+				top:0;
+				width: 400px;
+				background: skyblue;
+			}
+			.content ul{
+				display: none;
+			}
+			.content p{
+				margin:10px;
+			}
+			.scroll_bar{
+				height: 30px;
+				width: 100%;
+				position: absolute;
+				left: 0;
+				top:0;
+				background: #000;
+			}
+		</style>
+		<script src="../../src/tools.js"></script>
+		<script>
+		function renderLi(n){
+			var str = "";
+			for( var i = 0; i < parseInt(n); i++ ){
+				str += '<li>11111</li>';
+			}
+			return str;
+		}
+		function html(){
+			var str = "";
+
+				for( var i = 0; i < 50; i++ ){
+					str += `<p >第一课练习</p>
+							<ul>
+								${renderLi(i+5)}
+							</ul>`;
+				}
+
+			return str;
+		}
+			/*
+				options
+				{
+					scrollBar:scrollBar,  //要拖拽的滚动条
+					scrollBox:main,      //最外层的父级
+					contentBox:content   // 内容
+				}
+			*/
+			function customScroll(options){
+				var defaults = tools.extend(options);
+
+				var contentMaxJL = 0,scrollMaxJL = 0;
+
+			}
+
+			window.onload = function(){
+				var content = tools.$(".content")[0];
+				
+				var allUl = tools.$("ul",content);
+				var allP = tools.$("p",content);
+				content.innerHTML = html();
+
+				allUl[0].style.display = "block";
+
+				var main = tools.$(".main")[0];
+				var scroll = tools.$(".scroll")[0];
+				var scrollBar = tools.$(".scroll_bar")[0];
+				
+
+				customScroll({
+					scrollBar:scrollBar,
+					scrollBox:main,
+					contentBox:content
+				})
+
+			};
+		</script>
+	</head>
+
+	<body>
+		<div class="main">
+			<div class="scroll">
+				<div class="scroll_bar"></div>
+			</div>
+			<div class="content"></div>
+		</div>
+	</body>
+</html>

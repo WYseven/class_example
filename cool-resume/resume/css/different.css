@@ -261,7 +261,7 @@
 	background: #f4f4f4;
 }
 #black .case_list .case_listbt1{
-	background-color:#23252b;
+	background-color:#8a8d91;
 }
 #black .case_sharebtn .case_btn{
 	background: #6456a9;
@@ -298,7 +298,8 @@
 }
 
 #black .case_listcon li.hoverStyle{
-	border-color:#23252b;
+	border-color:#8a8d91;
+	background: #e9e9e9;
 }
 
 #black .case_listcon li.hoverStyle i{

@@ -5,7 +5,7 @@ function MTween(obj,attrObj,duration,fx,callBack){
 	}
 	for( var attr in attrObj ){
 		newObj[attr].b = parseFloat(getComputedStyle(obj)[attr]);
-		newObj[attr].c = attrObj[attr] - newObj[attr].b;
+		newObj[attr].c = parseFloat(attrObj[attr]) - newObj[attr].b;
 	}
 	var current = new Date().getTime();
 	var d = duration;
@@ -32,7 +32,12 @@ function MTween(obj,attrObj,duration,fx,callBack){
 			if( attr === "opacity" ){
 				obj.style[attr] = value;
 			}else{
-				obj.style[attr] = value + "px";
+				if( !isNaN(attrObj[attr]) ){
+					obj.style[attr] = value + "px";
+				}else{
+					obj.style[attr] = value + "%";
+				}
+				
 			}
 		}
 		if( t === d ){

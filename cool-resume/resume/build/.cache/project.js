@@ -1,13 +1,17 @@
-/*TMODJS:{"version":29,"md5":"1d565084d510feb10e12221596275829"}*/
+/*TMODJS:{"version":42,"md5":"5b7251c6c0b9b56dbfd085e9d3d1c6b9"}*/
 template('project',function($data,$filename
 /**/) {
 'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,projects=$data.projects,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,$out='';$out+='<div class="project"> <div class="bts"> <h2 class="bt">项目池</h2> <h3 class="smallbt">业余项目与公司项目相互促进</h3> </div> ';
 $each(projects,function($value,$index){
-$out+=' <div class="project_ex"> <dl class="pro clearfix"> <dt><img src="';
+$out+=' <div class="project_ex"> <dl class="pro clearfix"> <dt> <a target="_blank" href="';
+$out+=$escape($value.projectWebsite);
+$out+='"> <img src="';
 $out+=$escape($value.projectThumbnail);
-$out+='"/></dt> <dd> <h2 class="project_bt">';
+$out+='"/> </a> </dt> <dd> <h2 class="project_bt"> <a target="_blank" href="';
+$out+=$escape($value.projectWebsite);
+$out+='"> ';
 $out+=$escape($value.projectName);
-$out+='</h2> <p class="project_time">';
+$out+=' </a> </h2> <p class="project_time">';
 $out+=$escape($value.startTime);
 $out+='~';
 $out+=$escape($value.endTime);

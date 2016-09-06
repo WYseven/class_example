@@ -147,13 +147,38 @@ var tools = (function(){
 				height:obj.offsetHeight
 			}
 		},
-		attr:function (obj,key,value){
-			if( arguments.length === 3 ){
-				obj.setAttribute(key,value);
-			}else if( arguments.length === 2 ){
-				return obj.getAttribute(key);
+		next:function (element){
+			return element.nextElementSibling;
+		},
+		view:function (){
+			return {
+				W:document.documentElement.clientWidth,
+				H:document.documentElement.clientHeight
+			}		
+		},
+		mouseWheel:function (element,upFn,downFn){
+				element.onmousewheel = wheelFn
+				if( element.addEventListener ){
+					element.addEventListener("DOMMouseScroll",wheelFn,false);
+				}
+				function wheelFn(ev){
+					var direction = true;
+					if(ev.wheelDelta){  //ie和chrome
+						direction = ev.wheelDelta > 0 ? true : false;
+					}else if(ev.detail){ //FF
+						direction = ev.detail < 0 ? true : false;
+					}
+
+					if( direction ){  //向上
+						typeof upFn === "function" && upFn();
+					}else{  //向下
+						typeof downFn === "function" && downFn();
+					}
+
+					ev.preventDefault();
+				}
+
 			}
-		}
 	}
 
 	return toolsObj;

@@ -174,7 +174,7 @@
 
     if (typeof define === 'function') {define(function() {return template;});} else if (typeof exports !== 'undefined') {module.exports = template;} else {this.template = template;}
     
-    /*v:130*/
+    /*v:134*/
 template('case',function($data,$filename
 /**/) {
 'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,casees=$data.casees,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,include=function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);$out+=text;return $out;},$out='';$out+='<div class="case"> <div class="casecon"> <div class="case1 clearfix"> <div class="bts"> <h2 class="bt">前端知识汇总&案例展示</h2> </div> <div class="case_main"> <div class="case_left"> <div class="case_list_main"> ';
@@ -224,12 +224,12 @@ $out+=' ';
 }
 $out+=' ';
 });
-$out+=' </div> </div> </div> </div> </div>';
+$out+=' </div> <div class="right_srcoll"> <div class="right_bar"></div> </div> </div> </div> </div> </div>';
 return new String($out);
-});/*v:20*/
+});/*v:39*/
 template('case_right_temp',function($data,$filename
 /**/) {
-'use strict';var $utils=this,$helpers=$utils.$helpers,$escape=$utils.$escape,caseTitle=$data.caseTitle,publishTime=$data.publishTime,caseDescription=$data.caseDescription,caseThumbnail=$data.caseThumbnail,caseWebsite=$data.caseWebsite,$out='';$out+='<div class="right_content"> <h3 class="case_bt2">';
+'use strict';var $utils=this,$helpers=$utils.$helpers,$escape=$utils.$escape,caseTitle=$data.caseTitle,publishTime=$data.publishTime,caseDescription=$data.caseDescription,caseThumbnail=$data.caseThumbnail,caseWebsite=$data.caseWebsite,$out='';$out+='<div class="right_content"> <div class="right_main"> <div class="content"> <h3 class="case_bt2">';
 $out+=$escape(caseTitle);
 $out+='</h3> <p class="case_time">发布时间：';
 $out+=$escape(publishTime);
@@ -237,9 +237,9 @@ $out+='</p> <p class="case_decoration">';
 $out+=$escape(caseDescription);
 $out+='</p> <img src="';
 $out+=$escape(caseThumbnail);
-$out+='" class="case_exp"/> <div class="case_share clearfix"> <div class="case_sharebtn"> <a class="case_btn" target="_blank" href="';
+$out+='" class="case_exp"/> </div> </div> <div class="case_share clearfix"> <div class="case_sharebtn"> <a class="case_btn" target="_blank" href="';
 $out+=$escape(caseWebsite);
-$out+='" />点击预览</a> </div> <div class="case_sharelink clearfix"> <span>分享至：</span> <a href="#" class="weibo"></a> <a href="#" class="kongjian"></a> <a href="#" class="weixin"></a> <a href="#" class="qq"></a> <a href="#" class="douban"></a> </div> </div> </div>';
+$out+='" />点击预览</a> </div> <div class="case_sharelink clearfix"> <span>分享至：</span> <a href="#" class="weibo"></a> <a href="#" class="kongjian"></a> <a href="#" class="weixin"></a> <a href="#" class="qq"></a> <a href="#" class="douban"></a> </div> </div> </div> ';
 return new String($out);
 });/*v:4*/
 template('footer','<div class="footer"> <div class="footcon clearfix"> <div class="footleft"> <p>最后更新于2015年7月25日</p> <p>简历模板由妙味课堂Miaov.com设计开发（使用本模板请注明此项）</p> </div> <div class="footright"> <dl> <dt><img src="images/erweima.png"/></dt> <dd> <p>您还可以使用手机或iPad</p> <p>扫描左侧二维码打开本页</p> </dd> </dl> </div> </div> </div>');/*v:56*/
@@ -271,13 +271,23 @@ $out+=' </p> </div> <div class="intro_circle"></div> </li> <li> <div class="deta
 $out+=$escape($helpers. arrayJoin(userInfo.userAward , "、"));
 $out+='</p> </div> <div class="intro_circle"></div> </li> </ul> </div> </div> </div> </div> </div> </div> ';
 return new String($out);
-});/*v:43*/
+});/*v:50*/
 template('init',function($data,$filename
 /**/) {
-'use strict';var $utils=this,$helpers=$utils.$helpers,include=function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);$out+=text;return $out;},timeAxis=$data.timeAxis,projects=$data.projects,$out='';$out+=' ';
+'use strict';var $utils=this,$helpers=$utils.$helpers,include=function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);$out+=text;return $out;},skills=$data.skills,timeAxis=$data.timeAxis,projects=$data.projects,$out='';$out+=' ';
 include('./hea_intro');
 $out+='  ';
+if(skills.temp == "circle"){
+$out+=' ';
 include('./skills-1');
+$out+=' ';
+}
+$out+=' ';
+if(skills.temp == "columns"){
+$out+=' ';
+include('./skills-2');
+$out+=' ';
+}
 $out+=' ';
 if(timeAxis.length){
 $out+='  ';
@@ -296,16 +306,20 @@ $out+='  ';
 include('./footer');
 $out+=' ';
 return new String($out);
-});/*v:29*/
+});/*v:42*/
 template('project',function($data,$filename
 /**/) {
 'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,projects=$data.projects,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,$out='';$out+='<div class="project"> <div class="bts"> <h2 class="bt">项目池</h2> <h3 class="smallbt">业余项目与公司项目相互促进</h3> </div> ';
 $each(projects,function($value,$index){
-$out+=' <div class="project_ex"> <dl class="pro clearfix"> <dt><img src="';
+$out+=' <div class="project_ex"> <dl class="pro clearfix"> <dt> <a target="_blank" href="';
+$out+=$escape($value.projectWebsite);
+$out+='"> <img src="';
 $out+=$escape($value.projectThumbnail);
-$out+='"/></dt> <dd> <h2 class="project_bt">';
+$out+='"/> </a> </dt> <dd> <h2 class="project_bt"> <a target="_blank" href="';
+$out+=$escape($value.projectWebsite);
+$out+='"> ';
 $out+=$escape($value.projectName);
-$out+='</h2> <p class="project_time">';
+$out+=' </a> </h2> <p class="project_time">';
 $out+=$escape($value.startTime);
 $out+='~';
 $out+=$escape($value.endTime);
@@ -358,6 +372,29 @@ $out+='  </ul> ';
 }
 $out+=' </div> <div class="right skills_canval_circle">  </div> </div> </div> </div> </div>';
 return new String($out);
+});/*v:53*/
+template('skills-2',function($data,$filename
+/**/) {
+'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,skills=$data.skills,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,$out='';$out+=' <div class="skills"> <div class="skills_bottom"> <div class="bottom_con"> <div class="skills_title"> <h3>技能展示</h3> <p>7年工作经验，编写艺术般的代码</p> </div> <div class="bottom_detail"> <ul> ';
+$each(skills.skillsClassify,function($value,$index){
+$out+=' <li class="detail_0';
+$out+=$escape($index+1);
+$out+='"> <div class="percent">';
+$out+=$escape($value.percent);
+$out+='</div> <div class="subject"> <div class="detail" style="width:0%;padding-left:1%;transition: .5s;" data-width=';
+$out+=$escape($value.percent);
+$out+='> <span>';
+$out+=$escape($value.skillLanguage);
+$out+='</span> <div class="subject_circle" style="display: none;opacity: 0;"></div> <div class="subject_con" style="display: none;opacity: 0;"> <p class="boxbg"></p> ';
+$each($value.skillTooltip,function($value,$index){
+$out+=' <p class="word"> ';
+$out+=$escape($value);
+$out+=' </p> ';
+});
+$out+=' </div> </div> </div> </li> ';
+});
+$out+=' </ul> </div> </div> </div> </div>';
+return new String($out);
 });/*v:86*/
 template('timeAxis-1',function($data,$filename
 /**/) {
@@ -403,6 +440,7 @@ $out+='</p> </div> </div> </div> ';
 });
 $out+=' </div> </div> </div>';
 return new String($out);
-});
+});/*v:3*/
+template('timeAxis-2',' <div class="timeAxis"> <div class="timecon"> <div class="skills_title"> <h3>工作时光轴</h3> <p>有大型网站开发、优化经验</p> </div> <div class="timeline_top"> <div class="dot dot2"></div> <div class="line line2"></div> </div> <div class="exper_detail"> <div class="exper"> <div class="exper_item exper_item2"> <div class="item_title"> <div class="ball"> <div class="icon icon2"><img src="images/expre_bgL.png" /></div> </div> <div class="title_word title_word2"> <p class="date"> 2013.12.11~2015.10.09 <img src="images/date.png" /> </p> <div class="company"> <h4>广州市千钧网络科技有限公司</h4> <p>前端开发工程师</p> </div> </div> </div> <div class="item_con"> <p>前端负责人。搭建了前端的整体构架</p> <p>包括：制定前端静态资源目录结构和代码发布流程；根据前者开发代码构建工具，简化发布操作；开发前后端中间平台，分离前后端职责，提高开发效率。此外，还负责美黛拉App内嵌页面和PC网站的开发。</p> </div> </div> </div> <div class="timeline_top"> <div class="dot_dom"></div> </div> </div> <div class="exper_detail"> <div class="exper"> <div class="exper_item exper_item2"> <div class="item_title"> <div class="ball"> <div class="icon icon2"><img src="images/expre_bgL.png" /></div> </div> <div class="title_word title_word2"> <p class="date"> 2013.12.11~2015.10.09 <img src="images/date.png" /> </p> <div class="company"> <h4>广州市千钧网络科技有限公司</h4> <p>前端开发工程师</p> </div> </div> </div> <div class="item_con"> <p>前端负责人。搭建了前端的整体构架</p> <p>包括：制定前端静态资源目录结构和代码发布流程；根据前者开发代码构建工具，简化发布操作；开发前后端中间平台，分离前后端职责，提高开发效率。此外，还负责美黛拉App内嵌页面和PC网站的开发。</p> </div> </div> </div> <div class="timeline_top"> <div class="dot_dom"></div> </div> </div> </div> </div>');
 
 }()

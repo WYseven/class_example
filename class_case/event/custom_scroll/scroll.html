@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			*{
+				margin:0;
+				top:0;
+			}
+			.main{
+				width: 500px;
+				height: 500px;
+				position: relative;
+				margin: 50px auto;
+				border: 1px solid #000;
+				overflow: hidden;
+			}
+			.scroll {
+				height: 100%;
+				width: 10px;
+				background: #ccc;
+				position: absolute;
+				right: 0;
+				top:0;
+			}
+			.content {
+				position: absolute;
+				left:0;
+				top:0;
+				width: 400px;
+				background: skyblue;
+			}
+			.content ul{
+				display: none;
+			}
+			.content p{
+				margin:10px;
+			}
+			.scroll_bar{
+				height: 30px;
+				width: 100%;
+				position: absolute;
+				left: 0;
+				top:0;
+				background: #000;
+			}
+		</style>
+		<script src="../../src/tools.js"></script>
+		<script>
+		function renderLi(n){
+			var str = "";
+			for( var i = 0; i < parseInt(n); i++ ){
+				if( n === 0){
+					str += '<li>开始</li>';
+				}else{
+					str += '<li>111</li>';
+				}
+				
+			}
+			return str;
+		}
+		function html(){
+			var str = "";
+
+				for( var i = 0; i < 10; i++ ){
+					str += `<p >第一课练习</p>
+							<ul>
+								${renderLi(i+5)}
+							</ul>`;
+				}
+
+			return str;
+		}
+			window.onload = function(){
+				var content = tools.$(".content")[0];
+				
+
+
+
+				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				var allUl = tools.$("ul",content);
+				var allP = tools.$("p",content);
+				content.innerHTML = html();
+
+				allUl[0].style.display = "block";
+				
+
+				for( var i = 0; i < allP.length; i++ ){
+					allP[i].index = i;
+					allP[i].status = true;
+					allP[i].onclick  =function (){
+						for( var i = 0; i < allUl.length; i++ ){
+							allUl[i].style.display = "none";	
+							if( this !== allUl[this.index] ){
+								allUl[i].status = true;
+							}
+						}
+						if( this.status ){
+							allUl[this.index].style.display = "block";	
+							this.status = false;
+						}else{
+							allUl[this.index].style.display = "none";
+							this.status = true;	
+						}
+						
+						changeScrollHeight();
+					};
+				}
+				allUl[0].status = false;
+
+				var main = tools.$(".main")[0];
+				var scroll = tools.$(".scroll")[0];
+				var scrollBar = tools.$(".scroll_bar")[0];
+				var contentMaxJL = 0,scrollMaxJL = 0;
+				changeScrollHeight();
+				//重新计算所有的数据，重新设置滚动条的高度和top值
+				function changeScrollHeight(){
+					//文档高度
+					var clientH = main.clientHeight;
+					//内容高度
+					var contentHeight = content.scrollHeight;
+
+					//文档能够滚动的最大距离
+					contentMaxJL = Math.round(contentHeight - clientH);
+					//设置的top高于最大值
+					console.log( contentHeight , clientH ,  Math.abs(content.offsetTop) , contentMaxJL );
+					if(contentHeight > clientH &&  Math.abs(content.offsetTop) > contentMaxJL ){
+						content.style.top = -Math.round(contentMaxJL) + 'px';
+					}else if(contentHeight <= clientH){
+						content.style.top = 0 + 'px';
+					}
+					
+					//计算出滚动条的高度
+					scrollBar.style.height = Math.round(clientH/contentHeight * clientH)+ 'px';
+				
+
+					if( clientH >= contentHeight ){
+						scroll.style.display = 'none';
+					}else{
+						scroll.style.display = 'block';
+					}
+					//滚动条能滚动的最大距离
+					scrollMaxJL = Math.round(clientH - scrollBar.offsetHeight);
+					//重新计算滚动条的top值
+					scrollBar.style.top = Math.round(Math.abs(content.offsetTop)/contentMaxJL*scrollMaxJL) + 'px';
+				}
+
+
+				tools.addEvent(scrollBar,"mousedown",function (ev){
+					var disY = ev.clientY - scrollBar.offsetTop;
+
+					document.onmousemove = function (ev){
+						//限制范围
+						var t = ev.clientY - disY;
+						changeScrollTop(t);
+					};
+					document.onmouseup = function (ev){
+						document.onmouseup  =document.onmousemove = null;	
+					};
+					ev.preventDefault();
+				})
+
+				function changeScrollTop(t){
+					if( t < 0  ) t = 0;
+
+					if( t > scrollMaxJL ) t = scrollMaxJL;
+
+					// t就是滚动条滚动的top值
+					//走的距离会得到一个比例
+					scale = t / scrollMaxJL;
+
+					scrollBar.style.top = Math.round(t) + "px";
+					content.style.top = -Math.round(scale * contentMaxJL) + 'px';	
+				}
+
+
+				tools.mouseWheel(main,function (){
+					if( scrollBar.offsetHeight !== 0 ){
+
+						var t = scrollBar.offsetTop - 5;	
+						changeScrollTop(t)
+					}
+				},function (){
+					if( scrollBar.offsetHeight !== 0 ){
+						
+						var t = scrollBar.offsetTop + 5;	
+						changeScrollTop(t);	
+					}
+				})
+
+				tools.addEvent(window,"resize",function (){
+					main.style.height = tools.view().H - 120 + 'px';	
+					changeScrollHeight();
+				});
+
+
+			};
+		</script>
+	</head>
+
+	<body>
+		<div class="main">
+			<div class="scroll">
+				<div class="scroll_bar"></div>
+			</div>
+			<div class="content"></div>
+		</div>
+	</body>
+</html>

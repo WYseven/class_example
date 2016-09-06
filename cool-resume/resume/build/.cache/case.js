@@ -1,4 +1,4 @@
-/*TMODJS:{"version":130,"md5":"0b8b7e3f9ff13d7fe1392061ca3ef022"}*/
+/*TMODJS:{"version":134,"md5":"2169412fa18f15d038c2afda2ce1e324"}*/
 template('case',function($data,$filename
 /**/) {
 'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,casees=$data.casees,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,include=function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);$out+=text;return $out;},$out='';$out+='<div class="case"> <div class="casecon"> <div class="case1 clearfix"> <div class="bts"> <h2 class="bt">前端知识汇总&案例展示</h2> </div> <div class="case_main"> <div class="case_left"> <div class="case_list_main"> ';
@@ -48,6 +48,6 @@ $out+=' ';
 }
 $out+=' ';
 });
-$out+=' </div> </div> </div> </div> </div>';
+$out+=' </div> <div class="right_srcoll"> <div class="right_bar"></div> </div> </div> </div> </div> </div>';
 return new String($out);
 });

@@ -2,7 +2,16 @@
 {{include './hea_intro'}}
 
 <!-- 技能展示 -->
-{{include './skills-1'}}
+
+{{if skills.temp == "circle"}}
+	{{include './skills-1'}}
+{{ /if }}
+
+{{if skills.temp == "columns"}}
+	{{include './skills-2'}}
+{{ /if }}
+
+
 
 {{if timeAxis.length}}
 	<!-- 时间轴 -->
