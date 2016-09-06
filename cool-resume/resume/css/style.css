@@ -516,12 +516,14 @@ body {
 
 .case_right .right_content {
 	position: relative;
-	height: 100%;
+	height: 80%;
 	
 
 }
 .case_right .right_content .right_main {
+	height: 100%;
 	position: relative;
+	overflow: hidden;
 }
 .case_right .right_content .content {
 	position: absolute;

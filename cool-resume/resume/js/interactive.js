@@ -142,7 +142,8 @@ tools.addEvent(case_list_main,"click",function (ev){
 		var oneCase = getCaseById(casees,_id);
 
 		var html = template('case_right_temp', oneCase);
-		tools.$(".case_right")[0].innerHTML = html;
+		rightContent.innerHTML = html;
+		rightContent.style.top = 0;
 
 		isRender = _id;
 
@@ -156,6 +157,8 @@ tools.addEvent(case_list_main,"click",function (ev){
 
 	//滚动条高度
 	changeScrollHeight();
+	changeRightScrollHeight();
+
 	
 	ev.preventDefault();
 });
@@ -259,9 +262,98 @@ function changeCaseH(){
 }
 
 //左侧滚动条
-var right_srcoll = tools.$(".right_srcoll")[0];
+var rightSrcoll = tools.$(".right_srcoll")[0];
+var rightBar = tools.$(".right_bar")[0];
+
+var rightMain = tools.$(".right_main")[0];
+var rightContent = tools.$(".content",rightMain)[0];
+var rightContentMaxJL = 0,rightScrollMaxJL = 0;
 
 
 
+changeRightScrollHeight();
+//重新计算所有的数据，重新设置滚动条的高度和top值
+function changeRightScrollHeight(){
+	rightSrcoll.style.height = tools.$(".right_content")[0].offsetHeight + 'px';
+	//文档高度
+	var clientH = rightMain.clientHeight;
+	//内容高度
+	var contentHeight = rightContent.scrollHeight;
 
+	//文档能够滚动的最大距离
+	rightContentMaxJL = Math.round(contentHeight - clientH);
+	//设置的top高于最大值
+	if(contentHeight > clientH &&  Math.abs(rightContent.offsetTop) > rightContentMaxJL ){
+		rightContent.style.top = -Math.round(rightContentMaxJL) + 'px';
+	}else if(contentHeight <= clientH){
+		rightContent.style.top = 0 + 'px';
+	}
+	
+	//计算出滚动条的高度
+	rightBar.style.height = Math.round(clientH/contentHeight * clientH)+ 'px';
+	//滚动条能滚动的最大距离
+	console.log( clientH , contentHeight );
+	if( clientH >= contentHeight ){
+		rightSrcoll.style.display = 'none';
+	}else{
+		rightSrcoll.style.display = 'block';
+	}
+	rightScrollMaxJL = Math.round(clientH - rightBar.offsetHeight);
+	//重新计算滚动条的top值
+	rightBar.style.top = Math.round(Math.abs(rightContent.offsetTop)/rightContentMaxJL*rightScrollMaxJL) + 'px';
+}
+
+
+tools.addEvent(rightBar,"mousedown",function (ev){
+	var disY = ev.clientY - rightBar.offsetTop;
+
+	document.onmousemove = function (ev){
+		//限制范围
+		var t = ev.clientY - disY;
+		changeRightScrollTop(t);
+	};
+	document.onmouseup = function (ev){
+		document.onmouseup  =document.onmousemove = null;	
+	};
+	ev.preventDefault();
+})
+
+function changeRightScrollTop(t){
+	if( t < 0  ) t = 0;
+	if( t > rightScrollMaxJL ) t = rightScrollMaxJL;
+	// t就是滚动条滚动的top值
+	//走的距离会得到一个比例
+	scale = t / rightScrollMaxJL;
+
+	rightBar.style.top = Math.round(t) + "px";
+	rightContent.style.top = -Math.round(scale * rightContentMaxJL) + 'px';	
+}
+
+tools.addEvent(window,"resize",changeRightCaseH);
+
+function changeRightCaseH(){
+	changeRightScrollHeight();	
+}
+tools.mouseWheel(rightMain,function (){
+	if( rightBar.offsetHeight !== 0 ){
+		var t = rightBar.offsetTop - 5;	
+		changeRightScrollTop(t)
+	}
+},function (){
+	if( rightBar.offsetHeight !== 0 ){
+		var t = rightBar.offsetTop + 5;	
+		changeRightScrollTop(t)
+	}	
+})
+tools.mouseWheel(rightSrcoll,function (){
+	if( rightBar.offsetHeight !== 0 ){
+		var t = rightBar.offsetTop - 5;	
+		changeRightScrollTop(t)
+	}
+},function (){
+	if( rightBar.offsetHeight !== 0 ){
+		var t = rightBar.offsetTop + 5;	
+		changeRightScrollTop(t)
+	}	
+})
 
