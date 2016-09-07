@@ -1,7 +1,7 @@
-/*TMODJS:{"version":138,"md5":"e14b8454ad3209d1f7b070f147dca5a9"}*/
+/*TMODJS:{"version":140,"md5":"2e89a39aaf56bfcede0969052ea886c8"}*/
 template('case',function($data,$filename
 /**/) {
-'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,casees=$data.casees,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,include=function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);$out+=text;return $out;},caseWebsite=$data.caseWebsite,$out='';$out+='<div class="case"> <div class="casecon"> <div class="case1 clearfix"> <div class="bts"> <h2 class="bt">前端知识汇总&案例展示</h2> </div> <div class="case_main"> <div class="case_left"> <div class="case_list_main"> ';
+'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,casees=$data.casees,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,include=function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);$out+=text;return $out;},$out='';$out+='<div class="case"> <div class="casecon"> <div class="case1 clearfix"> <div class="bts"> <h2 class="bt">前端知识汇总&案例展示</h2> </div> <div class="case_main"> <div class="case_left"> <div class="case_list_main"> ';
 $each(casees,function($value,$index){
 $out+=' <div class="case_list"> <h3 class="case_listbt1"> <em class="';
 $out+=$escape($helpers. isAddClass('unload' , $value.isDisplay ));
@@ -48,8 +48,6 @@ $out+=' ';
 }
 $out+=' ';
 });
-$out+=' </div> </div> <div class="case_share clearfix"> <div class="case_sharebtn"> <a class="case_btn" target="_blank" href="';
-$out+=$escape(caseWebsite);
-$out+='" />点击预览</a> </div> <div class="case_sharelink clearfix"> <span>分享至：</span> <a href="#" class="weibo"></a> <a href="#" class="kongjian"></a> <a href="#" class="weixin"></a> <a href="#" class="qq"></a> <a href="#" class="douban"></a> </div> </div> </div> <div class="right_srcoll"> <div class="right_bar"></div> </div> </div> </div> </div> </div>';
+$out+=' </div> </div> </div> <div class="right_srcoll"> <div class="right_bar"></div> </div> </div> </div> </div> </div>';
 return new String($out);
 });

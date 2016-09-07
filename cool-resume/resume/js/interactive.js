@@ -270,11 +270,12 @@ var rightContent = tools.$(".content",rightMain)[0];
 var rightContentMaxJL = 0,rightScrollMaxJL = 0;
 
 
-
-changeRightScrollHeight();
+setTimeout(function (){
+	changeRightScrollHeight();	
+},0)
 //重新计算所有的数据，重新设置滚动条的高度和top值
 function changeRightScrollHeight(){
-	rightSrcoll.style.height = tools.$(".right_content")[0].offsetHeight + 'px';
+	//rightSrcoll.style.height = tools.$(".right_content")[0].offsetHeight + 'px';
 	//文档高度
 	var clientH = rightMain.clientHeight;
 	//内容高度
@@ -288,11 +289,11 @@ function changeRightScrollHeight(){
 	}else if(contentHeight <= clientH){
 		rightContent.style.top = 0 + 'px';
 	}
-	
+	console.log(clientH,contentHeight , clientH );
 	//计算出滚动条的高度
 	rightBar.style.height = Math.round(clientH/contentHeight * clientH)+ 'px';
 	//滚动条能滚动的最大距离
-	console.log( clientH , contentHeight );
+
 	if( clientH >= contentHeight ){
 		rightSrcoll.style.display = 'none';
 	}else{

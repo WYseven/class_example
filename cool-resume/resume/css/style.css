@@ -200,11 +200,13 @@ body {
 	font-size: 16px;
 }
 .top_detail .left {
+	height: 590px;
 	width: 362px;
 	float: left;
 	margin-right: 52px;
 	opacity: 0;
 	transition:1s;
+	position: relative;
 }
 
 .top_detail .left .skillLanguage{
@@ -260,6 +262,9 @@ body {
 	margin-top: 14px;
 	text-align: center;
 	height: 20px;
+	position: absolute;
+	left: 80px;
+	bottom: 50px;
 }
 
 .bottom_con {
@@ -516,7 +521,7 @@ body {
 
 .case_right .right_content {
 	position: relative;
-	height: 80%;
+	height: 100%;
 	
 
 }
@@ -549,9 +554,7 @@ body {
 
 .case_right .case_share {
 	width: 100%;
-	position: absolute;
-	bottom: 20px;
-	left: 0;
+	margin-bottom: 20px;
 }
 
 .case_right .case_bt2{
