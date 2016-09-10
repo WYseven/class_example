@@ -72,7 +72,7 @@ body {
 }
 
 .hea_qq {
-	background: url(../images/hea_03.png) no-repeat left 39px;
+	background: url(../images/icon/hea_03.png) no-repeat left 39px;
 	margin-right: 37px;
 	height: 51px;
 	padding-top: 48px;
@@ -80,7 +80,7 @@ body {
 	padding-left: 38px;
 }
 .hea_mail {
-	background: url(../images/hea_05.png) no-repeat left 39px;
+	background: url(../images/icon/hea_05.png) no-repeat left 39px;
 	height: 51px;
 	padding-top: 48px;
 	float: left;
@@ -103,12 +103,12 @@ body {
 	width: 309px;
 	padding: 154px 0px 0px 15px;
 	margin-right: 59px;
-	background: url(../images/intro_05.png) no-repeat 0px 156px;
+	background: url(../images/icon/intro_05.png) no-repeat 0px 156px;
 }
 .intro_left p {
 	margin: 0px 8px 0 8px;
 	line-height: 24px;
-	background: url(../images/intro_07.png) no-repeat 104px 30px;
+	background: url(../images/icon/intro_07.png) no-repeat 104px 30px;
 }
 .intro_right {
 	float: left;
@@ -323,13 +323,13 @@ body {
 }
 
 .icon {
-	background: url(../images/expre_logo1.png) no-repeat 14px 10px;
+	background: url(../images/icon/expre_logo1.png) no-repeat 14px 10px;
 }
 .icon2 {
-	background: url(../images/expre_logo2.png) no-repeat 14px 10px;
+	background: url(../images/icon/expre_logo2.png) no-repeat 14px 10px;
 }
 .icon3 {
-	background: url(../images/expre_logo3.png) no-repeat 14px 10px;
+	background: url(../images/icon/expre_logo4.png) no-repeat 14px 10px;
 }
 .empty {
 	width: 456px;
@@ -531,6 +531,7 @@ body {
 	overflow: hidden;
 }
 .case_right .right_content .content {
+	width: 100%;
 	position: absolute;
 	left:0;
 	top:0;
@@ -550,6 +551,7 @@ body {
     background: #d5d7db;
     float: right;
     position: relative;
+    display: none;
 }
 
 .case_right .case_share {
@@ -603,7 +605,7 @@ body {
 .case_sharelink a{
 	float: left;
 	margin-left: 20px;
-	background-image:url(../images/share.png);
+	background-image:url(../images/icon/share.png);
 	width: 32px;
 	height: 32px;
 }

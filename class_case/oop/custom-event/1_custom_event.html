@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				
+				addEvent:{
+					custom1:[func1,func2,func3],
+					custom2:[func1]
+				}
+
+				{
+					addEvent:function (){
+						//添加	
+					},
+					removeEvent:function (){
+						//删除		
+					},
+					fireEvent:function (){
+						//触发	
+					}
+				}
+			*/
+			function CustomEvent(){
+				this.listener = {};
+			}
+			CustomEvent.prototype.addEvent = function (evName,evFn){
+
+				if( typeof evName === "string" && typeof evFn === "function" ){
+					if( typeof this.listener[evName] === "undefined" ){
+						this.listener[evName] = [evFn];
+					}else{
+						this.listener[evName].push(evFn);
+					}
+				}
+				return this;	
+			}
+			CustomEvent.prototype.removeEvent = function (evName,evFn){
+				if( typeof evName === "string" ){
+					if( typeof this.listener[evName] !== "undefined" ){
+						if( typeof evFn === "function" ){
+							for( var i = 0; i < this.listener[evName].length; i++ ){
+								if( typeof evFn === "function" && evFn === this.listener[evName][i] ){
+									this.listener[evName].splice(i,1);
+									i--;
+								}
+							}
+						}else{
+							delete this.listener[evName];
+						}
+						
+					}
+				}
+				return this;	
+			}
+			CustomEvent.prototype.fireEvent = function (evName,data){
+
+				if( typeof evName === "string" ){
+					if( typeof this.listener[evName] !== "undefined" ){
+						for( var i = 0; i < this.listener[evName].length; i++ ){
+							this.listener[evName][i](data);
+						}
+					}
+				}
+				return this;	
+			}
+
+			var event = new CustomEvent();
+
+			function fn1(data){
+				alert(data)	
+			}
+			function fn2(data){
+				alert(data)		
+			}
+
+			//添加
+			event.addEvent("abc",fn1);
+			event.addEvent("abc",fn2);
+			event.addEvent("abc",fn2);
+
+			event.removeEvent("abc",fn2);
+
+			//触发
+			event.fireEvent("abc","我被触发了");
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

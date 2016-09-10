@@ -17,7 +17,7 @@
 	}
 #black .intro_right .pic {
     border: 3px solid #fff;
-    background: url(../images/intro_03.png) no-repeat;
+    background: url(../images/icon/intro_03.png) no-repeat;
 }
 #black .intro_circle {
 	background: #696969;
@@ -30,11 +30,11 @@
 	border-left: 1px dashed #2d3035;
 }
 #black .hea_intro {
-	background: #1c1e22 url(../images/hea_intro_bg.png) repeat-x;
+	background: #1c1e22 url(../images/icon/hea_intro_bg.png) repeat-x;
 }
 
 #black .high_light {
-	background: url(../images/bg.png) no-repeat center top;
+	background: url(../images/icon/bg.png) no-repeat center top;
 }
 
 #black .left .circle {
@@ -184,12 +184,12 @@
 	border: 1px solid #9596db;
 	z-index: 1;
 	border-radius: 5px;
-	background: url(../images/tip.png);
+	background: url(../images/icon/tip.png);
 	left: 150px;
 	bottom: 36px;
 }
 #black .boxbg {
-	background: url(../images/subject_con_jiao.png) no-repeat;
+	background: url(../images/icon/subject_con_jiao.png) no-repeat;
 	position: absolute;
 	width: 13px;
 	height: 8px;
@@ -219,7 +219,7 @@
 #black .timeline_top .dot {
 	height: 10px;
 	width: 10px;
-	background: url(../images/date.png) no-repeat;
+	background: url(../images/icon/date.png) no-repeat;
 	margin: 0 auto;
 }
 #black .timeline_top .line {
@@ -250,7 +250,7 @@
 #black .dot_dom {
 	height: 10px;
 	width: 10px;
-	background: url(../images/date.png) no-repeat;
+	background: url(../images/icon/date.png) no-repeat;
 	margin: 0px 39px;
 }
 
@@ -282,10 +282,10 @@
 		border-bottom: 1px solid #2e3036;
 }
 #black .case_listbt1 .unload {
-	background: #fff url(../images/unload.png) no-repeat center;
+	background: #fff url(../images/icon/unload.png) no-repeat center;
 }
 #black .case_listbt1 .add {
-	background: #fff url(../images/add.png) no-repeat center;
+	background: #fff url(../images/icon/add.png) no-repeat center;
 }
 #black .case_listcon li i{
 	background: #acaeaf;
@@ -333,7 +333,7 @@
 	}
 #red .intro_right .pic {
     border: 3px solid #e16b5f;
-    background: url(../images/intro_03.png) no-repeat;
+    background: url(../images/icon/intro_03.png) no-repeat;
 }
 #red .intro_circle {
 	background: #734776;
@@ -345,10 +345,10 @@
 	border-left: 1px dashed #422e46;
 }
 #red .hea_intro {
-	background: #191b21 url(../images/hea_intro_bgred.png) repeat-x;
+	background: #191b21 url(../images/icon/hea_intro_bgred.png) repeat-x;
 }
 #red .high_light {
-	background: url(../images/bg_red.png) no-repeat center top;
+	background: url(../images/icon/bg_red.png) no-repeat center top;
 }
 
 #red .left .circle {
@@ -498,12 +498,12 @@
 	border: 1px solid #c3a6c7;
 	z-index: 1;
 	border-radius: 5px;
-	background: url(../images/tip.png);
+	background: url(../images/icon/tip.png);
 	left: 150px;
 	bottom: 36px;
 }
 #red .boxbg {
-	background: url(../images/subject_con_jiaor.png) no-repeat;
+	background: url(../images/icon/subject_con_jiaor.png) no-repeat;
 	position: absolute;
 	width: 13px;
 	height: 8px;
@@ -543,7 +543,7 @@
 #red .timeline_top .dot {
 	height: 10px;
 	width: 10px;
-	background: url(../images/dater.png) no-repeat;
+	background: url(../images/icon/dater.png) no-repeat;
 	margin: 0 auto;
 }
 #red .timeline_top .line {
@@ -575,7 +575,7 @@
 #red .dot_domr {
 	height: 10px;
 	width: 10px;
-	background: url(../images/daterp.png) no-repeat;
+	background: url(../images/icon/daterp.png) no-repeat;
 	margin: 0px 39px;
 }
 #red .case_listcon .case_li2{
@@ -607,10 +607,10 @@
 		border-bottom: 1px solid #e88980;
 }
 #red .case_listbt1 .unload {
-	background: #fff url(../images/redcase_unload.png) no-repeat center;
+	background: #fff url(../images/icon/redcase_unload.png) no-repeat center;
 }
 #red .case_listbt1 .add {
-	background: #fff url(../images/redcase_add.png) no-repeat center;
+	background: #fff url(../images/icon/redcase_add.png) no-repeat center;
 }
 #red .case_listcon li i{
 	background: #acaeaf;
@@ -632,6 +632,10 @@
 	cursor: pointer;
 }
 
+#red .list_bar,#red .right_bar {
+	background: #e4877e;
+}
+
 
 
 /*blue*/
@@ -651,7 +655,7 @@
 	}
 #blue .intro_right .pic {
     border: 3px solid #1eb5f2;
-    background: url(../images/intro_03.png) no-repeat;
+    background: url(../images/icon/intro_03.png) no-repeat;
 }
 #blue .intro_circle {
 	background: #1eb5f2;
@@ -663,11 +667,11 @@
 	border-left: 1px dashed #215f95;
 }
 #blue .hea_intro {
-	background: #22467c url(../images/hea_intro_bgblue.png) repeat-x;
+	background: #22467c url(../images/icon/hea_intro_bgblue.png) repeat-x;
 }
 
 #blue .high_light {
-	background: url(../images/bg_blue.png) no-repeat center top;
+	background: url(../images/icon/bg_blue.png) no-repeat center top;
 }
 
 #blue .detail_left p {
@@ -824,12 +828,12 @@
 	border: 1px solid #81b9f0;
 	z-index: 1;
 	border-radius: 5px;
-	background: url(../images/tip.png);
+	background: url(../images/icon/tip.png);
 	left: 150px;
 	bottom: 36px;
 }
 #blue .boxbg {
-	background: url(../images/subject_con_jiaob.png) no-repeat;
+	background: url(../images/icon/subject_con_jiaob.png) no-repeat;
 	position: absolute;
 	width: 13px;
 	height: 8px;
@@ -866,7 +870,7 @@
 #blue .timeline_top .dot {
 	height: 10px;
 	width: 10px;
-	background: url(../images/dateb.png) no-repeat;
+	background: url(../images/icon/dateb.png) no-repeat;
 	margin: 0 auto;
 }
 #blue .timeline_top .line {
@@ -897,7 +901,7 @@
 #blue .dot_dom {
 	height: 10px;
 	width: 10px;
-	background: url(../images/datebl.png) no-repeat;
+	background: url(../images/icon/datebl.png) no-repeat;
 	margin: 0px 39px;
 }
 #blue .case_listcon .case_li2{
@@ -928,10 +932,10 @@
 		border-bottom: 1px solid #5579af;
 }
 #blue .case_listbt1 .unload {
-	background: #fff url(../images/bluecase_unload.png) no-repeat center;
+	background: #fff url(../images/icon/bluecase_unload.png) no-repeat center;
 }
 #blue .case_listbt1 .add {
-	background: #fff url(../images/bluecase_add.png) no-repeat center;
+	background: #fff url(../images/icon/bluecase_add.png) no-repeat center;
 }
 #blue .case_listcon li i{
 	background: #acaeaf;
@@ -947,3 +951,7 @@
 }
 #blue .project_lable span{
 		color:#2b589b;}
+
+#blue .list_bar,#blue .right_bar {
+	background: #6fc0f3;
+}

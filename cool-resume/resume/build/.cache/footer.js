@@ -1,2 +1,2 @@
-/*TMODJS:{"version":4,"md5":"3e07b1bf6a5786d4ada0c53faf146aaf"}*/
-template('footer','<div class="footer"> <div class="footcon clearfix"> <div class="footleft"> <p>最后更新于2015年7月25日</p> <p>简历模板由妙味课堂Miaov.com设计开发（使用本模板请注明此项）</p> </div> <div class="footright"> <dl> <dt><img src="images/erweima.png"/></dt> <dd> <p>您还可以使用手机或iPad</p> <p>扫描左侧二维码打开本页</p> </dd> </dl> </div> </div> </div>');
+/*TMODJS:{"version":6,"md5":"c3412029164bb0e66292c324576856d5"}*/
+template('footer','<div class="footer"> <div class="footcon clearfix"> <div class="footleft"> <p>最后更新于2015年7月25日</p> <p>简历模板由妙味课堂Miaov.com设计开发（使用本模板请注明此项）</p> </div> <div class="footright"> <dl> <dt><img src="images/icon/erweima.png"/></dt> <dd> <p>您还可以使用手机或iPad</p> <p>扫描左侧二维码打开本页</p> </dd> </dl> </div> </div> </div>');

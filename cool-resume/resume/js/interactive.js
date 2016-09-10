@@ -156,8 +156,14 @@ tools.addEvent(case_list_main,"click",function (ev){
 	}
 
 	//滚动条高度
-	changeScrollHeight();
-	changeRightScrollHeight();
+	/*changeScrollHeight();
+	changeRightScrollHeight();*/
+
+	setTimeout(function (){
+		changeScrollHeight();
+		changeRightScrollHeight();
+		changeImgSize();	
+	},0)
 
 	
 	ev.preventDefault();
@@ -237,15 +243,17 @@ function changeScrollTop(t){
 }
 
 
-tools.mouseWheel(main,function (){
+tools.mouseWheel(main,function (ev){
 	if( scrollBar.offsetHeight !== 0 ){
 		var t = scrollBar.offsetTop - 5;	
-		changeScrollTop(t)
+		changeScrollTop(t);
+		ev.preventDefault();
 	}
-},function (){
+},function (ev){
 	if( scrollBar.offsetHeight !== 0 ){
 		var t = scrollBar.offsetTop + 5;	
-		changeScrollTop(t)
+		changeScrollTop(t);
+		ev.preventDefault();
 	}	
 })
 
@@ -270,9 +278,14 @@ var rightContent = tools.$(".content",rightMain)[0];
 var rightContentMaxJL = 0,rightScrollMaxJL = 0;
 
 
+
+
+
+
 setTimeout(function (){
 	changeRightScrollHeight();	
 },0)
+var n = 0;
 //重新计算所有的数据，重新设置滚动条的高度和top值
 function changeRightScrollHeight(){
 	//rightSrcoll.style.height = tools.$(".right_content")[0].offsetHeight + 'px';
@@ -289,11 +302,10 @@ function changeRightScrollHeight(){
 	}else if(contentHeight <= clientH){
 		rightContent.style.top = 0 + 'px';
 	}
-	console.log(clientH,contentHeight , clientH );
 	//计算出滚动条的高度
 	rightBar.style.height = Math.round(clientH/contentHeight * clientH)+ 'px';
 	//滚动条能滚动的最大距离
-
+	rightContent.innerHTML = rightContent.innerHTML
 	if( clientH >= contentHeight ){
 		rightSrcoll.style.display = 'none';
 	}else{
@@ -302,6 +314,22 @@ function changeRightScrollHeight(){
 	rightScrollMaxJL = Math.round(clientH - rightBar.offsetHeight);
 	//重新计算滚动条的top值
 	rightBar.style.top = Math.round(Math.abs(rightContent.offsetTop)/rightContentMaxJL*rightScrollMaxJL) + 'px';
+}
+changeImgSize();
+function changeImgSize(){
+	var contentImg = tools.$("img",rightContent)[0];
+	if( contentImg ){
+		contentImg.onload = function (){
+			var w = this.offsetWidth;
+			var h = this.offsetHeight;
+			var scale = w/560;
+
+			if( w > 560 ){
+				this.style.width = "560px";
+				this.style.height = h / scale + 'px';
+			}
+		};
+	}
 }
 
 
@@ -335,15 +363,17 @@ tools.addEvent(window,"resize",changeRightCaseH);
 function changeRightCaseH(){
 	changeRightScrollHeight();	
 }
-tools.mouseWheel(rightMain,function (){
+tools.mouseWheel(rightMain,function (ev){
 	if( rightBar.offsetHeight !== 0 ){
 		var t = rightBar.offsetTop - 5;	
-		changeRightScrollTop(t)
+		changeRightScrollTop(t);
+		ev.preventDefault();
 	}
-},function (){
+},function (ev){
 	if( rightBar.offsetHeight !== 0 ){
 		var t = rightBar.offsetTop + 5;	
-		changeRightScrollTop(t)
+		changeRightScrollTop(t);
+		ev.preventDefault();
 	}	
 })
 tools.mouseWheel(rightSrcoll,function (){

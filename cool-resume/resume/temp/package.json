@@ -9,7 +9,7 @@
         "charset": "utf-8",
         "syntax": "simple",
         "helpers": null,
-        "escape": true,
+        "escape": false,
         "compress": true,
         "type": "default",
         "runtime": "template.js",

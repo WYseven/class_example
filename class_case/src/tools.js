@@ -168,11 +168,11 @@ var tools = (function(){
 					}else if(ev.detail){ //FF
 						direction = ev.detail < 0 ? true : false;
 					}
-
+					
 					if( direction ){  //向上
-						typeof upFn === "function" && upFn();
+						typeof upFn === "function" && upFn.call(element,ev);
 					}else{  //向下
-						typeof downFn === "function" && downFn();
+						typeof downFn === "function" && downFn.call(element,ev);
 					}
 
 					ev.preventDefault();

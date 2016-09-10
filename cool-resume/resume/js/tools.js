@@ -170,12 +170,12 @@ var tools = (function(){
 					}
 
 					if( direction ){  //向上
-						typeof upFn === "function" && upFn();
+						typeof upFn === "function" && upFn.call(element,ev);
 					}else{  //向下
-						typeof downFn === "function" && downFn();
+						typeof downFn === "function" && downFn.call(element,ev);
 					}
 
-					ev.preventDefault();
+					
 				}
 
 			}

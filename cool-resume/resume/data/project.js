@@ -20,7 +20,7 @@ var projects = [
 			endTime:"至今",
 			projectExplain:"用户观看视频的主页面，其大部分内容是通过JS加载的。为了提高性能，采用了延迟加载、延迟渲染、事件代理等优化方式。此外，还通过监听页面的window.onerror事件对异常信息进行采集，以便及时发现和排查故障。",
 			projectLabel:["html","css3","css","js"],
-			projectThumbnail:"images/project.png"
+			projectThumbnail:"images/icon/project.png"
 		},
 		{
 			projectName:"56网PC视频播放页",
@@ -29,7 +29,7 @@ var projects = [
 			endTime:"至今",
 			projectExplain:"用户观看视频的主页面，其大部分内容是通过JS加载的。为了提高性能，采用了延迟加载、延迟渲染、事件代理等优化方式。此外，还通过监听页面的window.onerror事件对异常信息进行采集，以便及时发现和排查故障。",
 			projectLabel:["html","css3","css","js"],
-			projectThumbnail:"images/project.png"
+			projectThumbnail:"images/icon/project.png"
 		},{
 			projectName:"56网PC视频播放页",
 			projectWebsite:"http://www.miaov.com",
@@ -37,7 +37,7 @@ var projects = [
 			endTime:"至今",
 			projectExplain:"用户观看视频的主页面，其大部分内容是通过JS加载的。为了提高性能，采用了延迟加载、延迟渲染、事件代理等优化方式。此外，还通过监听页面的window.onerror事件对异常信息进行采集，以便及时发现和排查故障。",
 			projectLabel:["html","css3","css","js"],
-			projectThumbnail:"images/project.png"
+			projectThumbnail:"images/icon/project.png"
 		},{
 			projectName:"56网PC视频播放页",
 			projectWebsite:"http://www.miaov.com",
@@ -45,7 +45,7 @@ var projects = [
 			endTime:"至今",
 			projectExplain:"用户观看视频的主页面，其大部分内容是通过JS加载的。为了提高性能，采用了延迟加载、延迟渲染、事件代理等优化方式。此外，还通过监听页面的window.onerror事件对异常信息进行采集，以便及时发现和排查故障。",
 			projectLabel:["html","css3","css","js"],
-			projectThumbnail:"images/project.png"
+			projectThumbnail:"images/icon/project.png"
 		},{
 			projectName:"56网PC视频播放页",
 			projectWebsite:"http://www.miaov.com",
@@ -53,6 +53,6 @@ var projects = [
 			endTime:"至今",
 			projectExplain:"用户观看视频的主页面，其大部分内容是通过JS加载的。为了提高性能，采用了延迟加载、延迟渲染、事件代理等优化方式。此外，还通过监听页面的window.onerror事件对异常信息进行采集，以便及时发现和排查故障。",
 			projectLabel:["html","css3","css","js"],
-			projectThumbnail:"images/project.png"
+			projectThumbnail:"images/icon/project.png"
 		}
 ]

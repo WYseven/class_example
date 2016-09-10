@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			html{
+				height: 100%;
+			}
+			body{
+				height: 100%;
+			}
+			#box{
+				width: 100%;
+				height: 100%;
+				position: relative;
+				overflow: hidden;
+			}
+			#box .full_div {
+				width: 100%;
+				height: 100%;
+				background: red;
+				position: absolute;
+				left: 0;
+				top: 100%;
+				font-size: 50px;
+				color: #fff;
+			}
+			#box .full_div:nth-child(1){
+				top:0;
+			}
+		</style>
+		<script src="../../src/tools.js"></script>
+		<script src="cevnet.js"></script>
+		<script>
+			window.onload = function(){
+				var box = tools.$("#box");
+				var full_divs = tools.$(".full_div");
+
+				var cEv = new CustomEventFn();
+
+				cEv.addEvent("changeFullTop",changeFullTop);
+				cEv.fireEvent('changeFullTop');
+
+				var len = full_divs.length;
+
+
+				function changeFullTop(){
+					var fullH = box.offsetHeight;
+					for( var i = 1,len = full_divs.length; i < len; i++ ){
+						full_divs[i].style.transition = "none";
+						full_divs[i].style.top = fullH + "px";
+					}
+				}
+				box.status = true;
+				for( var i = 1,len = full_divs.length; i < len; i++ ){
+					full_divs[i].style.transition = "1s";
+
+					tools.addEvent(full_divs[i],"transitionend",function (){
+						
+						setTimeout(function (){
+							console.log(111);
+							box.status = true;	
+						},500)
+					})
+				}
+
+				var n = 0;
+				tools.mouseWheel(box,function (){
+					console.log( box.status );
+					if( box.status ){
+						var fullH = box.offsetHeight;
+						console.log(n);
+						//向上
+						n--;
+						if( n <= 0 ){
+							n = 0;
+						}else{
+							full_divs[n].style.transition = "1s";
+							full_divs[n].style.top = fullH + "px";
+							
+						}
+
+						box.status  = false;
+					}
+					
+				},function (){
+					
+					if( box.status ){
+						//向下	
+						n++;
+						if( n > len-1 ){
+							n = len;
+						}else{
+							full_divs[n].style.transition = "1s";
+							full_divs[n].style.top = 0 + "px";
+
+						}
+						box.status  = false;
+					}
+					 
+				})
+
+
+				window.onresize = function (){
+					cEv.fireEvent('changeFullTop');	
+				};
+			};
+		</script>
+	</head>
+
+	<body>
+		<div id="box">
+			<div class="div1 full_div">div1</div>
+			<div class="div2 full_div">div2</div>
+			<div class="div3 full_div">div3</div>
+		</div>
+	</body>
+</html>

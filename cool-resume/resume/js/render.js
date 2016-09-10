@@ -15,6 +15,7 @@ template.helper("mathCeil",function (data,bl){
 	return arr;
 });
 
+
 //给每一个案例上加一个id
 var isDisplay = true;
 var initShow = true;
@@ -51,6 +52,13 @@ var datas = {
 	casees:casees,
 	projects:projects
 }
+
+if( theme.theme === "red" ){
+	document.body.id = 'red';
+}else if(theme.theme === "blue"){
+	document.body.id = 'blue';
+}
+
 
 var html = template('init', datas);
 document.getElementById('resume_content').innerHTML = html;

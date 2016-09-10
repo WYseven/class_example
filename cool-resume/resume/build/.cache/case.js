@@ -1,29 +1,29 @@
-/*TMODJS:{"version":140,"md5":"2e89a39aaf56bfcede0969052ea886c8"}*/
+/*TMODJS:{"version":141,"md5":"fe40b59cdd23e22a13d21af5286f7cc9"}*/
 template('case',function($data,$filename
 /**/) {
-'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,casees=$data.casees,$value=$data.$value,$index=$data.$index,$escape=$utils.$escape,include=function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);$out+=text;return $out;},$out='';$out+='<div class="case"> <div class="casecon"> <div class="case1 clearfix"> <div class="bts"> <h2 class="bt">前端知识汇总&案例展示</h2> </div> <div class="case_main"> <div class="case_left"> <div class="case_list_main"> ';
+'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,casees=$data.casees,$value=$data.$value,$index=$data.$index,$string=$utils.$string,include=function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);$out+=text;return $out;},$out='';$out+='<div class="case"> <div class="casecon"> <div class="case1 clearfix"> <div class="bts"> <h2 class="bt">前端知识汇总&案例展示</h2> </div> <div class="case_main"> <div class="case_left"> <div class="case_list_main"> ';
 $each(casees,function($value,$index){
 $out+=' <div class="case_list"> <h3 class="case_listbt1"> <em class="';
-$out+=$escape($helpers. isAddClass('unload' , $value.isDisplay ));
+$out+=$string($helpers. isAddClass('unload' , $value.isDisplay ));
 $out+=' ';
-$out+=$escape($helpers. isAddClass('add' , !$value.isDisplay));
+$out+=$string($helpers. isAddClass('add' , !$value.isDisplay));
 $out+='"></em> ';
-$out+=$escape($value.caseName);
+$out+=$string($value.caseName);
 $out+='（';
-$out+=$escape($value.caseList.length);
+$out+=$string($value.caseList.length);
 $out+='） </h3> ';
 if($value.caseList && $value.caseList.length !== 0){
 $out+=' <ul class="case_listcon" style="display:';
-$out+=$escape($helpers. isAddClass('block' , $value.isDisplay ));
-$out+=$escape($helpers. isAddClass('none' , !$value.isDisplay));
+$out+=$string($helpers. isAddClass('block' , $value.isDisplay ));
+$out+=$string($helpers. isAddClass('none' , !$value.isDisplay));
 $out+=';"> ';
 $each($value.caseList,function($value,$index){
 $out+=' <li _id=';
-$out+=$escape($value.id);
+$out+=$string($value.id);
 $out+=' class="case_li1 ';
-$out+=$escape($helpers. isAddClass('hoverStyle' , $value.initShow ));
+$out+=$string($helpers. isAddClass('hoverStyle' , $value.initShow ));
 $out+='"> <a href="javascript:;">';
-$out+=$escape($value.caseTitle);
+$out+=$string($value.caseTitle);
 $out+='</a> <i></i><span></span> </li> ';
 });
 $out+=' </ul> ';

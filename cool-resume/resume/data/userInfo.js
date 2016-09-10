@@ -19,16 +19,16 @@
 */
 
 var userInfo = {
-    userName: "宁美琪123" , 
-    jobWant:  "123",
-    userQQ:  "2222222",
-    userEmail:   "222222@qq.com",
-    motto:  "置气和悲伤的源头都在于自己，你不听不闻不看，选择权在你", 
-    userPhone: 18612987054,
-    userOrignPlace:  "黑龙江" ,
+    userName: "常遇春" , 
+    jobWant:  "WEB前端开发工程师",
+    userQQ:  "1056104999",
+    userEmail:   "1056104999@qq.com",
+    motto:  "策蹇龙游道，西风妒旅袍。红添秋树血，绿长旱池毛。比屋豪华歇，平原杀气高。越山青入眼，回首鬓须搔。", 
+    userPhone: 13141414820,
+    userOrignPlace:  "安徽省蚌埠市怀远县" ,
     userSeatPlace:  "北京市" ,
-    userWeibo: "weibo.sina.com",
-    userAssessment: "我干得不错我干得不错我干得不错我干得不错我干得不错我干得不错我干得不错我干得不错",   
-    userHobby: ["看书","运动"],
-    userAward: ["新概念二等奖"]
+    userWeibo: "javascript@miaov.com",
+    userAssessment: "自请为前锋，力战克敌，横先天下，未尝败绩……",   
+    userHobby: ["运动","骑术","练武"],
+    userAward: ["开国名将，明朝第一先锋"]
 }
