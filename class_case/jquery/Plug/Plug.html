@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src='../jquery-2.2.4.js'></script>
+	</head>
+
+	<body>
+		<script>
+			(function ($){
+
+				$.abc = function (){
+					console.log(111);	
+				}
+
+				$.fn.abc = function (){
+					console.log(this);		
+				}	
+			})(jQuery);
+
+			$.abc();
+			$(document).abc()
+
+		</script>
+	</body>
+</html>

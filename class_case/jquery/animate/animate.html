@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			#oDiv{
+				width: 100px;
+				height: 100px;
+				display: block;
+				background: red;
+				position: absolute;
+				left: 100px;
+				top:0;
+			}
+		</style>
+		<script src='../jquery-2.2.4.js'></script>
+		<script src='./jquery.easing.1.3.js'></script>
+		<script>
+			$(function (){
+				$("input").click(function (){
+					/*$("#oDiv").fadeIn({
+						easing:'easeInOutQuad'
+					});	*/
+					/*$("#oDiv").animate({
+						width:500
+					},100,'easeInOutElastic');	*/
+					$("#oDiv").animate({
+						width:500,
+						left:'+=300'
+					},{
+						duration:500,
+						step:function (now,fix){
+							//console.log("完成");	
+							console.log( now,fix );
+						},
+						progress:function (){
+							console.log('ok');	
+						}
+					});
+				})	
+			})
+		</script>
+	</head>
+
+	<body>
+		<input type="button" name="" />
+		<div id="oDiv"></div>
+	</body>
+</html>

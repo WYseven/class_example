@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src='../jquery-2.2.4.js'></script>
+	</head>
+
+	<body>
+		<script>
+			(function ($){
+
+				var Drag = function(ele,options){
+					this.ele = $(ele);
+					this.target = $(options.moveTarget||ele);//拖拽移动目标
+					this.range = options.range;//限制范围
+					this.status = 0;//状态
+					//吸附范围
+					this.deviation = {
+						y: options.adsorbent&&options.adsorbent.y||0,
+						x: options.adsorbent&&options.adsorbent.x||0
+					};
+					
+					this.down();
+				};
+				
+			})(jQuery);
+
+			$.abc();
+			$(document).abc()
+
+		</script>
+	</body>
+</html>

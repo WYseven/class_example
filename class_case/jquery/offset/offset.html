@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			#div1{
+				width: 700px;
+				height: 700px;
+				background: red;
+			}
+			#div2{
+				width: 400px;
+				height: 400px;
+				background: yellow;
+				position: absolute;
+				left: 0;
+				top:0;
+			}
+			#div3{
+				width: 200px;
+				height: 200px;
+				background: blue;
+				margin:50px;
+				position: absolute;
+				left: 10px;
+				top:0;
+			}
+		</style>
+		<script src='../jquery-2.2.4.js'></script>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="div1">
+			<div id="div2">
+				<div id="div3"></div>
+			</div>
+		</div>
+		<script>
+			console.log( $("#div3").offset().left );
+			console.log( $("#div3").offset().top );
+			console.log( $("#div3").position().left );
+			console.log( $("#div3").position().top );
+			console.log( $("#div3")[0].offsetLeft );
+			console.log( $("#div3").offsetParent() );
+		</script>
+	</body>
+</html>

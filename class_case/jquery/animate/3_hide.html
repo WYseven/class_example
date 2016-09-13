@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			div {
+			   position: relative;
+			   background-color: #abc;
+			   width: 40px;
+			   height: 40px;
+			   float: left;
+			   margin: 5px;
+			   display: none;
+			}
+		</style>
+		<script src='../jquery-2.2.4.js'></script>
+		<script src='./jquery.easing.1.3.js'></script>
+		<script>
+			$(function (){
+				$( "#go" ).click(function(){
+					//$(".block").hide(300);
+					$(".block").slideDown(300)
+				});
+			})
+		</script>
+	</head>
+
+	<body>
+		<p><button id="go">Run »</button></p>
+		<div class="block"></div>
+	</body>
+</html>
