@@ -174,10 +174,10 @@
 
     if (typeof define === 'function') {define(function() {return template;});} else if (typeof exports !== 'undefined') {module.exports = template;} else {this.template = template;}
     
-    /*v:141*/
+    /*v:160*/
 template('case',function($data,$filename
 /**/) {
-'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,casees=$data.casees,$value=$data.$value,$index=$data.$index,$string=$utils.$string,include=function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);$out+=text;return $out;},$out='';$out+='<div class="case"> <div class="casecon"> <div class="case1 clearfix"> <div class="bts"> <h2 class="bt">前端知识汇总&案例展示</h2> </div> <div class="case_main"> <div class="case_left"> <div class="case_list_main"> ';
+'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,casees=$data.casees,$value=$data.$value,$index=$data.$index,$string=$utils.$string,include=function(filename,data){data=data||$data;var text=$utils.$include(filename,data,$filename);$out+=text;return $out;},$out='';$out+='<div class="case" > <div class="casecon"> <div class="case1 clearfix"> <div class="bts"> <h2 class="bt">前端知识汇总&案例展示</h2> </div> <div class="case_main clearfix"> <div class="case_left"> <div class="case_list_main"> ';
 $each(casees,function($value,$index){
 $out+=' <div class="case_list"> <h3 class="case_listbt1"> <em class="';
 $out+=$string($helpers. isAddClass('unload' , $value.isDisplay ));
@@ -206,7 +206,7 @@ $out+=' </ul> ';
 }
 $out+=' </div> ';
 });
-$out+=' </div> <div class="list_scroll"> <div class="list_bar"></div> </div> </div> <div class="case_right"> <div class="right_content"> <div class="right_main"> ';
+$out+=' </div> <div class="list_scroll"> <div class="list_bar"></div> </div> </div> <div class="case_right"> <div class="right_content"> <div class="right_main"> <div class="content"> ';
 $each(casees,function($value,$index){
 $out+=' ';
 if($value.isDisplay){
@@ -224,52 +224,78 @@ $out+=' ';
 }
 $out+=' ';
 });
-$out+=' </div> </div> </div> <div class="right_srcoll"> <div class="right_bar"></div> </div> </div> </div> </div> </div>';
+$out+=' </div> </div> </div> </div> <div class="right_srcoll"> <div class="right_bar"></div> </div> <div style="clear:both;"></div> </div> </div> </div> </div>';
 return new String($out);
-});/*v:47*/
+});/*v:70*/
 template('case_right_temp',function($data,$filename
 /**/) {
-'use strict';var $utils=this,$helpers=$utils.$helpers,$string=$utils.$string,caseTitle=$data.caseTitle,publishTime=$data.publishTime,caseDescription=$data.caseDescription,caseThumbnail=$data.caseThumbnail,caseWebsite=$data.caseWebsite,$out='';$out+='<div class="content"> <h3 class="case_bt2">';
+'use strict';var $utils=this,$helpers=$utils.$helpers,$string=$utils.$string,caseTitle=$data.caseTitle,publishTime=$data.publishTime,caseDescription=$data.caseDescription,caseThumbnail=$data.caseThumbnail,caseWebsite=$data.caseWebsite,$out='';$out+=' <h3 class="case_bt2">';
 $out+=$string(caseTitle);
 $out+='</h3> <p class="case_time">发布时间：';
 $out+=$string(publishTime);
 $out+='</p> <p class="case_decoration">';
 $out+=$string(caseDescription);
-$out+='</p> <img src="';
+$out+='</p> <div class="case_pic"> <img src="" _src="';
 $out+=$string(caseThumbnail);
-$out+='" class="case_exp"/> <div class="case_share clearfix"> <div class="case_sharebtn"> <a class="case_btn" target="_blank" href="';
+$out+='" class="case_exp"/> </div> <div class="case_share clearfix"> <div class="case_sharebtn"> <a class="case_btn" target="_blank" href="';
 $out+=$string(caseWebsite);
-$out+='" />点击预览</a> </div> <div class="case_sharelink clearfix"> <span>分享至：</span> <a href="#" class="weibo"></a> <a href="#" class="kongjian"></a> <a href="#" class="weixin"></a> <a href="#" class="qq"></a> <a href="#" class="douban"></a> </div> </div> </div> ';
+$out+='" />点击预览</a> </div> <div class="case_sharelink jiathis_style_32x32 clearfix"> <span>分享至：</span> <a href="#" class="weibo"></a> <a href="#" class="kongjian"></a> <a href="#" class="weixin"></a> <a href="#" class="qq jiathis_button_qzone"></a> <a href="#" class="douban"></a> </div> </div> ';
 return new String($out);
 });/*v:6*/
-template('footer','<div class="footer"> <div class="footcon clearfix"> <div class="footleft"> <p>最后更新于2015年7月25日</p> <p>简历模板由妙味课堂Miaov.com设计开发（使用本模板请注明此项）</p> </div> <div class="footright"> <dl> <dt><img src="images/icon/erweima.png"/></dt> <dd> <p>您还可以使用手机或iPad</p> <p>扫描左侧二维码打开本页</p> </dd> </dl> </div> </div> </div>');/*v:57*/
+template('footer','<div class="footer"> <div class="footcon clearfix"> <div class="footleft"> <p>最后更新于2015年7月25日</p> <p>简历模板由妙味课堂Miaov.com设计开发（使用本模板请注明此项）</p> </div> <div class="footright"> <dl> <dt><img src="images/icon/erweima.png"/></dt> <dd> <p>您还可以使用手机或iPad</p> <p>扫描左侧二维码打开本页</p> </dd> </dl> </div> </div> </div>');/*v:110*/
 template('hea_intro',function($data,$filename
 /**/) {
-'use strict';var $utils=this,$helpers=$utils.$helpers,$string=$utils.$string,userInfo=$data.userInfo,$out='';$out+='<div class="hea_intro"> <div class="high_light">  <div class="header"> <div class="hea_con"> <div class="hea_left"> <h3>';
+'use strict';var $utils=this,$helpers=$utils.$helpers,userInfo=$data.userInfo,$string=$utils.$string,images=$data.images,icon=$data.icon,intro_03=$data.intro_03,$each=$utils.$each,$value=$data.$value,$index=$data.$index,$out='';$out+='<div class="hea_intro"> <div class="high_light">  <div class="header"> <div class="hea_con"> <div class="hea_left"> ';
+if(userInfo.userName){
+$out+=' <h3>';
 $out+=$string(userInfo.userName);
-$out+='</h3> <p>';
+$out+='</h3> ';
+}
+$out+=' ';
+if(userInfo.jobWant){
+$out+=' <p>';
 $out+=$string(userInfo.jobWant);
-$out+='</p> </div> <div class="hea_right"> <div class="hea_qq">';
+$out+='</p> ';
+}
+$out+=' </div> <div class="hea_right"> ';
+if(userInfo.userQQ){
+$out+=' <div class="hea_qq">';
 $out+=$string(userInfo.userQQ);
-$out+='</div> <div class="hea_mail">';
+$out+='</div> ';
+}
+$out+=' ';
+if(userInfo.userEmail){
+$out+=' <div class="hea_mail">';
 $out+=$string(userInfo.userEmail);
-$out+='</div> </div> </div> </div>  <div class="intro clearfix"> <div class="intro_con clearfix"> <div class="intro_left"> <p>';
+$out+='</div> ';
+}
+$out+=' </div> </div> </div>  <div class="intro clearfix" id="intro"> <div class="intro_con clearfix"> <table class="intro_table" id="intro_table"> <tr> <td> <div class="intro_left"> ';
+if(userInfo.motto){
+$out+=' <p> ';
 $out+=$string(userInfo.motto);
-$out+='</p> </div> <div class="intro_right"> <div class="pic"></div> <div class="intro_detail"> <ul> <li> <div class="detail_left"> <p>手机</p> </div> <div class="detail_right intro_first"> <p class="intro_firstcon">';
-$out+=$string(userInfo.userPhone);
-$out+='</p> </div> <div class="intro_circle"></div> </li> <li> <div class="detail_left"> <p>籍贯</p> </div> <div class="detail_right"> <p>';
-$out+=$string(userInfo.userOrignPlace);
-$out+='</p> </div> <div class="intro_circle"></div> </li> <li> <div class="detail_left"> <p>所在地</p> </div> <div class="detail_right"> <p>';
-$out+=$string(userInfo.userSeatPlace);
-$out+='</p> </div> <div class="intro_circle"></div> </li> <li> <div class="detail_left"> <p>微博</p> </div> <div class="detail_right"> <p>';
-$out+=$string(userInfo.userWeibo);
-$out+='</p> </div> <div class="intro_circle"></div> </li> <li> <div class="detail_left"> <p>自我评价</p> </div> <div class="detail_right"> <p>';
-$out+=$string(userInfo.userAssessment);
-$out+='</p> </div> <div class="intro_circle"></div> </li> <li> <div class="detail_left"> <p>爱好</p> </div> <div class="detail_right"> <p> ';
-$out+=$string($helpers. arrayJoin(userInfo.userHobby , "、"));
-$out+=' </p> </div> <div class="intro_circle"></div> </li> <li> <div class="detail_left"> <p>个人奖项</p> </div> <div class="detail_right intro_last"> <p class="intro_lastcon">';
-$out+=$string($helpers. arrayJoin(userInfo.userAward , "、"));
-$out+='</p> </div> <div class="intro_circle"></div> </li> </ul> </div> </div> </div> </div> </div> </div> ';
+$out+=' <span></span> </p> ';
+}
+$out+=' </div> </td> </tr> </table> <div class="intro_right"> <div class="pic"> <img src="';
+$out+=$string(userInfo.userPortrait || images/icon/intro_03.png);
+$out+='" /> </div> <div class="intro_detail"> <ul> ';
+$each(userInfo.newUserInfo,function($value,$index){
+$out+=' <li> <div class="detail_left"> <p>';
+$out+=$string($value.title);
+$out+='</p> </div> <div class="detail_right intro_first"> ';
+if((typeof $value.content !== "object")){
+$out+=' <p class="intro_firstcon">';
+$out+=$string($value.content);
+$out+='</p> ';
+}
+$out+=' ';
+if((typeof $value.content === "object")){
+$out+=' <p class="intro_firstcon">';
+$out+=$string($helpers. arrayJoin($value.content , "、"));
+$out+='</p> ';
+}
+$out+=' </div> <div class="intro_circle"></div> </li> ';
+});
+$out+=' </ul> </div> </div> </div> </div> </div> </div> ';
 return new String($out);
 });/*v:51*/
 template('init',function($data,$filename
@@ -335,10 +361,10 @@ $out+=' </p> </dd> </dl> </div> ';
 });
 $out+=' </div>';
 return new String($out);
-});/*v:127*/
+});/*v:151*/
 template('skills-1',function($data,$filename
 /**/) {
-'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,skills=$data.skills,$value=$data.$value,$index=$data.$index,$string=$utils.$string,$out='';$out+=' <div class="skills"> <div class="skills_top"> <div class="top_con"> <div class="skills_title"> <h3>技能展示</h3> <p>7年工作经验，编写艺术般的代码</p> </div> <div class="top_detail clearfix"> <div class="left"> ';
+'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,skills=$data.skills,$value=$data.$value,$index=$data.$index,$string=$utils.$string,len=$data.len,$out='';$out+=' <div class="skills"> <div class="skills_top"> <div class="top_con"> <div class="skills_title"> <h3>技能展示</h3> <p>7年工作经验，编写艺术般的代码</p> </div> <div class="top_detail clearfix"> <div class="left"> ';
 $each(skills.pageArr,function($value,$index){
 $out+=' <div class="skillLanguage" style="display: ';
 $out+=$string($helpers. isAddClass('block' , $index===0 ));
@@ -351,8 +377,13 @@ $out+=$string($value.skillLanguage);
 $out+='-';
 $out+=$string($value.percent);
 $out+='</span> </h3> <div style="clear: both;"></div> <div> <ul style="margin-top: 10px;"> ';
+$out+=$string(len = $value.skillTooltip);
+$out+=' ';
 $each($value.skillTooltip,function($value,$index){
-$out+=' <li> <div class="skills_content skills_first"> <p class="first_con">';
+$out+=' <li> <div class="skills_content ';
+$out+=$string($helpers. isAddClass('skills_first' , $index===0));
+$out+=$string($helpers. isAddClass('skills_last' , $index===len.length-1));
+$out+='"> <p class="first_con">';
 $out+=$string($value);
 $out+='</p> </div> <div class="skills_circle"></div> </li> ';
 });
@@ -372,7 +403,7 @@ $out+='  </ul> ';
 }
 $out+=' </div> <div class="right skills_canval_circle">  </div> </div> </div> </div> </div>';
 return new String($out);
-});/*v:54*/
+});/*v:59*/
 template('skills-2',function($data,$filename
 /**/) {
 'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,skills=$data.skills,$value=$data.$value,$index=$data.$index,$string=$utils.$string,$out='';$out+=' <div class="skills"> <div class="skills_bottom"> <div class="bottom_con"> <div class="skills_title"> <h3>技能展示</h3> <p>7年工作经验，编写艺术般的代码</p> </div> <div class="bottom_detail"> <ul> ';
@@ -385,17 +416,17 @@ $out+='</div> <div class="subject"> <div class="detail" style="width:0%;padding-
 $out+=$string($value.percent);
 $out+='> <span>';
 $out+=$string($value.skillLanguage);
-$out+='</span> <div class="subject_circle" style="display: none;opacity: 0;"></div> <div class="subject_con" style="display: none;opacity: 0;"> <p class="boxbg"></p> ';
+$out+='</span> <div class="subject_circle" style="display: none;opacity: 0;"></div> <div class="subject_con" style="display: none;opacity: 0;"> ';
 $each($value.skillTooltip,function($value,$index){
 $out+=' <p class="word"> ';
 $out+=$string($value);
 $out+=' </p> ';
 });
-$out+=' </div> </div> </div> </li> ';
+$out+=' </div> <p class="boxbg"></p> </div> </div> </li> ';
 });
 $out+=' </ul> </div> </div> </div> </div>';
 return new String($out);
-});/*v:88*/
+});/*v:108*/
 template('timeAxis-1',function($data,$filename
 /**/) {
 'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,timeAxis=$data.timeAxis,$value=$data.$value,$index=$data.$index,$string=$utils.$string,nums=$data.nums,$out='';$out+=' <div class="timeAxis"> <div class="timecon"> <div class="skills_title"> <h3>工作时光轴</h3> <p>有大型网站开发、优化经验</p> </div> <div class="timeline_top"> <div class="dot"></div> <div class="line"></div> </div> <div class="exper_detail"> ';
@@ -412,7 +443,9 @@ $out+=' > <div class="icon ';
 $out+=$string($helpers. isAddClass('icon2' , $index%3 === 1));
 $out+=' ';
 $out+=$string($helpers. isAddClass('icon3' , $index%3 === 2));
-$out+=' "> ';
+$out+='" style="background: url(\'';
+$out+=$string($value.companyLogo || "images/icon/expre_logo1.png");
+$out+='\') no-repeat 14px 10px" > ';
 if($index%2 === 0){
 $out+=' <img src="images/icon/expre_bgL.png" /> ';
 }else if($index%2 === 1){

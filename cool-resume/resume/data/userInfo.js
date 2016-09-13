@@ -2,6 +2,7 @@
 /*个人信息说明，数据格式为对象
 	*   {
 	*       userName: @value String               *         姓名
+			userPortrait: @value String           *         头像
 	*       jobWant: @value String                *         求职意向
 	*       userQQ: @value String|Number          *         QQ号码
 	*       userEmail: @value String              *         邮箱地址
@@ -19,16 +20,18 @@
 */
 
 var userInfo = {
-    userName: "常遇春" , 
+    userName: "妙瑾萱" , 
+    userPortrait:"images/icon/intro_03.png",
     jobWant:  "WEB前端开发工程师",
     userQQ:  "1056104999",
     userEmail:   "1056104999@qq.com",
-    motto:  "策蹇龙游道，西风妒旅袍。红添秋树血，绿长旱池毛。比屋豪华歇，平原杀气高。越山青入眼，回首鬓须搔。", 
+    motto:  "置气和悲伤的源头都在于自己，你不听不闻不看，选择权在你置气和悲伤的源头都在于自己，你不听不闻不看，选择权在你置气和悲伤的源头都在于自己，你不听不闻不看，选择权在你置气和悲伤的源头都在于自己，你不听不闻不看，选择权在你", 
     userPhone: 13141414820,
     userOrignPlace:  "安徽省蚌埠市怀远县" ,
-    userSeatPlace:  "北京市" ,
+    userSeatPlace:  "北京市",
     userWeibo: "javascript@miaov.com",
-    userAssessment: "自请为前锋，力战克敌，横先天下，未尝败绩……",   
-    userHobby: ["运动","骑术","练武"],
-    userAward: ["开国名将，明朝第一先锋"]
+    userAssessment: "丰富的互联网工作经验，精通各种JS技巧与实现，为人和善。",   
+    userHobby: ["运动","游戏","电影"],
+    userAward: ["最佳前端架构奖"]
 }
+

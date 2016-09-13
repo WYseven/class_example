@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<input type="button" id="btn" />
+		<div id="div1">
+			<img src="https://avatars2.githubusercontent.com/u/8084958?v=3&s=460" id="imgs" alt="">
+		</div>
+		<script>
+			
+			imgs.onload = function (){
+				console.log("加载王完成");	
+			};	
+			var arr = ['http://static.adzerk.net/Advertisers/bc85dff2b3dc44ddb9650e1659b1ad1e.png','http://qunitjs.com/jquery-wp-content/themes/jquery/images/logo-qunit.png']
+			var n = 0;
+			btn.onclick = function (){
+				n++;
+				if( n % 2 === 0 ){
+					div1.innerHTML = '<img src="https://avatars0.githubusercontent.com/u/4336129?v=3&s=460" id="imgs" alt="">'
+				}else{
+					div1.innerHTML = '<img src="https://avatars3.githubusercontent.com/u/2725159?v=3&s=460" id="imgs" alt="">'
+				}
+
+				imgs.onload = function (){
+					console.log("加载王完成");	
+				};	
+			};
+
+		</script>
+	</body>
+</html>

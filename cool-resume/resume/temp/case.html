@@ -1,11 +1,10 @@
-<div class="case">
+<div class="case" >
 	<div class="casecon">
 		<div class="case1 clearfix">
 			<div class="bts">
 				<h2 class="bt">前端知识汇总&案例展示</h2>
 			</div>
-			<div class="case_main">
-				
+			<div class="case_main clearfix">
 				<div class="case_left">
 					<div class="case_list_main">
 						{{each casees}}
@@ -36,15 +35,17 @@
 				<div class="case_right">
 					<div class="right_content">
 						<div class="right_main">
-							{{each casees}}
-								{{if $value.isDisplay}}
-									{{each $value.caseList}}
-										{{if $value.initShow}}
-											{{include "./case_right_temp" $value}}
-										{{/if}}	
-									{{/each}}
-								{{/if}}
-							{{/each}}
+							<div class="content">
+								{{each casees}}
+									{{if $value.isDisplay}}
+										{{each $value.caseList}}
+											{{if $value.initShow}}
+												{{include "./case_right_temp" $value}}
+											{{/if}}	
+										{{/each}}
+									{{/if}}
+								{{/each}}
+							</div>
 						</div>
 						
 					</div>
@@ -53,6 +54,7 @@
 				<div class="right_srcoll">
 					<div class="right_bar"></div>
 				</div>
+				<div style="clear:both;"></div>
 			</div>
 
 		</div>

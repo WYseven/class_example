@@ -176,25 +176,12 @@
 	left: 50%;
 }
 #black .subject_con {
-	position: absolute;
-	width: 418px;
-	font-size: 12px;
-	padding: 22px 19px;
-	color: #929395;
-	border: 1px solid #9596db;
-	z-index: 1;
-	border-radius: 5px;
-	background: url(../images/icon/tip.png);
-	left: 150px;
-	bottom: 36px;
+	border: 1px solid #9596db;	
+	background-image: url(../images/icon/tip.png);
+
 }
 #black .boxbg {
 	background: url(../images/icon/subject_con_jiao.png) no-repeat;
-	position: absolute;
-	width: 13px;
-	height: 8px;
-	left: 50%;
-	bottom: -8px;
 }
 #black .date {
 	font-size: 18px;
@@ -489,26 +476,15 @@
 	left: 50%;
 }
 
-#red .subject_con {
-	position: absolute;
-	width: 418px;
-	font-size: 12px;
-	padding: 22px 19px;
+#red .subject_con {	
 	color: #929395;
 	border: 1px solid #c3a6c7;
-	z-index: 1;
-	border-radius: 5px;
-	background: url(../images/icon/tip.png);
-	left: 150px;
-	bottom: 36px;
+	background-image: url(../images/icon/tip.png);
+
 }
+
 #red .boxbg {
 	background: url(../images/icon/subject_con_jiaor.png) no-repeat;
-	position: absolute;
-	width: 13px;
-	height: 8px;
-	left: 50%;
-	bottom: -8px;
 }
 #red .date {
 	font-size: 18px;
@@ -655,7 +631,6 @@
 	}
 #blue .intro_right .pic {
     border: 3px solid #1eb5f2;
-    background: url(../images/icon/intro_03.png) no-repeat;
 }
 #blue .intro_circle {
 	background: #1eb5f2;
@@ -819,26 +794,14 @@
 	top: 15px;
 	left: 50%;
 }
-#blue .subject_con {
-	position: absolute;
-	width: 418px;
-	font-size: 12px;
-	padding: 22px 19px;
+#blue .subject_con{
 	color: #929395;
 	border: 1px solid #81b9f0;
-	z-index: 1;
-	border-radius: 5px;
-	background: url(../images/icon/tip.png);
-	left: 150px;
-	bottom: 36px;
+	background-image: url(../images/icon/tip.png);
 }
+
 #blue .boxbg {
 	background: url(../images/icon/subject_con_jiaob.png) no-repeat;
-	position: absolute;
-	width: 13px;
-	height: 8px;
-	left: 50%;
-	bottom: -8px;
 }
 #blue .date {
 	font-size: 18px;

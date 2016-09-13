@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			div{
+				-display: none;
+			}
+			.red{
+				background: red;
+			}
+		</style>
+		<script src="../jquery-2.2.4.js"></script>
+		<script>
+			$().ready(function (){
+				/*$("div:even").css("background","red");
+				$("div:odd").css("background","blue");
+				$("div:first").css("background","yellow");*/
+
+				//$("div:eq(2)").css("background","red");
+				//$("div:gt(2)").css("background","red");
+				//$("div:not(':eq(1)')").css("background","red");
+				//$("div:not(':first')").css("background","red");
+				//$("div:not('.div1')").css("background","red");
+				console.log( $(":root") );
+				//$(":root").css("background","red");
+
+				//$("input[type='button']").css("background","yellow");
+				//$("input[value='1']").css("background","yellow");
+				//$("div[a='abc']").css("background","yellow");
+
+			})
+		</script>
+	</head>
+
+	<body>
+		<!-- <input type="text" name="">
+		<input class="red" type="button" value="1" />
+		<input type="button" value="2" />
+		<input type="button" value="3" />
+		<div>1</div>
+		<div class="div1">1</div>
+		<div a="abc">1</div>
+		<div>1</div>
+		<div>2</div>
+		<div>3</div>
+		<input type="button"  value="4" /> -->
+
+		<div>
+			<span>John,</span>
+			<span>Karl,</span>
+			<span>Brandon</span>
+
+		</div>
+		<div>
+			<span>Glen,</span>
+			<span>Tane,</span>
+			<span>Ralph</span>
+
+		</div>
+		<script>
+			//$("div span:first-child").css("background","red")
+			$("span:first-of-type").css("background","red")
+		</script>
+	</body>
+</html>

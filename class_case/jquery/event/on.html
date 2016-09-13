@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="../jquery-2.2.4.js"></script>
+		<script>
+			$(function (){
+				/*$("#oDiv").on("click",function (){
+					alert(1)	
+				})	*/
+				/*$("#oDiv").on("click mouseover",function (ev){
+					console.log(ev.type);
+				})	*/
+				/*$("#oDiv").on({
+					click:function (){
+						console.log(11);	
+					},
+					mouseover:function (){
+						console.log(222);	
+					}
+				})*/	
+				$("#oDiv").on("click.one",function (){
+					console.log("oDiv");	
+				})
+				$("#oDiv input").on("click.one",function (ev,data){
+					console.log("one");	
+					console.log(data);
+				});
+				$("#oDiv input").on("click.two",function (){
+					console.log("two");	
+				})
+
+				$("#btns").click(function (){
+					$("#oDiv input").triggerHandler("click.one",{a:1});	
+				})
+			})
+		</script>
+	</head>
+
+	<body>
+		<div id="oDiv">
+			<input type="button" value="按钮" />
+			
+		</div>
+		<input type="button" id="btns" value="按钮" />
+	</body>
+</html>

@@ -4,90 +4,64 @@
 		<div class="header">
 			<div class="hea_con">
 				<div class="hea_left">
-					<h3>{{userInfo.userName}}</h3>
-					<p>{{userInfo.jobWant}}</p>
+					{{if userInfo.userName}}
+						<h3>{{userInfo.userName}}</h3>
+					{{/if}}
+					{{if userInfo.jobWant}}
+						<p>{{userInfo.jobWant}}</p>
+					{{/if}}
 				</div>
 				<div class="hea_right">
-					<div class="hea_qq">{{userInfo.userQQ}}</div>
-					<div class="hea_mail">{{userInfo.userEmail}}</div>
+					{{if userInfo.userQQ}}
+						<div class="hea_qq">{{userInfo.userQQ}}</div>
+					{{/if}}
+					{{if userInfo.userEmail}}
+						<div class="hea_mail">{{userInfo.userEmail}}</div>
+					{{/if}}
 				</div>
 			</div>
 		</div>
 		<!--intro-->
-		<div class="intro clearfix">
+		<div class="intro clearfix" id="intro">
 			<div class="intro_con clearfix">
-				<div class="intro_left">
-					<p>{{userInfo.motto}}</p>
-				</div>
+				<table class="intro_table" id="intro_table">
+					<tr>
+						<td>
+							<div class="intro_left">
+								{{if userInfo.motto}}
+									<p>
+										{{userInfo.motto}}
+										<span></span>
+									</p>
+								{{/if}}
+							</div>
+						</td>
+					</tr>
+				</table>
 				<div class="intro_right">
-					<div class="pic"></div>
+					<div class="pic">
+						<img src="{{userInfo.userPortrait || images/icon/intro_03.png}}" />
+					</div>
 					<div class="intro_detail">
 						<ul>
-							<li>
-								<div class="detail_left">
-									<p>手机</p>
-								</div>
-								<div class="detail_right intro_first">
-									<p class="intro_firstcon">{{userInfo.userPhone}}</p>
-								</div>
-								<div class="intro_circle"></div>
-							</li>
-							<li>
-								<div class="detail_left">
-									<p>籍贯</p>
-								</div>
-								<div class="detail_right">
-									<p>{{userInfo.userOrignPlace}}</p>
-								</div>
-								<div class="intro_circle"></div>
-							</li>
-							<li>
-								<div class="detail_left">
-									<p>所在地</p>
-								</div>
-								<div class="detail_right">
-									<p>{{userInfo.userSeatPlace}}</p>
-								</div>
-								<div class="intro_circle"></div>
-							</li>
-							<li>
-								<div class="detail_left">
-									<p>微博</p>
-								</div>
-								<div class="detail_right">
-									<p>{{userInfo.userWeibo}}</p>
-								</div>
-								<div class="intro_circle"></div>
-							</li>
-							<li>
-								<div class="detail_left">
-									<p>自我评价</p>
-								</div>
-								<div class="detail_right">
-									<p>{{userInfo.userAssessment}}</p>
-								</div>
-								<div class="intro_circle"></div>
-							</li>
-							<li>
-								<div class="detail_left">
-									<p>爱好</p>
-								</div>
-								<div class="detail_right">
-									<p>
-										{{userInfo.userHobby | arrayJoin:"、"}}
-									</p>
-								</div>
-								<div class="intro_circle"></div>
-							</li>
-							<li>
-								<div class="detail_left">
-									<p>个人奖项</p>
-								</div>
-								<div class="detail_right intro_last">
-									<p class="intro_lastcon">{{userInfo.userAward | arrayJoin:"、"}}</p>
-								</div>
-								<div class="intro_circle"></div>
-							</li>
+							{{each userInfo.newUserInfo}}
+								<li>
+									<div class="detail_left">
+										<p>{{$value.title}}</p>
+									</div>
+									<div class="detail_right intro_first">
+									{{if (typeof $value.content !== "object")}}
+										<p class="intro_firstcon">{{$value.content}}</p>
+									{{/if}}
+									{{if (typeof $value.content === "object")}}
+										<p class="intro_firstcon">{{$value.content | arrayJoin:"、"}}</p>
+									{{/if}}
+										
+									</div>
+									<div class="intro_circle"></div>
+								</li>
+							{{/each}}
+							
 						</ul>
 					</div>
 				</div>

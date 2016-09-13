@@ -1,4 +1,4 @@
-/*TMODJS:{"version":88,"md5":"240b9c4a686a1c09b6e2272223d29e92"}*/
+/*TMODJS:{"version":108,"md5":"79adf3d41ab43e44db8fe33fa576e992"}*/
 template('timeAxis-1',function($data,$filename
 /**/) {
 'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,timeAxis=$data.timeAxis,$value=$data.$value,$index=$data.$index,$string=$utils.$string,nums=$data.nums,$out='';$out+=' <div class="timeAxis"> <div class="timecon"> <div class="skills_title"> <h3>工作时光轴</h3> <p>有大型网站开发、优化经验</p> </div> <div class="timeline_top"> <div class="dot"></div> <div class="line"></div> </div> <div class="exper_detail"> ';
@@ -15,7 +15,9 @@ $out+=' > <div class="icon ';
 $out+=$string($helpers. isAddClass('icon2' , $index%3 === 1));
 $out+=' ';
 $out+=$string($helpers. isAddClass('icon3' , $index%3 === 2));
-$out+=' "> ';
+$out+='" style="background: url(\'';
+$out+=$string($value.companyLogo || "images/icon/expre_logo1.png");
+$out+='\') no-repeat 14px 10px" > ';
 if($index%2 === 0){
 $out+=' <img src="images/icon/expre_bgL.png" /> ';
 }else if($index%2 === 1){

@@ -15,16 +15,41 @@ var tools = (function(){
 			}else if( selector.charAt(0) === "#" ){
 				return document.getElementById(selector.slice(1))
 			}else if( selector.charAt(0) === "." ){
-				return context.getElementsByClassName(selector.slice(1));
+				if( context.getElementsByClassName ){
+					return context.getElementsByClassName(selector.slice(1));
+				}else{
+					var elements = context.getElementsByTagName("*");
+					var arr = [];
+					for( var i = 0; i < elements.length; i++ ){
+						var classNames = elements[i].className.split(" ");
+						for( var j = 0; j < classNames.length; j++ ){
+							if( classNames[j] === selector.slice(1) ){
+								arr.push(elements[i]);
+							}
+						}
+					}
+
+					return arr;
+				}
+				
 			}else{
 				return context.getElementsByTagName(selector);
 			}
 		},
 		addEvent:function(ele,eventName,eventFn){
-			ele.addEventListener(eventName,eventFn,false);
+			if(ele.addEventListener){
+				ele.addEventListener(eventName,eventFn,false);
+			}else if(ele.attachEvent){
+				ele.attachEvent("on"+eventName,eventFn);
+			}
 		},
 		removeEvent:function(ele,eventName,eventFn){
-			ele.removeEventListener(eventName,eventFn,false);
+			if( ele.removeEventListener ){
+				ele.removeEventListener(eventName,eventFn,false);
+			}else if(ele.detachEvent){
+				ele.detachEvent("on"+eventName,eventFn);
+			}
+			
 		},
 		addClass:function (element,clsNames){
 			if( typeof clsNames === "string" ){
@@ -148,7 +173,7 @@ var tools = (function(){
 			}
 		},
 		next:function (element){
-			return element.nextElementSibling;
+			return element.nextElementSibling || element.nextSibling;
 		},
 		view:function (){
 			return {
@@ -162,6 +187,7 @@ var tools = (function(){
 					element.addEventListener("DOMMouseScroll",wheelFn,false);
 				}
 				function wheelFn(ev){
+					ev = ev || window.event;
 					var direction = true;
 					if(ev.wheelDelta){  //ie和chrome
 						direction = ev.wheelDelta > 0 ? true : false;

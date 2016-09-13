@@ -1,30 +1,56 @@
-/*TMODJS:{"version":57,"md5":"0827b02b0a17af52c54eb957d4c7a064"}*/
+/*TMODJS:{"version":110,"md5":"b7ea8f4b25be04da9416a3554cd4f07c"}*/
 template('hea_intro',function($data,$filename
 /**/) {
-'use strict';var $utils=this,$helpers=$utils.$helpers,$string=$utils.$string,userInfo=$data.userInfo,$out='';$out+='<div class="hea_intro"> <div class="high_light">  <div class="header"> <div class="hea_con"> <div class="hea_left"> <h3>';
+'use strict';var $utils=this,$helpers=$utils.$helpers,userInfo=$data.userInfo,$string=$utils.$string,images=$data.images,icon=$data.icon,intro_03=$data.intro_03,$each=$utils.$each,$value=$data.$value,$index=$data.$index,$out='';$out+='<div class="hea_intro"> <div class="high_light">  <div class="header"> <div class="hea_con"> <div class="hea_left"> ';
+if(userInfo.userName){
+$out+=' <h3>';
 $out+=$string(userInfo.userName);
-$out+='</h3> <p>';
+$out+='</h3> ';
+}
+$out+=' ';
+if(userInfo.jobWant){
+$out+=' <p>';
 $out+=$string(userInfo.jobWant);
-$out+='</p> </div> <div class="hea_right"> <div class="hea_qq">';
+$out+='</p> ';
+}
+$out+=' </div> <div class="hea_right"> ';
+if(userInfo.userQQ){
+$out+=' <div class="hea_qq">';
 $out+=$string(userInfo.userQQ);
-$out+='</div> <div class="hea_mail">';
+$out+='</div> ';
+}
+$out+=' ';
+if(userInfo.userEmail){
+$out+=' <div class="hea_mail">';
 $out+=$string(userInfo.userEmail);
-$out+='</div> </div> </div> </div>  <div class="intro clearfix"> <div class="intro_con clearfix"> <div class="intro_left"> <p>';
+$out+='</div> ';
+}
+$out+=' </div> </div> </div>  <div class="intro clearfix" id="intro"> <div class="intro_con clearfix"> <table class="intro_table" id="intro_table"> <tr> <td> <div class="intro_left"> ';
+if(userInfo.motto){
+$out+=' <p> ';
 $out+=$string(userInfo.motto);
-$out+='</p> </div> <div class="intro_right"> <div class="pic"></div> <div class="intro_detail"> <ul> <li> <div class="detail_left"> <p>手机</p> </div> <div class="detail_right intro_first"> <p class="intro_firstcon">';
-$out+=$string(userInfo.userPhone);
-$out+='</p> </div> <div class="intro_circle"></div> </li> <li> <div class="detail_left"> <p>籍贯</p> </div> <div class="detail_right"> <p>';
-$out+=$string(userInfo.userOrignPlace);
-$out+='</p> </div> <div class="intro_circle"></div> </li> <li> <div class="detail_left"> <p>所在地</p> </div> <div class="detail_right"> <p>';
-$out+=$string(userInfo.userSeatPlace);
-$out+='</p> </div> <div class="intro_circle"></div> </li> <li> <div class="detail_left"> <p>微博</p> </div> <div class="detail_right"> <p>';
-$out+=$string(userInfo.userWeibo);
-$out+='</p> </div> <div class="intro_circle"></div> </li> <li> <div class="detail_left"> <p>自我评价</p> </div> <div class="detail_right"> <p>';
-$out+=$string(userInfo.userAssessment);
-$out+='</p> </div> <div class="intro_circle"></div> </li> <li> <div class="detail_left"> <p>爱好</p> </div> <div class="detail_right"> <p> ';
-$out+=$string($helpers. arrayJoin(userInfo.userHobby , "、"));
-$out+=' </p> </div> <div class="intro_circle"></div> </li> <li> <div class="detail_left"> <p>个人奖项</p> </div> <div class="detail_right intro_last"> <p class="intro_lastcon">';
-$out+=$string($helpers. arrayJoin(userInfo.userAward , "、"));
-$out+='</p> </div> <div class="intro_circle"></div> </li> </ul> </div> </div> </div> </div> </div> </div> ';
+$out+=' <span></span> </p> ';
+}
+$out+=' </div> </td> </tr> </table> <div class="intro_right"> <div class="pic"> <img src="';
+$out+=$string(userInfo.userPortrait || images/icon/intro_03.png);
+$out+='" /> </div> <div class="intro_detail"> <ul> ';
+$each(userInfo.newUserInfo,function($value,$index){
+$out+=' <li> <div class="detail_left"> <p>';
+$out+=$string($value.title);
+$out+='</p> </div> <div class="detail_right intro_first"> ';
+if((typeof $value.content !== "object")){
+$out+=' <p class="intro_firstcon">';
+$out+=$string($value.content);
+$out+='</p> ';
+}
+$out+=' ';
+if((typeof $value.content === "object")){
+$out+=' <p class="intro_firstcon">';
+$out+=$string($helpers. arrayJoin($value.content , "、"));
+$out+='</p> ';
+}
+$out+=' </div> <div class="intro_circle"></div> </li> ';
+});
+$out+=' </ul> </div> </div> </div> </div> </div> </div> ';
 return new String($out);
 });

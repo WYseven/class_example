@@ -1,10 +1,17 @@
+function getStyle(obj,attr){
+	if( obj.currentStyle ){
+		return obj.currentStyle[attr]
+	}else if(window.getComputedStyle){
+		return getComputedStyle(obj)[attr];
+	}
+}
 function MTween(obj,attrObj,duration,fx,callBack){
 	var newObj = {}
 	for( var attr in attrObj ){
 		newObj[attr] = {};
 	}
 	for( var attr in attrObj ){
-		newObj[attr].b = parseFloat(getComputedStyle(obj)[attr]);
+		newObj[attr].b = parseFloat(getStyle(obj,attr));
 		newObj[attr].c = parseFloat(attrObj[attr]) - newObj[attr].b;
 	}
 	var current = new Date().getTime();
@@ -35,7 +42,7 @@ function MTween(obj,attrObj,duration,fx,callBack){
 				if( !isNaN(attrObj[attr]) ){
 					obj.style[attr] = value + "px";
 				}else{
-					obj.style[attr] = value + "%";
+					obj.style[attr] = Math.abs(value) + "%";
 				}
 				
 			}

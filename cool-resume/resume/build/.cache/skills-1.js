@@ -1,7 +1,7 @@
-/*TMODJS:{"version":127,"md5":"ccb3b2da2a7c46d5fbd66c1662917bf2"}*/
+/*TMODJS:{"version":151,"md5":"6de572a74e20c49f5f4115512b169ffd"}*/
 template('skills-1',function($data,$filename
 /**/) {
-'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,skills=$data.skills,$value=$data.$value,$index=$data.$index,$string=$utils.$string,$out='';$out+=' <div class="skills"> <div class="skills_top"> <div class="top_con"> <div class="skills_title"> <h3>技能展示</h3> <p>7年工作经验，编写艺术般的代码</p> </div> <div class="top_detail clearfix"> <div class="left"> ';
+'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,skills=$data.skills,$value=$data.$value,$index=$data.$index,$string=$utils.$string,len=$data.len,$out='';$out+=' <div class="skills"> <div class="skills_top"> <div class="top_con"> <div class="skills_title"> <h3>技能展示</h3> <p>7年工作经验，编写艺术般的代码</p> </div> <div class="top_detail clearfix"> <div class="left"> ';
 $each(skills.pageArr,function($value,$index){
 $out+=' <div class="skillLanguage" style="display: ';
 $out+=$string($helpers. isAddClass('block' , $index===0 ));
@@ -14,8 +14,13 @@ $out+=$string($value.skillLanguage);
 $out+='-';
 $out+=$string($value.percent);
 $out+='</span> </h3> <div style="clear: both;"></div> <div> <ul style="margin-top: 10px;"> ';
+$out+=$string(len = $value.skillTooltip);
+$out+=' ';
 $each($value.skillTooltip,function($value,$index){
-$out+=' <li> <div class="skills_content skills_first"> <p class="first_con">';
+$out+=' <li> <div class="skills_content ';
+$out+=$string($helpers. isAddClass('skills_first' , $index===0));
+$out+=$string($helpers. isAddClass('skills_last' , $index===len.length-1));
+$out+='"> <p class="first_con">';
 $out+=$string($value);
 $out+='</p> </div> <div class="skills_circle"></div> </li> ';
 });

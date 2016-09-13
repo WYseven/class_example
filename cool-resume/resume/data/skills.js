@@ -52,7 +52,7 @@ var skills = {
 		},
 		{
 			skillLanguage:"canvas",
-			percent:"60%",
+			percent:"40%",
 			skillTooltip:[
 				"能熟练使用相关接口绘制各类图形",
 				"能运用canvas开发小游戏",
@@ -60,33 +60,8 @@ var skills = {
 			]
 		},
 		{
-			skillLanguage:"react",
-			percent:"50%",
-			skillTooltip:[
-				"虚拟DOM、单向数据流、JX",
-				"组件通信、props、语法糖、组件嵌套",
-				"数组储存结构,map,事件规则……"
-			]
-		},
-		{
 			skillLanguage:"jQuery",
 			percent:"60%",
-			skillTooltip:[
-				"移动端响应式",
-				"canvas游戏开发"
-			]
-		},
-		{
-			skillLanguage:"vue.js",
-			percent:"40%",
-			skillTooltip:[
-				"移动端响应式",
-				"canvas游戏开发"
-			]
-		},
-		{
-			skillLanguage:"node.js",
-			percent:"58%",
 			skillTooltip:[
 				"移动端响应式",
 				"canvas游戏开发"

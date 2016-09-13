@@ -20,11 +20,11 @@
 							 	style="float: right;"
 							 {{/if}}
 							>
-
 								<div class="icon 
 									{{'icon2' | isAddClass:$index%3 === 1}}
-									{{'icon3' | isAddClass:$index%3 === 2}}
-								">
+									{{'icon3' | isAddClass:$index%3 === 2}}"
+									style="background: url('{{$value.companyLogo || "images/icon/expre_logo1.png"}}') no-repeat 14px 10px"
+								>
 									{{if $index%2 === 0}}
 										<img src="images/icon/expre_bgL.png" />
 									{{else if $index%2 === 1}}

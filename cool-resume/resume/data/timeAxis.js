@@ -3,7 +3,8 @@
 	*   {
 	*       startTime: @value String            *         工作开始时间  格式为：2016.10.09
 	*       endTime: @value String 			    *         工作结束时间  格式为：2016.10.09
-	*       companyName: @value String          *         公司名称
+	*       companyLogo: @value String 	        *         公司log
+			companyName: @value String          *         公司名称
 	*       companyWebsite: @value String       []        公司网址       格式为：http://www.miaov.com
 	*       jobPost: @value String              *         工作职位
 	*       jonTask: @value String       		*         负责任务
@@ -17,6 +18,7 @@ var timeAxisArr = [
 		{
 		    startTime:"2016.01.01",
 			endTime:"至今",
+			companyLogo:'images/icon/expre_logo4.png',
 			companyNam:"网易科技",
 			companyWebsite:"http://www.miaov.com",
 			jobPost:"前端高级工程师",
@@ -26,6 +28,7 @@ var timeAxisArr = [
 		{
 		    startTime:"2016.01.01",
 			endTime:"2016.01.05",
+			companyLogo:'images/icon/expre_logo4.png',
 			companyNam:"北京九鼎科技信息有限公司",
 			companyWebsite:"http://www.miaov.com",
 			jobPost:"前端高级工程师",
@@ -36,6 +39,7 @@ var timeAxisArr = [
 		    startTime:"2016.01.01",
 			endTime:"2016.01.05",
 			companyNam:"妙味课堂",
+			companyLogo:'images/icon/expre_logo4.png',
 			companyWebsite:"http://www.miaov.com",
 			jobPost:"前端高级工程师",
 			jonTask:"前端负责人。搭建了前端的整体构架",

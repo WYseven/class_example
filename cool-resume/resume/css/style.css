@@ -101,14 +101,25 @@ body {
 	float: left;
 	color: #c5cbd0;
 	width: 309px;
-	padding: 154px 0px 0px 15px;
+	padding: 0 0px 0px 15px;
 	margin-right: 59px;
-	background: url(../images/icon/intro_05.png) no-repeat 0px 156px;
+	background: url(../images/icon/intro_05.png) no-repeat 0px 0;
+}
+.intro_table{
+	float:left;
 }
 .intro_left p {
 	margin: 0px 8px 0 8px;
 	line-height: 24px;
-	background: url(../images/icon/intro_07.png) no-repeat 104px 30px;
+}
+.intro_left p span{
+	background: url(../images/icon/intro_07.png) no-repeat;
+	width:15px;
+	height:15px;
+	position: relative;
+	display: inline-block;
+	top:3px;
+	left:5px;
 }
 .intro_right {
 	float: left;
@@ -199,6 +210,39 @@ body {
 	color: #b6b6b6;
 	font-size: 16px;
 }
+
+.subject_circle {
+	width: 10px;
+	height: 10px;
+	border-radius: 5px;
+	position: absolute;
+	top: 15px;
+	left: 50%;
+}
+.subject_con {
+	position: absolute;
+	width: 418px;
+	font-size: 12px;
+	padding: 22px 19px;
+	color: #929395;
+	z-index: 1;
+	border-radius: 5px;
+	left: 145px;
+	bottom: 36px;
+	background:#fff;
+}
+.boxbg {
+	position: absolute;
+	width: 13px;
+	height: 8px;
+	left: 50%;
+	bottom: 29px;
+	z-index: 1;
+	display: none;
+	opacity: 0;
+}
+
+
 .top_detail .left {
 	height: 590px;
 	width: 362px;
@@ -241,11 +285,11 @@ body {
 }
 .skills_circle {
 	display: block;
-	width: 8px;
-	height: 8px;
-	border-radius: 4px;
+	width: 7px;
+	height: 7px;
+	border-radius: 3.5px;
 	position: absolute;
-	left: -4px;
+	left: -3px;
 	top: 9px;
 }
 .left .circle {
@@ -322,7 +366,7 @@ body {
 	width: 88px;
 }
 
-.icon {
+/* .icon {
 	background: url(../images/icon/expre_logo1.png) no-repeat 14px 10px;
 }
 .icon2 {
@@ -330,7 +374,7 @@ body {
 }
 .icon3 {
 	background: url(../images/icon/expre_logo4.png) no-repeat 14px 10px;
-}
+} */
 .empty {
 	width: 456px;
 	height: 182px;
@@ -674,7 +718,9 @@ body {
 	padding: 3px;
 	background: #bdbec0;
 	border-radius:13px;
+	overflow: hidden;
 }
+.pro dt img { width: 330px; height: 220px; border-radius: 13px;}
 .pro dd{
 	float: left;
 	width: 547px;
@@ -737,4 +783,11 @@ body {
 	float: left;
 	padding-top: 20px;
 	color: #babcbe;
+}
+
+.case_pic{
+	text-align:center;
+}
+.case_pic img{
+	display:inline-block;
 }

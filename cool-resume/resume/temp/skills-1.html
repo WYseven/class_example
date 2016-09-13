@@ -19,9 +19,10 @@
 									<div style="clear: both;"></div>
 									<div>
 										<ul style="margin-top: 10px;">
+										{{len = $value.skillTooltip}}
 											{{each $value.skillTooltip}}
 												<li>
-													<div class="skills_content skills_first">
+													<div class="skills_content {{'skills_first' | isAddClass:$index===0}}{{'skills_last' | isAddClass:$index===len.length-1}}">
 														<p class="first_con">{{$value}}</p>
 													</div>
 													<div class="skills_circle"></div>

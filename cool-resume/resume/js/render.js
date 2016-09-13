@@ -45,6 +45,53 @@ for( var i = 0; i < pageNum; i++ ){
 	n+=3;
 }
 
+//人物信息
+var userInfoArr = {
+	userName: "姓名" , 
+    userPortrait:"头像",
+    jobWant:  "职位",
+    userQQ:  "QQ",
+    userEmail:   "Email",
+    motto:  "箴言", 
+    userPhone: "手机",
+    userOrignPlace:  "籍贯" ,
+    userSeatPlace:  "所在地",
+    userWeibo: "微博",
+    userAssessment: "自我评价",   
+    userHobby: '爱好',
+    userAward: '个人奖项'
+
+}
+
+var info = ["userPhone","userOrignPlace","userSeatPlace",
+"userWeibo","userAssessment","userHobby","userAward"
+
+];
+
+userInfo.newUserInfo = [];
+userInfo.newUserInfoArr = [];
+
+for( var i = 0,len = info.length; i < len; i++ ){
+	if( userInfo[info[i]] && userInfo[info[i]] !== '' ){
+		userInfo.newUserInfo.push({
+			title:userInfoArr[info[i]],
+			content:userInfo[info[i]]
+		})
+		
+	}
+}
+
+//ie8加载柱状图
+var browser=navigator.appName 
+var b_version=navigator.appVersion 
+var version=b_version.split(";"); 
+var trim_Version=version[1].replace(/[ ]/g,""); 
+
+if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE8.0"){ 
+	skills.temp = "columns";
+} 
+
+
 var datas = {
 	userInfo:userInfo,
 	skills:skills,
@@ -61,6 +108,7 @@ if( theme.theme === "red" ){
 
 
 var html = template('init', datas);
+
 document.getElementById('resume_content').innerHTML = html;
 
 

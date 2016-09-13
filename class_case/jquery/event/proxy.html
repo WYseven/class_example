@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="../jquery-2.2.4.js"></script>
+		<script>
+			$(function (){
+				var obj = {
+					fn:function (){
+						console.log(this);		
+					}
+				}
+
+				$("#btns").click($.proxy(obj.fn,obj));
+
+			})
+		</script>
+	</head>
+
+	<body>
+		<div id="oDiv">
+			<input type="button" value="按钮" />
+			
+		</div>
+		<input type="button" id="btns" value="按钮" />
+	</body>
+</html>
