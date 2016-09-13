@@ -178,7 +178,14 @@ var tools = (function(){
 					ev.preventDefault();
 				}
 
+		},
+		attr:function (element,key,value){
+			if( typeof value === 'undefined' ){
+				return element.getAttribute(key)
+			}else{
+				return element.setAttribute(key,value);
 			}
+		}
 	}
 
 	return toolsObj;
