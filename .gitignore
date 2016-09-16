@@ -4,5 +4,7 @@
 /example/.project
 /example/weiyun/.idea
 /WeiYun/node_modules
+/custom-react-component/node_modules
 /node/mongdb/node_modules
 /jquery-source-code/test-jq
+/cool-resume/resume-min
