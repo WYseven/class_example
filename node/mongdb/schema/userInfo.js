@@ -2,7 +2,7 @@ var mongoose  =require('mongoose');
 
 module.exports = new mongoose.Schema({
 	name:String,
-	password:Number,
+	password:String,
 	time:{
 		type:Date,
 		default:Date.now

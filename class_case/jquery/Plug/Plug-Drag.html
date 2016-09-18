@@ -4,33 +4,167 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title></title>
 		<style>
-			
+			*{
+				padding:0;
+				margin: 0;
+			}
+			#drag {
+				width: 300px;
+				height: 100px;
+				background: red;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			#drag h2{
+				width: 100%;
+				height: 30px;
+				border-bottom: 1px solid #000;
+				background: #ccc;
+			}
 		</style>
 		<script src='../jquery-2.2.4.js'></script>
 	</head>
 
-	<body>
+	<body>	
+		<input type="button" value="按钮" />
+		<div id="drag">
+			<h2>这里是标题</h2>
+		</div>
 		<script>
 			(function ($){
 
-				var Drag = function(ele,options){
-					this.ele = $(ele);
-					this.target = $(options.moveTarget||ele);//拖拽移动目标
-					this.range = options.range;//限制范围
-					this.status = 0;//状态
-					//吸附范围
-					this.deviation = {
-						y: options.adsorbent&&options.adsorbent.y||0,
-						x: options.adsorbent&&options.adsorbent.x||0
-					};
-					
-					this.down();
-				};
-				
+				var Drag = function (element,options){
+
+					this.defaults = {
+						limit:false
+					}
+					$.extend(this.defaults,options);
+
+
+
+					if( $.isPlainObject(this.defaults.x) || $.isPlainObject(this.defaults.y)){
+						this.defaults.limit = false;
+					}
+
+					this.element = element;
+					this.target = this.defaults.moveObj && $(this.defaults.moveObj) || element;
+					console.log( this.target );
+					this.init();
+					//this.disX = this.disY = 0;
+					this.status = 0;
+				}
+
+				Drag.prototype = {
+					constructor:Drag,
+					init:function (){
+						this.element.on('mousedown',$.proxy(this.downFn,this));	
+					},
+					downFn:function (ev){
+
+						this.disX = ev.pageX - this.target.offset().left;	
+						this.disY = ev.pageY - this.target.offset().top;
+
+						this.status = 1;
+
+						this.dragChange();
+
+						$(document).on('mousemove',$.proxy(this.moveFn,this));
+						$(document).on('mouseup',$.proxy(this.upFn,this));
+
+						ev.preventDefault();
+					},
+					moveFn:function (ev){
+						this.x = ev.pageX - this.disX;
+						this.y = ev.pageY - this.disY;
+						
+						this.status = 2;
+
+						this.limitFn();
+
+						this.target.css({
+							left:this.x,
+							top: this.y
+						});
+
+						this.dragChange();
+					},
+					upFn:function (ev){
+						$(document).off("mousemove",this.moveFn);
+						$(document).off("mouseup",this.upFn);
+						this.status = 3;
+
+						this.dragChange();
+					},
+					dragChange:function (){
+						switch( this.status ){
+							case 1:
+								this.element.trigger("dragStart");
+							break;
+							case 2:
+								this.element.trigger("dragMove");
+							break;
+							case 3:
+								this.element.trigger("dragEnd");
+							break;
+						}	
+					},
+					limitFn:function (){
+						var maxX = 0,maxY = 0,minX = 0,minY = 0;
+						if( this.defaults.limit ){
+
+							var clientW = $(window).width();	
+							var clientH = $(window).height();
+
+							minX = minY = 0;
+
+							maxX = clientW - this.element.outerWidth();
+							maxY = clientH - this.element.outerHeight();
+						}
+
+						if( $.isPlainObject(this.defaults.x) ){
+							minX = this.defaults.x.min;
+							maxX = this.defaults.x.max;
+						}
+						if( $.isPlainObject(this.defaults.y) ){
+							minY = this.defaults.y.min;
+							maxY = this.defaults.y.max;
+						}
+
+
+						if( this.x < minX  ){
+							this.x = minX;
+						}
+						if( this.y < minY  ){
+							this.y = minY;
+						}
+						if( this.x > maxX  ){
+							this.x = maxX;
+						}
+						if( this.y > maxY  ){
+							this.y = maxY;
+						}
+					}
+				}
+
+				$.fn.drag = function (options){
+
+					new Drag(this,options);	
+				}
+
+
 			})(jQuery);
 
-			$.abc();
-			$(document).abc()
+			$("#drag").drag({
+				limit:true
+			});
+
+			$("#drag").on("dragStart",function (){
+				console.log("start");	
+			});
+
+
+
 
 		</script>
 	</body>
