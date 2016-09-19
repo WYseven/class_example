@@ -16,7 +16,7 @@ const swig = require('swig');
 global.APPCONFIG = {
 	path: __dirname,
 	db: {
-		url: 'mongodb://localhost:27017/weiyun'
+		url: 'mongodb://localhost:27017/test'
 	}
 }
 

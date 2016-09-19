@@ -25,6 +25,10 @@ let upload = multer({
 	storage: storage
 })
 
+router.post('/upload', upload.single('file'), (req, res, next) => {
+	res.send('ok')
+})
+
 let files = [];
 
 refreshData();
@@ -242,14 +246,14 @@ router.get('/move', (req, res, next) => {
 /**
  * 上传界面
  */
-// router.get('/upload', (req, res, next) => {
-// 	res.render('upload.html');
-// })
+router.get('/upload', (req, res, next) => {
+	res.render('upload.html');
+})
 
 /**
  * 上传文件
  */
-router.post('/upload', upload.single('file'), (req, res, next) => {
+/*router.post('/upload', upload.single('file'), (req, res, next) => {
 
 	let pid = req.body.pid || null;
 
@@ -287,7 +291,7 @@ router.post('/upload', upload.single('file'), (req, res, next) => {
 		})
 	})
 
-});
+});*/
 
 
 function refreshData() {

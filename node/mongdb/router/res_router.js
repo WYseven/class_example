@@ -1,14 +1,17 @@
-module.exports = function (app){
-	app.get('/', function(req, res){
-	  //res.send('hello world');
-	  res.render('index.html');
-	});
-	app.get('/login', function(req, res){
-	  //res.send('hello world');
-	  res.render('login.html');
-	});
-	app.get('/register', function(req, res){
-	  //res.send('hello world');
-	  res.render('register.html');
-	});
-}
+var router = require('express').Router();
+
+router.get('/', function(req, res){
+  res.render('index.html');
+});
+router.get('/login', function(req, res){
+  res.render('login.html');
+});
+router.get('/register', function(req, res){
+	console.log(11111111111111);
+  res.render('register.html');
+});
+router.get('/tree', function(req, res){
+  res.render('tree.html');
+});
+
+module.exports = router;

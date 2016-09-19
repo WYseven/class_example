@@ -19,7 +19,11 @@ app.set('view engine', 'swig');
 app.set('views', __dirname + '/view');
 
 //网站请求路由
-require('./router/res_router.js')(app);
-require('./router/db_router.js')(app);
+//require('./router/res_router.js')(app);
+//require('./router/db_router.js')(app);
+
+
+app.use("/api", require("./router/db_router"));
+app.use("/", require("./router/res_router") );
 
 app.listen(3000);

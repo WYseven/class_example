@@ -21,6 +21,7 @@ module.exports = function (app){
 	});
 	app.post('/register', function(req, res){
 		//查找数据库有没有存在这个名字
+		console.log("注册");
 		userInfo.register({name:req.body.userName})
 		.then((data)=>{
 			if( !data ){

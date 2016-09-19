@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="../jquery-2.2.4.js"></script>
+		<script>
+			$(function (){
+				var callbacks = $.Callbacks('stopOnFalse');
+
+				callbacks.add(testUserName);
+				callbacks.add(testQQ);
+				callbacks.add(function (){
+					alert('要发送了');		
+				});
+
+				$("input:eq(2)").click(function (){
+					callbacks.fire();
+				});
+
+				function testUserName(){
+					if( re.test($("input:eq(0)").val()) ){
+						$("#user").text("可以注册");
+					}else if($("input:eq(0)").val() === ""){
+						$("#user").text("不能为空");
+						return false;
+					}else{
+						$("#user").text("不能注册");
+						return false;
+					}
+				}
+				function testQQ(){
+					if( reQQ.test($("input:eq(1)").val()) ){
+						$("#qq").text("QQ正确");
+					}else if($("input:eq(1)").val() === ""){
+						$("#qq").text("QQ不能为空");
+						return false;
+					}else{
+						$("#qq").text("QQ不正确不能注册");
+						return false;
+					}
+				}
+
+				var re = /^\w{2,5}$/;
+				$("input:eq(0)").blur(function (){
+					testUserName();
+				});
+				var reQQ = /^[1-9]\d{4,11}$/;
+				$("input:eq(1)").blur(function (){
+					testQQ();
+				});
+			})
+		</script>
+	</head>
+
+	<body>
+		用户名：<input type="text" name="userName" /><span id="user"></span><br/>
+		QQ号码：<input type="text"  name="QQ" /><span id="qq"></span><br/>
+		<input type="button" value="按钮" />
+	</body>
+</html>
