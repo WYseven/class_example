@@ -242,7 +242,7 @@ $out+=$string(caseWebsite);
 $out+='" />点击预览</a> </div> <div class="case_sharelink jiathis_style_32x32 clearfix"> <span>分享至：</span> <a href="#" class="weibo"></a> <a href="#" class="kongjian"></a> <a href="#" class="weixin"></a> <a href="#" class="qq jiathis_button_qzone"></a> <a href="#" class="douban"></a> </div> </div> ';
 return new String($out);
 });/*v:6*/
-template('footer','<div class="footer"> <div class="footcon clearfix"> <div class="footleft"> <p>最后更新于2015年7月25日</p> <p>简历模板由妙味课堂Miaov.com设计开发（使用本模板请注明此项）</p> </div> <div class="footright"> <dl> <dt><img src="images/icon/erweima.png"/></dt> <dd> <p>您还可以使用手机或iPad</p> <p>扫描左侧二维码打开本页</p> </dd> </dl> </div> </div> </div>');/*v:110*/
+template('footer','<div class="footer"> <div class="footcon clearfix"> <div class="footleft"> <p>最后更新于2015年7月25日</p> <p>简历模板由妙味课堂Miaov.com设计开发（使用本模板请注明此项）</p> </div> <div class="footright"> <dl> <dt><img src="images/icon/erweima.png"/></dt> <dd> <p>您还可以使用手机或iPad</p> <p>扫描左侧二维码打开本页</p> </dd> </dl> </div> </div> </div>');/*v:112*/
 template('hea_intro',function($data,$filename
 /**/) {
 'use strict';var $utils=this,$helpers=$utils.$helpers,userInfo=$data.userInfo,$string=$utils.$string,images=$data.images,icon=$data.icon,intro_03=$data.intro_03,$each=$utils.$each,$value=$data.$value,$index=$data.$index,$out='';$out+='<div class="hea_intro"> <div class="high_light">  <div class="header"> <div class="hea_con"> <div class="hea_left"> ';

@@ -1,4 +1,4 @@
-/*TMODJS:{"version":110,"md5":"b7ea8f4b25be04da9416a3554cd4f07c"}*/
+/*TMODJS:{"version":112,"md5":"b7ea8f4b25be04da9416a3554cd4f07c"}*/
 template('hea_intro',function($data,$filename
 /**/) {
 'use strict';var $utils=this,$helpers=$utils.$helpers,userInfo=$data.userInfo,$string=$utils.$string,images=$data.images,icon=$data.icon,intro_03=$data.intro_03,$each=$utils.$each,$value=$data.$value,$index=$data.$index,$out='';$out+='<div class="hea_intro"> <div class="high_light">  <div class="header"> <div class="hea_con"> <div class="hea_left"> ';

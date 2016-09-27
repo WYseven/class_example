@@ -1,0 +1,5 @@
+tmod 用node全局安装
+
+npm install -g tmod
+
+
