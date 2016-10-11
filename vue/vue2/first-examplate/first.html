@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="../vue.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			{{message}}
+		</div>
+		<script>
+
+			/*
+				这样看起来类似于渲染了字符串模板一样
+				通过vue，把数据和DOM绑定了起来，做到了响应式的，当数据发生改变，DOM部分就会做相应的更新
+			*/
+
+			var app = new Vue({
+				el:"#app",
+				data:{
+					message:"hello,vue"
+				}
+			})
+		</script>
+	</body>
+</html>

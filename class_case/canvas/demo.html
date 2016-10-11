@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			#can {
+				background: #fff;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<canvas id="can" width="500" height="500"></canvas>
+		<script src="./TweenLite.min.js"></script>
+		<script>
+			var can = document.getElementById("can");
+			var cxt=can.getContext("2d");
+
+			/*//cxt.fillStyle = 'rgba(255,255,255,0.5)';
+			cxt.beginPath();
+			cxt.strokeStyle = "red";
+			cxt.arc(100,100,50,0,0.5*Math.PI,false);
+			//cxt.closePath();
+			cxt.stroke();*/
+
+			
+				var arr = [];
+				
+				for( var i = 0; i < 10; i++ ){
+					arr.push({
+						x:Math.random()*400+10,
+						y:Math.random()*400+10
+					})
+				}
+
+				
+				fills();
+				function fills(){
+					for( var i = 0; i < arr.length; i++ ){
+						cxt.fillStyle = 'rgba(255,255,255,0.5)';
+						cxt.fillStyle = "red";
+						cxt.beginPath();
+						cxt.arc(arr[i].x,arr[i].y,5,0,2*Math.PI,false);
+						cxt.closePath();
+						cxt.fill();
+					}
+				}
+				function drawLine(){
+					var start = arr[0];
+					for( var i = 1; i < arr.length; i++ ){
+						cxt.moveTo(arr[i-1].x,arr[i-1].y);
+						cxt.lineTo(arr[i].x,arr[i].y);
+						cxt.stroke();
+					}
+				}
+
+			for( var i = 0; i < arr.length; i++ ){
+				animate0(arr[i])
+			}
+
+			// 245 121  
+
+			function animate0(index){
+				console.log(index);
+				TweenLite.to(index, 1+1*Math.random(), {x:index.x-50+Math.random()*100,
+	            y: index.y-50+Math.random()*100, ease:"linear",
+	            onComplete: function() {
+	                //_this.animate0(index);
+	                console.log( index );
+	                animate0(index)
+	            }});	
+			}
+
+			function chonghui(){
+				cxt.clearRect(0,0,500,500);
+				fills();
+				drawLine();
+				setTimeout(function(){
+					chonghui();
+				})
+			}
+			chonghui();
+
+
+
+
+
+			/*cxt.moveTo(10,10);
+			cxt.lineTo(100,100);
+			cxt.lineTo(300,200);
+			cxt.moveTo(150,150);
+			cxt.lineTo(300,300);
+			cxt.stroke();*/
+
+
+		</script>
+	</body>
+</html>

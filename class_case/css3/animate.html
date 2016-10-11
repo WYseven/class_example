@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			@keyframes abc{
+				0%{
+					width:100px;
+				}
+				100%{
+					width:500px;
+				}
+			}
+			#box{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+				left: 0;
+				top:0;
+			}
+			#box:hover{
+				background: blue;
+				-webkit-animation: 1s abc steps(3);
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="box"></div>
+	</body>
+</html>

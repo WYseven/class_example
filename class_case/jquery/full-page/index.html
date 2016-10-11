@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			.section{
+				font-size: 100px;
+				text-align: center;
+			}
+			.section0{
+				background: red;
+			}
+			.section1{
+				background: yellow;
+			}
+			.section2{
+				background: blue;
+			}
+			.section3{
+				background: pink;
+			}
+			.section4{
+				background: green;
+			}
+
+		</style>
+		<link rel="stylesheet" type="text/css" href="./jquery.fullPage.css" />
+		<script type="text/javascript" src="../jquery-2.2.4.js"></script>
+		<script type="text/javascript" src="./jquery.fullPage.js"></script>
+		<script>
+			$(document).ready(function() {
+			    $('#fullpage').fullpage({
+			    	verticalCentered:false,
+			    	afterRender:function (){
+			    		console.log(123);		
+			    	},
+			    	afterLoad:function (){
+			    		console.log("after");
+			    		return false	
+			    	},
+			    	onLeave:function (index,nextIndex ,direction){
+			    		console.log( index,nextIndex ,direction );	
+			    	}
+			    });
+			});
+		</script>
+	</head>
+
+	<body>
+		<div id="fullpage">
+		    <div class="section section0">第一屏</div>
+		    <div class="section section1 actvie">
+				<div class="slide">第三屏的第一屏</div>  
+		        <div class="slide">第三屏的第二屏</div>  
+		        <div class="slide">第三屏的第三屏</div>  
+		        <div class="slide">第三屏的第四屏</div>  
+		    </div>
+		    <div class="section section2">第三屏</div>
+		    <div class="section section3">第四屏</div>
+		    <div class="section section4">第五屏</div>
+		</div>
+	</body>
+</html>

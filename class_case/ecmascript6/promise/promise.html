@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*fetch('./test.php').then(function (data){
+				return data.text()
+			}).then(function (data){
+				console.log( data );
+			});
+			fetch('./test2.php').then(function (data){
+				return data.text()
+			}).then(function (data){
+				console.log( data );
+			});*/
+
+			//var p = new Promise();
+
+			function ajax(){
+				return new Promise(function (resolve){
+					fetch('./test.php').then(function (data){
+						return data.text();	
+					}).then(function (data){
+						resolve(data)	
+					})
+				})
+			}
+			function ajax2(){
+				return new Promise(function (resolve,reject){
+					fetch('./test2.php').then(function (data){
+						return data.text();	
+					}).then(function (data){
+						reject(data);
+					})
+				})
+			}
+
+			var p = Promise.all([ajax(),ajax2()]);
+			p.then(function (data,data2){
+				console.log( data,data2 );
+			}).catch(function (error){
+				console.log( error );
+			});
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			@-webkit-keyframes movedown {
+			    0% {
+			        background-position: 0 0
+			    }
+
+			    100% {
+			        background-position: 0 -1800px
+			    }
+			}
+			@-webkit-keyframes moveup {
+				    0% {
+				        background-position: 0 -1800px
+				    }
+
+				    100% {
+				        background-position: 0 -2850px
+				    }
+				}
+			.item {
+				width: 150px;
+    			height: 150px;
+			}
+			.item a{
+				width: 150px;
+    			height: 150px;
+				display: block;
+				background: url(./1.jpg) 0 0 no-repeat;
+				-webkit-animation: moveup 300ms steps(7) forwards;
+			}
+			.item a:hover{
+				-webkit-animation: movedown 300ms steps(12) forwards;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div class="item  unactive">
+			<a class="phone content"></a>
+		</div>
+	</body>
+</html>
