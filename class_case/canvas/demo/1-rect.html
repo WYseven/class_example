@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body style="background: #000;">
+		<canvas id="draw" width="500" height="500" style="background: #fff;" ></canvas>
+		<script>
+			var draw = document.getElementById("draw");
+			var cxt = draw.getContext("2d");
+			//画方块
+
+			cxt.fillStyle = "red";  //先定义颜色，再开始绘制
+
+			cxt.fillRect(30,30,150,150);  //(x,y,w,h)  //绘制填充的矩形
+			cxt.lineWidth = 10;    //控制边的粗细
+			cxt.fillStyle = 'black';
+			cxt.strokeRect(300,300,50,50);  //绘制一个矩形的边框
+
+			cxt.clearRect(50,50,50,50);  //清除指定矩形区域，让清除部分完全透明。
+
+
+			
+			cxt.rect(0,0,100,100);
+			cxt.stroke();
+
+
+		</script>
+	</body>
+</html>

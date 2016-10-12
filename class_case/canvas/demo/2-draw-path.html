@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body style="background: #000;">
+		<canvas id="draw" width="500" height="500" style="background: #fff;" ></canvas>
+		<script>
+			var draw = document.getElementById("draw");
+			//var cxt = draw.getContext("2d");
+			//绘制路径
+			/*
+				1. 创建路径起始点。
+				2. 使用画图命令去画出路径。
+				3. 把路径封闭。
+
+				路径生成，就能通过描边或填充路径区域来渲染图形。
+
+				beginPath()
+				新建一条路径，生成之后，图形绘制命令被指向到路径上生成路径。
+				closePath()
+					闭合路径之后图形绘制命令又重新指向到上下文中。
+				stroke()
+					通过线条来绘制图形轮廓。
+				fill()
+					通过填充路径的内容区域生成实心的图形。
+
+				moveTo(x,y)  起点
+				lineTo(x,y)  从起点到当前位置的直线
+
+				注意使用fill，需要三个坐标
+ 			*/
+
+			var ctx = draw.getContext('2d');
+
+		    ctx.beginPath();
+		    ctx.moveTo(75,50);
+		    ctx.lineTo(100,75);
+		    ctx.lineTo(200,300);
+
+		    ctx.lineWidth =10;
+		    ctx.strokeStyle = "green";  //描边的样式
+		    
+		    ctx.stroke();  //不会自动闭合
+		    ctx.closePath();
+
+		    ctx.beginPath();
+		    ctx.moveTo(25,25);
+		    ctx.lineTo(105,25);
+		    ctx.lineTo(55,95);
+		    ctx.lineTo(60,195);
+		    ctx.fill();     //自动闭合
+
+
+		</script>
+	</body>
+</html>

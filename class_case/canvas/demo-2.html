@@ -7,6 +7,11 @@
 			#can {
 				background: #fff;
 			}
+			#box{
+				width: 100px;
+				height: 100px;
+				background: red;
+			}
 		</style>
 		<script>
 			
@@ -14,11 +19,23 @@
 	</head>
 
 	<body>
-		<canvas id="can" width="2000" height="2000"></canvas>
-		<script src="./TweenLite.min.js"></script>
+		<!-- <canvas id="can" width="2000" height="2000"></canvas> -->
+		<div id="box"></div>
+		<script src="./js/TweenLite.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>
 		<script>
-			var can = document.getElementById("can");
+			/*var can = document.getElementById("can");
 			var cxt=can.getContext("2d");
+*/
+			var box = document.getElementById("box");
+		//	TweenLite.to(box,2,{width:"500px"})
+
+			var obj = {a:1};
+			TweenLite.to(obj,10,{a:100,onUpdate:function (){
+				//console.log( obj.a );
+			},onComplete:function (){
+				console.log(111);	
+			}});
 
 			
 

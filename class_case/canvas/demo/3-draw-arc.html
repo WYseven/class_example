@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body style="background: #000;">
+		<canvas id="draw" width="500" height="500" style="background: #fff;" ></canvas>
+		<script>
+			var draw = document.getElementById("draw");
+			var cxt = draw.getContext("2d");
+			//绘制弧形或圆
+
+			//arc(x, y, radius, startAngle, endAngle, anticlockwise);
+			/*
+				x
+					圆弧中心（圆心）的 x 轴坐标。
+				y
+					圆弧中心（圆心）的 y 轴坐标。
+				radius
+					圆弧的半径。
+				startAngle
+					圆弧的起始点， x轴方向开始计算，单位以弧度表示。
+				endAngle
+					圆弧的终点， 单位以弧度表示。
+				anticlockwise 可选
+					可选的Boolean值 ，如果为 true，逆时针绘制圆弧，反之，顺时针绘制。 
+			*/
+
+			//绘制一个空心圆
+			cxt.beginPath();
+			cxt.arc(100,100,50,0,Math.PI*2);
+			cxt.stroke();
+			//绘制一个实心圆
+			/*cxt.beginPath();
+			cxt.fillStyle = 'red';
+			cxt.arc(300,300,50,0,Math.PI*2);
+			cxt.fill();*/
+
+			//角度与弧度的js表达式:弧度=(Math.PI/180)*角度
+			//绘制半个圆
+			/*var n = 0,m = 300;
+			setInterval(function (){
+				n+= 0.1
+				//cxt.clearRect(0,0,500,500);
+				cxt.beginPath();
+				cxt.fillStyle = 'red';
+				cxt.arc(m+=10,300,50,0,Math.PI*n);
+				cxt.stroke();	
+			},30);*/
+
+			/*var n = 2,m = 300;
+			setInterval(function (){
+				n-= 0.1
+				cxt.clearRect(0,0,500,500);
+				cxt.beginPath();
+				cxt.fillStyle = 'red';
+				cxt.arc(200,300,50,0,Math.PI*n,true);
+				cxt.stroke();	
+			},1000);*/
+			
+			
+
+
+		</script>
+	</body>
+</html>
