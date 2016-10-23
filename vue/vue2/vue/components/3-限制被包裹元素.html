@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../../vue.js" charset="utf-8"></script>
+</head>
+<body>
+<select id="demo">
+    <my-row></my-row>
+</select>
+<table id="demo2">
+    <tr is="my-row"></tr>
+</table>
+<script type="text/javascript">
+    /*
+    * 在使用DOM作为模板时，会受到html的一些限制
+        例如 table、ul、select、ol这些元素中只能限制了被包含的元素，例如：
+            ul、ol中只能包含li
+            select中只能包含options
+            table只能包含thead、tbody、tfooter或tr
+
+        一旦在这些元素中使用自定义元素，认为是无效的元素，就会导致一些问题：
+        不能这样使用：
+            <select id="demo">
+                <my-row></my-row>
+            </select>
+
+        变通方案：
+            在元素中依然使用允许的元素，在元素中使用特殊的js属性：
+            <table id="demo2">
+                <tr is="my-row"></tr>
+            </table>
+
+    * */
+    //初始化根实例（root instance）
+    new Vue({
+        el:"#demo",
+        components:{ //局部注册组件
+            "my-row":{
+                template:"<option>北京</option>"
+            }
+        }
+    });
+
+    new Vue({
+        el:"#demo2",
+        components:{ //局部注册组件
+            "my-row":{
+                template:"<tr><td>hello，我是表格</td></tr>"
+            }
+        }
+    });
+</script>
+</body>
+</html>
