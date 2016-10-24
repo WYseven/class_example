@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../../vue.js" charset="utf-8"></script>
+</head>
+<body>
+    <div id="demo">
+        {{message}}
+        <my-component 
+            v-on:increment="changeMessage" 
+            :message="message" 
+            v-on:click.native="nativeEvent"
+        ></my-component>
+    </div>
+<script type="text/javascript">
+
+    /*
+        当子组件要改变props的值，传回给父组件，那么需要绑定一个自定义的事件
+
+        父组件可以在使用子组件的地方直接使用v-on来监听子组件触发的事件
+
+        v-on:click.native 在根元素下，监听子组件中原生事件的触发
+    */
+
+    Vue.component("my-component",{
+        //声明props
+        props:["message"],
+        template:`<div>
+            <input 
+                type="button" 
+                value="测试改变props中数据" 
+                @click="this.clickHandle" 
+            />
+            <p>{{message}}</p>
+        </div>`,
+        methods:{
+            clickHandle:function (){
+                //触发自定义事件，通知父级改变数据
+                //没有自定义事件，则不触发
+                this.$emit("increment");
+            }
+        }
+    })
+
+    new Vue({
+        el:"#demo",
+        data:{
+            message:1
+        },
+        methods:{
+            changeMessage:function (){
+                this.message++;
+
+            },
+            nativeEvent:function (){
+               console.log(123);     
+            }
+        }
+        
+    });
+
+    //子组件已经和它外部完全解耦了。它所做的只是触发一个父组件关心的内部事件
+
+</script>
+</body>
+</html>
