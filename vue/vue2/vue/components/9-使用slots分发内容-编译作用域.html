@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../../vue.js" charset="utf-8"></script>
+</head>
+<body>
+    <div id="demo">
+        {{message}}
+        <!--  v-show="showContent" -->
+        <my-component>
+            {{message}}
+        </my-component>
+    </div>
+<script type="text/javascript">
+    /*
+        为了组件可以组合，需要一种方式将父组件的内容和子组件的模板混合，这种方式称之为内容分发或transclusion
+
+        使用特殊的solt元素作为原始内容那个的插槽
+
+        先来看组件作用域：
+            父组件模板的内容在父组件作用域内编译；
+            子组件模板的内容在子组件作用域内编译。
+
+        父组件模板不应该知道子组件的状态。
+
+        在组件上添加一个v-show指令，showContent的值为子组件的数据，这样不能影响子组件的影藏显示
+
+        子组件的数据那就再子组件的作用域内使用
+
+        在模板中使用一堆my-component标签组件嵌套的内容，应该属于父组件的
+        子组件有其自己的作用域
+    */
+
+    var root = new Vue({
+        el:"#demo",
+        data:{
+            message:"我是父组件的信息"
+        },
+        components:{
+            "my-component":{
+                template:`<div v-show="showContent">{{message}}</div>`,
+                data:function (){
+                    return {
+                        message:"我是子组件的信息",
+                        showContent:true
+                    }      
+                }
+            },
+            
+        }
+        
+    });
+
+
+
+</script>
+</body>
+</html>

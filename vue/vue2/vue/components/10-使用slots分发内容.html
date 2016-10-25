@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../../vue.js" charset="utf-8"></script>
+</head>
+<body>
+    <div id="demo">
+        {{message}}
+        <!--  v-show="showContent" -->
+        <my-component>
+            <!-- <p>我是父组件提供的内容，子组件你用solot替换</p>
+            {{message}} -->
+        </my-component>
+    </div>
+<script type="text/javascript">
+    /*
+        使用特殊的solt元素作为原始内容的插槽
+
+        子组件内使用了solt标签，则父组件的内容片段将会被插入到solt标签位置并替换掉solt
+
+        如果子组件没有使用solt标签，则父组件的内容被抛弃。
+
+        当父组件没有提供内容，子组件中有solt标签，则显示solt中的内容，这种被称之为内容回退，回退的内容在子组件作用域编译。
+
+
+    */
+
+    var root = new Vue({
+        el:"#demo",
+        data:{
+            message:"我是父组件的信息"
+        },
+        components:{
+            "my-component":{
+                template:`<div v-show="showContent">
+                            {{message}}
+                            <slot>
+                                <p>父组件没有提供内容，提供了就替换我</p>
+                            </slot>
+                        </div>`,
+                data:function (){
+                    return {
+                        message:"我是子组件的信息",
+                        showContent:true
+                    }      
+                }
+            },
+            
+        }
+        
+    });
+
+
+
+</script>
+</body>
+</html>

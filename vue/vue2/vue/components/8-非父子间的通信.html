@@ -62,7 +62,9 @@
                // this.$emit("increment");
             }
         }
-    })
+    });
+
+    var bus = new Vue();  //也可以使用空的实例作为中央事件总线
 
     var root = new Vue({
         el:"#demo",

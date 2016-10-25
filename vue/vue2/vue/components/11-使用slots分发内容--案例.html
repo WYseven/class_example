@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../../vue.js" charset="utf-8"></script>
+    <style>
+        .ok{
+            background: green;
+        }
+        .error{
+            background: red;
+        }
+        .warn{
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="demo">
+        <h1>不同形式的提醒框</h1>
+        <hr>
+        <message-tip>
+            
+        </message-tip>
+        <hr>
+        <message-tip>
+            <p class="ok">您的操作成功</p>
+        </message-tip>
+        <hr>
+        <message-tip>
+            <p class="error">您的操作失败</p>
+        </message-tip>
+        <message-tip>
+            <p class="warn">给您一个大大的警告</p>
+        </message-tip>
+    </div>
+<script type="text/javascript">
+
+/*
+    同时写了props和data，会警告
+
+    不同的提醒：
+        默认使用使用slot中的内容
+        在一对自定义组件标签中写上内容，自动会替换子组件中slot标签所在的位置
+*/
+
+Vue.component("message-tip",{
+    template:`
+        <div>
+            <slot><p :class="className">{{title}}{{tip}}</p></slot>
+        </div>
+    `,
+    data:function (){
+        return {
+            title:"温馨提示：",
+            tip:"这是默认提示",
+            className:""
+        }       
+    }
+})
+
+new Vue({
+    el:"#demo"
+})
+
+
+</script>
+</body>
+</html>

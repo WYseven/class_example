@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../../vue.js" charset="utf-8"></script>
+    <style>
+        .ok{
+            background: green;
+        }
+        .error{
+            background: red;
+        }
+        .warn{
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="demo">
+        <h1>布局</h1>
+        <message-tip>
+            <h1 slot="header">这是网站的头部</h1>
+            <h1 slot="header">这是网站的头部</h1>
+            
+            <div>
+                这是网站的内容，这块内容填充slot没有name的位置
+            </div>
+            <p slot="footer">
+                这是网站的底部,放在footer中
+            </p>
+
+            <div>
+                这是网站的内容，这块内容填充slot没有name的位置
+            </div>
+
+        </message-tip>
+    </div>
+<script type="text/javascript">
+
+/*
+<slot> 元素可以用一个特殊的属性 name 来配置如何分发内容。
+多个 slot 可以有不同的名字。具名 slot 将匹配内容片段中有对应 slot 特性的元素。
+
+仍然可以有一个匿名 slot ，它是默认 slot ，作为找不到匹配的内容片段的回退插槽。
+
+如果没有默认的 slot ，这些找不到匹配的内容片段将被抛弃。
+*/
+
+var temp = `
+<div>
+    <header>
+        <slot name="header"></slot>
+    </header>
+    <main>
+        <slot></slot>
+    </main>
+    <footer>
+        <slot name="footer"></slot>
+    </footer>
+</div>
+`;
+
+Vue.component("message-tip",{
+    template:temp,
+    data:function (){
+        return {
+            title:"温馨提示：",
+            tip:"这是默认提示",
+            className:""
+        }       
+    }
+})
+
+new Vue({
+    el:"#demo"
+})
+
+
+</script>
+</body>
+</html>
