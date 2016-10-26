@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="../../vue.js"></script>
+	</head>
+
+	<body>
+		<div id="demo">
+			{{message}}
+			<p v-once>{{once}}</p>
+		</div>
+		<script>
+			/*
+				文本
+					绑定数据使用Mustache语法（双大括号）
+
+					绑定的数据对象上message发生变化，插值处的内容都会更新
+
+					使用指令 v-once一次性的插值，当数据改变时候，插值内容不更新，
+					注意这个元素嵌套的其他数据绑定也会受影响
+					
+			*/
+
+			var vm = new Vue({
+				el:"#demo",
+				data:{
+					message:"hello,Vue",
+					once:"一次绑定"
+				}
+			});
+
+			vm.once = "改不了啦"
+
+		</script>
+	</body>
+</html>

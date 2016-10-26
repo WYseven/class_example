@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			.red{
+				background: red;
+			}
+		</style>
+		<script src="../../vue.js"></script>
+	</head>
+
+	<body>
+		<div id="demo">
+			{{message  | uppercse | reverse("-") }}
+
+		</div>
+		<script>
+			/*
+				过滤器
+					vue允许自定义过滤器，常用于文本格式化
+
+					添加在双括号中插值之后，由管道符指示
+
+						| pipe symbol  管道符
+
+						过滤器可以串联多个
+
+					过滤器要写在选项对象的filter对象中
+						filters:{
+							过滤器函数
+						}
+
+					过滤器的第一个参数为表达式的值，从第二参数开始为使用过滤器传入的实参
+
+					可以写多个插值，从左向后一次执行，过滤器的第一次参数为上一个过滤器return后的值
+
+
+					
+			*/
+
+			var vm = new Vue({
+				el:"#demo",
+				data:{
+					message:"hello"
+				},
+				filters:{
+					reverse:function (value,param){
+						console.log( value,param );
+						return value.split("").reverse().join(param);
+					},
+					uppercse:function (value){
+						console.log( value );
+						return value.toUpperCase()
+					}
+				}
+			});
+
+		</script>
+	</body>
+</html>

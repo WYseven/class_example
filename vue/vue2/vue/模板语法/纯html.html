@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			.red{
+				background: red;
+			}
+		</style>
+		<script src="../../vue.js"></script>
+	</head>
+
+	<body>
+		<div id="demo">
+			{{message}}
+			<p v-html="message"></p>
+			<div class="red">我是红色的块</div>
+			<div v-bind:class="className">我是红色的块</div>
+			<hr>
+			<div>
+				{{1+2}}
+				{{ isOk ? "我是真的" : "我是假的" }}
+
+				{{ className = 10 }}
+				{{ Math.random() }}
+			</div>
+		</div>
+		<script>
+			/*
+				纯html
+					双大括号中会被解释为纯文本，而想解析为html，需要加上指令v-html
+
+					解析为html中绑定的数据会被忽略
+
+				属性
+					双大括号不能在html属性中使用，因此使用v-bind指令绑定
+
+				使用js表达式
+					可以在双括号中使用js表达式,只能绑定表达式，不能写成语句
+						{{ var a = 10 }}
+						{{ if(){} }}
+
+					在表达式中可以使用Math，Data这样的全局变量，不能访问用户自定义的全局变量
+
+				
+					
+			*/
+
+			var vm = new Vue({
+				el:"#demo",
+				data:{
+					message:"<div>我是html呀{{testData}}</div>",
+					testData:"我能不能被渲染出来呢？",
+					className:"red",
+					isOk:false //false
+				}
+			});
+
+			vm.once = "改不了啦"
+
+		</script>
+	</body>
+</html>
