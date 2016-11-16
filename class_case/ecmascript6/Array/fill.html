@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+			/*
+				array.fill():
+					作用：
+						填充数组,数组已有项会全部抹去
+					返回值：
+						被填充的数组
+					参数：
+						1. 要填充的值，不填则为undefined
+						2. 可选，起始位置 正数或负数，负数-1代表最后一位
+						3. 可选，结束位置 不写默认为最后一位
+						
+			*/
+			var newArr = Array.of(1,2,3,4);
+
+			//var abc = newArr.fill();
+			//var abc = newArr.fill("a",-1,0);
+			var abc = newArr.fill("a",newArr.length);
+
+			console.log( abc );
+			console.log( newArr );
+
+		</script>
+	</head>
+
+	<body>
+		<ul id="demo">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+	</body>
+</html>

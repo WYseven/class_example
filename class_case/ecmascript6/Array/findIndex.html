@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+			/*
+				array.findIndex():
+					作用：
+						找出第一个符合条件的数组元素的位置
+					返回值：
+						第一次回调函数返回true的项
+						数组中的成员都不符合条件，返回-1
+					参数：
+						回调函数
+							回调函数接收三个参数：循环的项，下标，引用的数组
+			*/
+			var newArr = Array.of(1,2,3,4);
+
+			var abc = newArr.findIndex(function (item){
+				return item > 100;
+			});
+
+			console.log( abc );
+
+		</script>
+	</head>
+
+	<body>
+		<ul id="demo">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+	</body>
+</html>

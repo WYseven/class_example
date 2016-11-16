@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+			/*
+				Array.from(类数组|数组|字符串,[callback]):
+					作用：
+						将类数组|数组|字符串变为数组
+					返回值：
+						新的数组
+					参数：
+						1. 类数组|数组|字符串
+						2. 可选的callback
+							对每个类数组的每一项进行处理，将处理后的值返回在新数组中。
+			*/
+
+			
+
+			window.onload = function(){
+				var allLi = document.querySelectorAll("li");  //返回的是nodeList集合
+				/*var newArr = [].slice.call(allLi);
+
+				newArr.push(1);
+
+				console.log( newArr );*/
+
+				/*var newArr = Array.from(allLi,function (item){
+						return item.textContent;
+				});
+
+				newArr.push(1)
+
+				console.log( newArr );*/
+
+				console.log( Array.from("abc").length );	
+			};
+
+		</script>
+	</head>
+
+	<body>
+		<ul id="demo">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+	</body>
+</html>
