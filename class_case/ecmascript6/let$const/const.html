@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        /*
+        * conct 声明变量，一旦声明值就不能改变
+        * conct声明变量并且必须立即初始化
+        * 声明只在块级作用域中有效
+        *
+        * 如果值是一个引用类型的值，那么会改变值
+        * */
+
+       // const KEY = 20;
+
+        //KEY = 30;
+
+        const KEY = [];
+
+        KEY.push(1);
+
+        console.log(KEY);
+
+        /*
+        *
+        * 冻结对象 调用Object.freeze方法
+        *
+        * */
+
+        function deepFreeze(obj){
+            Object.freeze(obj);
+
+            Object.keys(obj).forEach(function(key){
+                if( typeof obj[key] === 'object'){
+                    deepFreeze(obj[key])
+                }
+            })
+
+        }
+
+        const obj = Object.freeze({a:1,b:2,fn:{}});  //冻结对象
+
+        obj.fn.k = 30;
+
+        console.log(obj);
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

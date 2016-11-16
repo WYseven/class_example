@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+       /*
+       *
+       * 严格模式 "strict mode"
+       *
+       * 使用严格模式可以消除js语法上不合理，不严谨，减少怪异的行为
+       *
+       * 开启严格模式：
+       * 1. 在一对script标签的开始使用字符串 "use strict"
+       * 2. 在函数中使用字符串 'use strict'
+       *
+       * 在严格模式下，使用以下的注意点：
+       *
+       * 1. 直接调用函数，函数中的this就不指向window了，而是undefined
+       * 2. 使用call第一参数改变this指向，在es5中指向是window，在严格模式下执行传入的第一个参数
+       * 3. 形参不能重复声明，重复声明会报错
+       * 4. arguments不能追踪变化
+       * 5. 不允许对arguments赋值
+       * 5. 声明变量必须显式的使用var来声明变量，不是用var回报错
+       * 6. 试图用delete删除变量回报错
+       * 7. 函数声明必须在顶层或函数作用域中，在非函数的代码块中会报错
+       *
+       * 参考：http://www.ruanyifeng.com/blog/2013/01/javascript_strict_mode.html
+       * https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Functions_and_function_scope/Strict_mode
+       * */
+
+       "use strict"
+
+       var a = 10;
+
+       if(true){
+           function fn(){}
+       }
+
+       fn();
+
+
+
+     //  delete a;
+
+      /* console.log(a);
+
+       function test(){
+           console.log(this);
+       }
+
+       test();
+
+       test.call(undefined);
+
+        function fn(a,b){   //竟然可以重复写入两个相同的变量
+            console.log(a);
+            b = 30;
+
+            arguments = 123;
+            console.log(arguments);
+
+
+        }
+
+        fn(1,2,3,4);
+
+        var obj = {
+            a:1,
+            a:2
+        }
+
+        console.log(obj);*/
+
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

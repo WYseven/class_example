@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        'use strict';
+        /*
+         * let声明变量会在块级作用域中生效
+         * 不存在变量提升
+         * 所声明的变量就会锁死在这个区域，被称之为暂时性死区
+         * 在let声明变量之前，变量不可用
+         * 不能重复的声明变量
+         *
+         * 严格模式下，函数不能再块级作用域中声明，浏览器并没遵守这个规定，但是在严格模式就会报错
+         * */
+
+        if(true){
+            var abc = 1;
+            let test = 10;
+        }
+
+        /*console.log(abc);
+        console.log(test);*/
+
+       // console.log(test);
+
+        /*let test = 30;
+
+        let test = 30;*/
+
+        if(false){
+            function fn(){
+                console.log(123);
+            }
+        }
+       // console.log(fn);
+        //fn();
+
+        function fn1(){
+            console.log(1);
+        }
+
+        function func(){
+            if(true){
+
+                function fn1(){}
+
+                console.log(fn1);
+
+            }
+
+            console.log(fn1);
+        }
+
+        func();
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
