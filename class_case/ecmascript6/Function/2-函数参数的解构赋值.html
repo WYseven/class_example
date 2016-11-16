@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /*
+        * 可以使用解构赋值
+        * */
+
+
+
+        /*function fn(
+                {x,y=30}
+        ) {
+
+            console.log(x,y);
+            
+        }
+
+        //fn();  一定要出入对象，否则会报错
+
+        fn({}); //x，y都为undefined，因为你没有给任何默认值
+
+        fn({x:10}) //10，30  y为默认值*/
+
+
+        /*function fn(
+                {x,y=30} = {}
+        ) {
+
+            console.log(x,y);
+
+        }
+
+        fn();  //可以给一个默认的对象，双重默认值
+
+        fn({}); //x，y都为undefined，因为你没有给任何默认值
+
+        fn({x:10}) //10，30  y为默认值*/
+
+        //---
+
+        function fn(
+            {x,y=30} = {}
+         ) {
+            console.log(x,y);
+
+         }
+
+         fn();  //可以给一个默认的对象，双重默认值
+
+         fn({}); //x，y都为undefined，因为你没有给任何默认值
+
+         fn({x:10}) //10，30  y为默认值
+
+
+
+        
+    </script>
+</head>
+<body>
+
+</body>
+</html>

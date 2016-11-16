@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /*
+        *ES6引入了rest参数形式，即（...变量），这个变量存的是一个数组
+        *
+        * 使用rest参数，就可以不用arguments啦
+        *
+        * rest参数之后，不能再有其他参数，rest只能是最后一个参数
+        *
+        * */
+
+        function fn(){
+            console.log(arguments);
+        }
+
+        fn(1,2,3,4,5);
+
+        function fn2(a,...args){
+            console.log(args);
+
+            console.log(args.push);
+        }
+
+        fn2(1,2,3,4,5,6,7);
+
+
+
+
+        
+    </script>
+</head>
+<body>
+
+</body>
+</html>
