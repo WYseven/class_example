@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			//定义一个类
+			//类的属性名可以使用表达式
+			//不存在变量提升
+			var methods = 'abc';
+			class Dialog{
+				//默认方法，当使用new实例化的时候，自动会调用这个函数
+				constructor(){
+					this.a =10;
+					console.log("我是构造函数");
+				}
+				say(){
+					console.log("会说话");
+				}
+				run(){
+					console.log("会奔跑");
+				}
+				[methods](){
+
+				}
+			}
+
+			//给类中添加方法，就相当于在prototype上扩展方法
+
+			//这些方法都是不可枚举的
+
+			console.log( Object.keys(Dialog) );
+			//获取自身的属性
+			console.log( Object.getOwnPropertyNames(Dialog.prototype) );
+
+			new Dialog();
+			//类本身就形象构造函数
+			console.log( Dialog === Dialog.prototype.constructor );
+
+			console.log( new Dialog instanceof Dialog );
+
+			//console.log( typeof Dialog );
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				对数组进行解构赋值
+			*/
+
+			var a = 1;
+			var b = 2;
+			var c = 3;
+
+			var arr = [1,2];
+
+			var [a,b,c=30,d] = arr;
+
+			console.log( a,b,c,d );
+
+			//这样会报错
+			//var [k] = 1;
+
+			/*
+				对对象进行解构赋值
+			*/
+
+			var {foo:a,bar,k=30} = {foo:1,bar:2};
+			/*
+				: 形式取一个别名
+			*/
+			console.log( a,k );
+
+			function fn({url,data,success=function(){}}){
+					console.log( url,data,success );
+			}
+
+			fn({
+				url:"1",
+				data:1,
+				success:function (){
+					console.log(1);	
+				}
+			})
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

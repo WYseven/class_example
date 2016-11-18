@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+
+			/*
+				使用extends来继承一个类
+
+				当在子类中使用constructor，那么需要调用super方法，super就代表的是父类的构造函数
+
+				在es6中先创建的而是父类的实例，然后子类再在这个this上修改，如果不调用super，会报错
+
+				如果不使用constructor方法，会自动调用super
+			*/
+			
+			class People{
+				constructor(){
+					console.log("我是父级");
+				}
+			}
+
+			class Children extends People{
+				constructor(){
+					console.log( super() );
+					console.log("我是子级");
+				}
+			}
+
+			new Children();
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>
