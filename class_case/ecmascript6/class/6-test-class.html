@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        //定义类父类
+        class Parent {
+
+            constructor(name,age){
+                this.name = name;
+                this.age = age;
+            }
+
+            speakSometing(){
+                console.log("I can speek chinese");
+            }
+        }
+        //定义子类，继承父类
+        class Child extends Parent {
+            constructor(name,age){
+                //不调super()，则会报错  this is not defined
+
+                //必须调用super
+                super(name,age);
+            }
+
+            coding(){
+                console.log("coding javascript");
+            }
+        }
+
+        var c = new Child("job",30);
+
+        //可以调用父类的方法
+        c.speakSometing(); // I can speek chinese
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
