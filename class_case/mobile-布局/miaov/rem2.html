@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="user-scalable=no,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0" >
+        <title></title>
+		
+		<!--
+			不设置viewport默认的浏览器的可视窗口大小一般是980
+			如果设置了缩放 默认 width 是 device-width
+		-->
+
+		<style>
+			html {
+				font-size:20px;
+			}
+			body{
+				margin: 0;
+			}
+			div{
+				width: 7.68rem;
+				height: 7.68rem;
+				background: red;
+				float: left;
+
+			}
+		</style>
+		<script>
+			/*(function(){
+				var html = document.documentElement;
+				var htmlW = html.getBoundingClientRect().width;
+				html.style.fontSize = 	htmlW/16+"px";
+				// 1rem = 屏幕宽度的 1/16
+			})();*/
+		</script>
+	</head>
+
+	<body>
+		<div style="background: green;">这是我的第一个移动端页面</div>
+		<div style="background: blue;">这是我的第一个移动端页面</div>
+		<div style="background: yellow;">这是我的第一个移动端页面</div>
+		<div>这是我的第一个移动端页面</div>
+	</body>
+</html>

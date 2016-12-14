@@ -12,7 +12,12 @@ Array.from()
 Array.isArray()
 	作用：
 		判断一个值是否是数组类型，是返回true，否则放回false
-
+	用法：
+		Boolean Array.isArray(arg)
+	参数：
+		任意类型的值
+	返回值：
+		布尔值
 
 
 arr.map()

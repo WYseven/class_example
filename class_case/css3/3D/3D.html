@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			#demo{
+				width: 500px;
+				height: 500px;
+				border: 1px solid #000;
+				margin: 0px auto;
+				position: relative;
+				perspective: 800px;
+			}
+			.exa{
+				width: 200px;
+				height: 200px;
+				background: red;
+				color: #fff;
+				font-size: 50px;
+				transform: rotateY(0deg);
+				transition: 2s;
+				backface-visibility: hidden;
+			}
+			.heng {
+				width: 200px;
+				height: 200px;
+				background: yellow;
+			}
+			#demo:hover .exa{
+				transform: rotateY(180deg);
+			}
+			.dian {
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+				background: #000;
+				position: absolute;
+				left: 100px;
+				top: 100px;
+			}
+		</style>
+		<script>
+			/*
+				transform:
+					rotate()
+						作用：旋转
+						默认：沿着Z轴顺时针旋转
+						参数：
+							角度：
+								单位deg
+							周（圈）
+								单位turn FF不兼容
+							grad rad
+						
+						rotateX()
+						rotateY()
+						rotate3d()
+
+					skew()
+					scale()
+						作用：缩放
+						默然：沿着X，Y轴缩放
+							  两个值分别为(x,y)
+						scaleX()
+						scaleY()
+						scale3d()
+					translate()
+						作用：位移
+						默然：沿着X轴位移
+							两个值分别为（X,Y）
+						translateX()
+						translateY()
+						translate3d()
+
+				以上方法组合使用，先写后执行,后写先执行，执行完成后，原点不随着执行后改变，还保持在原来的位置
+				
+				transform-orign：X Y Z
+					作用是：设置原点
+					对应的值：
+						默认为 center center
+						可以设置 left top right bottom
+						也可以设置 px %
+					受到原点影响的方法为：rotate() skew() scale()
+
+				perspective:景深
+				perspective-origin:景深原点
+
+				transform-3d:让子元素拥有3d功能
+
+				backface-visibility 隐藏背面
+
+			*/
+		</script>
+	</head>
+
+	<body>
+		<div id="demo">
+			<div class="exa">
+				我被蹂躏
+				<div class="heng"></div>
+			</div>
+			<div class="dian"></div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+
+    </style>
+    <script>
+
+        var str = '1223ggg555gg';
+        var str2 = '123&355g5';
+
+        var re = /^(?=.*[a-zA-Z])(?=.*[0-9])\w{6,12}$/g;
+
+        str.replace(re,function ($0,$1,$2){
+            console.log( $0 );
+            console.log( $1 );
+            console.log( $2 );
+        })
+
+        console.log( re.test(str) );
+        re.lastIndex = 0;
+        console.log( re.test(str2) );
+
+        var str3 = 'ab1';
+        var str4 = 'adc';
+
+        var re2 = /(?=-]).*/g;
+
+        console.log( re2.test(str3) );
+
+        str3.replace(re2,function($0){
+            console.log($0);
+        })
+
+        str4.replace(/(?=ab)c/g,function ($0){
+            console.log( $0 );
+        })
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>

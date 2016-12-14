@@ -1,5 +1,3 @@
-
-
 var list = [
 	{
 		id:1,
@@ -9,7 +7,7 @@ var list = [
 	{
 		id:2,
 		title:"hello,vuejs2",
-		isSelected:false
+		isSelected:true
 	}
 ];
 
@@ -33,13 +31,79 @@ function itemHtml(options){
 
     return newLi;
 }
+//先拿到hash
+var active = '#all';
+hashchangeFn();
+
+var filtersA = $(".filters a");
+
+var filters = {
+	"#all":function (){
+		return list.map(function (item){
+			return item;
+		});	
+	},
+	"#active":function (){
+		return list.filter(function (item){
+			return !item.isSelected;
+		});	
+	},
+	"#completed":function (){
+		return list.filter(function (item){
+			return item.isSelected;
+		});	
+	}
+}
+
+function render(){
+	var list2 = filters[active]();
+
+	//根据数据渲染出页面结构
+	list2.forEach(function (item){
+		$(".todo-list").append(itemHtml(item));
+	});
+	filtersA.removeClass('selected');
+	switch(active){
+		case '#all':
+			filtersA.eq(0).addClass("selected");
+		break
+		case '#active':
+			filtersA.eq(1).addClass("selected");
+		break
+		case '#completed':
+			filtersA.eq(2).addClass("selected");
+		break
+	}
+}
+render();
+
+//获取所有的input[type="checkbox"]
+var allCheckboxs = $(".todo-list").find("input[type='checkbox']");
+
+//获取所有的li
+var allLi = $(".todo-list").find("li");
+
+//获取strong
+var strong = $(".todo-count strong");
 
 
-list.forEach(function (item){
-	$(".todo-list").append(itemHtml(item));
-});
+
+//全选是否选中，取决于数据的isSelected是否全为true
+function isAddSelect(){
+	var num = 0;
+	list.forEach(function (item){
+		if( item.isSelected ){
+			num++;
+		}
+	});
+	return num;
+}
+
+$(".toggle-all").prop('checked',isAddSelect() == list.length);
+strong.text(list.length-isAddSelect());
 
 
+//单条信息input的change
 $(".todo-list").on("change","input[type='checkbox']",function (){
 	var isSelected = $(this).prop("checked");
 	if( isSelected ){
@@ -57,13 +121,13 @@ $(".todo-list").on("change","input[type='checkbox']",function (){
 
 	oneList.isSelected = isSelected;
 
-	list.splice(i,1,oneList);
+	$(".toggle-all").prop('checked',isAddSelect() == list.length);
+	strong.text(list.length-isAddSelect());
 
-	console.log( list );
+	list.splice(i,1,oneList);
 
 })
 .on("click",'.destroy',function (){
-	console.log(123);
 	var id = $(this).parents("li").data("id");
 	//同时更新数据
 	var id = $(this).parents("li").data("id");
@@ -79,6 +143,9 @@ $(".todo-list").on("change","input[type='checkbox']",function (){
 	}else{
 		$(".todo-list").html("");
 	}
+
+	$(".toggle-all").prop('checked',isAddSelect() == list.length);
+	strong.text(list.length-isAddSelect());
 })
 
 
@@ -94,7 +161,50 @@ $(".new-todo").on("keyup",function (ev){
 		$(".todo-list").append(itemHtml(singleItem));	
 
 		$(this).val("");
+		$(".toggle-all").prop('checked',isAddSelect() == list.length);
+		strong.text(list.length-isAddSelect());
 	};
+});
+
+$(".toggle-all").on("change",function (){
+	var allCheckboxs = $(".todo-list").find("input[type='checkbox']");
+	//获取所有的li
+	var allLi = $(".todo-list").find("li");
+	var checked = $(this).prop('checked');
+
+	allCheckboxs.prop("checked",checked);
+
+	if( checked ){
+		allLi.addClass('completed');
+	}else{
+		allLi.removeClass('completed');
+	}
+
+	//改变数据
+
+	list.forEach(function (item){
+		item.isSelected = checked;
+	})
+
+	strong.text(list.length-isAddSelect());
+});
+
+
+//监控has
+
+
+function hashchangeFn(){
+	var hash = window.location.hash;
+	if( hash ){
+		active = hash;
+	}
 
 	
-})
+}
+
+window.addEventListener('hashchange',function (){
+	hashchangeFn();
+	$(".todo-list").html("");
+	render();	
+});
+

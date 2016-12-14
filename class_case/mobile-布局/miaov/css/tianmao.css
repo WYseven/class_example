@@ -1,0 +1,55 @@
+/*
+Error: Invalid CSS after "185/": expected expression (e.g. 1px, bold), was "@r"
+        on line 4 of E:\git\class_example\class_case\mobile-布局\miaov\less\tianmao.sass
+
+1: @r = 46.25
+2: 
+3: .w 
+4: 	width: 185/@r
+
+Backtrace:
+E:\git\class_example\class_case\mobile-布局\miaov\less\tianmao.sass:4
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1165:in `expected'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/script/lexer.rb:220:in `expected!'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/script/parser.rb:573:in `assert_expr'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/script/parser.rb:235:in `times_div_or_mod'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/script/parser.rb:227:in `plus_or_minus'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/script/parser.rb:227:in `relational'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/script/parser.rb:227:in `eq_or_neq'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/script/parser.rb:227:in `and_expr'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/script/parser.rb:227:in `or_expr'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/script/parser.rb:361:in `space'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/script/parser.rb:345:in `interpolation'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/script/parser.rb:293:in `expr'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/script/parser.rb:571:in `assert_expr'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/script/parser.rb:62:in `parse'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/script/parser.rb:183:in `parse'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/script.rb:27:in `parse'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:1120:in `parse_script'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:710:in `parse_property'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:681:in `parse_property_or_rule'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:647:in `parse_line'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:525:in `build_tree'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:544:in `block in append_children'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:543:in `each'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:543:in `append_children'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:534:in `block in build_tree'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:527:in `each'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:527:in `build_tree'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:544:in `block in append_children'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:543:in `each'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:543:in `append_children'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:396:in `_to_tree'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:268:in `render'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:404:in `run'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:62:in `process_result'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:52:in `parse'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:19:in `parse!'
+C:/Program Files/Koala/rubygems/gems/sass-3.4.9/bin/sass:13:in `<top (required)>'
+C:/Program Files/Koala/bin/sass:18:in `load'
+C:/Program Files/Koala/bin/sass:18:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"185/\": expected expression (e.g. 1px, bold), was \"@r\"\A         on line 4 of E:\git\class_example\class_case\mobile-布局\miaov\less\tianmao.sass\A \A 1: @r = 46.25\A 2: \A 3: .w \A 4: 	width: 185/@r"; }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="../jquery-2.2.4.js"></script>
+		<script>
+			function aa(){console.log(1);}
+			function bb(){console.log(2);}
+			function cc(){console.log(3);}
+			var a = $.Callbacks("memory");
+			a.add(aa,bb);
+			a.fire();
+			a.fire();
+			a.fire();
+			a.add(cc);
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

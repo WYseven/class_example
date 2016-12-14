@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="user-scalable=no,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0" >
+        <title></title>
+		
+		<!--
+			不设置viewport默认的浏览器的可视窗口大小一般是980
+			如果设置了缩放 默认 width 是 device-width
+		-->
+
+		<style>
+			body {
+				margin: 0;
+			}
+		</style>
+		<script>
+			//alert(window.devicePixelRatio)
+			(function(){
+				var scale = 1;	
+				var ratio = window.devicePixelRatio;
+				var meta = document.createElement("meta");
+				alert(window.screen.width);
+				meta.setAttribute("name","viewport");
+				meta.setAttribute("content","user-scalable=no,minimum-scale="+scale/ratio+",maximum-scale="+scale/ratio+",initial-scale="+scale/ratio);
+				document.head.appendChild(meta);
+			})();
+			
+		</script>
+	</head>
+
+	<body>
+		<div style="width: 200px;height: 200px;background: red; border-bottom: 1px solid #000;">这是我的第一个移动端页面</div>
+	</body>
+</html>
