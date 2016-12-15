@@ -291,25 +291,20 @@
 		edtor.focus();
 
 		create.isCreate = true;  //新建的状态
+		if(rename.isRename){
+			(function(){
+				var selectArr = whoSelect();
+				var firstElement = selectArr[0];
+				var fileTitle = firstElement.querySelector(".file-title");
+				var fileEdtor = firstElement.querySelector(".file-edtor");
+				var edtor = firstElement.querySelector(".edtor");
 
-		//使用失去焦点方式做也可以，不推崇使用，一个事件套在了另一事件中
-		//使用了，最好把事件解绑
+				fileTitle.style.display = "block";
+				fileEdtor.style.display = "none";
 
-		/*t.on(edtor,"blur",function fn(){
-			
-
-			t.off(edtor,"blur",fn)	
-		})
-		edtor.onblur = function (){
-			//alert(1);
-			//新建成功
-			fileTitle.style.display = "block";
-			fileEdtor.style.display = "none";
-
-			fileTitle.innerHTML = edtor.value;
-
-			edtor.onblur = null;
-		};*/
+				rename.isRename = false;
+			})()
+		}
 	})
 
 	//keyup的时候也可以创建成功
@@ -395,12 +390,79 @@
 	}
 
 	//----------删除---------
+	function whoSelect(){
+		return Array.from(checkboxs).filter(function(item){
+			return t.hasClass(item,"checked");
+		}).map(function(item){
+			return t.parent(item,".file-item");
+		})
+	}
 
-	/*var delect = document.querySelector(".delect");
+	var delect = document.querySelector(".delect");
 
 	t.on(delect,"click",function (){
-		fullTip("warn","请选择文件")	
-	})*/
+		var selectArr = whoSelect();
+		if( selectArr.length ){
+			
+			var arr = selectArr.map(function(item){
+				return item.dataset.id;
+			});
+
+			handle.delectChildsAllByIdArr(datas,arr);
+
+			render(currentId);
+			treeMenu.innerHTML = createTreeHtml(datas,-1);
+
+			fullTip("ok","删除成功");
+
+		}else{
+			fullTip("warn","请选择文件")
+		}	
+	})
+
+	//----------重命名------------
+
+	var rename = document.querySelector(".rename");
+
+	t.on(rename,"click",function(){
+		var selectArr = whoSelect();
+		if(selectArr.length > 1){
+			fullTip("warn","重命名文件最多只能选择一个")
+		}else if(selectArr.length === 1){
+			var selectArr = whoSelect();
+			var firstElement = selectArr[0];
+			var fileTitle = firstElement.querySelector(".file-title");
+			var fileEdtor = firstElement.querySelector(".file-edtor");
+			var edtor = firstElement.querySelector(".edtor");
+
+			fileTitle.style.display = "none";
+			fileEdtor.style.display = "block";
+			edtor.value = fileTitle.innerHTML.trim();
+			edtor.select();
+
+			rename.isRename = true;
+			
+
+		}else{
+			fullTip("warn","请选择文件")
+		}
+	})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

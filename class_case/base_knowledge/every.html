@@ -2,12 +2,98 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
+    <script src="./data.js"></script>
     <script>
+        /*
+        * every
+        * map
+        * filter
+        * find
+        *
+        * */
+
+        window.onload = function(){
+            var data = [
+                {
+                    id:1,
+                    title: "hello",
+                    data:"2016-11-12"
+                },
+                {
+                    id:2,
+                    title: "hello",
+                    data:"2016-11-12"
+                },
+                {
+                    id:3,
+                    title: "hello",
+                    data:"2016-11-12"
+                }
+            ]
+
+            function fomateData(){
+                var d = new Date();
+                return d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+            }
+
+            function render(arr){
+                var html = '';
+                arr.forEach(function(item){
+                    html += '<li>'+item.title+'<span>'+item.data+'</span></span><input data-id="'+item.id+'" type="button" value="删除" /></li>'
+                });
+
+                return html;
+            }
+
+            list.innerHTML = render(data);
+
+            text.onkeyup = function(ev){
+                if( ev.keyCode === 13){
+                    data.unshift({
+                        id:Math.random(),
+                        title: this.value,
+                        data: fomateData()
+                    })
+
+                    list.innerHTML = render(data);
+                }
+            }
+
+            list.onclick = function (ev){
+                if( ev.target.nodeName.toLowerCase() === "input" ){
+                    var id = ev.target.dataset.id;
+                    /*data = data.filter(function(item){
+                     return item.id != id;
+                     })*/
+
+                    for( var i = 0; i < data.length; i++ ){
+                        if( data[i].id == id ){
+                            data.splice(i,1);
+                            break;
+                        }
+                    }
+
+                    console.log(data);
+
+                    list.innerHTML = render(data);
+
+                }
+            }
+
+
+        }
+
 
     </script>
 </head>
 <body>
-$END$
+<input type="text" id="text"  />
+<ul id="list">
+    <li>
+        hello
+        <span>2016-11-12</span>
+    </li>
+</ul>
 </body>
 </html>

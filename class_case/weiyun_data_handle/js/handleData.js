@@ -43,7 +43,59 @@ var handle = {
 		return childs.findIndex(function(item){
 			return item.title === value;
 		}) !== -1;
+	},
+
+	getChildsAllById(data,id){
+		var arr = [];
+		var self = handle.getSelfById(data,id);
+		arr.push(self);
+		var childs = handle.getChildsById(data,self.id);
+
+		childs.forEach(function(item){
+			arr = arr.concat(handle.getChildsAllById(data,item.id))
+		})
+
+		return arr;
+	},
+	//找到传入数组的id的所有的子级
+	//
+	getChildsAllByIdArr(data,idArr){
+		var childsObj = [];
+		idArr.forEach(function(value){
+			childsObj = childsObj.concat(handle.getChildsAllById(data,value));
+		});
+		return childsObj;
+	},
+	delectChildsAllByIdArr(data,idArr){
+		var obj = handle.getChildsAllByIdArr(data,idArr);
+		for( var i = 0; i < data.length; i++ ){
+			for( var j = 0; j < obj.length; j++ ){
+				if( obj[j] === data[i] ){
+					data.splice(i,1);
+					i--;
+					break;
+				}
+			}
+		}
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 }
 

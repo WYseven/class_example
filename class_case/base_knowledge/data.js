@@ -3,8 +3,6 @@
 	第一层的id为 0
 */
 
-
-
 var data = {
 	files:[
 		{
