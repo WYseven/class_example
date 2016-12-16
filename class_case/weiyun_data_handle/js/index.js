@@ -291,20 +291,25 @@
 		edtor.focus();
 
 		create.isCreate = true;  //新建的状态
-		if(rename.isRename){
-			(function(){
-				var selectArr = whoSelect();
-				var firstElement = selectArr[0];
-				var fileTitle = firstElement.querySelector(".file-title");
-				var fileEdtor = firstElement.querySelector(".file-edtor");
-				var edtor = firstElement.querySelector(".edtor");
 
-				fileTitle.style.display = "block";
-				fileEdtor.style.display = "none";
+		//使用失去焦点方式做也可以，不推崇使用，一个事件套在了另一事件中
+		//使用了，最好把事件解绑
 
-				rename.isRename = false;
-			})()
-		}
+		/*t.on(edtor,"blur",function fn(){
+			
+
+			t.off(edtor,"blur",fn)	
+		})
+		edtor.onblur = function (){
+			//alert(1);
+			//新建成功
+			fileTitle.style.display = "block";
+			fileEdtor.style.display = "none";
+
+			fileTitle.innerHTML = edtor.value;
+
+			edtor.onblur = null;
+		};*/
 	})
 
 	//keyup的时候也可以创建成功
@@ -366,6 +371,17 @@
 
 				fullTip("ok","新建成功");
 
+				//把所有的checkboxs的class去掉
+
+				var selectArr = whoSelect();
+
+				selectArr.forEach(function (item){
+					var checkbox = item.querySelector(".checkbox");
+					t.removeClass(checkbox,"checked");
+					t.removeClass(item,"file-checked");
+				});
+				t.removeClass(checkedAll,"checked");
+
 
 			}
 
@@ -390,10 +406,14 @@
 	}
 
 	//----------删除---------
+
+	//那些文件被选中了
 	function whoSelect(){
-		return Array.from(checkboxs).filter(function(item){
-			return t.hasClass(item,"checked");
-		}).map(function(item){
+		//var arr = [];
+		//找所有的checkboxs的class为checked
+		return Array.from(checkboxs).filter(function (item){
+			return t.hasClass(item,"checked");	
+		}).map(function (item){
 			return t.parent(item,".file-item");
 		})
 	}
@@ -401,69 +421,166 @@
 	var delect = document.querySelector(".delect");
 
 	t.on(delect,"click",function (){
+
+		//点击删除，没有选择文件和选择文件两种情况
 		var selectArr = whoSelect();
+
 		if( selectArr.length ){
-			
-			var arr = selectArr.map(function(item){
+
+			//删除掉要删的文件的所有的子孙数据
+			//1. 拿到要删除数据的id
+
+			//1-1， 删除一个指定id的所有的子孙数据
+
+			var id = selectArr[0].dataset.id;
+
+			/*var idArr = selectArr.map(function (item){
 				return item.dataset.id;
-			});
+			})*/
 
-			handle.delectChildsAllByIdArr(datas,arr);
+			var idArr = [];
 
-			render(currentId);
+			for( var i = 0; i < selectArr.length; i++ ){
+				idArr.push(selectArr[i].dataset.id);
+			}
+
+			//console.log( handle.getChildsAll(datas,id) );
+
+			//console.log( handle.getChildsAllByIdarr(datas,idArr) );
+
+			//删除拿到的数据
+
+		
+			handle.delectChildsAll(datas,idArr);
+
 			treeMenu.innerHTML = createTreeHtml(datas,-1);
+			render(currentId);
 
-			fullTip("ok","删除成功");
+
 
 		}else{
-			fullTip("warn","请选择文件")
-		}	
+			fullTip("warn","请填写完必填项，才可以预览")
+		}
+
+			
 	})
 
-	//----------重命名------------
 
-	var rename = document.querySelector(".rename");
+	//------------------框选---------------------
 
-	t.on(rename,"click",function(){
-		var selectArr = whoSelect();
-		if(selectArr.length > 1){
-			fullTip("warn","重命名文件最多只能选择一个")
-		}else if(selectArr.length === 1){
-			var selectArr = whoSelect();
-			var firstElement = selectArr[0];
-			var fileTitle = firstElement.querySelector(".file-title");
-			var fileEdtor = firstElement.querySelector(".file-edtor");
-			var edtor = firstElement.querySelector(".edtor");
+	function getRect(obj){
+		return obj.getBoundingClientRect();
+	}
+	/*
+		obj1 拖拽的元素
+		obj2 被碰撞的元素
+	*/
+	function pengzhuang(obj1,obj2){
+		var obj1Rect = 	getRect(obj1);
+		var obj2Rect = 	getRect(obj2);
 
-			fileTitle.style.display = "none";
-			fileEdtor.style.display = "block";
-			edtor.value = fileTitle.innerHTML.trim();
-			edtor.select();
+		//如果obj1碰上了哦obj2返回true，否则放回false
+		var obj1Left = obj1Rect.left;
+		var obj1Right = obj1Rect.right;
+		var obj1Top = obj1Rect.top;
+		var obj1Bottom = obj1Rect.bottom;
 
-			rename.isRename = true;
+		var obj2Left = obj2Rect.left;
+		var obj2Right = obj2Rect.right;
+		var obj2Top = obj2Rect.top;
+		var obj2Bottom = obj2Rect.bottom;
+
+		if( obj1Right < obj2Left || obj1Left > obj2Right || obj1Bottom < obj2Top || obj1Top > obj2Bottom ){
+			return false;
+		}else{
+			return true;
+		}
+
+
+	}
+
+	//画方块
+	var div = null,
+		disX = null,
+		disY = null;
+		t.on(document,"mousedown",function (ev){
+			if(ev.which !== 1) return;
+			ev.preventDefault();
+			if( !t.parent(ev.target,".file-list") ){
+				return;
+			}
+
+			//找到操作的file-item 判断下面checkbox是否有class为checked
+			var isChecked = false;
+			if( t.parent(ev.target,".file-item") ){
+				isChecked = !!t.parent(ev.target,".file-item").querySelector(".checked");
+			}
+
 			
 
-		}else{
-			fullTip("warn","请选择文件")
-		}
-	})
+			disX = ev.clientX;  //摁下去的x位置
+			disY = ev.clientY;  //摁下去的Y位置
+			
+			document.onmousemove = function (ev){
+
+				if(isChecked){
+					console.log("选中");
+					return;
+				}
+				//在move的过程中，只生成一个div，只要生成了了一个div之后，就没必要再生成了
+				
+
+				//生成的div，要在一定的范围之后才append到body中
+				//15像素
+
+				//15个像素
+
+				if( Math.abs( ev.clientX - disX ) > 15 || Math.abs( ev.clientY - disY ) > 15 ){
+
+					if( !div ){
+						div = document.createElement("div");
+						div.className = "kuang";
+						document.body.appendChild(div);
+					}
+
+					div.style.width = Math.abs( ev.clientX - disX ) + "px";
+					div.style.height = Math.abs( ev.clientY - disY ) + "px";
+
+					div.style.left = Math.min(ev.clientX,disX) + "px";
+					div.style.top = Math.min(ev.clientY,disY) + "px";
+
+					//检测碰撞
+					for( var i = 0; i < fileItems.length; i++ ){
+						if( pengzhuang(div,fileItems[i]) ){
+							t.addClass(fileItems[i],"file-checked");
+							t.addClass(checkboxs[i],"checked");
+
+						}else{
+							t.removeClass(fileItems[i],"file-checked");
+							t.removeClass(checkboxs[i],"checked");
+						}
+					}
+					//判断是否全选
+					var selectArr = whoSelect();
+					if( selectArr.length === checkboxs.length ){
+						t.addClass(checkedAll,"checked")
+					}else{
+						t.removeClass(checkedAll,"checked")
+					}
+				}
 
 
 
+			}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+			document.onmouseup = function (ev){
+				document.onmousemove = null;
+				document.onmouseup = null;
+				if( div ){
+					document.body.removeChild(div);
+					//把div变量设置为null，目的再次点击还要继续生成div
+					div = null;
+				}
+			}
+	});
 })()
