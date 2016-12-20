@@ -141,7 +141,7 @@
 		//如果判断出class为checkbox，那么就不能进入到下一级，而是单选
 		//无论if是否成立，target都被赋值了
 
-		if( t.parent(target,".checkbox") ){
+		if( t.parent(target,".checkbox") && !fileList.isDrag ){
 			target = t.parent(target,".checkbox");
 			t.toggleClass(target,"checked");
 			//有一个单选没被选中，全选就不能被选中
@@ -164,9 +164,11 @@
 		var target = ev.target;
 
 		//点击文件区域，如果点击在单选和编辑的input上，不重新渲染
-		if( t.parent(target,".checkbox") ||  t.parent(target,".edtor")){
+		if( t.parent(target,".checkbox") ||  t.parent(target,".edtor") || fileList.isDrag){
 			return;
 		}
+
+		console.log(fileList.isDrag);
 
 		if( target = t.parent(target,".file-item") ){
 			var fileId = target.dataset.id;
@@ -268,6 +270,7 @@
 		//1. 通过添加数据，在文件区域中重新渲染
 		//2. 直接添加结构
 
+		if(fileList.isDrag) return;
 
 
 		var firstElement = fileList.firstElementChild;
@@ -427,43 +430,224 @@
 
 		if( selectArr.length ){
 
-			//删除掉要删的文件的所有的子孙数据
-			//1. 拿到要删除数据的id
+			dialog({
+				title:"",
+				content:"确定要删除?",
+				okFn:function(){
+					//删除掉要删的文件的所有的子孙数据
+					//1. 拿到要删除数据的id
 
-			//1-1， 删除一个指定id的所有的子孙数据
+					//1-1， 删除一个指定id的所有的子孙数据
 
-			var id = selectArr[0].dataset.id;
+					var id = selectArr[0].dataset.id;
 
-			/*var idArr = selectArr.map(function (item){
-				return item.dataset.id;
-			})*/
+					/*var idArr = selectArr.map(function (item){
+						return item.dataset.id;
+					})*/
 
-			var idArr = [];
+					var idArr = [];
 
-			for( var i = 0; i < selectArr.length; i++ ){
-				idArr.push(selectArr[i].dataset.id);
-			}
+					for( var i = 0; i < selectArr.length; i++ ){
+						idArr.push(selectArr[i].dataset.id);
+					}
 
-			//console.log( handle.getChildsAll(datas,id) );
+					//console.log( handle.getChildsAll(datas,id) );
 
-			//console.log( handle.getChildsAllByIdarr(datas,idArr) );
+					//console.log( handle.getChildsAllByIdarr(datas,idArr) );
 
-			//删除拿到的数据
+					//删除拿到的数据
 
-		
-			handle.delectChildsAll(datas,idArr);
+				
+					handle.delectChildsAll(datas,idArr);
 
-			treeMenu.innerHTML = createTreeHtml(datas,-1);
-			render(currentId);
+					treeMenu.innerHTML = createTreeHtml(datas,-1);
+					render(currentId);
+				}
+			})
+
+			
 
 
 
 		}else{
-			fullTip("warn","请填写完必填项，才可以预览")
+			fullTip("warn","请填写完必填项，才可以删除")
 		}
 
 			
 	})
+
+	//-------------------重命名----------------------
+	var rename = document.querySelector(".rename");
+	var renameObj = {};
+	t.on(rename,"click",function(){
+		var selectArr = whoSelect();
+		if( selectArr.length === 1 ){
+
+			renameObj.element = selectArr[0];
+			renameObj.fileTitle = renameObj.element.querySelector(".file-title");
+			renameObj.fileEdtor = renameObj.element.querySelector(".file-edtor");
+			renameObj.edtor = renameObj.element.querySelector(".edtor");
+
+			renameObj.fileTitle.style.display = "none";
+			renameObj.fileEdtor.style.display = "block";
+
+			renameObj.edtor.value = renameObj.fileTitle.innerHTML;
+
+			renameObj.edtor.select();
+
+			rename.isRename = true;
+
+		}else if(selectArr.length > 1){
+			fullTip("warn","不能选择多个文件，请重新选择")
+		}else{
+			fullTip("warn","请选择要重命名的文件")
+		}
+	})
+
+
+	t.on(document,"mousedown",function(){
+		if(!rename.isRename) return;
+
+		var value = renameObj.edtor.value.trim();
+
+		if( value ){
+			var isExist = handle.isTitleExist(datas,value,currentId);
+			if(value === renameObj.fileTitle.innerHTML.trim()){
+				renameObj.fileTitle.style.display = "block";
+				renameObj.fileEdtor.style.display = "none";
+			}else if(isExist){
+				renameObj.fileTitle.style.display = "block";
+				renameObj.fileEdtor.style.display = "none";
+				fullTip("warn","命名冲突，重新命名不成功");
+			}else{
+				var info = handle.getSelfById(datas,renameObj.element.dataset.id);
+
+				info.value = value;
+
+				renameObj.fileTitle.innerHTML = value;
+
+				renameObj.fileTitle.style.display = "block";
+				renameObj.fileEdtor.style.display = "none";
+
+				treeMenu.innerHTML = createTreeHtml(datas,-1);
+
+				fullTip("ok","命名成功");
+
+
+			}
+
+
+		}else{
+			renameObj.fileTitle.style.display = "block";
+			renameObj.fileEdtor.style.display = "none";
+		}
+
+		rename.isRename = false;
+
+	});
+
+	//------------------移动到-----------------------
+	var move = document.querySelector(".move");
+	var moveStatus = false;
+	var moveFIleId = false;
+	t.on(move,"click",function(){
+
+		var selectArr = whoSelect();
+		var selectArrId = whoSelect().map(function(item){
+			return item.dataset.id;
+		});
+		var selectArrData = selectArrId.map(function(value){
+			return datas.find(function(item){
+				return item.id == value;
+			})
+		});
+
+		if( selectArr.length ){
+			dialog({
+				title:"移动到",
+				content:"<div class='tree-menu-comm move-tree'>"+createTreeHtml(datas,-1)+"</div>",
+				okFn(){
+
+					if(moveStatus){
+						
+						//点击的fileId
+						var childs = handle.getChildsById(datas,moveFIleId);
+
+						for( var i = 0; i < selectArrData.length; i++ ){
+							var onOff = false;
+							for( var j = 0; j < childs.length; j++ ){
+								if( selectArrData[i].title === childs[j].title ){
+									onOff = true;
+								}
+							}
+
+							if( !onOff ){
+								selectArrData[i].pid = moveFIleId;
+								fileList.removeChild(selectArr[i]);
+								selectArr.splice(i,1,false);
+							}
+						}
+
+						var arr = selectArr.filter(function(item){
+							return item !== false;
+						})
+
+						if( arr.length ){
+							fullTip("warn","部分移动失败，重名了");
+						}
+
+						treeMenu.innerHTML = createTreeHtml(datas,-1);
+
+
+					}else{
+						return true;
+					}
+				}
+			});
+
+			moveTreeFn();
+		}else{
+			fullTip("warn","请选择要移动的文件");
+		}
+		
+	});
+
+	//----------------给移动到的属性菜单添加点击处理------------------
+	function moveTreeFn(){
+		var moveTree = document.querySelector(".move-tree");
+		var selectArrId = whoSelect().map(function(item){
+			return item.dataset.id;
+		});
+		var allChilds = handle.getChildsAllByIdarr(datas,selectArrId);
+
+		var errorSpan = document.querySelector(".full-pop .error");
+		var currentTree = moveTree.querySelector(".tree-title");
+		t.addClass(currentTree,"tree-nav");
+		t.on(moveTree,"click",function(ev){
+			var target = ev.target;
+
+			if( target = t.parent(target,".tree-title") ){
+				t.removeClass(currentTree,"tree-nav");
+				t.addClass(target,"tree-nav");
+				currentTree = target;
+				var fileId = target.dataset.id;
+				//不能移动到自身下面，和他的子孙元素下
+				var obj = allChilds.find(function(value){
+					return value.id == fileId;
+				});
+
+				if(obj){
+					errorSpan.innerHTML = "不能移动到自身和子元素下";
+					moveStatus = false;
+				}else{
+					errorSpan.innerHTML = "";
+					moveStatus = true;
+					moveFIleId = fileId;
+				}
+
+			}
+		})
+	}
 
 
 	//------------------框选---------------------
@@ -502,7 +686,9 @@
 	//画方块
 	var div = null,
 		disX = null,
-		disY = null;
+		disY = null,
+		downObj = null,
+		dragDiv = null;
 		t.on(document,"mousedown",function (ev){
 			if(ev.which !== 1) return;
 			ev.preventDefault();
@@ -516,6 +702,10 @@
 				isChecked = !!t.parent(ev.target,".file-item").querySelector(".checked");
 			}
 
+
+			//添加上一个状态，为正在拖拽的状态
+			fileList.isDrag = true;
+
 			
 
 			disX = ev.clientX;  //摁下去的x位置
@@ -525,6 +715,61 @@
 
 				if(isChecked){
 					console.log("选中");
+					if( !dragDiv ){
+						selectArr2 = whoSelect();
+						dragDiv = document.createElement('div');
+						dragDiv.className = 'drag-helper ui-draggable-dragging';
+
+						var str = `<div class="icons">
+					            <i class="icon icon0 filetype icon-folder"></i>           
+					            <i class="icon icon1 filetype icon-folder"></i>       
+					            <i class="icon icon2 filetype icon-folder"></i>      
+					            <i class="icon icon3 filetype icon-folder"></i>   
+					        </div>
+					        <span class="sum">${selectArr2.length}</span>`;
+
+					   	dragDiv.innerHTML = str;
+					   	dragDiv.style.display = 'block';
+					   	document.body.appendChild(dragDiv);
+
+					   	newDiv = document.createElement("div");
+					   	newDiv.style.cssText= "width:10px;height:10px;background:red;position:absolute;left:0;top:0;";
+				   		document.body.appendChild(newDiv);
+
+					}
+
+				   	dragDiv.style.left = ev.clientX+10 + "px";
+				   	dragDiv.style.top = ev.clientY+10 + "px";
+					
+					newDiv.style.left = ev.clientX-5 + "px";
+				   	newDiv.style.top = ev.clientY-5 + "px";
+
+				   	//检测碰撞
+					for( var i = 0; i < fileItems.length; i++ ){
+						var onOff = false;
+						for( var j = 0; j < selectArr2.length; j++ ){
+							console.log(fileItems[i] !== selectArr2[j])
+							if(fileItems[i] === selectArr2[j]){
+								onOff = true;
+							}
+							
+						}
+
+						if(onOff) continue;
+
+						if( pengzhuang(dragDiv,fileItems[i]) ){
+							t.addClass(fileItems[i],"file-checked");
+							t.addClass(checkboxs[i],"checked");
+
+						}else{
+							t.removeClass(fileItems[i],"file-checked");
+							t.removeClass(checkboxs[i],"checked");
+						}
+
+						
+					}
+
+
 					return;
 				}
 				//在move的过程中，只生成一个div，只要生成了了一个div之后，就没必要再生成了
@@ -568,9 +813,6 @@
 						t.removeClass(checkedAll,"checked")
 					}
 				}
-
-
-
 			}
 
 			document.onmouseup = function (ev){
@@ -581,6 +823,13 @@
 					//把div变量设置为null，目的再次点击还要继续生成div
 					div = null;
 				}
+				if(dragDiv){
+					document.body.removeChild(dragDiv);
+					document.body.removeChild(newDiv);
+					dragDiv = null;
+					newDiv = null;
+				}
+				fileList.isDrag = false;
 			}
 	});
 })()

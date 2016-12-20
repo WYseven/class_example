@@ -44,6 +44,11 @@ var handle = {
 			return item.title === value;
 		}) !== -1;
 	},
+	TitleArrExist(data,valueArr,id){
+		return valueArr.filter(function(item){
+			return !handle.isTitleExist(data,item.title,id);
+		})
+	},
 	//通过指定id，找到这个id的所有的子孙数据，放在数组中
 	getChildsAll(data,id){
 		var arr = [];
