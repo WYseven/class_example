@@ -573,28 +573,19 @@
 						//点击的fileId
 						var childs = handle.getChildsById(datas,moveFIleId);
 
-						for( var i = 0; i < selectArrData.length; i++ ){
-							var onOff = false;
-							for( var j = 0; j < childs.length; j++ ){
-								if( selectArrData[i].title === childs[j].title ){
-									onOff = true;
-								}
-							}
+						for( var i = 0; i < selectArrId.length; i++ ){
+							var self = handle.getSelfById(datas,selectArrId[i]);
 
-							if( !onOff ){
-								selectArrData[i].pid = moveFIleId;
+							var isExists = handle.isTitleExist(datas,self.title,moveFIleId);
+							
+							if( !isExists ){
+								self.pid = moveFIleId;
 								fileList.removeChild(selectArr[i]);
-								selectArr.splice(i,1,false);
 							}
+
 						}
 
-						var arr = selectArr.filter(function(item){
-							return item !== false;
-						})
-
-						if( arr.length ){
-							fullTip("warn","部分移动失败，重名了");
-						}
+						
 
 						treeMenu.innerHTML = createTreeHtml(datas,-1);
 
@@ -631,6 +622,15 @@
 				t.addClass(target,"tree-nav");
 				currentTree = target;
 				var fileId = target.dataset.id;
+
+				var selfData = handle.getSelfById(datas,whoSelect()[0].dataset.id);
+
+				if( selfData.pid == fileId ){
+					errorSpan.innerHTML = "不能移动到";
+					moveStatus = false;
+					return;
+				}
+
 				//不能移动到自身下面，和他的子孙元素下
 				var obj = allChilds.find(function(value){
 					return value.id == fileId;
@@ -688,7 +688,8 @@
 		disX = null,
 		disY = null,
 		downObj = null,
-		dragDiv = null;
+		dragDiv = null,
+		pengObj = null;
 		t.on(document,"mousedown",function (ev){
 			if(ev.which !== 1) return;
 			ev.preventDefault();
@@ -713,18 +714,14 @@
 			
 			document.onmousemove = function (ev){
 
-				if(isChecked){
-					console.log("选中");
+				if(isChecked && (Math.abs( ev.clientX - disX ) > 5 || Math.abs( ev.clientY - disY ) > 5)){
 					if( !dragDiv ){
 						selectArr2 = whoSelect();
 						dragDiv = document.createElement('div');
 						dragDiv.className = 'drag-helper ui-draggable-dragging';
 
 						var str = `<div class="icons">
-					            <i class="icon icon0 filetype icon-folder"></i>           
-					            <i class="icon icon1 filetype icon-folder"></i>       
-					            <i class="icon icon2 filetype icon-folder"></i>      
-					            <i class="icon icon3 filetype icon-folder"></i>   
+					            <i class="icon icon0 filetype icon-folder"></i>   
 					        </div>
 					        <span class="sum">${selectArr2.length}</span>`;
 
@@ -733,7 +730,7 @@
 					   	document.body.appendChild(dragDiv);
 
 					   	newDiv = document.createElement("div");
-					   	newDiv.style.cssText= "width:10px;height:10px;background:red;position:absolute;left:0;top:0;";
+					   	newDiv.style.cssText= "width:10px;height:10px;background:#fff;position:absolute;left:0;top:0;opacity:0;";
 				   		document.body.appendChild(newDiv);
 
 					}
@@ -748,19 +745,20 @@
 					for( var i = 0; i < fileItems.length; i++ ){
 						var onOff = false;
 						for( var j = 0; j < selectArr2.length; j++ ){
-							console.log(fileItems[i] !== selectArr2[j])
 							if(fileItems[i] === selectArr2[j]){
 								onOff = true;
 							}
 							
 						}
 
+
+
 						if(onOff) continue;
 
-						if( pengzhuang(dragDiv,fileItems[i]) ){
+						if( pengzhuang(newDiv,fileItems[i]) ){
 							t.addClass(fileItems[i],"file-checked");
 							t.addClass(checkboxs[i],"checked");
-
+							pengObj = fileItems[i];
 						}else{
 							t.removeClass(fileItems[i],"file-checked");
 							t.removeClass(checkboxs[i],"checked");
@@ -830,6 +828,30 @@
 					newDiv = null;
 				}
 				fileList.isDrag = false;
+				if(pengObj){
+					var selectArr = selectArr2;
+					var selectArrId = selectArr.map(function(item){
+						return item.dataset.id;
+					});
+
+					for( var i = 0; i < selectArrId.length; i++ ){
+						var self = handle.getSelfById(datas,selectArrId[i]);
+
+						var isExists = handle.isTitleExist(datas,self.title,pengObj.dataset.id);
+						
+						if( !isExists ){
+							self.pid = pengObj.dataset.id;
+							fileList.removeChild(selectArr[i]);
+						}
+
+					}
+					treeMenu.innerHTML = createTreeHtml(datas,-1);
+
+					t.removeClass(pengObj,"file-checked");
+					t.removeClass(pengObj.querySelector(".checkbox"),"checked");
+
+					pengObj = null;
+				}
 			}
 	});
 })()
