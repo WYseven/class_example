@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+<script>
+
+	/*
+		量词
+			+  至少重复一次或多次
+	*/
+	/*var str = 'jj1g123kgkg4lgl66';
+
+	console.log( str.match(/\d+/g) );*/
+
+	var str = "ab1ab2ab3abab";
+	// ab abab  abababa
+	var re2 = /(ab)+/g;
+
+	console.log( str.match(re2) );
+
+</script>
+	</head>
+
+	<body>
+	</body>
+</html>

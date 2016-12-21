@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+			/*
+				\d 一个数字
+				\D 非数字
+				\s 一个空格
+				\S 非空格
+
+				
+				^ 行首
+				$ 行尾
+
+			*/
+			//去除字符串的前后空格
+			var str = ' miao    vketang  ';
+
+			var re = /^\s*|\s*$/g;
+
+			var newStr = str.replace(re,"");
+			console.log( "("+newStr+")" );
+
+			function trim(str){
+				return str.replace(/^\s*|\s*$/g,"")
+			}
+
+			console.log( trim(str) );
+
+
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

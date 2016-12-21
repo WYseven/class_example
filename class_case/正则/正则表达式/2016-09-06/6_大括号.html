@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				{} 量词
+
+					n,m代表是数字  重复????
+
+					{n}   代表重复n次
+					{n,m} 至少重复n次，最多重复m次
+					{n,}  至少重复n次，最多不限
+	
+				+ {1,}  至少重复1次，最多不限
+				? {0,1} 至少重复0次，最多重复1次
+				* {0,}  至少重复0次，最多不限
+			*/
+			var str = 'a1ca244424442444ca3a4a5ac';
+			//规则：a开头，a后面有一个到多个数字，c出现一次到多次
+			var re = /a\d+c+/g;
+			console.log( str.match(re) );
+			//规则：a开头，a后面可以出现多次也可以不出现，c出现一次到多次
+			var re2 = /a\d*c+/g;
+			console.log( str.match(re2) );
+			//规则：a开头，a后面可以不出现最多出现1次，c出现一次到多次
+			var re3 = /a\d?c+/g;
+			console.log( str.match(re3) );
+
+			//规则：a开头，a后面的数字是2次到5次，c出现一次到多次
+			var re4 = /a\d{2,5}c+/g;
+			console.log( str.match(re4) );
+
+
+			/*var str = 'aaaaaabbb';
+			//规则：a可以重复一次到多次
+			var re = /a{2,5}/g;
+
+			console.log( str.match(re) );*/
+
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

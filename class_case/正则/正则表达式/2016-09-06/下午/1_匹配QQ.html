@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				QQ
+				全是数字  
+				不能以0开头
+				数字的个数  5 - 12
+			*/	
+		</script>
+	</head>
+
+	<body>
+		<input type="text" id="QQ" /><span id="meg"></span>
+		<script>
+			//var re = /^[1-9]\d{4,11}$/;
+			//var re = /[1-9]\d{4,11}$/;
+			//a123455666
+			var re = /^[1-9]\d{4,11}$/g;
+			QQ.oninput = function (){
+				re.lastIndex = 0;
+				if( re.test(this.value) ){
+					meg.innerHTML = '是QQ'
+				}else{
+					meg.innerHTML = '不是QQ'
+				}
+			};
+
+
+
+		</script>
+	</body>
+</html>

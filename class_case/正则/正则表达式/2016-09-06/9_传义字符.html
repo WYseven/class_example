@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+			/*
+				\d 一个数字
+				\D 非数字
+				\s 一个空格
+				\S 非空格
+				\w 数字，字母 下划线
+				\W 非数字，字母 下划线
+				\b \w的边界符（一个\w的左边或右边不是一个\w就存在一个边界符）
+				\B 非边界符
+
+
+				. 任意字符 除了换行\n
+
+				
+				^ 行首
+				$ 行尾
+
+			*/
+			var str = 'miaov$ ke tang 0 _';
+			var re = /\B/g;
+			//var re = /\b/g;
+
+			console.log( str.replace(re,"|") );
+
+
+
+
+
+		</script>
+	</head>
+
+	<body>
+	</body>
+</html>

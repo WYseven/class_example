@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+<script>
+	/*
+		replace
+		replace
+			作用
+			        替换掉匹配的字符串或正则表达式匹配到的内容
+			语法
+				String string.replace(string|regexObj,string|function)
+			参数
+				(string|regexObj,string|function)
+					第一个参数：字符串或正则表达式
+					第二个参数：字符串或函数
+				注意：第二个参数为函数，则必须要有返回值，否则为	          替换后的内容为undefined
+			返回值
+				替换后新的字符串
+
+	*/
+
+	/*var str = "miaovkemmmmtamng";  
+	var re = /m/g;
+
+	var newStr = str.replace(re,function (){
+		return "*";	
+	});
+
+	console.log( str );
+	console.log( newStr );*/
+
+	var str = "m123miaov3jjmiaovdugmiaov3";  
+	var re = /\d/g;
+
+	var newStr = str.replace(re,function ($0,$1,$2){
+		/*
+			$0 第一个参数，匹配到的字符串
+			$1 匹配到的字符串在原字符串中所处的位置
+			$2 原字符串
+		*/
+		console.log( $0,$1,$2 );
+	});
+
+	console.log( str );
+	console.log( newStr );
+
+
+
+
+
+</script>
+	</head>
+
+	<body>
+	</body>
+</html>

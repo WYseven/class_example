@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+
+		</script>
+	</head>
+
+	<body>
+		<p>请输入字符串：<input id="inputText" value="aaaaabbbffffff" type="text" /><input type="button" id="btn" value="点击找到重复最多的字符" /></p>
+		<p>重复的字符为：<span id="char"></span></p>
+		<p>重复了：<span id="num"></span>次</p>
+		<script>
+			var str = 'aaaaabbbffffff';
+
+			btn.onclick = function (){
+					
+				var re = /(\w)\1+/g;
+
+				var arr = inputText.value.match(re).map(function (item,index){
+					var char = item.charAt(0);
+					return {
+						char,
+						length:item.length
+					}		
+				}).sort(function (b,a){
+					return a.length - b.length
+				})
+
+				char.innerText = arr[0].char;
+				num.innerText = arr[0].length;
+			}
+
+
+
+		</script>
+	</body>
+</html>

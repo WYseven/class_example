@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+			/*
+				\d 一个数字
+				\D 非数字
+				\s 一个空格
+				\S 非空格
+				\w 数字，字母 下划线
+				\W 非数字，字母 下划线
+				
+
+
+				. 任意字符 除了换行\n
+
+				
+				^ 行首
+				$ 行尾
+
+			*/
+
+			var str = 'hello.';
+			var re = /\./g;
+			console.log( str.match(re) );
+
+
+			/*var str  = '通知：\n中秋快乐%^();';
+			var re = /./g;
+
+			console.log( str );
+
+			console.log( str.replace(re,"*") );*/
+
+
+
+			/*var str = 'a1kggkg_(*:""))ca$c';
+			//规则：a开头c结尾中间出现任意字符
+			var re = /a.*?c/g;
+
+			console.log( str.match(re) );*/
+
+			/*var str = 'a1kggkg_)ca$c';
+			//规则：a开头c结尾中间出现数字字母下划线 重复一次到多次
+			var re = /a\W+c/g;
+
+			console.log( str.match(re) );*/
+
+
+
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

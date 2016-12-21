@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				正则 规则
+					/正则表达式/[修饰符]
+				test
+				search
+				match
+				replace
+				作业
+			*/
+
+			//格式化日期
+
+			var data1 = '2016-09-06';
+			var data2 = '2016---09-06';
+			var data3 = '2016+++09-06';
+			var data4 = '2016////09////06';
+
+			//规则：一堆数字一堆非数字一堆数字一堆非数字一堆数字
+			var re = /\d+\D+\d+\D+\d+/g;
+
+			data4.replace(re,function ($0,$1,$2){
+				console.log( $0,$1,$2 );
+				//只要的是数字
+				//return 数字+"年"+
+
+			})
+
+
+
+
+
+			//把这一堆日期统一格式化为 XXXX年XX月XX日
+			/*var re = /\d+/g;
+			console.log( data1.match(re) );*/
+
+			/*
+				\d 代表一个数字
+				\D 代表非数字
+			*/
+
+			/*var re = /\D+/g;
+
+			//console.log( data1.match(re) );
+
+			var newStr = data1.replace(re,function (){
+				return "*";	
+			}).split("*");
+
+			console.log( newStr );*/
+
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>
