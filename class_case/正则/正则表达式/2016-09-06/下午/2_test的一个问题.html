@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				QQ
+				全是数字  
+				不能以0开头
+				数字的个数  5 - 12
+			*/	
+		</script>
+	</head>
+
+	<body>
+		<input type="text" id="QQ" /><span id="meg"></span>
+		<script>
+
+			var str = 'f12jg2';
+			var re = /\d/g;
+
+			console.dir( re.lastIndex );  //如果使用全局模式，会记录匹配到的内容的位置
+			re.lastIndex = 0;
+			console.log( re.test(str) );
+			console.dir( re.lastIndex );
+			re.lastIndex = 0;
+			console.log( re.test(str) );
+			console.dir( re.lastIndex );
+			re.lastIndex = 0;
+			console.log( re.test(str) );
+			console.dir( re.lastIndex );
+			re.lastIndex = 0;
+			console.log( re.test(str) );
+			console.dir( re.lastIndex );
+
+
+		</script>
+	</body>
+</html>

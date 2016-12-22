@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+<script>
+	/*
+		match
+			作用
+			    检索指定字符串或正则表达式匹配的字符串
+			语法
+				Array|Null string.match(string|regexObj)
+			参数
+				string|regexObj
+					字符串或正则表达式
+			返回值
+				返回数组---把匹配到的字符串放在数组中
+				没有检索到返回null
+
+			注意：
+				参数为regexObj时，
+					如果带有g修饰符，则为全局匹配，返回的是匹配到的字符串组成的数组；
+					如果不带g修饰符，则只会匹配一个字符串，并且数组会有index和input属性
+
+	*/
+
+	var str = 'jgjgj9jgj';
+	var re = /\d/g;
+	console.log( str.match(re) );  //[]
+
+
+	var arr = ["a","v"];
+	arr.a = 10;  //因为数组也是一个对象，可以在数组身上挂载一些自定义的属性
+	console.log(arr.length);
+	console.log( arr );/**/
+
+
+
+
+</script>
+	</head>
+
+	<body>
+	</body>
+</html>

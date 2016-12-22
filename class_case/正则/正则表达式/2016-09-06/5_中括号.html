@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				[]
+					匹配中括号任意 一个 字符  (有或的意思)
+
+				匹配连续的数字：
+					[0-9]
+					[5-9]
+					[a-z]
+					[A-Z]
+
+					[A-z]会包含其他的符号
+					要的是大写或小写
+						[a-zA-Z]
+
+				^ 在中括号使用，排除中括号中的字符
+			*/
+
+			var str = "a1ca2ca3ca+ca1ca)c";
+			//规则：a开头c结尾，中间是数字不能是1或2或3或4或5或6或7或8或或0（排除掉）
+			var re = /a[^12]c/g;  
+
+			console.log( str.match(re) );
+
+
+			
+
+			/*var str = "a11ca2ca3ca+ca15ca)c";
+			//规则：a开头c结尾，中间是数字1或2或3或4或5或6或7或8或或0
+			var re = /a[5-2]c/g;  //报错
+			//var re = /a[0-2][0-9]c/g;  // 0  1 2 6 
+
+			console.log( str.match(re) );*/
+
+
+			/*var str = "a112ca2ca3ca+ca|ca)c";
+			//规则：a开头c结尾，中间是数字1或2或3
+			var re = /a[1+23|()]c/g;
+
+			console.log( str.match(re) );*/
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+<script>
+
+	/*
+		| 或
+	*/
+	//过滤敏感词
+	var str = '城管对政府说了，我们城管的行为是合法的，符合政府的执法要求。';
+
+	// 城管  合法 政府 执法
+
+	var re = /城管|合法|政府|执法/g;
+
+	str = str.replace(re,function ($0){
+		var star = "";
+		for( var i = 0; i < $0.length; i++ ){
+			star += "*";
+		}
+		return star;
+	});
+
+	console.log( str );
+
+</script>
+	</head>
+
+	<body>
+	</body>
+</html>

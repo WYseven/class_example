@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+<script>
+
+	/*
+		正则.test(字符串)
+
+			作用
+				 查看正则表达式与指定的字符串是否匹配
+			语法
+				boolean regexObj.charAt(string)
+			参数
+				string
+					用来与正则表达式匹配的字符串
+			返回值
+				布尔值 true 或 false
+
+				匹配到返回true，否则为false
+
+
+
+		\d 代表一个数字
+	*/
+
+
+	var str = 'angjf1jfj';
+
+	//如果这个字符串中有数字，提醒这个字符串中有数字
+	//如果没有，就提醒没有数字
+
+	var re = /\d/;
+
+	if( re.test(str) ){
+		alert("这个字符串中有数字")
+	}else{
+		alert("这个字符串中没有数字")
+	}
+
+</script>
+	</head>
+
+	<body>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</body>
+</html>

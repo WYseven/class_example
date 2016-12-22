@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+<script>
+	/*
+		search
+			作用
+			        检索指定字符串或正则表达式匹配的字符串
+			语法
+				number string.search(string|regexObj)
+			参数
+				string|regexObj
+					字符串或正则表达式
+			返回值
+				返回数字---匹配到的字符串首次出现的位置
+
+				没有检索到返回-1
+
+		
+		search和indexOf，不同点，search可以接收正则和字符串作为参数，indexOf只能接收字符串
+	*/
+
+	var str = 'm9iaovketang';
+
+	var str2 = 'vv';
+
+	/*alert( str.indexOf(str2) )
+	alert( str.search(str2) )*/
+
+	var re = /\d/;
+
+	alert( str.search(re) );
+	alert( str.indexOf(re) );  //-1
+
+
+
+
+
+</script>
+	</head>
+
+	<body>
+	</body>
+</html>

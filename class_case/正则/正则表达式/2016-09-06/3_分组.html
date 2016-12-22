@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				正则中 ()
+					在正则表达式中，称之为子项表达式或子项
+
+				replace中第二个参数为函数
+					正则中没有分组，这个函数的参数：
+						$0 整个正则匹配到的内容
+						$1 匹配到的内容出现的位置
+						$2 原字符串
+					正则中有分组，这个函数的参数
+						$0 整个正则匹配到的内容
+						从第二参数开始，是第一组匹配到的内容，
+						第三个参数，是第二组匹配到的内容
+						以此类推。。。。
+
+						函数中的最后一个参数 是原字符串
+						倒数第二个整个正则匹配到的内容出现的位置
+
+				分组嵌套的时候，以左大括号为基准，依次类推
+
+
+			*/
+
+			/*var str = 'a1111a2a3222ca233ca5cac';
+			//规则：a开头后面跟一个到多个数字，a开头后面跟数字可以重复一次到多次，以c结尾
+			var re = /(a\d+)+c/g;
+			console.log( str.match(re) );*/
+
+			var str = 'a1ca2ca5ca6ca6c';
+			//规则：a开头c结尾 中间是数字1或2或3
+			var re = /a(1|2|3)c/g;
+
+			console.log( str.match(re) );
+
+
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

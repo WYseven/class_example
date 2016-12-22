@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+
+		</script>
+	</head>
+
+	<body>
+		<script>
+			/*
+				贪婪模式
+				懒惰模式
+					在量词后面加上？开启了懒惰模式
+			*/
+			var str = 'a1f24ca_345c';
+
+			//规则：a开头中间是数字一个到多个以c结尾
+			//var re = /a\w+c/g;  //贪婪的模式，尽可能的匹配多个字符
+			var re = /a\w+?c/g;  //懒惰模式 尽可能少的匹配字符
+
+			console.log( str.match(re) );
+
+		</script>
+	</body>
+</html>

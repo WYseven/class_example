@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				中文区间[\u4e00-\u9fa5]
+
+			*/
+			var str = '妙3味1课2堂';
+			//var re = /妙/g;
+			var re = /[\u4e00-\u9fa5]/g;
+
+			//汉字的区间
+
+			console.log( str.match(re) );
+
+			console.log( decodeURI('\u4e00') );
+			console.log( decodeURI('\u9fa5') );
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>
