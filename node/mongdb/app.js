@@ -15,8 +15,8 @@ app.engine('html', con.swig);
 
 
 
-app.set('view engine', 'swig');
-app.set('views', __dirname + '/view');
+app.set('html engine', 'swig');
+app.set('views', __dirname + '/html');
 
 //网站请求路由
 //require('./router/res_router.js')(app);

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            left:0;
+            top:0;
+        }
+    </style>
+    <script>
+
+        class Drag {
+            constructor(element){
+                this.element = element;
+            }
+
+            init(){
+
+                this.element.onmousedown = function(ev){
+                    var disX = ev.clientX;
+                    var disY = ev.clientY;
+
+                    document.onmousemove = function(ev){
+
+                    }
+                }
+            }
+        }
+
+        window.onload = function(){
+            new Drag(dragObj);
+        }
+    </script>
+</head>
+<body>
+    <div id="dragObj"></div>
+</body>
+</html>

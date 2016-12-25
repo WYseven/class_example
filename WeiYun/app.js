@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 //设置模板存放的目录
 app.set('views', './views');
 //设置模板引擎
-app.set('view engine', 'html');
+app.set('html engine', 'html');
 //设置引擎渲染的方法，以及渲染的文件类型
 app.engine('html', swig.renderFile);
 //取消模板引擎的缓存设置，修改模板不需要重启服务器

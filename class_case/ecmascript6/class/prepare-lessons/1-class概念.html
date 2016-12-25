@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		
+		/*
+		
+			类描述了一组有相同特性（属性）和相同行为（方法）的对象
+
+			类是对象的描述！对象从类中产生出来！此时，对象具有类所描述的所有的属性以及方法
+
+			对象的抽象是类，类的具体化就是对象
+		 */
+		
+		class Peroson {
+			static run(){
+				console.log("奔跑");
+			}
+			
+			constructor(userName){
+				this.userName = userName;
+			}
+			say(){
+				console.log("可以说话")
+			}
+		}
+
+		var p = new Peroson("leo");
+
+		console.log(p)
+		console.log(Peroson.run);
+
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

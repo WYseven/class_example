@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.tab {
+			float: left;
+		}
+		.tab div{
+			width: 300px;
+			height: 300px;
+			border: 1px solid #000;
+			display: none;
+		}
+		.red{
+			color: red;
+		}
+	</style>
+	<script>
+		
+		/*
+		
+			类描述了一组有相同特性（属性）和相同行为（方法）的对象
+
+			类是对象的描述！对象从类中产生出来！此时，对象具有类所描述的所有的属性以及方法
+
+			对象的抽象是类，类的具体化就是对象
+		 */
+		
+		class Tab {
+			constructor(tabElement){
+				this.inputs = tabElement.querySelectorAll("input");
+				this.divs = tabElement.querySelectorAll("div");
+				this.len = this.divs.length;
+				this.timer = null;
+				this.n = 0;
+
+				this.status = null;
+			}
+
+			init(){
+				var _this = this;
+				Array.from(this.inputs).forEach(function(item,index){
+					item.index = index;
+					item.onclick = function(){
+						_this.change(this.index);
+					};
+					item.onmouseover = function(){
+						if( _this.timer ){
+							clearInterval(_this.timer);
+							_this.change(this.index);
+							_this.n = this.index;
+						}
+						
+					};
+					item.onmouseout = function(){
+						_this.play(this.n);
+						
+					};
+				})
+			}
+			stops(){
+				clearInterval(this.timer);
+				this.status = null;
+			}
+			change(index){
+				for( var i = 0; i < this.divs.length; i++ ){
+					this.divs[i].style.display = "none";
+					this.inputs[i].className = '';
+				}
+				this.inputs[index].className = "red";
+				this.divs[index].style.display = "block";
+			}
+			play(){
+				var _this = this;
+				this.timer = setInterval(function(){
+					_this.n++;
+					if(_this.n>_this.len-1 ){
+						_this.n = 0;
+					}
+					_this.change(_this.n);
+				},1000);
+
+				this.status = true
+			}
+		}
+
+
+		window.onload  =function(){
+
+			
+
+			var t1 = new Tab(tab1);
+
+			t1.init();
+
+			var t2 = new Tab(tab2);
+
+			t2.init();
+
+			t2.play();
+
+			btn1.onclick = function(){
+				console.log(t1.status);
+				if( !t1.status ){
+					t1.play();
+				}
+			}
+
+			btn2.onclick = function(){
+				if(t1.status){
+					t1.stops();
+				}
+			}
+
+		}
+
+	</script>
+</head>
+<body>
+	<div id="tab1" class="tab">
+		<input class="red" type="button" value="按钮1" />
+		<input type="button" value="按钮2" />
+		<input type="button" value="按钮3" />
+		<div style="display: block;">按钮1</div>
+		<div>按钮2</div>
+		<div>按钮3</div>
+	</div>
+	<div id="tab2" class="tab">
+		<input class="red" type="button" value="按钮1" />
+		<input type="button" value="按钮2" />
+		<input type="button" value="按钮3" />
+		<div style="display: block;">按钮1</div>
+		<div>按钮2</div>
+		<div>按钮3</div>
+	</div>
+
+	<input type="button" value="第一开始自动播放" id="btn1" />
+	<input type="button" value="第一开始停止自动播放" id="btn2" />
+
+
+
+</body>
+</html>

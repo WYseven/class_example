@@ -12,162 +12,104 @@
     var fileList = tools.$(".file-list")[0];  //放入文件的容器
 
     var datas = data.files;
-    
 
-    //通过id获取这个id下所有的自己
+    function getChildsById(data,id){
+        return data.filter(function(item){
+            return item.pid == id;
+        })
+    }
 
-    function getChildById(data,id){
+    function getDataLeval(data,id){
         var arr = [];
-        for( var i = 0; i < data.length; i++ ){
-            if( id == data[i].pid ){
-                arr.push(data[i])
-            }  
-        } 
+        data.forEach(function(item){
+            if( item.id == id ){
+                arr.push(item);
+
+                arr = arr.concat(getDataLeval(data,item.pid));
+            }
+        })
 
         return arr;
     }
 
-    //通过id获取所有父级
 
-    function getParentsById(data,id){
-        var arr = [];
-        for( var j = 0; j < data.length; j++ ){
-            if( data[j].id == id ){
-                arr.push(data[j])
-               arr = arr.concat(getParentsById(data,data[j].pid));
-            }       
-        } 
-        return arr;
-    }   
+    var initId = -1;
 
-   //  window.itemAddEvent = itemAddEvent;
+    function treeHtml(id){
+        var childs = getChildsById(datas,id);
 
+        var html = '<ul>';
 
-    var child = getChildById(data,0);
+        childs.forEach(function(item){
 
-    renderFiles(fileList,renderId);
+            var leave = getDataLeval(datas,item.id).length;
 
-    //所有的父级
-    
+            /*tree-nav*/
 
-    var pathNav = tools.$(".path-nav")[0];
+            html += '<li>'+
+                            '<div data-id="'+item.id+'" style="padding-left: '+leave*14+'px" class="tree-contro">'+
+                                '<span>'+
+                                    '<strong class="ellipsis">'+item.name+'</strong>'+
+                                    '<i class="ico"></i>'+
+                                '</span>'+
+                            '</div>';
+                html += treeHtml(item.id);
+                html += '</li>';
 
-     pathNavFn(datas,0)
+        });
 
-    function pathNavFn(datas,id){
-        var parents = getParentsById(datas,id).reverse();
-        var str = '';
-        var m = parents.length;
-        for( var i = 0; i < parents.length-1; i++ ){
-            var item = parents[i];
-            str += '<a href="javascript:;" style="z-index: '+(--m)+'" data-file-id="'+item.id+'">'+item.name+'</a>';
-        }
-        
-        str += '<a href="javascript:;" style="z-index: '+(--m)+'" class="current-path" >'+parents[parents.length-1].name+'</a>'
-        
-        pathNav.innerHTML = str;
+        html += '</ul>';
+
+        return html;
+
     }
 
-    var allDiv = tools.$(".file-item",fileList);
+    var  treeMenu = document.querySelector(".tree-menu");
 
-    /*
-            selector:
-                #id
-                .class
-                taget
-    */
+    treeMenu.innerHTML = treeHtml(-1);
 
-    function parents(element,selector){
-        var f = selector.charAt();
-        var f2 = selector.slice(1);
-        var obj = null;
-        if( f === "#" ){
+    //var allDiv = treeMenu.querySelector('.tree-contro[data-id="'+700+'"]');
 
-            while(element.nodeType !== 9 && element.id !== f2 ){
-                element = element.parentNode;
-                obj = element;
-            }
+    //allDiv.className = 'tree-nav';
 
-        }else if( f === "." ){
-            while(element.nodeType !== 9 && !tools.containClass(element,f2) ){
-                element = element.parentNode;
-                obj = element;
-            }
-        }else{
+    var allDiv = treeMenu.querySelectorAll('.tree-contro');
 
-        }
+    function treeControDiv(id){
 
-        return obj.nodeType === 9 ? null : obj;
+
+        var div = Array.from(allDiv).filter(function(item){
+            return item.dataset.id == id
+        })
+
+        return div[0];
     }
 
-    tools.addEvent(fileList,"click",function (ev){
-        var target = ev.target;
-        target = parents(target,".file-item");
-         var fileId = target.dataset.fileId;
 
-          renderFiles(fileList,fileId);
-          pathNavFn(datas,fileId);
-    })
+    var init = 0;
 
-    /*for( var i = 0; i < allDiv.length; i++ ){
-        itemAddEvent(allDiv[i])
-    }
+    treeControDiv(init).className = 'tree-nav';
 
-    function itemAddEvent(div){
-        div.onclick = function (){
-           var fileId = this.dataset.fileId;
 
-              renderFiles(fileList,fileId);
-              pathNavFn(datas,fileId);
-  
-        };
-    }*/
+    Array.from(allDiv).forEach(function(item,index){
+        item.onclick  =function(){
+            var id = this.dataset.id;
 
-     tools.addEvent(pathNav,"click",function(ev){
-        if( ev.target.nodeName.toLowerCase() === "a"  && !tools.parents(ev.target,".current-path") ){
+            treeControDiv(init).className = '';
 
-            var fileId = ev.target.dataset.fileId;
-            renderFiles(fileList,fileId);
-              pathNavFn(datas,fileId);
+            treeControDiv(id).className = 'tree-nav';
+
+            init = id;
         }
     });
 
-    function getLevelById(data,id){
-        return getParentsById(data,id).length;
-    }
-
-     //树形菜单
-
-    var treeMenu = tools.$(".tree-menu")[0];
-
-    function treeLi(item){
-        var newLi = document.createElement("li");
-        var titleNone = "";
-        var str = '<div class="tree_title '+titleNone+'" style="padding-left: '+getLevelById(datas,item.id)*14+'px;" data-file-id="'+item.id+'">'+
-        '<span><strong class="ellipsis">'+item.name+'</strong> <i class="ico"></i></span>'
-        +'</div>';
-
-        newLi.innerHTML = str;
-        return newLi;
-    }
-
-    function tree(datas,id){
-
-        var newUl = document.createElement('ul');
-        var childs = getChildById(datas,id);
-        
-        for( var i = 0; i < childs.length; i++ ){
-            var newLi = treeLi(childs[i]);
-            newLi.appendChild(tree(datas,childs[i].id))
-            newUl.appendChild( newLi);
-        }
+    var pathNav = document.querySelector(".path-nav");
 
 
 
-        return newUl;
-    }
+    pathNav.innerHTML = getDataLeval(datas,700).map(function(item){
+        return item.name;
+    }).reverse();
 
-    treeMenu.appendChild(tree(datas,-1));
 
 
 
