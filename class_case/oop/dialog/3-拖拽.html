@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #drag{
+            width: 100px;
+            height:100px;
+            background: red;
+            position: absolute;
+            left:0;
+            top:0;
+        }
+        #drag h3 {
+            width: 100%;
+            height:30px;
+            background: #cc9a9a;
+            margin: 0px;
+            cursor: move;
+            position: absolute;
+            left:0;
+            top:0;
+        }
+    </style>
+    <script>
+        function Drag(options){
+
+            this.defaults = {
+                dragElement:null,
+                moveElement:null
+            }
+
+            for( var attr in options ){
+                this.defaults[attr] = options[attr];
+            }
+
+            if( !this.defaults.dragElement ){
+                throw new error("拖拽的元素必须填写");
+            }
+
+            if( this.defaults.moveElement ){
+                this.element = this.defaults.moveElement;
+            }else{
+                this.element = this.defaults.dragElement;
+            }
+
+
+
+            this.disX = 0;
+            this.disY = 0;
+
+            this.init();
+        }
+
+        Drag.prototype = {
+            constructor:Drag,
+            init(){
+                this.defaults.dragElement.onmousedown = this.downFn.bind(this);
+            },
+            downFn(ev){
+                this.disX = ev.clientX - this.element.offsetLeft;
+                this.disY = ev.clientY - this.element.offsetTop;
+
+                document.onmousemove = this.moveFn.bind(this);
+                document.onmouseup = this.upFn.bind(this);
+
+                ev.preventDefault();
+            },
+            limit(){
+                if(this.l < 0){
+                    this.l = 0;
+                }
+                if(this.l > document.documentElement.clientWidth - this.element.offsetWidth){
+                    this.l = document.documentElement.clientWidth - this.element.offsetWidth;
+                }
+                if(this.t < 0){
+                    this.t = 0;
+                }
+                if(this.t > document.documentElement.clientHeight - this.element.offsetHeight){
+                    this.t = document.documentElement.clientHeight - this.element.offsetHeight;
+                }
+            },
+            moveFn(ev){
+                this.l = ev.clientX - this.disX;
+                this.t = ev.clientY - this.disY;
+                this.limit();
+                this.element.style.left = this.l + "px";
+                this.element.style.top = this.t + "px";
+            },
+            upFn(){
+                document.onmousemove = null;
+                document.onmouseup = null;
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div id="drag">
+        <h3 id="dragH3">我是标题</h3>
+    </div>
+    <script>
+        new Drag({
+            dragElement:dragH3,
+            moveElement:drag
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #drag{
+            width: 100px;
+            height:100px;
+            background: red;
+            position: absolute;
+            left:0;
+            top:0;
+        }
+    </style>
+    <script>
+        function Drag(element){
+            this.element = element;
+
+            this.disX = 0;
+            this.disY = 0;
+
+            this.init();
+        }
+
+        Drag.prototype = {
+            constructor:Drag,
+            init(){
+                this.element.onmousedown = this.downFn.bind(this);
+            },
+            downFn(ev){
+                this.disX = ev.clientX - this.element.offsetLeft;
+                this.disY = ev.clientY - this.element.offsetTop;
+
+                document.onmousemove = this.moveFn.bind(this);
+                document.onmouseup = this.upFn.bind(this);
+            },
+            moveFn(ev){
+                console.log(ev.clientX - this.disX);
+                this.element.style.left = ev.clientX - this.disX + "px";
+                this.element.style.top = ev.clientY - this.disY + "px";
+            },
+            upFn(){
+                document.onmousemove = null;
+                document.onmouseup = null;
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div id="drag"></div>
+    <script>
+        new Drag(drag);
+    </script>
+</body>
+</html>

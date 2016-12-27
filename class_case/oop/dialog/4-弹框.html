@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./demo.css">
+    <style>
+        #drag{
+            width: 100px;
+            height:100px;
+            background: red;
+            position: absolute;
+            left:0;
+            top:0;
+        }
+        #drag h3 {
+            width: 100%;
+            height:30px;
+            background: #cc9a9a;
+            margin: 0px;
+            cursor: move;
+            position: absolute;
+            left:0;
+            top:0;
+        }
+    </style>
+    <script>
+        function Drag(options){
+
+            this.defaults = {
+                dragElement:null,
+                moveElement:null
+            }
+
+            for( var attr in options ){
+                this.defaults[attr] = options[attr];
+            }
+
+            if( !this.defaults.dragElement ){
+                throw new error("拖拽的元素必须填写");
+            }
+
+            if( this.defaults.moveElement ){
+                this.element = this.defaults.moveElement;
+            }else{
+                this.element = this.defaults.dragElement;
+            }
+
+
+
+            this.disX = 0;
+            this.disY = 0;
+
+            this.init();
+        }
+
+        Drag.prototype = {
+            constructor:Drag,
+            init(){
+                this.defaults.dragElement.onmousedown = this.downFn.bind(this);
+            },
+            downFn(ev){
+                this.disX = ev.clientX - this.element.offsetLeft;
+                this.disY = ev.clientY - this.element.offsetTop;
+
+                document.onmousemove = this.moveFn.bind(this);
+                document.onmouseup = this.upFn.bind(this);
+
+                ev.preventDefault();
+            },
+            limit(){
+                if(this.l < 0){
+                    this.l = 0;
+                }
+                if(this.l > document.documentElement.clientWidth - this.element.offsetWidth){
+                    this.l = document.documentElement.clientWidth - this.element.offsetWidth;
+                }
+                if(this.t < 0){
+                    this.t = 0;
+                }
+                if(this.t > document.documentElement.clientHeight - this.element.offsetHeight){
+                    this.t = document.documentElement.clientHeight - this.element.offsetHeight;
+                }
+            },
+            moveFn(ev){
+                this.l = ev.clientX - this.disX;
+                this.t = ev.clientY - this.disY;
+                this.limit();
+                this.element.style.left = this.l + "px";
+                this.element.style.top = this.t + "px";
+            },
+            upFn(){
+                document.onmousemove = null;
+                document.onmouseup = null;
+            }
+        }
+
+        function Dialog(option){
+
+
+
+
+            option = option || {};
+
+           this.defaults = {
+                title:"这是一个弹框",
+                content:"我是弹框",
+                okFn:function(){}
+            };
+
+            for( var attr in option ){
+                this.defaults[attr] = option[attr];
+            }
+
+            this.inits();
+
+            Drag.call(this,{
+                dragElement:this.h3,
+                moveElement:this.diaDiv
+            });
+        }
+
+        Dialog.prototype = {
+
+            constructor:Dialog,
+            inits(){
+                document.body.appendChild(this.dialogHtml());
+                document.body.appendChild(this.createMask());
+
+                this.diaDiv.style.zIndex = 100;
+                this.mask.style.zIndex = 99;
+
+                this.h3 = this.diaDiv.querySelector("h3");
+
+                this.position();
+
+            },
+            position(){
+                //居中显示
+                this.diaDiv.style.left = (document.documentElement.clientWidth - this.diaDiv.offsetWidth)/2 + "px";
+                this.diaDiv.style.top = (document.documentElement.clientHeight - this.diaDiv.offsetHeight)/2 + "px";
+            },
+            createMask(){
+                this.mask = document.createElement("div");
+
+                this.mask.style.cssText = "width:100%;height:100%;background:#000;opacity:.5;position:fixed;left:0;top:0;"
+                this.mask.style.zIndex = 199;
+
+
+                return this.mask;
+            },
+            dialogHtml(){
+                this.diaDiv = document.createElement("div");
+                this.diaDiv.className = "full-pop";
+
+                var diaHtml = `<h3>
+                    <p class="title">${this.defaults.title}</p>
+                    <a href="javascript:void(0);" class="close" title="关闭">×</a>
+                    </h3>
+                    <div class="content">
+                        ${this.defaults.content}
+                    </div>
+                    <div class="pop-btns">
+                        <span class="error"></span>
+                        <a href="javascript:void(0)" class="confirm">确定</a>
+                        <a href="javascript:void(0)" class="cancel">取消</a>
+                    </div>`;
+
+                this.diaDiv.innerHTML = diaHtml;
+
+                return this.diaDiv
+            }
+        }
+
+        for( var attr in Drag.prototype ){
+            Dialog.prototype[attr] = Drag.prototype[attr];
+        }
+
+        Dialog.prototype.limit = function(){
+            if(this.l < 100){
+                this.l = 100;
+            }
+        }
+
+    </script>
+</head>
+<body>
+<input type="button" id="btn" value="按钮" />
+
+    <script>
+        btn.onclick = function(){
+            new Dialog();
+        }
+    </script>
+</body>
+</html>
