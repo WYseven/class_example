@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,
+			ul,
+			li {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			.bg{
+				background:url("bg1.png") no-repeat;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="baidu.css" />
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div class="baidu">
+				<ul id="list">
+					<li>
+						<div></div>
+						<span>泡沫</span>
+						<span>邓紫棋</span>
+					</li>
+					<li>
+						<div></div>
+						<span>说爱你</span>
+						<span>蔡依林</span>
+					</li>
+					<li>
+						<div></div>
+						<span>稻香</span>
+						<span>周杰伦</span>
+					</li>
+					<li>
+						<div></div>
+						<span>我的梦</span>
+						<span>张靓颖</span>
+					</li>
+					<li>
+						<div></div>
+						<span>怎么说我不爱你</span>
+						<span>萧敬腾</span>
+					</li>
+					<li>
+						<div>️</div>
+						<span>无处安放</span>
+						<span>白若溪</span>
+					</li>
+				</ul>
+				<div class="select">
+					<span class="selectAll"><span>全选</span></span>
+					<div class="others">
+						<span><em></em>收藏</span>
+						<span><em></em>添加</span>
+						<span class="delecte"><em></em>删除</span>
+					</div>
+				</div>
+				<div class="edtorDiv">
+					<p>歌曲： <input type="text" /> </p>
+					<p>作者： <input type="text" /> </p>
+					<input type="button" value="保存" />
+					<input type="button" value="取消" />
+				</div>
+			</div>
+		</div>
+		<script src='../../jquery-2.2.4.js'></script>
+		<script>
+			//隔行变色
+			var lis = $("#list li");
+            $("#list").find("li:odd").css("background","rgba(225, 86, 113, 0.298039)");
+
+            lis.each(function(index,item){
+                addEvent($(item));
+			});
+
+            function addEvent(li){
+                li.on("mouseover",function(){
+                    $(this).css("background","rgba(225, 86, 113,1)");
+                })
+				.on("mouseout",function(){
+
+					if($(this).find("div.bg").length){
+						return;
+					}
+
+					if($(this).is("#list li:odd")){
+						$(this).css("background","rgba(225, 86, 113,0.298039)");
+					}else{
+						$(this).css("background","#fff");
+					}
+				})
+				.on("click",function(ev){
+					var target = $(ev.target).closest("li").find("div");
+
+					$(target).toggleClass("bg");
+
+					var bl = lis.find("div").toArray().every(function(item){
+						return $(item).hasClass("bg");
+					});
+
+					if(bl){
+						selectAll.addClass("bg");
+					}else{
+						selectAll.removeClass("bg");
+					}
+				});
+			}
+
+
+
+            var selectAll = $(".selectAll");
+
+            selectAll.on("click",function(ev){
+                var bl = $(this).toggleClass("bg").hasClass("bg");
+
+                if(bl){
+                    lis.find("div").addClass("bg");
+                    lis.css("background","rgba(225, 86, 113,1)");
+				}else{
+                    lis.find("div").removeClass("bg");
+                    lis.css("background","");
+                    $("#list").find("li:odd").css("background","rgba(225, 86, 113, 0.298039)");
+				}
+
+			});
+
+            var edtorDiv = $(".edtorDiv");
+            var inputText = edtorDiv.find("[type='text']");
+            var inputButton = edtorDiv.find("[type='button']");
+
+            inputButton.eq(0).on("click",function(){
+				var val1 = inputText.eq(0).val();
+				var val2 = inputText.eq(1).val();
+
+				var newLi = $(
+				    	"<li></li>",
+						{
+						    html:`<div></div>
+								<span>${val1}</span>
+								<span>${val2}</span>`
+						}
+						);
+
+				newLi.appendTo($("#list"));
+
+				console.log(newLi.is("#list li:odd"));
+
+                if(newLi.is("#list li:odd")){
+                    newLi.css("background","rgba(225, 86, 113,0.298039)");
+                }
+
+                addEvent(newLi);
+
+                lis.push(newLi);
+
+			})
+
+			$(".delecte").click(function(){
+              //  console.log($("#list li").find("div").hasClass("bg").end().hide());
+                var div = $("#list li").find("div.bg");
+                if(div.length){
+                    div.parent("li").remove();
+                    $("#list").find("li:odd").css("background","rgba(225, 86, 113, 0.298039)");
+                    $("#list").find("li:even").css("background","#fff");
+				}
+			});
+
+
+
+		</script>
+	</body>
+
+</html>

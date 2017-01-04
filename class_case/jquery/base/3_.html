@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			div {
+			   background-color: #abc;
+			   width: 340px;
+			   height: 340px;
+				display: none;
+			}
+		</style>
+		<script src='../jquery-2.2.4.js'></script>
+		<script>
+			$(function (){
+			   // console.log($("input").constructor);
+
+				//在循环的时候，加上下标
+                $("input").each(function(index,item){
+                    $(this).attr("index",index);
+				});
+
+				$("input").click(function(){
+					/*var index = $(this).attr("index");
+					$(this).css("background","yellow").siblings("input").css("background","");
+
+					$("div").hide().eq(index).show();*/
+
+					//console.log($("input").index($(this)));
+
+                    /*$(this).css("background","yellow").siblings("input").css("background","");
+
+                    $("div").hide().eq(index).show();*/
+				});
+			})
+		</script>
+	</head>
+
+	<body>
+
+
+	<div style="display: block;">1</div>
+	<div>2</div>
+	<div>3</div>
+
+	<input type="button" value="1" />
+	<input type="button" value="2" />
+	<input type="button" value="3" />
+
+	</body>
+</html>
