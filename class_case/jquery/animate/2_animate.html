@@ -24,8 +24,8 @@
 				  }, {
 				    duration: 1000,
 				    step: function( now, fx ){
-				    	console.log(fx.prop);
-				      //$( ".block:gt(0)" ).css( "left", now );
+				    	console.log(fx.prop,now);
+				      $( ".block:gt(0)" ).css( "left", now );
 				    }
 				  });
 				});

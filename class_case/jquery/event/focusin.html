@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-2.2.4.js"></script>
+    <script>
+
+    </script>
+</head>
+<body>
+<p>
+    <input type="text" /><span style="display: none;">请填写正确的信息</span>
+</p>
+<p>
+    <input type="text" /><span style="display: none;">请填写正确的信息</span>
+</p>
+    <script>
+        /*$("input")[0].onfocus = function(ev){
+            console.log(ev);
+        }
+        $("input")[0].onclick = function(ev){
+            console.log(ev);
+        }*/
+
+        $("input").focus(function(){
+            console.log(456);
+        })
+        $("p").focusin(function(){
+            $(this).children("span").fadeIn();
+        });
+        $("p").focusout(function(){
+            $(this).children("span").fadeOut();
+        });
+
+
+
+
+
+    </script>
+</body>
+</html>

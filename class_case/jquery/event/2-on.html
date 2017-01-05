@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="../jquery-2.2.4.js"></script>
+		<script>
+			$(function (){
+				/*$("ul").on("click","span",123,function(ev){
+					console.log(ev);
+				});*/
+
+                /*$(".add1").on("click.list1",function(){
+                    $("<li>hello</li>").appendTo($(".list1"));
+
+                })
+                $(".add1").on("click.list2",function(){
+                    $("<li>hello1111</li>").appendTo($(".list2"));
+                })
+
+				$(".add2").click(function(){
+                    $(".add1").trigger("click.list2")
+				});
+
+				$("#oDiv").click(function(){
+				    console.log(123);
+				});*/
+
+				$(".add2").click(function () {
+                    $(".list1").toggle(1000);
+                });
+                $(window).on("beforeunload",function (ev) { alert("Bye now!"); ev.preventDefault()  } );
+                $(window).on('beforeunload', function(){
+                    return '确定离开吗?';
+                });
+			})
+		</script>
+	</head>
+
+	<body>
+
+	<input type="button" class="add2" value="按钮2">
+		<div id="oDiv">
+			<input type="button" class="add1" value="按钮1">
+			<ul class="list1">
+				<li>
+					<span>123</span>
+				</li>
+				<li>
+					<span>123</span>
+				</li>
+				<li>
+					<span>123</span>
+				</li>
+			</ul>
+			<hr />
+			<ul class="list2">
+				<li>
+					<span>123</span>
+				</li>
+				<li>
+					<span>123</span>
+				</li>
+				<li>
+					<span>123</span>
+				</li>
+			</ul>
+		</div>
+
+	</body>
+</html>

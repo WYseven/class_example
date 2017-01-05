@@ -8,6 +8,7 @@
 				width: 200px;
 				height: 200px;
 				background: red;
+				transform: translateX(0px);
 			}
 		</style>
 		<script src="../jquery-2.2.4.js"></script>
@@ -17,8 +18,10 @@
 		<div id="box"></div>
 		<script>
 			$(document).click(function (){
-					
-			}	)
+				$("#box").animate({
+				    transform:"translateX(100px)"
+				})
+			})
 		</script>
 	</body>
 </html>
