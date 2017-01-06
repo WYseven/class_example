@@ -97,20 +97,17 @@
 
         function Dialog(option){
 
-
-
-
             option = option || {};
 
-           this.defaults = {
+           this.defaultss = {
                 title:"这是一个弹框",
                 content:"我是弹框",
-                okFn:function(){}
+                okFn:function(){},
+                left:null,
+                limit:null
             };
 
-            for( var attr in option ){
-                this.defaults[attr] = option[attr];
-            }
+            extend(this.defaultss,option);
 
             this.inits();
 
@@ -133,12 +130,27 @@
                 this.h3 = this.diaDiv.querySelector("h3");
 
                 this.position();
+                this.addEvent();
 
             },
             position(){
-                //居中显示
-                this.diaDiv.style.left = (document.documentElement.clientWidth - this.diaDiv.offsetWidth)/2 + "px";
-                this.diaDiv.style.top = (document.documentElement.clientHeight - this.diaDiv.offsetHeight)/2 + "px";
+                var left = this.defaultss.left && !isNaN(Number(this.defaultss.left));
+                var top = this.defaultss.top && !isNaN(Number(this.defaultss.top));
+                if(left && top){
+                    this.diaDiv.style.left = this.defaultss.left + "px";
+                    this.diaDiv.style.top = this.defaultss.top + "px";
+                }else if(left){
+                    this.diaDiv.style.left = this.defaultss.left + "px";
+                    this.diaDiv.style.top = (document.documentElement.clientHeight - this.diaDiv.offsetHeight)/2 + "px";
+                }else if(top){
+                    this.diaDiv.style.top = this.defaultss.top + "px";
+                    this.diaDiv.style.left = (document.documentElement.clientWidth - this.diaDiv.offsetWidth)/2 + "px";
+                }else{
+                    //居中显示
+                    this.diaDiv.style.left = (document.documentElement.clientWidth - this.diaDiv.offsetWidth)/2 + "px";
+                    this.diaDiv.style.top = (document.documentElement.clientHeight - this.diaDiv.offsetHeight)/2 + "px";
+                }
+
             },
             createMask(){
                 this.mask = document.createElement("div");
@@ -154,11 +166,11 @@
                 this.diaDiv.className = "full-pop";
 
                 var diaHtml = `<h3>
-                    <p class="title">${this.defaults.title}</p>
+                    <p class="title">${this.defaultss.title}</p>
                     <a href="javascript:void(0);" class="close" title="关闭">×</a>
                     </h3>
                     <div class="content">
-                        ${this.defaults.content}
+                        ${this.defaultss.content}
                     </div>
                     <div class="pop-btns">
                         <span class="error"></span>
@@ -169,16 +181,74 @@
                 this.diaDiv.innerHTML = diaHtml;
 
                 return this.diaDiv
+            },
+            removeDialog(){
+                document.body.removeChild(this.diaDiv);
+                document.body.removeChild(this.mask);
+            },
+            addEvent(){
+                var _this = this;
+                window.addEventListener("resize",function(){
+                    _this.position();
+                });
+
+                var close = this.diaDiv.querySelector(".close");
+                var ok = this.diaDiv.querySelector(".confirm");
+                var cancel = this.diaDiv.querySelector(".cancel");
+
+                close.addEventListener("click",this.removeDialog.bind(this))
+                ok.addEventListener("click",function(){
+                    var bl = _this.defaultss.okFn.call(_this);
+                    if( !bl ){
+                        _this.removeDialog();
+                    }
+
+                })
+                cancel.addEventListener("click",this.removeDialog.bind(this))
             }
         }
 
-        for( var attr in Drag.prototype ){
-            Dialog.prototype[attr] = Drag.prototype[attr];
+        function extend(){
+
+            var target = arguments[0];
+            var i = 1;
+            var options = null;
+
+            if(arguments.length === 1){
+                return target;
+            }
+
+            for(;i < arguments.length; i++){
+                if( options = arguments[i]  ){
+                    for( var attr in options){
+                        target[attr] = options[attr];
+                    }
+                }
+            }
+
+            return target;
+
         }
 
+        extend(Dialog.prototype,Drag.prototype);
+
         Dialog.prototype.limit = function(){
-            if(this.l < 100){
-                this.l = 100;
+            if( this.defaultss.limit ){
+                console.log(this.l , this.defaultss.limit.minX);
+                if( typeof this.defaultss.limit.minX !== "undefined" && this.l < this.defaultss.limit.minX ){
+                    this.l = this.defaultss.limit.minX
+                }
+                if( typeof this.defaultss.limit.maxX !== "undefined" && this.l > this.defaultss.limit.maxX ){
+                    this.l = this.defaultss.limit.maxX
+                }
+                if( typeof this.defaultss.limit.minY !== "undefined" && this.l < this.defaultss.limit.minY ){
+                    this.l = this.defaultss.limit.minY
+                }
+                if( typeof this.defaultss.limit.maxY !== "undefined" && this.l > this.defaultss.limit.maxY ){
+                    this.l = this.defaultss.limit.maxY
+                }
+            }else{
+
             }
         }
 
@@ -189,7 +259,18 @@
 
     <script>
         btn.onclick = function(){
-            new Dialog();
+            new Dialog({
+                title:"hello",
+                content:"hahah",
+                left:100,
+                limit:{
+                    minX:100,
+                    maxX:500
+                },
+                okFn(){
+                    return true;
+                }
+            });
         }
     </script>
 </body>
