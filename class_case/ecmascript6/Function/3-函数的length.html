@@ -7,6 +7,8 @@
         /*
         * 函数的length属性，获取的是预期传入参数的个数，一旦给参数设置了默认值，那么不计算在内
         *
+        * length不包含reset参数
+        *
         * */
 
         function fn(a,b=1){
@@ -14,6 +16,12 @@
         }
 
         console.log( fn.length );
+
+        function func(a,b,c,d=100){
+
+        }
+
+        console.dir(func);
 
 
 

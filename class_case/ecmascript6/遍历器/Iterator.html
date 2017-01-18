@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var arr = ["miaov","ketang"];
+        //生成遍历器对象
+        function makIterator(arr){
+            var index = 0;
+            return {
+                next:function(){
+                    return index < arr.length
+                            ? {value:arr[index++],done:false}
+                            : {value:undefined,done:true}
+                }
+            }
+        }
+        //使用next移动指针
+        var o = makIterator(arr);
+
+        console.log(o.next());
+        console.log(o.next());
+        console.log(o.next());
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

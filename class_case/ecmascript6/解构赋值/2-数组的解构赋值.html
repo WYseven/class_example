@@ -7,17 +7,18 @@
 			
 		</style>
 		<script>
-			/*
-				Object.getOwnPropertyDescriptor()
 
+			var [x,y,z=3] = [1,2];
 
-			*/
+			console.log(x,y,z);
 
-			var obj = {a:1}
+			var {foo:a,bar,c:d=10} = {foo:1,bar:2};
 
-			console.log( Object.getOwnPropertyDescriptor(obj,"a") );
-			console.log( Object.getOwnPropertyDescriptor(obj,"__proto__") );
+			console.log(a,bar,d);
 
+			var [str1] = "hello";
+
+			console.log(str1);
 
 
 

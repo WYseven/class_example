@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script>
-        'use strict';
+        //'use strict';
         /*
          * let声明变量会在块级作用域中生效
          * 不存在变量提升
@@ -37,7 +37,7 @@
        // console.log(fn);
         //fn();
 
-        function fn1(){
+        /*function fn1(){
             console.log(1);
         }
 
@@ -53,7 +53,19 @@
             console.log(fn1);
         }
 
-        func();
+        func();*/
+
+       /* function func(a,a,b){
+            console.log(a,b);
+        }
+
+        func(1,2,3);*/
+
+        function func(x=y,y=20){
+         console.log(x,y);
+         }
+
+         func(1);
 
 
 

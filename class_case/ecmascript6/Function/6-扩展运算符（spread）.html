@@ -7,7 +7,11 @@
         /*
         * 扩展运算符（spread） 使用的是三个点，是rest的逆运算，将一个数组转为用逗号分隔的参数序列
         *
-        *
+        *   用处：
+        *       1. 合并数组
+        *       2. 与解构赋值结合
+        *       3. 字符串转成数组
+        *       4. 类数组转成数组
         * */
         function fn(){
             console.log(arguments);
@@ -36,6 +40,13 @@
         console.log(Math.max.apply(null,arr));
 
         console.log(Math.max(...arr));
+
+        //-----2. 与解构赋值结合------
+        var arr = ["miao","miaov","ke"];
+
+        let [a,...rest] = arr;
+
+        console.log(a,rest);
 
 
 

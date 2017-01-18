@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        //交集
+        var arr1 = [1,2,3,4];
+        var arr2 = [3,4,5,6];
+
+        var newArr = [...new Set(arr1.filter(function(item){
+            return new Set(arr2).has(item);
+        }))];
+
+        console.log(newArr);
+
+        //并集
+
+        var newArr2 = [...new Set([...arr1,...arr2])];
+
+        console.log(newArr2);
+
+        //差集
+
+        var newArr3 = [...new Set(arr1.filter(function(item){
+            return !(new Set(arr2).has(item));
+        }))];
+
+        console.log(newArr3);
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

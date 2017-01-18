@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        var data = [
+            {
+                title:"hello1",
+                id:"1"
+            },
+            {
+                title:"hello2",
+                id:"2"
+            },
+            {
+                title:"hello3",
+                id:"3"
+            }
+        ]
+
+    </script>
+</head>
+<body>
+
+    <ul id="list">
+       <!-- <li>hello</li>-->
+    </ul>
+    <hr>
+    <div>
+        <input type="button" id="delect" value="删除选中的" />
+    </div>
+    <script>
+        var html = data.map(function (item) {
+            return '<li data-item-id="'+item.id+'"><input type="checkbox" />'+item.title+'</li>'
+        }).join("");
+
+        list.innerHTML = html;
+
+        var allLi = list.getElementsByTagName("li");
+
+        delect.onclick = function () {
+            var chechedLi = [...list].filter( function(item){
+                return item.getElementsByTagName('input')[0].checked;
+            } );
+
+            //删除数据
+
+            var itemIdArr = chechedLi.map(item => item.dataset.itemId);
+
+            data = data.filter(function(item){
+                return !(new Set(itemIdArr).has(item.id));
+            });
+
+            console.log(data);
+
+        }
+
+
+    </script>
+</body>
+</html>

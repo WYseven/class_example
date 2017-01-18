@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var arr = ["miaov","ketang"];
+
+        //得到一个遍历器对象
+
+        /*var iterator = arr[Symbol.iterator]();
+
+        console.log(iterator.next());
+        console.log(iterator.next());
+        console.log(iterator.next());*/
+
+        /*for( let [key,value] of arr.entries() ){
+            console.log(key,value);
+        }*/
+
+        /*for( let value of arr.values() ){
+            console.log(value);
+        }*/
+
+        var  obj = {a:1,b:2,[Symbol.iterator] : function () {
+            console.log(123);
+            return {
+                next: function () {
+                    return {
+                        value: 1,
+                        done: true
+                    };
+                }
+            };
+        }};
+
+
+
+        for( let value of obj){
+            console.log(value);
+        }
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
