@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <style>
+        body{
+            margin:0;
+            font-size: 12px;
+            overflow: hidden;
+        }
+        body,html{
+            width: 100%;
+            overflow: hidden;
+        }
+        ul {
+            margin:0;
+            padding:0;
+        }
+        li{
+            list-style: none;
+        }
+        #tops{
+            width: 100%;
+            height:1.6rem;
+            background: red;
+            font-size: 20px;
+            line-height: 1.6rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        #footer {
+            width: 100%;;
+            height:1.6rem;
+            position: absolute;
+            left: 0;
+            bottom:0;
+            font-size: 20px;
+            line-height: 1.6rem;
+            text-align: center;
+            background: yellow;
+        }
+        #middle {
+            position: absolute;
+            left:0;
+            top:1.6rem;
+            bottom: 0;
+            right:0;
+            background: green;
+            overflow: hidden;
+        }
+        #list {
+            background: pink;
+        }
+    </style>
+    <script>
+        var html = document.documentElement;
+        var r = html.getBoundingClientRect().width;
+        html.style.fontSize = r/15 + "px";
+    </script>
+</head>
+<body>
+    <header id="tops">
+        这是头部
+    </header>
+    <section id="middle">
+        <ul id="list">
+            <li>开始</li>
+        </ul>
+    </section>
+    <footer id="footer">
+        这是底部
+    </footer>
+    <script src="./mTween.js"></script>
+    <script>
+        var list = document.querySelector('#list');
+
+        var str = "";
+        for(var i = 0; i < 1000; i++){
+            str += '<li>'+i+'</li>';
+        }
+       list.innerHTML +=  str;
+        list.innerHTML += '结束';
+
+        
+
+        var startDis = 0;
+        var startPage = 0;
+
+        var lastY = 0;
+        var lastDis = 0;
+
+        var time = 0;
+        var lastTime = 0;
+
+       
+
+        cssTransform(list,"translateZ",0.01);
+
+        document.addEventListener("touchstart",function(e){
+            e.preventDefault();
+        })
+        list.addEventListener("touchstart",function (ev)  {
+            startPage = ev.changedTouches[0].pageY;
+            lastY = startDis = cssTransform(list,"translateY");
+            lastTime = lastDis = 0;
+
+            time = new Date().getTime();
+
+            tops.innerHTML = startPage;
+
+            clearInterval(this.timer);
+
+            //ev.stopPropagation();
+
+        },false);
+
+        list.addEventListener("touchmove",function (ev)  {
+            var nowTime = new Date().getTime();
+            var nowPage = ev.changedTouches[0].pageY;
+
+            var y = (nowPage - startPage)+startDis;
+
+            if(y>0){
+                y *= 0.3;
+            }
+
+            tops.innerHTML = y;
+
+            cssTransform(list,"translateY",y);
+
+            lastDis = y - lastY;
+
+            lastY = y;
+
+            lastTime = nowTime - time;
+
+            time = nowTime;
+
+        },false);
+
+        list.addEventListener("touchend",function (ev)  {
+            var type = "easeOutStrong"
+            var speed = Math.round(lastDis/lastTime*5);
+            if(isNaN(speed)){
+                return;
+            }
+            var target = Math.round(speed*50 + cssTransform(list,"translateY"));
+            if(target>0){
+                target = 0;
+                
+            }
+
+            
+            mTween({
+                el:this,
+                target:{
+                    translateY:target
+                },
+                time:Math.abs(target*1.5) || 500,
+                type:type,
+                callback:function(){
+                    if(target>0){
+                        target = 0;
+                    }
+                }
+            })
+        },false);
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+        body{
+            margin:0;
+        }
+        body,html{
+            width: 100%;
+            overflow: hidden;
+        }
+        ul {
+            margin:0;
+            padding:0;
+        }
+        li{
+            list-style: none;
+        }
+        img{
+            border:0;
+            margin:0;
+            padding:0;
+        }
+        section {
+            position: relative;
+            height: 10rem;
+            width: 100%;
+        }
+        .tab{
+            width: 1000%;
+            transform: translate3d(0,0,0);
+            position: absolute;
+            left:0;
+            top:0;
+        }
+        .tab li{
+            width: 15rem;
+            float: left;
+        }
+        .tab li img {
+            width: 100%;
+        }
+    </style>
+    <script>
+        var html = document.documentElement;
+        var r = html.getBoundingClientRect().width;
+        html.style.fontSize = r/15 + "px";
+
+
+
+    </script>
+</head>
+<body>
+    <section>
+        <ul class="tab">
+            <li>
+                <img src="./img/1.jpg" alt="">
+            </li>
+            <li>
+                <img src="./img/2.jpg" alt="">
+            </li>
+            <li>
+                <img src="./img/3.jpg" alt="">
+            </li>
+        </ul>
+    </section>
+    <script>
+        var tab = document.querySelector(".tab");
+        var tabLi = tab.querySelectorAll("li");
+        var startPoint = 0;
+        var initpos = 0;
+
+        var w = tabLi[0].offsetWidth;
+
+        tab.addEventListener("touchstart",function(e){
+            startPoint = e.changedTouches[0].pageX;
+            initpos = this.offsetLeft;
+            this.style.transition = "none";
+        },false);
+
+        tab.addEventListener("touchmove",function(e){
+            var movePoint = e.changedTouches[0].pageX;
+            this.style.left = (movePoint - startPoint)+initpos + "px";
+
+        },false);
+
+        tab.addEventListener("touchend",function(e){
+            var n = Math.round(this.offsetLeft/w);
+            this.style.left = w*n + "px";
+            this.style.transition = ".5s";
+
+        },false);
+
+
+
+    </script>
+</body>
+</html>
