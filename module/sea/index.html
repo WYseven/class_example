@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./src/sea.js"></script>
+    <script>
+
+    	seajs.config({
+    		base:"./sae-modules/",
+    		alias:{
+    			bbb:"./a.js",
+    			abc:"b.js",
+    		}
+    	})
+
+    	//启动人口文件
+    	seajs.use("bbb",function(a){
+    		console.log(a);
+    	})
+    </script>
+</head>
+<body>
+
+</body>
+</html>
