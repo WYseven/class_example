@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        function addEvent(){
+            var events = {};
+
+            events.listenList = {};
+
+            events.listen = function(key,fn){
+
+                if(!events.listenList[key]){
+                    events.listenList[key] = [];
+                }
+
+                events.listenList[key].push(fn);
+            }
+
+            events.trigger = function(){
+
+                var key = [].shift.call(arguments),
+                    listens = events.listenList[key];
+
+                if( !listens || listens.length === 0){
+                    return ;
+                }
+
+                for( var i = 0,fn; fn=listens[i++]; ){
+                    fn.apply(this,arguments);
+                }
+            }
+
+            events.remove = function(key,fn){
+                var listens = events.listenList[key];
+
+                if( !listens || listens.length === 0){
+                    return ;
+                }
+
+                if(!fn){
+                    listens && (listens.length = 0);
+
+                }else{
+                    for( var i = listens.length-1; i >= 0 ;i--  ){
+                        if(fn === listens[i]){
+                            listens.splice(i,1);
+                        }
+                    }
+                }
+            }
+            return events;
+        }
+
+        function initEvents(obj){
+            for ( var i in addEvent() ){
+                obj[ i ] = addEvent()[ i ];
+            }
+        }
+
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

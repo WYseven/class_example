@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var events = {};
+
+        events.listenList = [];
+
+        events.listen = function(fn){
+            events.listenList.push(fn);
+        }
+
+        events.trigger = function(){
+            for( var i = 0,fn; fn=this.listenList[i++]; ){
+                fn.apply(this,arguments);
+            }
+        }
+
+        events.listen(function(){
+            console.log(arguments)
+        })
+        events.listen(function(){
+            console.log(arguments)
+        })
+
+        events.trigger(100);
+        events.trigger(200);
+        events.trigger(300);
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

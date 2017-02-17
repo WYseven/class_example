@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,user-scalable=no" />
+    <style>
+        body {
+            overflow: hidden;
+        }
+        #box{
+            width: 700px;
+            height:100px;
+            background: red;
+            position: absolute;
+            left:0;
+            top:0px;
+            opacity: 1;
+        }
+        input {
+            border:1px solid #000;
+        }
+        select {
+            border: 1px solid red;
+        }
+    </style>
+    <script>
+
+    </script>
+</head>
+<body>
+<a href="http://www.baidu.com" id="hefrs">百度</a>
+<p>123</p>
+<input type="text" />
+<select name="" id="">
+    <option value="">hello</option>
+    <option value="">hello</option>
+    <option value="">hello</option>
+    <option value="">hello</option>
+    <option value="">hello</option>
+</select>
+    <div id="box"></div>
+    <script>
+        var t = 0;
+        document.addEventListener("touchstart",function(ev){
+            console.log(ev.target.nodeName)
+            /*if(ev.target.nodeName === "A") return;
+            if(ev.target.nodeName === "INPUT") return;
+            if(ev.target.nodeName === "SELECT") return;
+            if(ev.target.nodeName === "BODY" || ev.target.nodeName === "HTML") return;*/
+            ev.preventDefault();
+        },false)
+        /*box.addEventListener("touchend",function(ev) {
+            console.log(123)
+            this.style.display = "none";
+            ev.preventDefault();
+        },false);*/
+        box.addEventListener("touchstart",function(ev) {
+            console.log(ev)
+            box.innerHTML = ev.changedTouches.length;
+        },false);
+        box.addEventListener("touchmove",function(ev) {
+           box.innerHTML = ev.changedTouches.length;
+            //box.innerHTML += 1;
+        },false);
+        box.addEventListener("touchend",function(ev) {
+            box.innerHTML += 222;
+            box.innerHTML = ev.changedTouches.length;
+        },false);
+
+
+    </script>
+</body>
+</html>
