@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			#box1,#box2 {
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+				left: 0;
+				top:0;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="box1">box1</div>
+		<!-- <div id="box2">box2</div> -->
+		<script>
+			function Drag(ele){
+				this.ele = ele;
+				this.disX = this.disY = 0;
+				this.init();
+			}
+
+			Drag.prototype.init  = function (){
+				//this -> 实例
+				var that = this;
+				this.ele.onmousedown = function (ev){
+					//this -> 元素
+					that.downFn(ev);	
+				};
+			};
+
+			Drag.prototype.downFn = function (ev){
+				//this -> 实例
+				this.disX = ev.clientX - this.ele.offsetLeft;
+				this.disY = ev.clientY - this.ele.offsetTop;
+				var that = this;
+				document.onmousemove = function (ev){
+					that.moveFn(ev);
+				};
+				document.onmouseup = function (ev){
+					that.moveUp(ev);
+				}
+				ev.preventDefault();
+			}
+
+			Drag.prototype.moveFn  = function (ev){
+				//限制范围
+				//this -> 实例
+				this.ele.style.left = ev.clientX - this.disX + "px";
+				this.ele.style.top = ev.clientY - this.disY + "px";	
+			};
+			Drag.prototype.moveUp = function (ev){
+				document.onmousemove = document.onmouseup = null;	
+			}
+
+
+			new Drag(box1);
+
+
+		</script>
+	</body>
+</html>

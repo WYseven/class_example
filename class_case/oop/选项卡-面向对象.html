@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/miaov">
+		</script>
+		<style>
+			p {display: none;}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+	
+	<body>
+		<div id="div1">
+			<input type="button" value="按钮一" style="background: yellow;" />
+			<input type="button" value="按钮二" />
+			<input type="button" value="按钮三" />
+			<p style="display: block;">内容一</p>
+			<p>内容二</p>
+			<p>内容三</p>
+		</div>
+		
+		<div id="div2">
+			<input type="button" value="按钮一" style="background: yellow;" />
+			<input type="button" value="按钮二" />
+			<input type="button" value="按钮三" />
+			<input type="button" value="按钮四" />
+			<p style="display: block;">内容一</p>
+			<p>内容二</p>
+			<p>内容三</p>
+			<p>内容四</p>
+		</div>
+		
+		<input type="button" value="开始播放第二个" id="btn1" />
+		<input type="button" value="停止播放第一个" id="btn2" />
+		<input type="button" value="开始播放所有" id="btn3" />
+		<input type="button" value="停止播放所有" id="btn4" />
+		<input type="button" value="反向播放" id="btn5" /> <!-- -->
+		<script>
+			
+			function Tab(parent){
+
+				//使用var声明的变量，私有变量
+
+				this.inputs = parent.getElementsByTagName("input");	
+				this.ps = parent.getElementsByTagName("p");	
+				this.len = this.inputs.length;
+
+				this.timer = null;
+				/*
+					用new调用后，返回的对象就是实例，函数中this指向实例
+				*/
+				//初始化
+				this.init();
+			}
+
+			Tab.prototype.init = function (){
+				//this -> 实例
+				var that = this;  //先把实例存在变量中
+				for( var i = 0; i < this.len; i++ ){
+					this.inputs[i].index = i;
+					this.inputs[i].onclick = function (){
+						//清空inputs的背景色
+						that.play(this.index);
+					};
+				}	
+			}
+
+			Tab.prototype.play = function (index){
+				//this -> 实例
+				var that = this;
+				for( var i = 0; i < that.len; i++ ){
+					that.inputs[i].style.backgroundColor = '';
+					that.ps[i].style.display = "none";
+				}
+
+				that.inputs[index].style.backgroundColor = "yellow";
+				that.ps[index].style.display = "block";	
+			};
+
+			//提供一个函数，用来自动播放
+			Tab.prototype.autoPlay = function (){
+				//this --> 实例
+				var that = this;
+				var n = 0;
+				this.timer = setInterval(function (){
+					n++;
+					if(n === that.len){
+						n = 0;
+					}
+
+					that.play(n);
+
+				},1000)
+			}; 
+
+			//向外界暴露一个状态 status
+
+			Tab.prototype.status = function (){
+				return !!this.timer;	
+			}
+
+			Tab.prototype.stop = function (){
+				clearInterval(this.timer);	
+				this.timer = null;
+			}
+			
+				
+
+			var div1 = document.getElementById("div1");
+			var div2 = document.getElementById("div2");
+
+
+			var t1 = new Tab(div1);
+			var t2 = new Tab(div2);
+
+			//让第一个选项卡自动播放
+
+			t1.autoPlay();
+			t2.autoPlay();
+
+			//反向播放
+
+			btn5.onclick = function (){
+				//知道当前选项卡播放的状态	
+
+				if(t1.status()){  //正在播放
+					t1.stop();
+				}else{
+					t1.autoPlay();
+				}
+			};
+
+
+		</script>
+	</body>
+</html>
