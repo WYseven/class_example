@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title></title>
+	<style>
+
+	</style>
+	<script>
+        function inherit(){
+
+        }
+        //继承
+
+        //人类
+
+        function Person(name){
+            this.name = name;
+            this.property = ["眼睛","鼻子"];
+        }
+
+        Person.prototype.say = function(){
+            console.log("我的名字是"+this.name);
+        }
+
+        function jicheng(c,prototype){
+			function p(){};
+
+			p.prototype = prototype;
+
+			c.prototype = new p();
+			c.prototype.constructor = c;
+		}
+
+
+        //一个程序员
+
+        function Coder(name,flag){
+            Person.call(this,name);
+            this.flag = flag;
+        }
+
+		/*Coder.prototype.say = function(){
+		 console.log("我的名字是"+this.name);
+		 }*/
+        //不能给父类传入参数
+        Coder.prototype = new Person();
+
+        //Coder.prototype.constructor = Coder;
+
+        jicheng(Coder,Person.prototype)
+
+        Coder.prototype.coding = function(){
+            console.log("我会写代码");
+        }
+
+        var c = new Coder("leo","码农");
+        var c2 = new Coder("leo2","码农");
+
+        c.property.push("耳朵");
+
+        console.log(c2);
+
+        console.log(c instanceof Person);
+
+
+	</script>
+</head>
+
+<body>
+
+</body>
+</html>
