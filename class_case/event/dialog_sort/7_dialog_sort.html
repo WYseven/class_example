@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			.box {
+				width: 800px;
+				height: 500px;
+				border: 1px solid #000;
+				margin:10px auto;
+				position: relative;
+			}
+			.box .item{
+				width: 50px;
+				height: 20px;
+				border: 1px dashed #ccc;
+				cursor: move;
+				text-align: center;
+				font-size: 12px;
+				line-height: 20px;
+				float: left;
+				margin: 10px 0 0 10px;
+				position: relative;
+				z-index: 2;
+				background:#fff;
+			}
+			.content {
+				width: 400px;
+				height: 300px;
+				border: 1px solid red;
+				padding-top: 30px;
+			}
+			.box .mask{
+				width: 50px;
+				height: 20px;
+				border: 1px dashed red;
+				position: absolute;
+				left:0;
+				top:0;
+			}
+		</style>
+		<script src="../../src/tools.js"></script>
+	</head>
+
+	<body>
+		<div class="box">
+			<div class="content">
+				<div class="item">订阅</div>
+				<div class="item">娱乐</div>
+				<div class="item">新闻</div>
+				<div class="item">图片</div>
+				<div class="item">涵涵</div>
+				<div class="item">成龙</div>
+				<div class="item">刘德华</div>
+				<div class="item">李宗盛</div>
+				<div class="item">王杰</div>
+				<div class="item">谢霆锋</div>
+				<div class="item">刘青云</div>
+				<div class="mask"></div>
+			</div>
+		</div>
+		<script>
+			//布局转换
+
+			var items = tools.$(".item");
+			var mask = tools.$(".mask")[0];
+
+			var position = [];
+
+			for( var i = 0; i < items.length; i++ ){
+				var rects = tools.getEleRect(items[i]);
+				position.push({
+					left:items[i].offsetLeft,
+					top:items[i].offsetTop,
+					originLeft:items[i].offsetLeft+items[i].offsetWidth,
+					originTop:items[i].offsetTop+items[i].offsetHeight,
+					zhongxinX:items[i].offsetLeft+items[i].offsetWidth/2,
+					zhongxinY:items[i].offsetTop+items[i].offsetHeight/2
+				})
+			}
+
+			var arr = [];
+
+			for( var i = 0; i < items.length; i++ ){
+				items[i].style.position = 'absolute';
+				items[i].style.left = position[i].left + 'px';
+				items[i].style.top = position[i].top + 'px';
+				items[i].style.margin = 0;
+				tools.attr(items[i],"index",i);
+				addEvent(items[i]);
+
+				arr.push(i);
+			}
+			var zIndex = 10;
+
+			function addEvent(item){
+				
+				var disX = 0;
+				var disY = 0;
+				var n = 0;
+				var status = '';
+				var nativL = 0;
+				var nativT = 0;
+				tools.addEvent(item,"mousedown",function (ev){
+					n = parseInt(tools.attr(item,"index"));
+					disX = ev.clientX - this.offsetLeft;	
+					disY = ev.clientY - this.offsetTop;	
+					tools.addEvent(document,"mousemove",moveFn);
+					tools.addEvent(document,"mouseup",upFn);
+
+					mask.style.left = position[n].left + "px";
+					mask.style.top = position[n].top + "px";
+					status = '';
+					ev.preventDefault();
+
+					zIndex++;
+					this.style.zIndex = zIndex;
+
+					nativL = item.offsetLeft;
+					nativT = item.offsetTop;
+				});
+				var onOff = true;
+				function moveFn(ev){
+					var l = ev.clientX - disX;
+					var t = ev.clientY - disY;
+					item.style.left = l + 'px';
+					item.style.top = t + 'px';
+
+					for( var i = 0; i < items.length; i++ ){
+						if(items[i] !== item && tools.collisionRect(item,items[i]) ){
+							if(nativT === items[i].offsetTop && Math.abs(item.offsetLeft - items[i].offsetLeft) < 30 ){
+						
+								items[i].style.left = position[tools.attr(item,"index")].left + "px";
+								items[i].style.top = position[tools.attr(item,"index")].top + "px";
+								var index = tools.attr(items[i],"index");
+								tools.attr(items[i],"index",tools.attr(item,"index"))
+								tools.attr(item,"index",index)
+
+								mask.style.left = position[tools.attr(item,"index")].left + "px";
+								mask.style.top = position[tools.attr(item,"index")].top + "px";
+
+							}
+
+							if(nativT < items[i].offsetTop){
+								//大于这个item的都要向前推进
+								var index = tools.attr(items[i],"index");
+
+							}
+						}
+
+
+					}
+
+				}
+				function upFn(){
+					tools.removeEvent(document,"mousemove",moveFn);	
+					tools.removeEvent(document,"mouseup",upFn);
+
+					item.style.left = position[tools.attr(item,"index")].left + "px";
+					item.style.top = position[tools.attr(item,"index")].top + "px";
+
+				}
+			}
+
+		</script>
+	</body>
+</html>

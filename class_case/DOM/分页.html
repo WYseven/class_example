@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			span{
+				margin:0px 10px;
+			}
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<div id="demo">
+			<span>1</span>
+			<span>2</span>
+			<span>3</span>
+			<span>4</span>
+			<span>5</span>
+		</div>
+		<script>
+			var arr = [];
+			function render(){
+				var html = '';
+				for( var i = 0; i < arr.length; i++ ){
+					html += '<span>'+arr[i]+'</span>';
+				}
+
+				demo.innerHTML = html;
+			}
+
+			var pageTotal = 16;  //生成总页数
+			var pageShow = 7;     //要展示的页数
+			var currentPage = 0;  //正在展示的页码
+			var pageMiddle = Math.ceil(pageShow/2);  //中间数
+
+			//通过currentPage，生成初始要展示的翻页结构
+
+			for( var i = 0; i < pageShow; i++ ){
+				arr.push(i+1)
+			}
+
+		//	arr.push('...',pageTotal)
+
+			render();
+
+			demo.onclick = function (ev){
+				if(ev.target.nodeName === "SPAN"){
+
+					var text = parseInt(ev.target.innerHTML.trim());
+
+					if( text < pageMiddle ){
+						return;
+					}
+
+					if(text>=pageMiddle && text+(pageMiddle-1)<=pageTotal){
+						for( var i = 0; i < arr.length; i++ ){
+							var n = text+(i-(pageMiddle-1));
+							arr[i] = n;
+						}
+					}else{
+						arr.length = 0;
+						for( var j = pageTotal-pageShow+1; j <= pageTotal; j++ ){
+							console.log(j);
+							arr.push(j);
+						}
+
+
+					}
+					
+					
+
+					
+
+					render();
+				}	
+			};
+
+		</script>
+	</body>
+</html>
