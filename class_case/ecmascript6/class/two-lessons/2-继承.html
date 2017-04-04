@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        //定义类 类描述了一组具有相同特性和行为的对象
+        //声明类 声明的类不会提升
+        class Person {
+            constructor(name){
+                //属性定义在对象身上
+                this.name = name;
+                console.log('我被执行了')
+                //new.target指向当前正在执行的函数
+                console.log( new.target.name )
+            }
+            run(){
+                console.log("奔跑吧")
+            }
+
+        }
+
+        //super 代表父类的构造函数
+        //必须在子类的调用super这个方法，负责会抛出错误
+        //因为子类中没有自己的this对象，是通过继承父类的this，然后进行加工的
+
+        class Coder extends Person {
+            static a(){
+            }
+            constructor(name,money){
+                super(name);
+                //super自动会绑定子类的this
+                this.names = 1000;
+                super.x = 200;
+                console.log(this.x)
+                console.log(super.run()) //指向原型对象
+            }
+
+            m(){
+                console.log(super.run)
+                console.log(super.names)
+            }
+        }
+
+        var c = new Coder('leo');
+
+        c.m();
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

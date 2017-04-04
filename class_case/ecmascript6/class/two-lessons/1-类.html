@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        //定义类 类描述了一组具有相同特性和行为的对象
+        //声明类 声明的类不会提升
+        class Person {
+            constructor(name){
+                //属性定义在对象身上
+                this.name = name;
+                console.log('我被执行了')
+            }
+
+            //都会定义在原型上
+
+            run(){
+                console.log("奔跑吧")
+            }
+            //属性名可以作为表达式
+            ['run'+1](){
+
+            }
+
+        }
+
+        console.dir( Person)
+
+       //通过类创建实例
+        var p1 = new Person('leo');
+
+        console.log(p1);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
