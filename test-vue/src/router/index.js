@@ -4,12 +4,26 @@ import Hello from '@/components/Hello'
 
 Vue.use(Router)
 
+document.onclick = function () {
+  /*
+    require(['../pages/test.js'], function (require) {
+    require('../pages/test2.js')
+    console.log('good')
+  }, 'test-chunk')
+   r => require.ensure([], () => r(require('../pages/index.vue')), 'group-foo')
+  */
+}
+
 export default new Router({
   routes: [
     {
       path: '/',
       name: 'Index',
-      component: resolve => require(['../pages/index.vue'], resolve)
+      component: (r) => {
+        require.ensure(['../pages/info.vue'], (require) => {
+          r(require('../pages/index.vue'))
+        })
+      }
     },
     {
       path: '/login',
@@ -18,11 +32,11 @@ export default new Router({
     },
     {
       path: '/u',
-      name: 'User',
+      // name: 'User', 如果有默认子路由，父路由name要去掉
       component: resolve => require(['../components/Hello.vue'], resolve),
       children: [
         {
-          path: '/',
+          path: 'home',
           name: 'Home',
           component: resolve => require(['../pages/home.vue'], resolve)
         },

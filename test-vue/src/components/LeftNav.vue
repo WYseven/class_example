@@ -1,8 +1,9 @@
 <template>
   <div>
     <h2>左侧导航</h2>
-    <router-link to="/u/">home</router-link>
+
     <router-link to="/u/info/">学员信息</router-link>
+    <router-link to="/u/home">home</router-link>
     <router-link to="/u/modules/">模块设置</router-link>
     <router-link to="/u/contents/">内容管理</router-link>
   </div>
@@ -20,5 +21,8 @@
 <style>
   a {
     display: block;
+  }
+  .router-link-active {
+    color: #f00;
   }
 </style>

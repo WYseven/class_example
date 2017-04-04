@@ -5,7 +5,10 @@
       <left-nav></left-nav>
     </div>
     <div id="right">
-      <router-view></router-view>
+      <transition model="out-in" name="fade">
+          <router-view></router-view>
+      </transition>
+
     </div>
   </div>
 </template>
@@ -45,6 +48,9 @@ li {
 a {
   color: #42b983;
 }
+
+
+
 #left {
   float: left;
   width: 200px;
@@ -56,5 +62,29 @@ a {
   height: 1000px;
   border: 1px solid #999;
   box-shadow: 1px 2px 5px #000;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.fade-enter {
+  opacity:0;
+  transform: translateX(500px);
+}
+.fade-enter-active {
+  transition: .5s;
+}
+.fade-enter-to {
+  opacity:1;
+  transform: translateX(0px);
+}
+.fade-leave {
+  transform: translateX(0px);
+}
+.fade-leave-active {
+  transition: 1s;
+}
+.fade-leave-to {
+  transform: translateX(-500px);
 }
 </style>
