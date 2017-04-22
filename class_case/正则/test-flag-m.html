@@ -2,12 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
     <script>
+        var str = `
+            I am a girl
+            hello,nice to meet you.
+        `
+
+        var re = /^\d+$/mg;
+
+        console.log(str.match(re));
+
 
     </script>
 </head>
 <body>
-$END$
+<input type="button" value="测试" id="btn" />
+<textarea name="" id="abc" cols="30" rows="10"></textarea>
+<script>
+    btn.onclick = function () {
+        console.log(abc.value.match(re))
+    }
+</script>
 </body>
 </html>

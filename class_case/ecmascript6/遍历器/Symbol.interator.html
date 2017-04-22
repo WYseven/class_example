@@ -22,21 +22,29 @@
             console.log(value);
         }*/
 
-        var  obj = {a:1,b:2,[Symbol.iterator] : function () {
-            console.log(123);
+        var  obj = {0:1,1:2,length:2,[Symbol.iterator] : function () {
+           
+            var index = -1;
             return {
-                next: function () {
-                    return {
-                        value: 1,
+                next:  () => {
+                    index++;
+                    return index < this.length ? {
+                        value: this[index],
                         done: true
+                    } : {
+                        done:false
                     };
                 }
             };
         }};
 
+        var o = obj[Symbol.iterator]()
 
+        console.log(o.next())
+        console.log(o.next())
 
         for( let value of obj){
+            console.log(1)
             console.log(value);
         }
 

@@ -2,12 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+    <script src="zepto.min.js"></script>
     <script>
+        $(function(){
+            console.log($);
+            $("#box").on("touchstart",function(){
+                console.log(123);
+            });
 
+        })
     </script>
 </head>
 <body>
-$END$
+    <div id="box"></div>
 </body>
 </html>

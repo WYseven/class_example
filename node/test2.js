@@ -16,8 +16,15 @@ var proxy = require('http-proxy-middleware');
 
 var app = express();
 
-app.use("/api",proxy({target:'http://www.example.org'}))
+app.use("/api",function(req,res){
+    res.set({
+        'Content-Type': 'text/plain',
+        'Content-Length': '123',
+        'ETag': '12345'
+    })
+    res.send("proxy success")
+})
 
 
 
-app.listen(3000);
+app.listen(4000);

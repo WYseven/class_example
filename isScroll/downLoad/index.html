@@ -2,12 +2,213 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
+    <style>
+        body{
+            margin:0;
+        }
+        ul{
+            padding: 0;
+            margin:0;
+            list-style: none;
+        }
+        #header {
+            position: absolute;
+            left:0;
+            top:0;
+            width: 100%;
+            height: 30px;
+            background: yellow;
+            z-index: 2;
+        }
+        #wrapper {
+            position: absolute;
+            left:0;
+            top:30px;
+            bottom:0;
+            right:0;
+            overflow: hidden;
+        }
+        #scroller {
+            position: absolute;
+            left:0;
+            top:0;
+            transform: translateZ(0);
+            top:0px;
+        }
+        .update {
+            position: absolute;
+            left:0;
+            top:-30px;
+            width: 300px;
+            height: 30px;
+            background: #cccacc;
+        }
+        #loading {
+            width: 300px;
+            height: 30px;
+            background: #cccacc;
+        }
+        .iScrollVerticalScrollbar {
+            width: 1rem;
+            position: absolute;
+            right: 0px;
+            top:0;
+            height: 100%;
+            background: blue;
+        }
+        .iScrollIndicator{
+            background: red;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <script type="text/javascript" src="../src/iscroll-probe.js"></script>
+    <script type="text/javascript" src="../src/demoUtils.js"></script>
+    <script type="text/javascript" src="../src/zepto.js"></script>
     <script>
 
     </script>
 </head>
 <body>
-$END$
+<header id="header">
+    <button>定位</button>
+</header>
+<div id="wrapper">
+    <div id="scroller">
+        <div class="update" id="update">
+            <span>下拉刷新</span>
+        </div>
+        <div style="display:none;" id="loading">loading...</div>
+        <ul id="list">
+            <li>开始</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>结束</li>
+        </ul>
+    </div>
+
+</div>
+<script>
+    var myScroll;
+
+    function loaded () {
+        myScroll = new IScroll('#wrapper',{
+            probeType:2
+        });
+        myScroll.on("beforeScrollStart",function(){
+            status = 0;
+        })
+        myScroll.on("scrollStart",function(){
+            /*console.log(this.directionY);
+            if(this.y === 0 && this.directionY === -1){
+                update.style.display = "block";
+                scroller.style.top = "0";
+            }else if(this.y === 0 && this.directionY === 1){
+               // update.style.visibility = "hidden";
+            }*/
+        })
+        var status = 0;
+        myScroll.on("scroll",function(){
+            //this.y = 0;
+           // $("#list").find("li").eq(0).before("<li>hello</li>");
+            if(this.y>30 && status === 0){
+                status = 1;
+                $("#update").hide();
+                $("#loading").show();
+                myScroll.refresh();
+            }
+
+        })
+        var timer = null;
+        myScroll.on("scrollEnd",function(){
+            if(status === 1){
+                status = 2;
+                clearTimeout(timer);
+                timer = setTimeout(function(){
+                    $("#update").show();
+                    $("#loading").hide();
+                    myScroll.scrollTo(0,0,500);
+                },2000)
+            }
+
+        })
+        wrapper.addEventListener("touchend",function(){
+
+        })
+    };
+    loaded();
+    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, isPassive() ? {
+        capture: false,
+        passive: false
+    } : false);
+</script>
 </body>
 </html>

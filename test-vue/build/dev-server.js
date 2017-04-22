@@ -23,7 +23,7 @@ var express = require('express')
 // 文件打包工具，详情：https://github.com/webpack/webpack
 var webpack = require('webpack')
 
-//设置服务器转发的中间件，可以转发请求到其他的服务
+//http协议代理的中间件，可以转发请求到其他的服务
 //详情：https://github.com/chimurai/http-proxy-middleware
 var proxyMiddleware = require('http-proxy-middleware')
 
@@ -38,11 +38,12 @@ var port = process.env.PORT || config.dev.port
 var autoOpenBrowser = !!config.dev.autoOpenBrowser
 // Define HTTP proxies to your custom API backend
 // https://github.com/chimurai/http-proxy-middleware
-// 获取需要代理服务的配置信息
+// 获取需要代理http服务的配置信息
 var proxyTable = config.dev.proxyTable
 
 var app = express()
-var compiler = webpack(webpackConfig)
+var compiler = webpack(webpackConfig)  // 编译器对象
+
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
@@ -57,7 +58,7 @@ var hotMiddleware = require('webpack-hot-middleware')(compiler, {
 //当模板发生变化时重新加载
 compiler.plugin('compilation', function (compilation) {
   compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
-    hotMiddleware.publish({ action: 'reload' })
+    //hotMiddleware.publish({ action: 'reload' })
     cb()
   })
 })
@@ -72,7 +73,6 @@ Object.keys(proxyTable).forEach(function (context) {
 })
 
 // handle fallback for HTML5 history API
-// 这个有什么用？？？？
 app.use(require('connect-history-api-fallback')())
 
 // serve webpack bundle output
@@ -82,7 +82,7 @@ app.use(devMiddleware)
 // compilation error display
 app.use(hotMiddleware)
 
-// serve pure static assets
+// 设置访问的静态目录
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 

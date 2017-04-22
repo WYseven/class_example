@@ -17,6 +17,7 @@
             left:0;
             top:0;
             transform: translateZ(0);
+            width: 1000px;
         }
         .iScrollVerticalScrollbar {
             width: 1rem;
@@ -121,19 +122,10 @@
     var myScroll;
 
     function loaded () {
-        //myScroll = new IScroll('#wrapper');
-        /*{
-            mouseWheel: true,
-                scrollbars:true,
-            fadeScrollbars:false,
-            interactiveScrollbars:true,
-            resizeScrollbars:true
-        }*/
+
         myScroll = new IScroll('#wrapper',{
-           // scrollbars:true  //加上滚动条
-            scrollbars:"custom",
-            fadeScrollbars:false, //滚动之后滚动条但淡引淡出
-            interactiveScrollbars:true //可以拖拽滚动条
+            scrollX:true,
+            startY:"-100"
         });
     };
     loaded();

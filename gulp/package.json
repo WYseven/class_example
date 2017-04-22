@@ -1,0 +1,17 @@
+{
+  "name": "gulp-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.14.1",
+    "gulp": "^3.9.1",
+    "gulp-live-server": "0.0.30",
+    "gulp-livereload": "^3.8.1"
+  }
+}

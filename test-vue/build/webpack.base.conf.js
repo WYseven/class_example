@@ -23,13 +23,13 @@ module.exports = {
     alias: {  // 给文件路径起一个别名，在import的时候使用
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-      '@c': resolve('src/components/'),
-      '@p': resolve('pages')
+      'components': resolve('src/components/'),
+      'views': resolve('src/view')
     }
   },
   module: {
     rules: [
-      {
+      /*{
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',            // 这个是什么意思？
@@ -37,7 +37,7 @@ module.exports = {
         options: {
           formatter: require('eslint-friendly-formatter')
         }
-      },
+      },*/
       {
         test: /\.vue$/,
         loader: 'vue-loader',

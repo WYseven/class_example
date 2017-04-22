@@ -2,12 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
     <script>
 
     </script>
 </head>
 <body>
-$END$
+<input type="button" value="右击" id="btn" />
+<div id="box"></div>
+    <script>
+
+        var tree = [
+            {
+                title:"我的计划清单",
+                other:{
+                    title1:"title1",
+                    title2:"title2"
+                }
+            }
+
+        ]
+
+        //找到指定的值或对象所在的所有父对象
+        //例如：给出一个值为"学习",找到所有的父数据为[{title:"学习"},[{},{}],{title:"我的清单"}]
+        //或者给一个对象为{title:"学习"}，找到所有的父数据
+
+        function isArray(obj){
+            return Object.prototype.toString(obj) === '[object Array]';
+        }
+        function isObject(obj){
+            return Object.prototype.toString(obj) === '[object Object]';
+        }
+
+        var rootElement = document.createElement("div");
+
+        function createHtml(tree){
+            var abc = null;
+            var r = isArray(tree) ? document.createElement('ul') : document.createElement('div');
+            //如果是数组，要生成li
+
+            for( var attr in tree ){
+
+            }
+
+
+
+            return r;
+        }
+
+        //rootElement.appendChild(createHtml(tree))
+
+        box.appendChild(createHtml(tree))
+
+
+
+    </script>
 </body>
 </html>

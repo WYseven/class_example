@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'freedom';
+  src:
+    url('../fonts/freedom.ttf') format('truetype'),
+    url('../fonts/freedom.woff') format('woff'),
+    url('../fonts/freedom.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
