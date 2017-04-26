@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>todos</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+    <section id="app" class="todoapp">
+        <div>
+            <header class="header" >
+                <h1>todos</h1>
+                <input 
+                    class="new-todo" 
+                    placeholder="请输入内容" 
+                    v-model='newTodo'
+                    @keyup.13="addTodo"
+                />
+            </header>
+            <section class="main" v-show="list.length">
+                <input class="toggle-all" type="checkbox" checked="">
+                <ul class="todo-list">
+                    <li 
+                        :class="{completed:value.isSelected,editing:editTodo === value}" 
+                        v-for="value,index in list"
+                        @dblclick="editorTodo(value)"
+                    >
+                        <div class="view">
+                            <input 
+                                class="toggle" 
+                                type="checkbox" 
+                                v-model='value.isSelected' 
+                            />
+                            <label>{{value.title}}</label>
+                            <button class="destroy" @click="removeTodo(index)"></button>
+                        </div>
+                        <input 
+                            class="edit" 
+                            v-model="value.title" 
+                            @blur="editoDone"
+                         />
+                    </li>
+                </ul>
+            </section>
+            <footer class="footer" v-show="list.length">
+	            <span class="todo-count">
+	            	<strong>0</strong>
+	            	<span>条未选中</span>
+	            </span>
+            </footer>
+        </div>
+    </section>
+    <script src="./src/vue.js"></script>
+    <script src="./app.js"></script>
+</body>
+
+</html>

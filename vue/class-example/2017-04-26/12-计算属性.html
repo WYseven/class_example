@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="./src/vue.js"></script>
+	</head>
+
+	<body>
+		<!--模板-->
+		<div id="app">
+			<input v-model="message" />
+			<hr>
+			<h2>使用computed翻转</h2>
+			<input type="button" value="给计算属性赋值" @click="reverseMessage = '123'" />
+			<hr>
+			翻转messsage: {{ reverseMessage }}<br/>
+			翻转messsage: {{ reverseMessage }}<br/>
+			翻转messsage: {{ reverseMessage }}<br/>
+			翻转messsage: {{ reverseMessage }}<br/>
+			翻转messsage: {{ reverseMessage }}<br/>
+			翻转messsage: {{ reverseMessage }}<br/>
+		</div>
+
+		<script>
+			/*
+				只翻转一次，多次使用
+
+				给计算属性赋值，计算属性依赖于数据，要改变计算属性改变数据
+				什么改变数据赋值？给计算属性赋值的时候？
+
+				在给计算属性赋值的时候，改变一下依赖的数据，就可以
+
+				计算属性对应的函数是在取计算属性值的时候触发，也就是函数是一个get函数
+				给计算属性设置值的时候，会触发set函数
+			*/
+
+			var vm = new Vue({
+				el: '#app',
+				data:{
+					message: 'miaovketang'
+				},
+				computed:{  //计算属性
+					reverseMessage: {
+						get:function (){
+
+							//reverseMessage的值取决于这个函数的返回值
+							console.log("computed");
+
+							// 这个计算属性依赖于数据中中的message，当message发生变化时候，计算属性重新求值。
+
+							//在需要对数据进行逻辑操作的时候，就使用计算属性
+
+							return this.message.split("").reverse().join("");
+						},
+						set:function(newValue){
+							console.log('我被设置值了');
+							this.message = newValue;
+
+						}
+					}
+				},
+				methods:{
+				}
+			})
+
+		</script>
+	</body>
+</html>

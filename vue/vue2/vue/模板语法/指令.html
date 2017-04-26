@@ -13,7 +13,7 @@
 
 	<body>
 		<div id="demo">
-			<div v-if="isDisplay">hello</div>
+			<div @click="hello" v-if="isDisplay">hello</div>
 			<a href="http://www.baidu.com">百度</a>
 			<a v-bind:href="url">淘宝</a>
 		</div>
@@ -47,8 +47,16 @@
 				data:{
 					isDisplay: false,
 					url:"http:www.taobao.com"
+				},
+				methods:{
+					hello:function (){
+							
+					}
 				}
 			});
+
+			console.log( Vue );
+			console.log( vm );
 
 		</script>
 	</body>

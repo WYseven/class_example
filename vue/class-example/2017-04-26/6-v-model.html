@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="./src/vue.js"></script>
+	</head>
+
+	<body>
+		<!--模板-->
+
+		<div id="app">
+			<input v-model="message" />
+			
+			<p>{{message}}</p>
+		</div>
+
+		<script>
+			/*
+				Vue中绑定事件
+					v-on:事件名="表达式|事件处理函数名字"
+
+				在vue中提供了一个指令帮助表单控件
+					input:text、radio、checkbox... select textarea 
+
+				绑定value，可以监控value的变化
+
+					v-model
+
+				你可以用 v-model 指令在表单控件元素上创建双向数据绑定。它会根据控件类型自动选取正确的方法来更新元素。尽管有些神奇，但 v-model 本质上不过是语法糖，它负责监听用户的输入事件以更新数据，并特别处理一些极端的例子。
+
+				MVVM
+					M => Model => js对象
+					V => View => html模板
+					VM => Vue 
+			*/
+
+			var vm = new Vue({
+				el: '#app',
+				data:{
+					message:"呵呵"
+				}
+			})
+
+
+		</script>
+	</body>
+</html>

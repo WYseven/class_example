@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="../../vue.js"></script>
+	</head>
+
+	<body>
+		<div id="demo">
+			<p>fullName:{{ fullName}} </p>
+			<p>fullName2:{{ fullName2}} </p>
+		</div>
+
+		<script>
+			/*
+				
+				除了使用计算属性和methods之外，还可以讲逻辑放在watch中，观察数据改变做出相应的操作
+
+				使用选项参数的watch
+
+					使用watch分别监控firstName和lastName，改变fullName，这样做明显有点麻烦
+
+					可以使用computed来实现
+
+			*/
+			var vm = new Vue({
+				el:"#demo",
+				data:{
+					firstName:"wang",
+					lastName:"yi",
+					fullName:"wang yi",
+					fullName2:"wang yi"
+				},
+				watch:{
+					firstName:function (val){
+						this.fullName = val + this.lastName;
+					},
+					lastName:function (val){
+						this.fullName = this.firstName + val;
+					}
+				},
+				computed:{
+					fullName2:function (){
+						return this.firstName + " " + this.lastName;	
+					}
+				}
+			});
+
+			vm.firstName = "zhang "
+
+		</script>
+	</body>
+</html>

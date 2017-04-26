@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			.red {
+				color:red;
+			}
+		</style>
+		<script src="./src/vue.js"></script>
+	</head>
+
+	<body>
+		<!--模板-->
+		<div id="app">
+			<!-- <input type="button" @dblclick='addColorHandle' /> -->
+			{{num}}
+			<ul>
+				<li
+					v-for="value,index in list"
+					:class="{red:value==num}"
+					@dblclick='addColorHandle(value)'
+				>
+					{{value}}
+				</li>
+			</ul>
+		</div>
+
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data:{
+					list:[1,2,3,4],
+					num:''
+				},
+				methods:{
+					addColorHandle(value){
+						this.num = value;
+					}
+				}
+			})
+
+
+		</script>
+	</body>
+</html>

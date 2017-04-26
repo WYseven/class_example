@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="./src/vue.js"></script>
+	</head>
+
+	<body>
+		<!--模板-->
+		<div id="app">
+			<h2 :title="title">{{ title }}</h2>
+			<ul>
+				<li v-for='value,index in list'>
+					<p>我是标题：{{ value.title }}</p>
+					<img :src="value.imgSrc" />
+				</li>
+			</ul>
+			<div>
+				{{ content }}
+			</div>
+		</div>
+
+		<script>
+			/*
+				在模板中循环数组
+					指令
+						指令是行间内特殊的属性，以v-开头，
+						指令的职责就是当其表达式的值改变时相应地将某些行为应用到DOM 上
+
+				循环数组和对象
+					v-for = 'value,key in 数组|对象'
+
+				在行间中动态的绑定数据 v-bind:自定义行间属性
+					简写 :
+			*/
+
+			/*let obj = {
+				title:"这是标题",
+				content:"这是我的正文",
+				list:[1,2,3,4,5,6]
+			}*/
+
+			var vm = new Vue({
+				el: '#app',
+				data:{
+					title:"这是标题",
+					content:"这是我的正文",
+					list:[
+						{
+							title:"我是新闻标题",
+							imgSrc:'./img/1.jpg'
+						},
+						{
+							title:"我是新闻标题",
+							imgSrc:'./img/1.jpg'
+						},
+						{
+							title:"我是新闻标题",
+							imgSrc:'./img/1.jpg'
+						}
+					]
+				}
+			})
+
+
+		</script>
+	</body>
+</html>

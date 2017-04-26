@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="./src/vue.js"></script>
+	</head>
+
+	<body>
+		<!--模板-->
+		<div id="app">
+			<!--
+				文本  {{ 表达式 }}
+					Mustache
+					Mustache 标签将会被替代为对应数据对象上 message 属性的值。无论何时，绑定的数据对象上 message 属性发生了改变，插值处的内容都会更新
+			-->
+			<p>{{ message }}</p>
+			<p>{{ 1+1 }}</p>
+		</div>
+
+		<script>
+			// 数据
+			let obj = {
+				message:"hello,miaov"
+			}
+			//vue的实例对象
+			//var app = document.getElementById("app")
+			var vm = new Vue({
+				el: '#app',
+				data:obj
+			})
+			// 属性名已$开头的都是内部提供的属性
+			console.log( vm );
+
+			//会把data对象中的属性作为实例对象的属性
+			console.log(  vm.message );
+
+			// 开启应用的时候,new Vue(选项对象)
+			/*
+				{
+					el 挂载点  string | 元素
+					data 数据 Object
+				}
+			*/
+
+
+
+		</script>
+	</body>
+</html>

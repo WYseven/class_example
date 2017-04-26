@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="./src/vue.js"></script>
+	</head>
+
+	<body>
+		<!--模板-->
+		<div id="app">
+			<p>{{ message }}</p>
+		</div>
+
+		<script>
+
+			let obj = {
+				message:"hello"
+			}
+
+			new Vue({
+				el: '#app',
+				data:obj
+			})
+
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="./src/vue.js"></script>
+	</head>
+
+	<body>
+		<!--模板-->
+		<div id="app">
+			{{message}}
+			<hr>
+			<h2>使用method翻转</h2>
+			{{message.split("").reverse().join("")}} <br/>
+			翻转messsage: {{ reverseMes() }}<br/>
+			翻转messsage: {{ reverseMes() }}<br/>
+			翻转messsage: {{ reverseMes() }}<br/>
+			<h2>使用computed翻转</h2>
+			翻转messsage: {{ reverseMessage }}<br/>
+			翻转messsage: {{ reverseMessage }}<br/>
+			翻转messsage: {{ reverseMessage }}<br/>
+			翻转messsage: {{ reverseMessage }}<br/>
+			翻转messsage: {{ reverseMessage }}<br/>
+			翻转messsage: {{ reverseMessage }}<br/>
+		</div>
+
+		<script>
+			
+			/*
+				只翻转一次，多次使用
+			*/
+
+			var vm = new Vue({
+				el: '#app',
+				data:{
+					message: 'miaovketang'
+				},
+				computed:{  //计算属性
+					reverseMessage:function (){
+
+						//reverseMessage的值取决于这个函数的返回值
+						console.log("computed");
+						return this.message.split("").reverse().join("");
+					}
+				},
+				methods:{
+					reverseMes(){
+						console.log("123");
+						return this.message.split("").reverse().join("")
+					}
+				}
+			})
+
+		</script>
+	</body>
+</html>
