@@ -1,32 +1,19 @@
+function ajax(url){
 
-"use strict"
+    return new Promise((resolve,reject) => {
+         var xhr = new XMLHttpRequest()
 
-function fn1(){
-    return new Promise(function(resolove,reject){
-        setTimeout(function(){
-            resolove('ok')
-        },1000)
+        xhr.open('get',url,true)
+
+        xhr.onload = function(){
+            if(xhr.status === 200){
+                resolve(xhr.responseText)
+            }else{
+                reject(xhr.status,xhr.statusText)
+            }
+        }
+        xhr.send()
     })
-}
-function fn2(){
-    return new Promise(function(resolove,reject){
-        setTimeout(function(){
-            reject('reject')
-        },2000)
-    })
-}
-function fn3(){
-    return new Promise(function(resolove,reject){
-        setTimeout(function(){
-            resolove('ok')
-        },5000)
-    })
-}
-//只要有一个失败，就抛出失败的promise对象
-Promise.all([fn1(),fn2(),fn3()]).then(function(data){
-    console.log(data)
-}).catch(function(err){
-    throw err;
-})
 
-
+   
+}

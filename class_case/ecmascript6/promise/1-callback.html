@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+			// 前一个函数执行完成后，才执行第二个函数
+			
+			//第一个函数是异步的写法
+			function fn1 (callback) {
+				setTimeout(function () {
+					console.log("我是第一个函数");
+					callback();
+				}, 1000);
+			}
+
+			function fn2 () {
+				console.log("第一个函数执行完成");
+			}
+
+			//fn1()
+			//fn2()
+			//把第二个函数作为函数传递给第一个函数
+			
+			fn1(fn2)
+
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

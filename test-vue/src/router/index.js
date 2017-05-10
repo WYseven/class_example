@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import mainRouters from './mainRouters'
 
 Vue.use(Router)
 
@@ -8,17 +7,44 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'index',
       component: function (resolve) {
         require.ensure([] , function () {
-          return resolve(require('views/layout'))
+           resolve(require('views/index'))
         })
-      },
-      children: mainRouters
+      }
     },
     {
-      path: '/login',
-      name: 'Login',
-      component: resolve => require.ensure([], () => resolve(require('views/login')), 'login')
+      path: '/wenzhang/:id?',
+      component: function (resolve) {
+        require.ensure([] , function () {
+          return resolve(require('views/wenzhang'))
+        })
+      },
+      children: [
+        {
+          path:'',
+          name: 'wenzhang',
+          component: function (resolve) {
+            require.ensure([] , function () {
+              return resolve(require('views/posts'))
+            })
+          }
+        }
+      ]
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: function (resolve) {
+        require.ensure([] , function () {
+          return resolve(require('views/about'))
+        })
+      }
+    },
+    {
+      path:'*',
+      redirect: '/'
     }
   ]
 })

@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-require("./assets/css/main.css")
+// require("./assets/css/main.css")
 
 Vue.config.productionTip = false  // 在应用启动时,关闭生产模式下给出的提示
 
