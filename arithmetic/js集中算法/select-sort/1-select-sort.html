@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+
+			function createNum(n,m){
+				var arr = [];
+				for( var i = 0; i <= n; i++ ){
+					arr.push(i);
+				}
+
+				arr.sort(function (){
+					return Math.random() - 0.5;	
+				});
+				arr.length = m;
+				return arr;
+			}
+
+
+			var arr1 = createNum(1000000,100000);
+
+			function selectSort(arr){
+				console.time("bubbleSort1");
+
+				var len = arr.length;
+
+				var minIndex,t;  // 记录最小值
+
+				for( var i = 0; i < len-1; i++ ){
+					minIndex = i;  // 先从0开始
+					for( var j = i+1; j < len; j++ ){
+						// 一次进行对比，记录最小值的下标
+						if(arr[minIndex] > arr[j]){
+							minIndex = j;
+						}
+					}
+					// 交换两个的位置
+					if(i !== minIndex){
+						//arr[i] = [arr[minIndex],arr[minIndex]=arr[i]][0]
+						t = arr[i];
+
+						arr[i] = arr[minIndex];
+
+						arr[minIndex] = t;
+					}
+					
+
+				}
+
+				console.timeEnd("bubbleSort1");
+
+			}
+
+			selectSort(arr1);
+
+			console.log(arr1);
+			console.log(arr1.length);
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

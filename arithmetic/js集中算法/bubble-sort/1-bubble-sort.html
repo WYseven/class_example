@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+
+			function createNum(n,m){
+				var arr = [];
+				for( var i = 0; i <= n; i++ ){
+					arr.push(i);
+				}
+
+				arr.sort(function (){
+					return Math.random() - 0.5;	
+				});
+				arr.length = m;
+				return arr;
+			}
+
+
+			var arr1 = createNum(1000000,9000);
+
+			function bubbleSort(arr){
+				console.time("bubbleSort1");
+				var i = arr.length - 1;
+
+				while(i > 0){
+					var pos = 0;
+					for( var j = 0; j < arr.length; j++ ){
+						if(arr[j] > arr[j+1]){
+							pos = j;
+							arr[j] = [arr[j+1],arr[j+1]=arr[j]][0];
+						}
+					}
+
+					i = pos;
+
+				}
+
+				console.timeEnd("bubbleSort1");
+
+			}
+
+			bubbleSort(arr1);
+
+			console.log(arr1);
+
+			//var arr2 = arr1.concat();
+			var arr2 = createNum(1000000,100000);
+			// 经过测试这个要稍快
+			function bubbleSort2(arr){
+				console.time("bubbleSort2");
+				for( var i = 0; i < arr.length-1; i++ ){
+					for( var j = 0; j < arr.length-1-i; j++ ){
+						if(arr[j] > arr[j+1]){
+							arr[j] = [arr[j+1],arr[j+1]=arr[j]][0];
+						}
+					}
+				}
+				console.timeEnd("bubbleSort2");
+			}
+
+			bubbleSort2(arr2);
+			console.log(arr2);/**/
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

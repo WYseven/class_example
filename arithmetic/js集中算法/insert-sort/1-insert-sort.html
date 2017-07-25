@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+
+			function createNum(n,m){
+				var arr = [];
+				for( var i = 0; i <= n; i++ ){
+					arr.push(i);
+				}
+
+				arr.sort(function (){
+					return Math.random() - 0.5;	
+				});
+				arr.length = m;
+				return arr;
+			}
+
+
+			var arr1 = createNum(100000,10000);
+			var arr2 = arr1.concat();
+			/*
+				8 2 4 9 3 6  首先我们考虑数字2，假设后面的数字不存在（手中只有一张8，又抓来了2），那么显然2应该放在8的前面。
+
+				　　2 8 4 9 3 6  又抓来了一张4，现在大家都知道应该怎么办了吧？
+				　　2 4 8 9 3 6  又来了个9，没错，正好不用换顺序
+				　　2 4 8 9 3 6  同样的道理，考虑3该放的位置，显然放在2和4的中间
+				　　2 3 4 8 9 6  最后一个也是一样，最后得到从小到大的序列
+				　　2 3 4 6 8 9  完成排序
+			*/
+
+			function insertSort(arr){
+				console.time("bubbleSort1");
+
+				var len = arr.length,temp,key,j;
+				for( var i = 1; i < len; i++ ){
+					key = arr[i]; // 下一个值
+					j = i-1;  // 上一个
+					while(j >= 0 && arr[j] > key){
+						arr[j+1] = arr[j];
+						j--;
+					}
+					arr[j+1] = key;
+					
+				}
+
+				console.timeEnd("bubbleSort1");
+
+			}
+
+			insertSort(arr1);
+
+			console.log(arr1);
+			console.log(arr1.length);
+
+			
+
+			// 二分法的思想
+			function insertSort2(arr){
+				console.time("bubbleSort1");
+
+				var len = arr.length,temp,key,j,middle;
+				for( var i = 1; i < len; i++ ){
+					key = arr[i],left = 0,right = i-1;
+
+					while(left <= right){
+						middle = parseInt((left+right)/2);
+						if(key < arr[middle]){
+							right = middle - 1;
+						}else{
+							left = middle+1;
+						}
+					}
+
+					for (var j = i - 1; j >= left; j--) {
+		                arr[j + 1] = arr[j];
+		            }
+
+		            arr[left] = key;
+					
+				}
+
+				console.timeEnd("bubbleSort1");
+
+			}
+
+			insertSort2(arr2);
+
+			console.log(arr2);
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>
