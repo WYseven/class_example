@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+
+			// 一个节点
+			class Node {
+				constructor(key){
+					this.key = key;
+					this.left = null;
+					this.right = null;
+					this.parent = null;
+				}
+			}
+
+			function inserNode(node,newNode){
+				// 新的node小于之前node，放在左边
+				if(newNode.key < node.key){
+					if(node.left === null){
+						node.left = newNode;
+					}else{
+						inserNode(node.left,newNode)
+					}
+				}else{
+					if(node.right === null){
+						node.right = newNode;
+					}else{
+						inserNode(node.right,newNode)
+					}
+				}
+				newNode.parent = node;
+			}
+
+			class BinarySearchTree {
+				constructor(){
+					this.root = null;
+					this.arr = [];
+				}
+				insert(key){
+					var newNode = new Node(key);
+					//console.log(this.root);
+					if(this.root === null){
+						this.root = newNode;
+					}else{
+						inserNode(this.root,newNode);
+					}
+					console.log(this.root);
+					//console.log(newNode);
+
+					this.arr.push(newNode)
+				}
+			}
+			var tree = new BinarySearchTree();
+			tree.insert(11)
+			tree.insert(5)
+			tree.insert(19)
+			tree.insert(6)
+			tree.insert(3)
+
+			console.log(tree.arr);
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>
