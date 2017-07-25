@@ -12,13 +12,9 @@ require("./src/sass/a.sass");
 
 require("./src/css/index.css");
 
-alert(1);
-
 //import foo form './src/foo'
 
 box.innerHTML = foo.fooTest+"<div class='"+styles.abc+"'>123</div>";
-
-
 
 
 

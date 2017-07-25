@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style></style>
+		<script src='/promise.js'></script>
+	</head>
+
+	<body>
+		<input type="button" value="按钮" id="btn" />
+        <script>
+            btn.onclick = function(){
+                /*ajax('http://localhost:3000/user1',function(data){
+                    console.log(data)
+                     ajax('http://localhost:3000/user2',function(data){
+                        console.log(data)
+                        ajax('http://localhost:3000/user3',function(data){
+                            console.log(data)
+                            
+                        })
+                    })
+                })*/
+
+                /*ajax('http://localhost:3000/user1').then((data)=>{
+                    console.log(data)
+                    return ajax('http://localhost:3000/user2')
+                }).then((data) => {
+                    console.log(data)
+                    return ajax('http://localhost:3000/user3')
+                }).then((data)=>{
+                    console.log(data)
+                }).catch((error)=>{
+                    console.log(error)
+                })*/
+
+                /*Promise.race([
+                    ajax('http://localhost:3000/user1'),
+                    ajax('http://localhost:3000/user2'),
+                    ajax('http://localhost:3000/user3')
+                ])
+                .then((data) => {
+                    console.log(data)
+                }).catch((error) => {
+                    console.log(error)
+                })*/
+
+                async function fn(){
+                    //return 1;
+                    /*let a = await ajax('http://localhost:3000/user1')
+                    let b = await ajax('http://localhost:3000/user2')
+                    let c = await ajax('http://localhost:3000/user3')*/
+                    return Promise.all([
+                    ajax('http://localhost:3000/user1'),
+                    ajax('http://localhost:3000/user2'),
+                    ajax('http://localhost:3000/user3')
+                ])
+                }
+
+                fn().then((data) => {
+                    console.log(data)
+                }).catch((error) => {
+                    console.log(error)
+                })
+
+
+
+            }
+        </script>
+	</body>
+</html>

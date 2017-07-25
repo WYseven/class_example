@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var obj = null;
+        var test = function (){
+            var storage = obj;
+            console.log(storage)
+            function c(){
+
+                if(storage){
+                    console.log(storage);
+                }
+            }
+
+            obj = {
+                arr:new Array(10).join('*')
+            }
+        }
+
+        setInterval(test)
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

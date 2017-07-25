@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function Person(userName){
+            this.userName = userName;
+        }
+
+        Person.prototype.say = function(){
+            console.log(this.userName+"今年"+this.age);
+        }
+
+        var arr = [123];
+
+
+
+        for(var i = 0; i < 50; i++){
+            var p = new Person("student");
+            arr.push(p)
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
