@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			function createNum(n,m){
+				var arr = [];
+				for( var i = 0; i <= n; i++ ){
+					arr.push(i);
+				}
+
+				arr.sort(function (){
+					return Math.random() - 0.5;	
+				});
+				arr.length = m;
+				return arr;
+			}
+
+			var arr1 = createNum(100000,10000);
+
+			function merge(left,right){
+				var temp = [];
+
+				while(left.length && right.length){
+					if(left[0] < right[0]){
+						temp.push(left.shift())
+					}else{
+						temp.push(right.shift())
+					}
+				}
+
+				return temp.concat(left,right);
+			}
+
+			function merge_sort(arr){
+				console.time("merge_sort1");
+
+				// 先分成左右两个数组
+
+				if(arr.length === 1){
+					return arr;
+				}
+
+				var middleIndex = ~~(arr.length/2);
+				,left = arr.slice(0,middleIndex)
+				,right = arr.slice(middleIndex);
+
+				return merge(merge_sort(left),merge_sort(right));
+
+
+				console.timeEnd("merge_sort1");	
+			}
+
+			merge_sort(arr1)
+
+			console.log(arr1);
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

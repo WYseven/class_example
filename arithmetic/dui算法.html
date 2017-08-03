@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+
+    </style>
+    <script>
+    //来一道算法题，已知有n个大漠，尤雨溪需要dui其中的m个，m≦n，不能重复怼同一个大漠，请写一个算法，输出所有不重复无视顺序的组合
+    var func = function(n, m) {
+            if (n <= 0 || m <= 0 || m > n) return []
+            let result = []
+            fn([], n, m, 1)
+            return result
+
+            function fn(temp, n, m, start) {
+            	console.log(temp);
+                if (temp.length === m) {
+                    result.push(Array.from(temp))
+                    return;
+                }
+                //min(n-m+start,n)
+                for (let i = start; i <= n; i++) {
+                    temp.push(i)
+                    fn(temp, n, m, i + 1)
+                    temp.pop()
+                    console.log(temp);
+                }
+            }
+
+           }
+        console.log(func(3,1));
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

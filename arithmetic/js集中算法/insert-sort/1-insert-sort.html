@@ -24,6 +24,7 @@
 
 			var arr1 = createNum(100000,10000);
 			var arr2 = arr1.concat();
+			var arr3 = arr1.concat();
 			/*
 				8 2 4 9 3 6  首先我们考虑数字2，假设后面的数字不存在（手中只有一张8，又抓来了2），那么显然2应该放在8的前面。
 
@@ -92,6 +93,24 @@
 			insertSort2(arr2);
 
 			console.log(arr2);
+			// 最慢的方式
+			function insertSort3(arr){
+				console.time("bubbleSort3");
+				var i,j;
+				   for(i = 1;i < arr.length; i++){
+				     for(j = 0;j<i;j++){
+				       if(arr[j]>arr[i]){
+				         arr.splice(j,0,arr[i]);
+				         arr.splice(i+1,1);
+				       }
+				     }
+				   }
+				 console.timeEnd("bubbleSort3");
+			}
+
+			insertSort3(arr3);
+
+			console.log(arr3);
 
 
 		</script>
