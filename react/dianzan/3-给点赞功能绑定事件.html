@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		
+	</script>
+</head>
+<body>
+	<div class="warp"></div>
+	<div class="warp2"></div>
+	<script>
+	// 写一个类，来复用html结构，同时绑定事件处理
+	// 
+	// 给结构包一层生成的DOM元素
+	// 
+		function createDOMFromString (html) {
+			let el = document.createElement('div');
+			el.innerHTML = html;
+			return el;
+		}
+		class LikeBtn {
+			render () {
+				this.el = createDOMFromString(
+					`
+						<button class="like-btn"> 
+							<span class="like-text">点赞</span>
+							<span>👍</span>	
+						</button>
+					`
+				)
+				this.el.addEventListener('click' , () => console.log("click"))
+				return this.el;
+			}
+		}
+
+		const wrap = document.querySelector('.warp')
+
+		wrap.appendChild(new LikeBtn().render());
+
+		const wrap2 = document.querySelector('.warp2')
+
+		wrap2.appendChild(new LikeBtn().render());
+
+	</script>
+</body>
+</html>

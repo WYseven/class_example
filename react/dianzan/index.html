@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		
+	</script>
+</head>
+<body>
+	<div class="warp">
+		<button class="like-btn"> 
+			<span class="like-text">点赞</span>
+			<span>👍</span>	
+		</button>
+	</div>
+	<script>
+	// 如果这个功能用在别的页面，不能复用
+		const button = document.querySelector('.like-btn')
+		const buttonText = button.querySelector('.like-text')
+		let isLiked = false
+		button.addEventListener('click', () => {
+			isLiked = !isLiked
+			if (isLiked) {
+			  buttonText.innerHTML = '取消'
+			} else {
+			  buttonText.innerHTML = '点赞'
+			}
+		}, false)
+	</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		
+	</script>
+</head>
+<body>
+	<div class="warp"></div>
+	<div class="warp2"></div>
+	<script>
+		function createDOMFromString (html) {
+			let el = document.createElement('div');
+			el.innerHTML = html;
+			return el;
+		}
+
+
+		class LikeBtn {
+			constructor(){
+				this.state = {
+					isLiked: false
+				}
+			}
+			setSate(obj){
+				// 只要调用 setState，组件就会重新渲染
+				let oldEl = this.el;
+				this.state = obj;
+
+				this.el = this.render();
+
+				// 重新更新到页面中
+				if (this.onStateChange) this.onStateChange(oldEl, this.el)
+			}
+			changeLikeText () {
+				
+				this.setSate({
+					isLiked: !this.state.isLiked
+				})
+			}
+			render () {
+				console.log(this.state.isLiked)
+				this.el = createDOMFromString(
+					`
+						<button class="like-btn"> 
+							<span class="like-text">${this.state.isLiked ? '取消' : '点赞'}</span>
+							<span>👍</span>	
+						</button>
+					`
+				)
+				console.log(this.el)
+				this.el.addEventListener('click' , this.changeLikeText.bind(this))
+				return this.el;
+			}
+		}
+
+		const wrap = document.querySelector('.warp');
+
+		let dianzan1 = new LikeBtn();
+
+		wrap.appendChild(dianzan1.render());
+
+		dianzan1.onStateChange = function (oldEl, newEl) {
+			wrap.insertBefore(newEl, oldEl) // 插入新的元素
+  			wrap.removeChild(oldEl) // 删除旧的元素
+		}
+		
+
+	</script>
+</body>
+</html>

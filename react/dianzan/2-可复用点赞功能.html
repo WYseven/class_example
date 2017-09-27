@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		
+	</script>
+</head>
+<body>
+	<div class="warp"></div>
+	<div class="warp2"></div>
+	<script>
+	// 写一个类，来复用html结构
+		class LikeBtn {
+			render () {
+				return `
+					<button class="like-btn"> 
+						<span class="like-text">点赞</span>
+						<span>👍</span>	
+					</button>
+				`
+			}
+		}
+
+		const wrap = document.querySelector('.warp')
+
+		wrap.innerHTML = new LikeBtn().render();
+
+		const wrap2 = document.querySelector('.warp2')
+
+		wrap2.innerHTML = new LikeBtn().render();
+
+	</script>
+</body>
+</html>
