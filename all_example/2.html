@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background: yellow;
+            transition: 1s;
+        }
+    </style>
+</head>
+
+<body>
+   <input type="button" value="按钮" id="btn" />
+   <div id="box"></div>
+   <script>
+        // 需求：点击页面某个按钮，按钮自己背景变为黄色
+        /*
+            思考一下：
+                有一个点击的事件作用在了一个元素上，做一些事情
+                1. 需要获取到元素
+                2. 绑定点击事件
+                3. 做出反应 自己的背景样式变为黄色
+
+            用到的知识点：
+                通过id获取元素
+                    document.getElementById("id名")
+                绑定点击处理
+
+
+            
+            alert(要提醒的内容)
+                是一个提醒框
+
+        */
+
+        
+        // btn这个按钮在被点击的时候做一些事情
+        document.getElementById("btn").onclick = function(){
+            document.getElementById("btn").style.background = 'red';
+            document.getElementById("btn").style.width = '100px';
+
+            document.getElementById("box").style.width = '0';
+            document.getElementById("box").style.height = '0';
+        }
+
+
+   </script>
+</body>
+
+</html>
