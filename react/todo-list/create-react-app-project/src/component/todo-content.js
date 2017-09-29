@@ -15,16 +15,16 @@ class TodoContent extends React.Component {
     this.setState({
       isCheckedAll: !this.state.isCheckedAll
     })
-
     this.props.toggleAll(!this.state.isCheckedAll)
 
   }
   render () {
+    console.log(this.state.isCheckedAll,this.props.isCheckedAll)
     return <section className="main">
               <input 
                 className="toggle-all" 
                 type="checkbox" 
-                checked={this.state.isCheckedAll} 
+                checked={this.props.isCheckedAll} 
                 onChange= {this.checkedAllHandle.bind(this)}
               />
               <ul className="todo-list">

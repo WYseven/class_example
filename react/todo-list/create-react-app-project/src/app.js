@@ -57,6 +57,7 @@ class App extends React.Component {
       return item.selected ? ++n : n;
     },n)
     
+    console.log(n === list.length)
 
     if(list.length){
       content = <TodoContent 

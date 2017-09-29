@@ -9,7 +9,11 @@ class TodoHeader extends React.Component {
   render () {
     return <header className="header" >
               <h1>todos</h1>
-              <input className="new-todo" placeholder="请输入内容" onKeyDown={this.addTodoHandle.bind(this)}  />
+              <input 
+                className="new-todo" 
+                placeholder="请输入内容" 
+                onKeyDown={this.addTodoHandle.bind(this)}  
+              />
           </header>
   }
 }
