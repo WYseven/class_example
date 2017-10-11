@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+
+		<link rel="stylesheet" href="lib/codemirror.css">
+		<link rel="stylesheet" href="lib/ambiance.css">
+		<link rel="stylesheet" href="lib/docs.css">
+		<style>
+			ul {
+				list-style: none;
+			}
+			.editor_pane ul li {
+				height: 100%;
+			}
+			.editor_pane {
+				float: right;
+			}
+			.box_show {
+				height: 100%;
+				background: red;
+			}
+			#wrap {
+
+			}
+		</style>
+		<script src="lib/codemirror.js"></script>
+		<script src="lib/codjs.js"></script>
+		<script>
+			/*
+				
+				      var jseditor = CodeMirror.fromTextArea($('#jscode')[0], {
+	                              lineNumbers: true,
+	                              mode: 'javascript',
+	                              theme: 'monokai',
+	                              theme: 'ambiance'
+	                            });	
+                            
+			*/
+		</script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div id="editor_pane" class="editor_pane">
+				<ul id="a0">
+					<li>
+						<textarea id="jscode" name="jscode" style="display: none;">
+const selectSVG = id =&gt; {
+	const el = document.getElementById(id);
+	return new SVGElement(el);
+};
+						</textarea>
+					</li>
+				</ul>
+				<ul id="a1">
+					<li>
+						<textarea id="csscode" name="csscode" style="display: none;">
+html, body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	font-family: 'Rubik Mono One', sans-serif;
+	background: #22292C;
+}
+
+
+						</textarea>
+					</li>
+				</ul>
+			</div>
+			<div class="box_show">
+				123
+			</div>
+		</div>
+		
+		<script>
+			var editor = CodeMirror.fromTextArea(jscode, {
+					lineNumbers: true,
+					mode: 'javascript',
+					theme: 'ambiance'
+			});
+			var editor = CodeMirror.fromTextArea(csscode, {
+					lineNumbers: true,
+					mode: 'css',
+					theme: 'ambiance'
+			});
+		</script>
+	</body>
+</html>
