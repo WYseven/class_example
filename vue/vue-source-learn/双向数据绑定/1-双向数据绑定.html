@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+
+			/*代理*/
+			function _proxy (data) {
+			  const that = this;
+
+			  Object.keys(data).forEach(key => {
+			  	console.log(that.$data[key],key);
+			      Object.defineProperty(that, key, {
+			          configurable: true,
+			          enumerable: true,
+			          get: function proxyGetter () {
+			              return that.$data[key];
+			          },
+			          set: function proxySetter (val) {
+			              that.$data[key] = val;
+			          }
+			      })
+			  });
+			}
+
+			function observer(value,cb) {
+			  Object.keys(value).forEach((key) => defineReactive(value, key, value[key] , cb))
+			}
+
+			function defineReactive (obj, key, val, cb) {
+			  Object.defineProperty(obj, key, {
+			      enumerable: true,
+			      configurable: true,
+			      get: ()=>{
+			          /*....依赖收集等....*/
+			          //return val;
+			          // 数据该如何返回？？？
+			      },
+			      set:newVal => {
+			          cb();/*订阅者收到消息的回调*/
+			      }
+			  })
+			}
+
+			class Vue {
+			  constructor(options) {
+			  	// 那大选项对象
+			      this.$data = options.data;
+			      observer(this.$data, options.render);
+			      _proxy.call(this,this.$data)
+			  }
+			}
+			let vm = new Vue({
+				data: {
+					text1: 1,
+					text2: 2
+				},
+				render () {
+					console.log('render');
+				}
+			})
+			// 改变及其不方便
+			// vm.$data.text1 = 10;
+			/*
+				我们可以在Vue的构造函数constructor中为data执行一个代理proxy。
+				这样我们就把data上面的属性代理到了vm实例上
+			*/
+			vm.text1 = 10;
+			vm.text1 = 10;
+			vm.text1 = 10;
+			console.log(vm);
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

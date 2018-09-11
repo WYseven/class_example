@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<a href="#home">#home</a>
+		<a href="#miaov">#miaov</a>
+		<a href="#about">#about</a>
+		<hr>
+		<a class="link" href="/home">/home</a>
+		<a class="link" href="/miaov">/miaov</a>
+		<a class="link" href="/about">/about</a>
+		<button id="next">向后</button>
+		<button id="prev">向前</button>
+		<div id="app"></div>
+		<script>
+			console.log(window.location);
+
+			next.onclick  =function (){
+				history.go(-1)	
+			}
+			prev.onclick  =function (){
+				history.go(1)	
+			}
+
+			let links = document.querySelectorAll('.link');
+
+			for( var i = 0; i < links.length; i++ ){
+				links[i].onclick = function (e){
+
+					var href = this.getAttribute('href');
+
+					history.pushState({a:1},null,href)
+					
+					e.preventDefault();		
+				}
+			}
+
+			window.addEventListener('popstate',function (e){
+				console.log('触发了1111111');
+				console.log(e);	
+			})
+
+		</script>
+	</body>
+</html>

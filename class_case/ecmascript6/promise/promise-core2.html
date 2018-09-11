@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			let p1 = new Promise(function (resolve,reject){
+					
+					setTimeout(function (){
+						resolve(1)	
+					},1000)
+			})
+			p1.then(function (d){
+				console.log(d);	
+			})
+			let p = new Promise(function (resolve,reject){
+					
+					setTimeout(function (){
+						// TypeError: A promise cannot be resolved with itself.
+						resolve({})	
+					},1000)
+			})
+
+			p.then(function (data){
+				console.log(data)
+			}).then(function (d){
+				console.log(d);
+			})
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

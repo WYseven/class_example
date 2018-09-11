@@ -1,0 +1,32 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/footer/home/index",
+    "pages/cool/index"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "妙味课堂",
+    "navigationBarTextStyle":"black",
+    "backgroundColor":"#000"
+  },
+  "tabBar":{
+    "color":"#fff",
+    "backgroundColor":"#23252b",
+    "list":[
+      {
+        "pagePath":"pages/index/index",
+        "text":"首页"
+        
+      },
+      {
+        "pagePath":"pages/cool/index",
+        "text":"我的课程"
+        
+      }
+    ]
+  },
+   "debug": true
+}

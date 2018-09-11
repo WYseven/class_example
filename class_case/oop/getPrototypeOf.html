@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+		class a {
+			abc(){
+
+			}
+		}
+		class Person {
+			constructor(){
+
+			}
+
+			add(){
+
+			}
+		}
+		var p = new Person
+		/*console.log( Object.getPrototypeOf([]) );
+		console.log( Object.getPrototypeOf(p) );*/
+
+		Object.setPrototypeOf(p,{
+			a:1
+		})
+
+		console.log( Object.getPrototypeOf(p) );
+
+		function fn(...a){
+			console.log( ...a );
+		}
+
+		fn([1,2,3])
+
+		var arr = [...'miaov'];
+
+		console.log( arr );
+
+		console.log( Math.max(null,...[1,2,3,4]) );
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

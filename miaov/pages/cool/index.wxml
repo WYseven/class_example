@@ -1,0 +1,20 @@
+<view class="container">
+    <input id="myInput" bindchange="bindChange" />
+    <div class="intro clearfix">
+        <div class="intro_con clearfix">
+            <div class="mobile_header clearfix">
+                <div class="pic"></div>
+                <div class="name">
+                    <view>宁美琪123</view>
+                    <view>高级前端开发工程师</view>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hea_right">
+        <div class="wrap">
+            <div class="hea_qq">41294687</div>
+            <div class="hea_mail">heeroluo@126.com</div>
+        </div>
+    </div>
+</view>

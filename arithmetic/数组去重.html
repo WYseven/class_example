@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			let arr = [1,1,1,2,1,1,2,2,3,3,4];
+			// 对数组去重，保留一个
+			for( var i = 0; i < arr.length-1; i++ ){
+				if(arr[i] === arr[i+1]){
+					arr.splice(i+1,1);
+					i--;
+				}
+			}
+			console.log(arr);
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

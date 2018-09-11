@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				bind()
+			*/
+			if (!Function.prototype.bind ) {
+				Function.prototype.bind = function (_thisArg,...params){
+
+					if(typeof this !== 'function') throw new TypeError('必须是函数调用');
+
+					let that = this,o = Object.create(this.prototype);
+					let fBound = function (...otherParmas) {
+						console.log(o);
+						return that.apply(this instanceof fBound ? o : _thisArg,[...params,...otherParmas]);
+					}
+					// 指向正确的原型
+					fBound.prototype = o;
+					return  fBound;
+				}
+			}
+
+			function tab(a,b,c){
+				console.log(this);
+				console.log(a,b,c);
+			}
+
+			tab.prototype.a  = 10;
+
+			let t = tab.bind([],1,2,3)
+			let k = new t();
+
+			console.log(k instanceof t);
+			console.log(k instanceof tab);
+
+			function person () {
+						
+			}
+
+			console.log(Object.create(person.prototype));
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

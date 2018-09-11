@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			// 策略模式
+
+
+
+		</script>
+	</head>
+
+	<body>
+		<form>
+			<p>姓名：<input type="text" name="name"></p>
+			<p>密码：<input type="password" name="password"></p>
+			<p>邮箱：<input type="text" name="email"></p>
+			<button id="send">提交</button>
+		</form>
+		<script>
+			/*
+				验证规则：
+					1. 姓名不能为空
+					2. 密码在6位以上
+					3. 邮箱要符合邮箱规则
+			*/
+			let firstForm = document.forms[0];
+			let send = document.getElementById('send');
+			let reg = {
+				email: /^\w+@\w{3-5}(\.[a-z]{3-5}){1-3}$/
+			}
+			firstForm.onsubmit = function (e){
+				e.preventDefault();
+
+				if(firstForm.name.value === ''){
+					alert('用户名不能为空')
+				}
+				if(firstForm.password.value.length < 6 ){
+					alert('密码长度不够')
+				}
+				if(!reg.email.test(firstForm.email.value)){
+					alert('邮箱验证不正确')
+				}
+			}
+
+			/*
+				缺点：
+					1. 事件处理函数中业务逻辑处理会越来越庞大
+					2. 违反了开放-封闭原则，即对扩展开发，对修改封闭。如果要邮箱验证修改规则，则需要深入事件处理函数中修改，缺乏弹性。
+					3. 复用性差，缩写的校验规则只能在一个地方使用，用在别处需要复制或单独重写。
+			*/
+
+		</script>
+	</body>
+</html>

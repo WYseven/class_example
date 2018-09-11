@@ -1,0 +1,108 @@
+#calendar {
+	width: 1000px;
+	margin: 0px auto;
+	border: 2px solid #57abff;
+	
+	box-sizing: border-box;
+	display: flex;
+	min-width: 400px;
+}
+
+#calendar > div {
+	flex: 1;
+}
+
+#calendar .left-datas {
+	flex: 2;
+	padding: 10px;
+}
+
+.right-show {
+	background: #57abff;
+	padding: 10px;
+	box-sizing: border-box;
+	flex-shrink: 0;
+	color: #fff;
+}
+
+.right-show  p {
+	text-align: center;
+}
+
+.current-ymd {
+
+}
+
+.current-data-box {
+	display: flex;
+	align-items: center;
+}
+
+.current-data {
+	width: 30%;
+	min-width: 75px;
+	height: 75px;
+	font-size: 30px;
+	line-height: 75px;
+    font-size: 52px;
+    background: #fb0;
+    border-radius: 3px;
+    box-shadow: 1px 2px 5px rgba(0,0,0,.1), -1px 2px 5px rgba(0,0,0,.1);
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.datas-select-header {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid #57abff;
+	padding-bottom: 5px;
+}
+
+.datas-select-header select {
+	width: 70px;
+	text-align: center;
+	height: 100%;
+}
+
+.datas-mian {
+	padding-top: 10px;
+
+}
+
+.datas-mian > div {
+	display: flex;
+}
+
+.datas-mian span {
+	text-align: center;
+}
+
+.datas-header {
+	height: 30px;
+	line-height: 30px;
+}
+
+.datas-header span {
+	flex: 1;
+}
+
+.datas-content span {
+	width: 14.2826%;
+	height: 70px;
+	line-height: 70px;
+	display: block;
+	border-top: 1px solid #e6e6e6;
+}
+
+.datas-content {
+	flex-flow: wrap;
+	font-size: 25px;
+}
+
+.current-date {
+	background: #fb0;
+}
+.other-date {
+	color: yellow;
+}

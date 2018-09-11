@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+    <title>使用jQuery Validate实现表单验证demo</title>
+    <link rel="stylesheet" type="text/css" href="style/css/demo.css">
+    <script type="text/javascript" src="style/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="style/js/validate-1.14.0.min.js"></script>
+    <script type="text/javascript" src="style/js/demo.js"></script>
+</head>
+<body>
+<form id="demo" autocomplete="off">
+    <p>
+        <span class="tip">用户名：</span>
+        <input type="text" name="username">
+    </p>
+    <p class="prompot"><i class="iconfont"></i></p>
+    <p>
+        <span class="tip">密码：</span>
+        <input type="password" name="password" id="password">
+    </p>
+    <p class="prompot"><i class="iconfont"></i></p>
+    <p>
+        <span class="tip">确认密码：</span>
+        <input type="password" name="password2">
+    </p>
+    <p class="prompot"><i class="iconfont"></i></p>
+    <p>
+        <span class="tip">手机号码：</span>
+        <input type="text" name="tel" class="tel">
+    </p>
+    <p class="prompot"><i class="iconfont"></i></p>
+    <p>
+        <span class="tip">性别：</span>
+        <input type="radio" name="sex" vlaue="1"><span class="radioSpan">男</span>
+        <input type="radio" name="sex" vlaue="2"><span class="radioSpan">女</span>
+    </p>
+    <p class="prompot"><i class="iconfont"></i></p>
+    <p>
+        <span class="tip">爱好：</span>
+        <input type="checkbox" name="favorite" value="1"><span class="checkboxSpan">唱歌</span>
+        <input type="checkbox" name="favorite" value="2"><span class="checkboxSpan">跳舞</span>
+        <input type="checkbox" name="favorite" value="3"><span class="checkboxSpan">游泳</span>
+        <input type="checkbox" name="favorite" value="4"><span class="checkboxSpan">画画</span>
+    </p>
+    <p class="prompot"><i class="iconfont"></i></p>
+    <button>确认</button>
+</form>
+</body>
+</html>

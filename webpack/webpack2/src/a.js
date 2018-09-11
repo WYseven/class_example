@@ -1,3 +1,2 @@
-/**
- * Created by seven on 2017/4/9.
- */
+console.log('gello')
+export default {a:1}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="./src/underscore.js"></script>
+		<script>
+			
+		</script>
+	</head>
+
+	<body style="height: 3000px;">
+		<script>
+			/*
+				要节流的函数fn
+				等到触发事件wait
+
+			*/
+			function throttle (fn,wait){
+
+				let prev = 0; // 记录上次的时间
+				let timer = null;
+				
+
+				return function (...arg){
+					let now = +new Date();  // 执行函数时的时间
+					
+					let remianing = wait - (now - prev); // 剩余时间
+					let context = this;
+					if( prev <= 0 || remianing > wait ){
+						prev = now; // 记录本次时间
+						if(timer){
+							clearTimeout(timer)
+							timer = null;
+						}
+						return fn.apply(context, arg);
+
+					}else if (!timer) {
+						timer = setTimeout(function (){
+							fn.apply(context, arg);
+							timer = null;	
+						},1000)
+					}
+
+				}	
+			}
+			let p = 0;
+			/*window.onscroll = throttle(function (){
+				let now = +new Date();
+				console.log(now - p);
+				console.log(123);	
+				p = now;
+			},1000)*/
+			window.onscroll = _.throttle(function (){
+				let now = +new Date();
+				console.log(now - p);
+				console.log(123);	
+				p = now;
+			},1000)
+		</script>
+	</body>
+</html>

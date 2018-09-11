@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,
+			ul,
+			li {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="baidu.css" />
+		<script src='../jquery-3.2.0.js'></script>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div class="baidu">
+				<ul id="list">
+					<li>
+						<div><input type="checkbox" name=""></div>
+						<span>泡沫</span>
+						<span>邓紫棋</span>
+					</li>
+					<li>
+						<div><input type="checkbox" name=""></div>
+						<span>说爱你</span>
+						<span>蔡依林</span>
+					</li>
+					<li>
+						<div><input type="checkbox" name=""></div>
+						<span>稻香</span>
+						<span>周杰伦</span>
+					</li>
+					<li>
+						<div><input type="checkbox" name=""></div>
+						<span>我的梦</span>
+						<span>张靓颖</span>
+					</li>
+					<li>
+						<div><input type="checkbox" name=""></div>
+						<span>怎么说我不爱你</span>
+						<span>萧敬腾</span>
+					</li>
+					<li>
+						<div><input type="checkbox" name=""></div>
+						<span>无处安放</span>
+						<span>白若溪</span>
+					</li>
+				</ul>
+				<div class="select">
+					<span class="selectAll">
+						<input type="checkbox" name="checkedAll">
+						<span>全选</span>
+					</span>
+					<div class="others">
+						<span><em></em>收藏</span>
+						<span><em></em>添加</span>
+						<span><em></em>删除</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			/*
+				1. li隔行变色 是奇数行还是偶数行
+						%
+				2. 给li绑定事件
+					鼠标移入li
+						背景颜色为yellow
+					鼠标移出li
+						移出的这个li中的checkbox是否是选中的
+							选中了
+								li保持背景颜色为yellow
+							没选中
+								还原之前隔行变色的颜色上
+
+						如果找li下的input
+			*/
+
+
+			let lis = $('#list li');
+
+			let arr = ['#fff','red']
+
+			$('#list li:odd').css('background','red');
+			$('#list li:even').css('background','#fff');
+
+			let inputs = $("#list li input");
+
+			lis.mouseenter(function (){
+				$(this).css('background','yellow');
+			}).mouseleave(function (){
+				let input = $(this).find('input');
+				if(!input.prop('checked')){
+					$(this).css('background',arr[$(this).index()%2])
+				}
+			})
+
+			lis.on('click', 'input', function (){
+				let checked = $(this).prop('checked');
+				let a = inputs.toArray().find((item) => {
+					return !$(item).prop('checked');
+				})
+
+				$('input[name="checkedAll"]').prop('checked',!a);
+			})
+
+			$('input[name="checkedAll"]').click(function (){
+				let checked = $(this).prop('checked');
+				inputs.prop('checked',checked);
+
+				if(checked){
+					lis.css('background','yellow');
+				}else{
+					lis.each(function (){
+						$(this).css('background',arr[$(this).index()%2])	
+					})
+					
+				}
+			})
+
+		</script>
+	</body>
+
+</html>

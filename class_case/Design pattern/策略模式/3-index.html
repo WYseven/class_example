@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			// 策略模式
+
+
+
+		</script>
+	</head>
+
+	<body>
+		<form>
+			<p>姓名：<input type="text" name="name"></p>
+			<p>密码：<input type="password" name="password"></p>
+			<p>邮箱：<input type="text" name="email"></p>
+			<button id="send">提交</button>
+		</form>
+		<script>
+			/*
+				验证规则：
+					1. 姓名不能为空
+					2. 密码在6位以上
+					3. 邮箱要符合邮箱规则
+			*/
+			let firstForm = document.forms[0];
+			let send = document.getElementById('send');
+			let reg = {
+				email: /^\w+@\w{3-5}(\.[a-z]{3-5}){1-3}$/
+			}
+
+			// 多个策略对象
+			let strategyObject = {
+				isNameEmpty(value,errorMes){
+					if(value === ''){
+						return errorMes
+					}
+				},
+				isPasswordMinLen(value,minLen,errorMes){
+					if(value.length < minLen ){
+						return errorMes;
+					}
+				},
+				isEmail(value,errorMes){
+					if(!reg.email.test(value)){
+						return errorMes;
+					}
+				}
+			}
+
+			// 环境context类，接收请求，委托给策略类处理
+			class  Validator {
+				constructor(){
+					this.cache = [];
+					this.errorMes = [];
+				}
+				// 添加要使用的验证
+				add(value,rul,errorMes){
+					// 向数据传入参数
+					let arg = rul.split(':');
+					rul = arg.shift();
+					arg.unshift(value);
+					this.cache.push(function (){
+						return {
+							key: rul,
+							errorMes: strategyObject[rul].apply(null,[...arg,errorMes])
+						}	
+					})
+				}
+				start(){
+					let errorMes;
+					this.cache.forEach((fn) => {
+						if((errorMes = fn()) && errorMes.errorMes){
+							this.errorMes.push(errorMes)
+						}
+					})
+				}
+			}
+
+			let validatorMthod = function (){
+				let validator = new Validator();
+
+				validator.add(firstForm.name.value,'isNameEmpty','请输入名字');
+				validator.add(firstForm.password.value,'isPasswordMinLen:6','请输入6位以上');
+				validator.add(firstForm.email.value,'isEmail','请输入正确的邮箱格式');
+				validator.start();
+				return 	validator.errorMes;	
+			}	
+
+
+
+			firstForm.onsubmit = function (e){
+				e.preventDefault();
+				let errorMes = validatorMthod();
+				
+				if(errorMes.length){
+					console.log(errorMes);
+				}
+
+			}
+
+			/*
+				缺点：
+					1. 事件处理函数中业务逻辑处理会越来越庞大
+					2. 违反了开放-封闭原则，即对扩展开发，对修改封闭。如果要邮箱验证修改规则，则需要深入事件处理函数中修改，缺乏弹性。
+					3. 复用性差，缩写的校验规则只能在一个地方使用，用在别处需要复制或单独重写。
+			*/
+
+		</script>
+	</body>
+</html>

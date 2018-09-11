@@ -1,29 +1,26 @@
 <template>
-    <div>
-        <header-component/>
-        <div>this is template body</div>
-        <other-component/>
+    <div id="app">
+        <div>11111111</div>
     </div>
 </template>
 <style>
+    /*body{
+        background: url(/static/logo.png);
+    }*/
+
     body{
-        background-color:#ff0000;
+        background: url(./assets/vuex.png);
     }
+
+
+
 
 </style>
 <script>
-    import HeaderComponent from './components/header.vue'
-    import OtherComponent from './components/other.vue'
-    export default{
-        data(){
-            return{
-                msg:'hello vue'
-            }
-        },
-        components:{
-            'other-component':OtherComponent,
-            HeaderComponent,
-        }
+   import A from '@/com/a';
+
+    export default {
+      name:'app'
     }
 
 </script>

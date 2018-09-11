@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+    <title>使用jQuery Validate实现表单验证</title>
+    <script type="text/javascript" src="style/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="style/js/validate-1.14.0.min.js"></script>
+    <script type="text/javascript" src="style/js/formcheck.js"></script>
+    <style>
+    p span {
+        display: inline-block;
+        width: 150px;
+        text-align: right;
+    }
+    </style>
+</head>
+<body>
+<form id="register">
+    <p><span>用户名：      </span><input class="required"></p>
+    <p><span>邮箱：        </span><input class="email"></p>
+    <p><span>网址：        </span><input class="url"></p>
+    <p><span>日期：        </span><input class="date"></p>
+    <p><span>ISO日期：     </span><input class="dateISO"></p>
+    <p><span>数字：        </span><input class="number"></p>
+    <p><span>整数：        </span><input class="digits"></p>
+    <p><span>信用卡卡号：  </span><input class="creditcard"></p>
+    <p><span>第一次输入：  </span><input type="text" name="password"></p>
+    <p><span>第二次输入：  </span><input equalTo="password"></p>   
+    <p><span>最大长度：    </span><input maxlength="5"></p>
+    <p><span>最小长度：    </span><input minlength="10"></p>
+    <p><span>输入个数限制：</span><input rangelength=[3,5]></p>
+    <p><span>输入范围限制：</span><input range=[3,5]></p>
+    <p><span>输入最大值：  </span><input max="100"></p>
+    <p><span>输入最小值：  </span><input min="10"></p>
+    <p><span>综合示例：    </span><input required="true" minlength="5" max="100"></p>
+    <p><span></span><input type="submit">
+</form>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="../jquery-2.2.4.js"></script>
+		<script>
+			
+		</script>
+	</head>
+
+	<body>
+		<form>
+			<input type="" name="a">
+			<select name="single">
+			<option>Single</option>
+			<option>Single2</option>
+			</select>
+			<select name="multiple" multiple="multiple">
+			<option selected="selected">Multiple</option>
+			<option>Multiple2</option>
+			<option selected="selected">Multiple3</option>
+			</select><br/>
+			<input type="checkbox" name="check" value="check1"/> check1
+			<input type="checkbox" name="check" value="check2" checked="checked"/> check2
+			<input type="radio" name="radio" value="radio1" checked="checked"/> radio1
+			<input type="radio" name="radio" value="radio2"/> radio2
+		</form>
+		<script>
+			var fields = $("input,select, :radio").serializeArray();
+
+			console.log( fields );
+
+			console.log( $("form").serialize() );
+		</script>
+	</body>
+</html>

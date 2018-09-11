@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			// 定义Promise的三种状态常量
+			const PENDING = 'PENDING'
+			const FULFILLED = 'FULFILLED'
+			const REJECTED = 'REJECTED'
+
+			class Promise2 {
+				constructor(handle){
+					if(typeof handle !== 'function') throw new TypeError('必须传人是一个函数');
+
+					this._status = PENDING; // 初始状态
+					this._value; // 初始值
+					// 添加成功回调函数队列
+					this._fulfilledQueues = []
+					// 添加失败回调函数队列
+					this._rejectedQueues = [];
+
+
+					try{
+						handle(this._resolve.bind(this),this._reject.bind(this))
+					}catch(e){
+						this._reject(e)
+					}
+
+				}
+
+				// 添加resovle时执行的函数
+				_resolve(val){
+					
+					// 执行成功回调函数
+					const run = () => {
+						if (this._status !== PENDING) return;
+
+						const runFulfilled = value => {
+							let cb;
+						    while (cb = this._fulfilledQueues.shift()) {
+						      cb(value)
+						    }
+						}
+						const runRejected = value => {
+							let cb;
+						    while (cb = this._rejectedQueues.shift()) {
+						      cb(value)
+						    }
+						}
+
+						if(val instanceof Promise2) {
+							val.then((value)=>{
+								this._status = FULFILLED
+								this._value = val;
+								runFulfilled(value)
+							},(err)=>{
+								this._status = REJECTED
+								this._value = err;
+								runFulfilled(err)
+							})
+						}else{
+							this._status = FULFILLED
+							this._value = val;
+							runFulfilled(val);
+						}					    
+					  }
+				  // 为了支持同步的Promise，这里采用异步调用
+				  setTimeout(run, 0);
+				}
+
+				// 添加reject时执行的函数
+				_reject (err){ 
+					if (this._status !== PENDING) return
+					
+					const run = () => {
+						this._status = REJECTED
+						this._value = err
+					    let cb;
+					    while (cb = this._rejectedQueues.shift()) {
+					      cb(err)
+					    }
+					  }
+				  // 为了支持同步的Promise，这里采用异步调用
+				  setTimeout(run, 0);
+				}
+
+
+				
+
+				then(onFulfilled, onRejected){
+					let {_status,_value} = this;
+					return new Promise2((onFulfilledNext, onRejectedNext) => {
+
+						// 封装一个成功执行的函数，内部处理传参问题
+
+						let fulfilled  = value => {
+							try{
+								if(typeof onFulfilled !== 'function'){
+									onFulfilledNext(value)
+								}else{
+									let res = onFulfilled(value);
+
+									if(res instanceof Promise2){
+										res.then(onFulfilledNext,onRejectedNext)
+									}else{
+										onFulfilledNext(res)
+									}
+								}
+							}catch(e){
+								onRejectedNext(e)
+							}
+						}
+						let rejected  = err => {
+							try{
+								if(typeof onRejected !== 'function'){
+									onRejectedNext(err)
+								}else{
+									let res = onRejected(err);
+									if(res instanceof Promise2){
+										res.then(onFulfilledNext,onRejectedNext)
+									}else{
+										// 调用下一个成功
+										onFulfilledNext(res)
+									}
+								}
+							}catch(e){
+								onRejectedNext(e)
+							}
+						}
+
+						switch(_status){
+							case PENDING:
+								this._fulfilledQueues.push(fulfilled);
+								this._rejectedQueues.push(rejected);
+							break;
+							case FULFILLED:
+					        	fulfilled(_value)
+					        break
+					      	case REJECTED:
+					        	rejected(_value)
+					        break
+						}
+
+					})
+				}
+
+				static a(){
+					
+				}
+			}
+
+
+			let p1 = new Promise2(function (resolve,reject){
+				setTimeout(() => {
+					reject('成功')
+				},1000)
+			});
+
+			let p = new Promise2(function (resolve,reject){
+				resolve(p1)
+			});
+
+			p.then((data) => {
+				console.log(data)
+				return new Promise2(function (resolve,reject){
+					resolve('第二个')
+				});
+			},(e)=>{
+				console.log('失败',e)
+			}).then((data) => {
+				console.log(data)
+			})
+
+			console.log('哈哈哈')
+
+			
+			
+			/*let p4 = new Promise((resolve,reject) => {
+				setTimeout(function (){
+					resolve('4444444444444')	
+				},1000)
+			})
+			let p3 = new Promise((resolve,reject) => {
+				reject(p4)
+			})
+
+			p3.then((data)=>{
+				console.log(44444,data)
+			},function (e){
+				console.log('错误信息',e);	
+			}).then((data) => {
+				console.log('正确',data)
+			},function (e){
+				console.log('lala',e);	
+			}).catch(() => {
+				console.log('粗偶')
+			})*/
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

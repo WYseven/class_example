@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			let arr = [2,2,2,1,1,1,0,0,0];
+			/*
+				三路快排：
+					保证 0 - zero之间是 0
+					保证 two ~ length - 1之间是2
+					保证 zero+1到 i-1之间是 1
+			*/	
+
+			let zero = -1;  
+			let two = arr.length;
+
+			for( var i = 0; i < two; ){
+				if(arr[i] === 1){
+					i++;
+				}else if(arr[i] === 2){
+					two--;
+					let c = arr[i];
+					arr[i] = arr[two];
+					arr[two] = c;
+				}else if(arr[i] === 0) {
+					zero++;
+					let c = arr[i];
+					arr[i] = arr[zero];
+					arr[zero] = c;
+					i++;
+				}
+			}
+
+			console.log(arr);
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>
