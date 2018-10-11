@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			.ketang {
+				width:0px;
+				height:0px;
+				background: red;
+			}
+		</style>
+		<script>
+
+
+
+			let url2 = `http://localhost:3000/1.jpg`
+
+			let img = new Image();
+
+			img.src = url2;
+
+			img.onload = function (){
+				console.log('加载完毕,图片宽高为：','width:'+img.width,'height:'+img.height);	
+				test.src = img.src;
+			}
+
+			let newW = 0;
+
+			let timer = setInterval(function (){
+				console.log('图片宽高为：','width:'+img.width,'height:'+img.height);	
+				newW = img.width;
+				ketang.style.width = img.width + 'px';
+				ketang.style.height = img.height + 'px';
+
+				if(newW){
+					clearInterval(timer)
+				}		
+			})
+
+
+		</script>
+	</head>
+
+	<body>
+		<div class ="ketang" id="ketang">
+			<img src="" id="test">
+		</div>
+	</body>
+</html>

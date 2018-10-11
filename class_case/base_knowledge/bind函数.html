@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*function func(...arg){
+				console.log('改变this为：',this);	
+				console.log('参数为：',arg);	
+			}
+			// bind第一个参数是改变this指向，改变为数组，之后传入的是给func函数传递的实参
+			let f = func.bind([1,2,3],1,2,3);
+			// 调用f
+			f(4,5,6);  // 结果为：改变this为： [1, 2, 3],同时给func传入参数
+			// 参数为： [1, 2, 3, 4, 5, 6]*/
+
+			// 把f当做构造函数，此时要找原型上的方法，依然去func上找
+
+			function func(...arg){
+				console.log('改变this为：',this);	
+				console.log('参数为：',arg);	
+			}
+
+			func.prototype.say = function (){
+				console.log('会说话');	
+			}
+
+			// bind第一个参数是改变this指向，改变为数组，之后传入的是给func函数传递的实参
+			let f = func.bind([1,2,3],1,2,3);
+
+			let instance = new f();  // this不在执行传入的数组，而是实例本身
+
+			instance.say();  // 打印：会说话
+
+
+
+
+		</script>
+	</head>
+
+	<body>
+		<div>1</div>
+		<div>1</div>
+		<div>1</div>
+		<div>1</div>
+	</body>
+</html>
