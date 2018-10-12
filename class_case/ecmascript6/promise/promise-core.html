@@ -60,7 +60,7 @@
 							},(err)=>{
 								this._status = REJECTED
 								this._value = err;
-								runFulfilled(err)
+								runRejected(err)
 							})
 						}else{
 							this._status = FULFILLED

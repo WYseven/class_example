@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="./promise-polyfill.js"></script>
+		<script>
+			let p = new P(function (resolve,reject){
+					setTimeout(function (){
+						resolve(p3)	
+					},100)
+			});
+			let p2 = new P(function (resolve,reject){
+					setTimeout(function (){
+						resolve('成功2')	
+					},500)
+			});
+			let p3 = new P(function (resolve,reject){
+					setTimeout(function (){
+						resolve('成功3')	
+					},1000)
+			});
+
+			p.then((data) => {
+				console.log(data);
+				return 1;
+			}).then((data) => {
+				console.log(data);
+				return p2;
+			}).then((data) => {
+				console.log(data);
+			})
+
+			p3.then((data) => {
+				console.log('p3',data)
+			})
+
+			console.log('我先执行');
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			// 定义Promise的三种状态常量
+			const PENDING = 1
+			const FULFILLED = 2
+			const REJECTED = 3
+
+			class Promise2 {
+				constructor(handle){
+					if(typeof handle !== 'function') throw new TypeError('必须传人是一个函数');
+
+					this._status = 1; // 初始状态
+					this._value; // 初始值
+					this._deferreds = [];  // 存then存函数的队列
+					this._deferredsResolve = [];  // 成功回调
+					this._deferredsRject = [];  // 失败回调
+					this.doResolve(handle,this);
+				}
+
+				// 添加resovle时执行的函数
+				_resolve(self,value){
+					try{
+						// 改变状态
+						self._status = 2;  // 成功状态
+						self._value =  value; // 保存值
+
+						// 执行成功队列的函数
+
+					}catch(e){
+						this._reject(self,e);
+					}
+				}
+
+				// 添加reject时执行的函数
+				_reject(self,value){ 
+
+				}
+
+				doResolve(fn,self){
+					let done = false;
+					try{
+						fn(function (value){
+							// 执行成功函数
+							if(done) return;
+							done = true;
+							this._resolve(self,value);
+						},function (value){
+							// 执行失败函数	
+							if(done) return;
+							done = true;
+							this._reject(self,value);
+						});
+					}catch(e){
+
+					}
+				}
+
+				then(onFulfilled, onRejected){
+
+					return new this.constructor( (resolve,reject) => {
+
+						
+
+						switch(this._status){ // 在pending阶段
+							case 1:
+								this._deferredsResolve.push(onFulfilled)
+								this._deferredsRject.push(onRejected)
+							break;
+							case 2:
+								onFulfilled();
+							break;
+							case 3:
+								onRejected();
+							break;
+
+						}
+					})
+				}
+			}
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>
