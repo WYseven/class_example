@@ -54,7 +54,25 @@
 	        	return binaryString;
 	    	}
 
-	    	console.log( divideBy2(30) );
+			console.log( divideBy2(30) );
+
+			// 转任意进制，使用数组做
+
+			function divideByAny(decNumber,redio){
+				let arr = [],bits = `0123456789ABCDEF`; // 有16进制的话，超过9的要用几个字母代替
+				let n;
+				while(decNumber > 0){
+					n = Math.floor(decNumber % redio);
+					arr.push(bits[n]);
+					decNumber = Math.floor(decNumber/redio)
+				}
+				
+				console.log(arr.reverse().join(''))
+
+			}
+
+			console.log(divideByAny(100345,16))
+
     </script>
 </head>
 
