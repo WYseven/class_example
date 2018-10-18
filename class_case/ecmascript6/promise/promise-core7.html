@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+			;(function (){
+				// 定义三种状态
+				let status = {
+					pending:0,
+					fulfilled:1,
+					rejected: 2
+				}
+
+				class CustomePromise {
+					constructor(executor){
+						this._status = status.pending;
+						this._value = null;
+						this._error = null;
+						this.fulfilledArr = [];
+						this.rejectedArr = [];
+						this._handler(executor)
+					}
+
+					_getThen(value){
+						let type = typeof value;
+						if(value && (type === 'object' || type === 'function')){
+							let then;
+							if(then = value.then){
+								return then;
+							}
+						}	
+						return null;
+					}
+
+					_handler(executor){
+						let done = false;
+						executor((value) => {
+							if(done) return;
+							done = true;
+
+							// 传入的value是不是对象，并且有没有then
+
+							let then = this._getThen(value);
+
+							if(then){
+								// 加入到传入的队列中，等到结束，再继续向下走
+								return this._handler(then.bind(value))
+							}
+
+							this._resolve(value)
+						},(error) => {
+							if(done) return;
+							done = true;
+							this._reject(error)
+						})
+					}
+					_resolve(value){
+						setTimeout(() => {
+							this._status = status.fulfilled;
+							this._value = value;
+
+							this.fulfilledArr.forEach(item => item(this._value))
+						})
+					}
+					_reject(error){
+						
+						
+						setTimeout(() => {
+							this._status = status.rejected;
+							this._error = error;
+
+							this.rejectedArr.forEach(item => item(this._error))
+						})
+					}
+
+					_done(fulfilledFunc,rejectedFunc){
+						fulfilledFunc = typeof fulfilledFunc === 'function' ? fulfilledFunc : null;
+						rejectedFunc = typeof rejectedFunc === 'function' ? rejectedFunc : null;
+						if(this._status === 0){
+							if(fulfilledFunc) this.fulfilledArr.push(fulfilledFunc);
+							if(rejectedFunc) this.rejectedArr.push(rejectedFunc);
+						}else if(this._status === 1 && fulfilledFunc){
+							fulfilledFunc(this._value);
+						}else if(this._status === 2 && rejectedFunc){
+							rejectedFunc(this._error);
+						}
+					}
+
+					then(fulfilledFunc,rejectedFunc){
+						return new CustomePromise((resolve,reject) => {
+							this._done((value) => {
+								if(typeof fulfilledFunc !== 'function'){
+									return resolve(value)
+								}else {
+									return resolve(fulfilledFunc(value))
+								}
+							},(error) => {
+								if(typeof rejectedFunc !== 'function'){
+									return reject(error)
+								}else {
+									return reject(rejectedFunc(error))
+								}
+							});
+						});
+					}
+				}
+
+				window.CustomePromise = CustomePromise;
+			})();
+
+			/*
+				resolve的值有三种：
+					1. 普通的值
+					2. Promise对象
+					3. thenable对象，{then(){}}
+			*/
+
+			let p2 = new CustomePromise((resolve,reject) => {
+				setTimeout(function (){
+					resolve('我成功了，你才能走');	
+				},1000)
+			});
+
+			p2.then((value) => {
+				console.log('p2',value);
+			}, (error) => {
+					
+			})
+
+			let p = new CustomePromise((resolve,reject) => {
+				setTimeout(function (){
+					resolve(p2);	
+				},3000)
+			});
+
+			p
+				.then((data) => {
+					console.log('then成功执行1',data);
+					return new CustomePromise((resolve) => {
+						setTimeout(function (){
+							resolve('哈哈哈')	
+						},3000)
+					});
+				}, (error) => {
+					console.log('then失败执行',error);		
+				})
+				.then((data) => {
+					console.log('then成功执行2',data);
+				}, (error) => {
+					console.log('then失败执行',error);		
+				})
+			p.then((data) => {
+				console.log('then成功执行',data);
+			}, (error) => {
+				console.log('then失败执行',error);		
+			})
+
+			document.onclick = function (){
+				p.then((data) => {
+					console.log('立马执行了',data);
+				})	
+			}
+
+			console.log('我先执行');
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

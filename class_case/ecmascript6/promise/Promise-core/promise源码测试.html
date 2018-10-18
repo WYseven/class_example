@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src="./customePromise.js"></script>
+<script>
+	// new Promise返回的对象称之为Promise对象
+	/*
+		三种状态：
+			pending 正在进行
+			fulfilled 已完成
+			rejected 已失败
+
+		1. new Promise 接收一个函数 executor
+		2. 函数 executor 接收两个参数，resolve，reject
+			调用resolve的时候，把promise对象转成成功状态
+			调用reject的时候，把promise对象转成失败状态
+		3. promise对象的then方法来注册成功状态或者失败状态要执行的函数
+			p.then(resolveFunc,rejectFunc);
+			p.then(resolveFunc,rejectFunc);
+			p.then(resolveFunc,rejectFunc);
+			p.then(resolveFunc,rejectFunc);
+
+			实现是一个promise对象调用多次then方法
+
+		5. then函数的链式操作
+			p.then().then().then();
+
+			就是then函数执行后返回一个promise对象
+
+		6. thenable
+			拥有 then 方法的对象或函数
+			{
+				then(){}
+			}
+
+			promise对象也拥有then方法
+
+		7. 当给resolve传入一个promise对象的时候，只有等到promise对象装成成功或者失败，resolve才会成功
+
+		8.resovle要接受的参数
+			1. 简单值
+			2. 接收thenable对象
+
+		9.then中成功或失败执行的函数的返回值
+			1. 有简单类型返回值，作为then方法返回的promise对象的成功状态的值
+		
+			2. 当返回一个thenable对象的时候，只有是成功状态才能执行下一个then
+
+	*/
+
+
+	let p = new Promise((resolve,reject) => {
+		resolve({
+			then(resolve,reject){
+				setTimeout(function (){
+					resolve('4000')	
+				},4000)
+			}
+		});	
+	});
+
+	p
+		.then((data) => {
+			console.log('第一个then成功',data)
+			return new Promise((resolve) => {
+				setTimeout(() => {
+					resolve('延迟了3000')
+				},3000)
+			})
+		}).then((data) => {
+			console.log('第2个then',data)
+			return 1;
+		})
+		.then(123)
+		.then((data) => {
+			console.log('第4个then',data)
+		});
+
+	p
+		.then((data) => {
+			console.log('第2个then成功',data)
+			return new Promise((resolve) => {
+				resolve('延迟了5000')
+			})
+		})
+
+	console.log('执行了');
+
+
+</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

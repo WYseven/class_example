@@ -23,19 +23,35 @@
 						this.fulfillQueues = [];
 						this.rejectQueues = [];
 						
+						this._handler(executor)
+						
+					}
+
+					_handler(executor){
+						let done = false;
 						try{
-							executor(this._resolve.bind(this),this._reject.bind(this));
+							executor((value) => {
+								if(done) return;
+								done = true;
+								this._resolve(value)
+							}, (error) => {
+								if(done) return;
+								done = true;
+								this._reject(error)	
+							})
 						}catch(e){
-							this._reject(e)
+							this._reject(e);
 						}
 					}
 
 					_resolve(value){
-						if(this._status !== 0) return;
-						
 						// 调用then传递的成功执行的方法....
-						
 						setTimeout( () => {
+
+							let then = this._getThen(value);
+							if(then){
+								return this._handler(then.bind(value))
+							}
 							this._status = status.fulfilled;
 							this._value = value;
 							this.fulfillQueues.forEach(item=>item(this._value))	
@@ -44,32 +60,42 @@
 					}
 
 					_reject(error){
-						if(this._status !== 0) return;
-						
 						// 调用then传递的失败执行的方法....
 						setTimeout( () => {
 							this._status = status.rejected;
 							this._value = error;
-							
 							this.rejectQueues.forEach(item=>{
-								console.log(this._value);
 								item(this._value)
 							})	
 						});
 					}
+
+					_getThen(value){
+						let type = typeof value;
+						if(value && (type === 'object' || type==='function')){
+							let then;
+							if(then = value.then){
+								return then;
+							}
+						}
+
+						return null;
+					}
+
 					then(fulfillFunc,rejectFunc){
 						return new CustomePromise( (resolve,reject) => {
 							// 收集成功和失败回调
 
 							let fulfillFuncNext = (value) => {
-								if(typeof fulfillFunc !== 'function'){
-									resolve(value);
-									return;
-								}
+								
 								try{
-									let returnValue = fulfillFunc(value)
-									if(returnValue instanceof CustomePromise){
-										returnValue.then(resolve,reject);
+									if(typeof fulfillFunc !== 'function'){
+										resolve(value);
+										return;
+									}
+									let returnValue = this._getThen(fulfillFunc(value));
+									if(returnValue){
+										this._handler(returnValue.bind(value))
 										return;
 									}
 									resolve(returnValue);
@@ -103,17 +129,42 @@
 					3. thenable对象，{then(){}}
 			*/
 
+			let p0 = new CustomePromise((resolve,reject) => {
+				setTimeout(function (){
+					resolve('p0')	
+				},3000)
+			});
+
+			p0.then((data) => {
+				console.log('p0.thenp0p0p0p0',data);
+			},function (data){
+				console.log('p0.then2',data);	
+			}).then((data) => {
+				console.log('p0.thenp0p0p0p0',data);
+			},function (data){
+				console.log('p0.then2',data);	
+			})
+
+			p0.then((data) => {
+				console.log('p0.then2222',data);
+			},function (data){
+				console.log('p0.then22222',data);	
+			})
+
 			let p = new CustomePromise((resolve,reject) => {
-				resolve('错误信息');	
+				setTimeout(function (){
+					resolve(p0);
+				},1000)
 			})
 
 			p
 				.then(function(data){
+					console.log(this,1111111111);
 					console.log('第一个then的成功函数,数据为',data);
 					return new CustomePromise((resolve,reject) => {
 						setTimeout(function (){
 							resolve('延时了一下')	
-						},4000)
+						},1000)
 					});
 				},function (error){
 					console.log('第一个then的失败函数,数据为',error);	
@@ -122,17 +173,13 @@
 					console.log('第2个then的成功函数,数据为',data);	
 				},function (error){
 					console.log('第2个then的失败函数,数据为',error);		
-				})
+				});
 
-			console.log('我先执行');
-
-			/*let p2 = new Promise((resolve,reject) => {
-				resolve(1000)
+			p.then((data) => {
+				console.log(123,data);
 			})
 
-			p2.then(1).then((data) => {
-				console.log(data);
-			})*/
+			console.log('我先执行');
 		</script>
 	</head>
 

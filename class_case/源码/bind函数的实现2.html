@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+
+			Function.prototype.customeBind = function (thisArg,...arg){
+				let self = this; // 目标函数
+				let foundBind = function (...arg2){
+					return self.apply(this instanceof foundBind ? this : thisArg,[...arg,...arg2]);
+				}
+				foundBind.prototype = Object.create(self.prototype);
+				foundBind.prototype.constructor = self;
+				return	foundBind;
+			}
+
+			// 原生的bind函数使用
+
+			// 目标函数
+			let func = function (...arg){
+				console.log(this);
+				console.log(arg);
+			}
+
+			func.prototype.say = function (){
+				console.log('我的名字叫miaov');	
+			}
+
+			let newFunc = func.bind([1],1,2,3);
+			let newFunc2 = func.customeBind([1],1,2,3);
+			/*newFunc(4,5,6);
+			newFunc2(4,5,6);*/
+			console.log(new newFunc());
+			console.log('-------------------------');
+			console.log(new newFunc2());
+
+
+
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			
+			;(function (){
+				// 定义三种状态
+				let status = {
+					pending:0,
+					fulfilled:1,
+					rejected: 2
+				}
+
+				class CustomePromise {
+					// 接收一个函数，内部执行
+					constructor(executor){
+						// 设置初始状态
+						this._status = status.pending;
+						this._value = null;
+						this._error = null;
+
+						this.resolveArr = [];
+						this.rejectArr = [];
+
+						this._handler(executor)
+					}
+					_getThen(value){
+						let type = typeof value;
+						if(value && (type === 'object' || type==='function')){
+							let then;
+							if(then = value.then){
+								return then;
+							}
+						}
+						return null;
+					}
+					_handler(executor){
+						let done = false;
+						try{
+
+							executor((value) => {
+								if(done) return;
+								let then = this._getThen(value)
+								if(then){
+									return this._handler(then.bind(value))
+								}
+
+								done = true;
+								this._resolve(value)
+							},() => {
+								if(done) return;
+								let then = this._getThen(value)
+								if(then){
+									return this._handler(then.bind(value))
+								}
+								done = true;
+								_this._reject(value)
+							})
+						}catch(e){
+							this._reject(e)
+						}
+					}
+					_resolve(value){
+						setTimeout( () => {
+							this._status = status.fulfilled;
+							this._value = value;
+							// 将来执行成功队列
+							this.resolveArr.forEach((item) => item(this._value))		
+						})
+					}
+					_reject(error){
+						setTimeout(() => {
+							this._status = status.rejected;
+							this._error = error;
+							// 将来执行失败队列
+							this.rejectArr.forEach((item) => item(this._error))
+						})
+					}
+
+					_done(fulfilledNext,rejectedNext){
+						if(this._status === 0){
+							this.resolveArr.push(fulfilledNext)
+							this.rejectArr.push(rejectedNext)
+						}else if(this._status === 1){
+							fulfilledNext(this._value)
+						}else if(this._status === 2){
+							rejectedNext(this._error)
+						}
+					}
+
+					then(fulfilledFunc,rejectedFunc){
+						let self = this;
+						return new Promise((resolve,reject) => {
+
+							return this._done((val) => {
+								try{
+									if(typeof fulfilledFunc !== 'function'){
+										resolve(val)
+									}else {
+										resolve(fulfilledFunc(val))
+									}
+								}catch(e){
+									reject(e)
+								}
+							},(error) => {
+								try{
+									if(typeof rejectedFunc !== 'function'){
+										reject(error)
+									}else {
+										reject(fulfilledFunc(error))
+									}
+								}catch(e){
+									reject(e)
+								}	
+							})
+						});
+					}
+				}
+
+				window.CustomePromise = CustomePromise;
+			})();
+
+			/*
+				resolve的值有三种：
+					1. 普通的值
+					2. Promise对象
+					3. thenable对象，{then(){}}
+			*/
+
+			/*new CustomePromise((resolve,rejected) => {
+				setTimeout(() => {
+					console.log('拿到异步结果了');
+					//resolve('拿到异步结果了，miaov1')
+					resolve({
+						then(resolve,reject){
+							console.log(resolve);
+						}
+					})
+				},3000)
+			})*/
+
+			let p0 = new CustomePromise((resolve,reject) => {
+				setTimeout(function (){
+					resolve('p0')	
+				},3000)
+			});
+
+			p0.then((data) => {
+				console.log('p0.then',data);
+			})
+
+			let p = new CustomePromise((resolve,reject) => {
+				setTimeout(function (){
+					resolve(p0);
+				},1000)
+			})
+
+			p
+				.then(function(data){
+					console.log('第一个then的成功函数,数据为',data);
+					return new CustomePromise((resolve,reject) => {
+						setTimeout(function (){
+							resolve('延时了一下')	
+						},1000)
+					});
+				},function (error){
+					console.log('第一个then的失败函数,数据为',error);	
+				})
+				.then(function (data){
+					console.log('第2个then的成功函数,数据为',data);	
+				},function (error){
+					console.log('第2个then的失败函数,数据为',error);		
+				});
+
+			p.then((data) => {
+				console.log(123,data);
+			})
+
+			console.log('我先执行');
+
+			/*let p2 = new Promise((resolve,reject) => {
+				resolve(1000)
+			})
+
+			p2.then(1).then((data) => {
+				console.log(data);
+			})*/
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

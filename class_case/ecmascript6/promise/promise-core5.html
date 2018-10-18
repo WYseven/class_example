@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			let p0 = new Promise((resolve,reject) => {
+				setTimeout(function (){
+					resolve('p0')	
+				},3000)
+			});
+
+			p0.then((data) => {
+				console.log('p0.then',data);
+			})
+
+			let p = new Promise((resolve,reject) => {
+				setTimeout(function (){
+					resolve(p0);
+				},1000)
+			})
+
+			p
+				.then(function(data){
+					console.log('第一个then的成功函数,数据为',data);
+					return new Promise((resolve,reject) => {
+						setTimeout(function (){
+							resolve('延时了一下')	
+						},1000)
+					});
+				},function (error){
+					console.log('第一个then的失败函数,数据为',error);	
+				})
+				.then(function (data){
+					console.log('第2个then的成功函数,数据为',data);	
+				},function (error){
+					console.log('第2个then的失败函数,数据为',error);		
+				});
+
+			p.then((data) => {
+				console.log(123,data);
+			})
+
+			console.log('我先执行');
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>
