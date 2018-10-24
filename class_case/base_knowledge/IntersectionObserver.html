@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		
+	</head>
+
+	<body>
+		<div style="margin-top: 1000px;background: red;" class="scrollerFooter">hello1</div>
+		<div style="margin-top: 1000px;background: red;" class="scrollerFooter123">hello2</div>
+		<script>
+			var intersectionObserver = new IntersectionObserver(function(entries) {
+				console.log(entries)
+			  console.log('Loaded new items');
+			});
+			// start observing
+			intersectionObserver.observe(document.querySelector('.scrollerFooter'));
+		</script>
+	</body>
+</html>
