@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				deep:深度
+				breadth: 广度
+			*/
+			function createData(deep,breadth){
+				let data = {},temp = data;
+				for( var i = 0; i < deep; i++ ){
+					temp = temp['data'] = {};
+					for( var j = 0; j < breadth; j++ ){
+						temp[j] = j;
+					}
+				};
+				return data;
+			}
+			let data = createData(30,3);
+			
+			console.log(data);
+
+			// 问题：如果深度拷贝的层级比较深，会在递归造成内存溢出
+			// 解决：使用while循环，不使用递归循环
+
+			function clone(source) {
+			    var root = {};
+			    // 先把数据扁平化，一个节点存上一个节点和下一个节点
+			    /*
+					{
+						parent: root,   // 新的对象
+						key: undefined // 要拷贝的key值
+						data:          // 要拷贝的数据
+					}
+			    */
+
+			    // 栈
+			    let loopList = [
+			    	{
+			    		parent: root,
+			    		key: undefined,
+			    		data: source
+			    	}
+			    ]
+
+			    while(loopList.length){
+			    	let node = loopList.pop(); // 截取信息
+			    	let parent = node.parent;
+			    	let data = node.data;
+			    	let key = node.key;
+
+
+			    	let res = parent;
+			    	if(typeof key !== 'undefined'){
+			    		res = parent[key] = {};
+			    	}
+
+			    	for(let attr in data) {
+			    		if(data.hasOwnProperty(attr)){
+			    			if(typeof data[attr] === 'object'){
+			    				loopList.push({
+			    					parent: res,
+			    					key: attr,
+			    					data:data[attr]				
+			    				})
+			    			}else{
+			    				res[attr] = data[attr];
+			    			}
+			    		}
+			    	}
+			    }
+
+			    return root;
+
+			}
+			
+			let abc = clone(data);
+			console.log(abc);
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

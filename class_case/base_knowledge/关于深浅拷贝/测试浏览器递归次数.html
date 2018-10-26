@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			function computeMaxCallStackSize() {
+			    try {
+			        return 1 + computeMaxCallStackSize();
+			    } catch (e) {
+			        // Call stack overflow
+			        return 1;
+			    }
+			}
+			console.log(computeMaxCallStackSize());
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>
