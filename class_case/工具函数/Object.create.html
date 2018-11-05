@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		
+		
+		/*
+			用来创建对象，创建对象时可指定新对象的原型。
+
+			Object.create(proto, [propertiesObject])
+				- 参数说明：
+					- proto，新创建出来的对象把传入的proto作为原型。proto参数只能是对象或null，如果为其他类型则抛出错误。当为null时，新创建的对象没有原型为空。
+					- propertiesObject是可选的，给创建的对象添加属性，要写上对象属性描述符。参考Object.defineProperties()的第二个参数。
+				- 返回值
+					返回一个对象，对象的原型为指定的原型对象，可带有指定的属性。
+
+
+				参考：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create
+
+		 */
+		
+		// 创建对象,原型为空
+		var newObj = Object.create(null);
+
+		console.log(newObj)
+
+		// 创建对象，原型为指定对象
+		
+		var proto = {foo:123}
+
+		var newObj2 = Object.create(proto);
+
+		console.log(newObj2);
+
+		// 创建对象，原型为指定对象,初始属性
+		
+		var proto3 = {foo:123}
+
+		var newObj3 = Object.create(proto3,{
+			a:{
+				value: 'hello',
+			    writable: true,
+			    enumerable: true,
+			    configurable: true 
+			}
+		});
+
+		newObj3.a = 20;
+
+		console.log(newObj3);
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

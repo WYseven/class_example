@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		// 判断对象是否是一个空对象，如果对象为空，则不需要做遍历之类的操作
+		function isEmptyObject (obj) {
+		  if (!obj) {
+		    return false
+		  }
+		  for (const n in obj) {
+		    if (obj.hasOwnProperty(n) && obj[n]) {
+		      return false
+		    }
+		  }
+		  return true
+		}
+
+		console.log(isEmptyObject({a:null}))
+		console.log(isEmptyObject({a:1}))
+
+		// jq中的做法
+
+		function isEmptyObject2( obj ) {
+			var name;
+
+			for ( name in obj ) {
+				return false;
+			}
+			return true;
+		}
+
+		Object.prototype.abc = 1;
+
+		console.log(isEmptyObject2({}))
+		console.log(isEmptyObject({}))
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>函数防抖动</title>
+  <script type="text/test">
+    以下场景往往由于事件频繁被触发，因而频繁执行DOM操作、资源加载等重行为，导致UI停顿甚至浏览器崩溃。
+
+  1. window对象的resize、scroll事件
+
+  2. 拖拽时的mousemove事件
+
+  3. 射击游戏中的mousedown、keydown事件
+
+  4. 文字输入、自动完成的keyup事件
+
+  实际上对于window的resize事件，实际需求大多为停止改变大小n毫秒后执行后续处理；
+  而其他事件大多的需求是以一定的频率执行后续处理。针对这两种需求就出现了debounce和throttle两种解决办法。
+
+  什么是debounce　
+
+    如果用手指一直按住一个弹簧，它将不会弹起直到你松手为止。
+    也就是说当调用动作n毫秒后，才会执行该动作，若在这n毫秒内又调用此动作则将重新计算执行时间。
+
+  </script>
+  <script>
+  let debounce = function(func, wait, immediate) {
+      
+      let timeout,result;
+
+      function later(arg){
+        return result = func.apply(this,...arg);
+      }
+
+      function debounced (...arg) {
+        if(timeout) clearTimeout(timeout);
+        if(immediate && !timeout) {  // 立马执行
+          result = func.apply(this,...arg);
+        }
+
+        timeout = setTimeout(later.bind(this,arg),wait);
+
+        return result;
+      }
+
+      return debounced;
+      
+    };
+  </script>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+  <input type="text" id="test">
+  <p id="tip">wait....</p>
+  <script>
+    
+    
+    /*document.addEventListener('mousemove',debounce(function(){
+      console.log('执行了',this)
+    },200,true))*/
+
+    test.onkeyup = debounce(function(){
+      console.log('开始发起ajax请求')
+      test.isDown = false;
+      tip.innerHTML = '已发送请求';
+    },800);
+    test.onkeydown = function(){
+      if(test.isDown) return; 
+      test.isDown = true;
+      tip.innerHTML = 'wait';
+    }
+
+  </script>
+</body>
+</html>

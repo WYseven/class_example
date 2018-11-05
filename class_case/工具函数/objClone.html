@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		
+		function objClone(obj){
+
+			var newObj;
+
+			if(obj instanceof Array){
+				newObj = [];
+				var i = jsonObj.length;
+				while(i--){
+					newObj[i] = objClone[i]
+				}
+			}else if (obj instanceof Object) {
+			    newObj = {}
+			    for (var k in jsonObj) {
+			    	
+				      buf[k] = objClone(jsonObj[k])
+			    }
+		    	return newObj;
+		  	} else {
+		    	return obj
+		  	}
+		}
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

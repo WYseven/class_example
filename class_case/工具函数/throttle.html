@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>函数防抖动</title>
+  <script type="text/test">
+    以下场景往往由于事件频繁被触发，因而频繁执行DOM操作、资源加载等重行为，导致UI停顿甚至浏览器崩溃。
+
+  1. window对象的resize、scroll事件
+
+  2. 拖拽时的mousemove事件
+
+  3. 射击游戏中的mousedown、keydown事件
+
+  4. 文字输入、自动完成的keyup事件
+
+  实际上对于window的resize事件，实际需求大多为停止改变大小n毫秒后执行后续处理；
+  而其他事件大多的需求是以一定的频率执行后续处理。针对这两种需求就出现了debounce和throttle两种解决办法。
+
+  什么是throttle　　
+
+      如果将水龙头拧紧直到水是以水滴的形式流出，那你会发现每隔一段时间，就会有一滴水流出。
+
+  　　也就是会说预先设定一个执行周期，当调用动作的时刻大于等于执行周期则执行该动作，然后进入下一个新周期。
+
+  </script>
+  <script>
+  let throttle = function(func, wait, immediate) {
+      
+      let timeout,result;
+
+      function later(arg){
+        return result = func.apply(this,...arg);
+      }
+
+      function throttled (...arg) {
+        
+        
+
+        return result;
+      }
+
+      return debounced;
+      
+    };
+  </script>
+</head>
+<body style="height:2000px;">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+  <input type="text" id="test">
+  <p id="tip">wait....</p>
+  <script>
+    
+    
+    window.addEventListener('scroll',_.throttle(function(){
+      console.log('执行了',this)
+    },1000,{trailing: false}));  // trailing: false 忽略最后一次执行
+
+    
+
+  </script>
+</body>
+</html>
