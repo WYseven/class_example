@@ -338,6 +338,8 @@
             for(let row = 0; row < data.length; row++){
                 for(let column = 0; column < data[row].length; column++){
                     if(data[row][column] === 0) continue;
+                    let ele = document.querySelector(`.position[data-row-column="${row}-${column}"]`);
+                    if(ele) continue;
                     let [left, top] = positionData[row][column];
                     let div = document.createElement('div');
                     div.className = 'position n'+ data[row][column];
@@ -370,12 +372,14 @@
             isMove = true;
             let ele = document.querySelector(`.position[data-row-column="${row}-${column}"]`);
             let ele2 = document.querySelector(`.position[data-row-column="${row}-${repalceIndex}"]`);
-            ele.style.left = positionData[row][repalceIndex][0] + 'px';
-            ele.style.zIndex = ++zIndex;
-            ele.setAttribute('data-row-column',`${row}-${repalceIndex}`)
+            if(ele){
+                ele.style.left = positionData[row][repalceIndex][0] + 'px';
+                ele.style.zIndex = ++zIndex;
+                ele.setAttribute('data-row-column',`${row}-${repalceIndex}`)
+            }
+            
             if(ele2){
                 setTimeout(() => {
-                    console.log('要删除');
                     ele2.remove();
                 },100);
             }
@@ -385,9 +389,12 @@
             isMove = true;
             let ele = document.querySelector(`.position[data-row-column="${row}-${column}"]`);
             let ele2 = document.querySelector(`.position[data-row-column="${row}-${replaceIndex}"]`);
-            ele.style.top = positionData[replaceIndex][column][1] + 'px';
-            ele.style.zIndex = ++zIndex;
-            ele.setAttribute('data-row-column',`${replaceIndex}-${column}`)
+            if(ele){
+                ele.style.top = positionData[replaceIndex][column][1] + 'px';
+                ele.style.zIndex = ++zIndex;
+                ele.setAttribute('data-row-column',`${replaceIndex}-${column}`)
+            }
+            
             if(ele2){
                 setTimeout(() => {
                     console.log('要删除');
