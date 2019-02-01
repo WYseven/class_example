@@ -8,27 +8,38 @@
     <title>2048小游戏</title>
     <style>
         #box {
-            width: 170px;
-            height: 170px;
+            width: 280px;
+            height: 280px;
             position: relative;
+            padding: 10px;
+            background: #bbada0;
+            border-radius: 6px;
         }
 
-        #box div {
-            width: 30px;
-            height: 30px;
-            margin: 5px;
-            border: 1px solid #000;
+        #box div.bg {
+            width: 57.5px;
+            height: 57.5px;
+            margin-right: 10px;
+            border-radius: 3px;
+            background: rgba(238, 228, 218, 0.35);
             display: inline-block;
-            position: relative;
         }
 
         #box div.position {
+            width: 57.5px;
+            height: 57.5px;
             position: absolute;
             left: 0;
             top: 0;
             margin: 0;
             text-align: center;
-            line-height: 30px;
+            line-height: 57.5px;
+            transition: .3s;
+            border-radius: 3px;
+        }
+
+        .scale {
+            transform: scale(0)
         }
 
         .n2 {
@@ -100,6 +111,9 @@
 
 <body>
     <div id="box"></div>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  crossorigin="anonymous"></script>
     <script>
         /*
             4X4 的格子
@@ -107,84 +121,103 @@
         // 把所有的0移到最右，direction = right;
         // 把所有的0移到最做，direction = left;
         let moveZeroesRight = function (nums){
-            let repalceIndex = 0;  // 记录要被交换的位置
-            let replaceElement; // 中间变量，用来存不为0的数字
-            let isMove = false; // 是否移动过。默认没有移动
-            for(let i = 0; i < nums.length; i++){
-                if(nums[i]) {  // 当不为0
-                    if(i != repalceIndex) {  // 第i个和repalceIndex相同，说明要交换的是同一个元素，没必要进行交换操作
-                        replaceElement = nums[i];
-                        nums[i] = 0;
-                        nums[repalceIndex] = replaceElement;
-                        isMove = true; // 移动过
+            for(let row = 0; row < nums.length; row++){
+                let repalceIndex = 0;  // 记录要被交换的位置
+                let replaceElement; // 中间变量，用来存不为0的数字
+                let isMove = false; // 是否移动过。默认没有移动
+                let d = nums[row];
+                for(let i = 0; i < d.length; i++){
+                    if(d[i]) {  // 当不为0
+                        if(i != repalceIndex) {  // 第i个和repalceIndex相同，说明要交换的是同一个元素，没必要进行交换操作
+                            replaceElement = d[i];
+                            d[i] = 0;
+                            d[repalceIndex] = replaceElement;
+                            $(document).trigger('moveZeroesRight',{
+                                row,
+                                repalceIndex,
+                                column:i
+                            })
+                        }
+                        repalceIndex++
                     }
-                    repalceIndex++
                 }
             }
-            return isMove;
         }
         let moveZeroesLeft = function (nums){
-            let repalceIndex = nums.length - 1;  // 记录要被交换的位置
-            let replaceElement; // 中间变量，用来存不为0的数字
-            let isMove = false; // 是否移动过。默认没有移动
-            for(let i = nums.length - 1; i >= 0; i--){
-                if(nums[i]) {  // 当不为0
-                    if(i != repalceIndex) {  // 第i个和repalceIndex相同，说明要交换的是同一个元素，没必要进行交换操作
-                        replaceElement = nums[i];
-                        nums[i] = 0;
-                        nums[repalceIndex] = replaceElement;
-                        isMove = true;
+            for(let row = 0; row < nums.length; row++){
+                let repalceIndex = nums.length - 1;  // 记录要被交换的位置
+                let replaceElement; // 中间变量，用来存不为0的数字
+                let isMove = false; // 是否移动过。默认没有移动
+                let d = nums[row];
+                for(let i = d.length - 1; i >= 0; i--){
+                    if(d[i]) {  // 当不为0
+                        if(i != repalceIndex) {  // 第i个和repalceIndex相同，说明要交换的是同一个元素，没必要进行交换操作
+                            replaceElement = d[i];
+                            d[i] = 0;
+                            d[repalceIndex] = replaceElement;
+                            isMove = true;
+                            $(document).trigger('moveZeroesRight',{
+                                row,
+                                repalceIndex,
+                                column:i
+                            })
+
+                        }
+                        repalceIndex--;
                     }
-                    repalceIndex--;
                 }
             }
-            console.log(nums);
-            return isMove;
-        }
-
-        let moveBottomOrUp = function(nums,func) {
-            // nums 是一个二维数组
-            let data2 = [];
-            let isMove = false;
-            for(let i = 0; i < nums.length; i++){
-                let a = []
-                for(let j = 0; j < nums.length; j++){
-                   a.push(nums[j][i]);
-                }
-                if(func(a)) {
-                    isMove = true;
-                }
-                // 移动完成之后，直接相加
-                for(let k = 0; k < a.length; k++){
-                    if(a[k] === a[k+1]){
-                        a[k] = a[k] + a[k+1];
-                        a[k+1] = 0;
-                    }
-                }
-                if(func(a)) {
-                    isMove = true;
-                }
-                data2.push(a);
-            };
-            let data3 = [];
-            for(let i = 0; i < data2.length; i++){
-                for(let j = 0; j < nums.length; j++){
-                   
-                   if(!data3[j]) data3[j] = [];
-                   data3[j][i] = data2[i][j];
-                }
-            };
-            // 把0放在右侧
-            nums.length = 0;
-            nums.push(...data3);
-            return isMove;
         }
 
         // 把0下移 传入的事二维数组
-        let moveZeroesBottom = (nums) => moveBottomOrUp(nums,moveZeroesRight)
+        let moveZeroesBottom = (nums) => {
+            for(let column = 0; column < data.length; column++){
+                let d = data[column];
+                let replaceIndex = 0; //  初始值是列
+                let replaceNumber;
+                for(let row = 0; row < d.length; row++){
+                    // 第一列的每一行 d[row][column]
+                    if(data[row][column]) {
+                        console.log(row,replaceIndex);
+                        if(row !== replaceIndex){
+                            replaceNumber = data[row][column];
+                            data[row][column] = 0;
+                            data[replaceIndex][column] = replaceNumber;
+                            $(document).trigger('moveZeroestop',{
+                                row,column,replaceIndex
+                            });
+                        }
+                        replaceIndex++;
+                    }
+                    
+                }
+            }
+        }
 
        // 把0下移
-       let moveZeroesUp = (nums) => moveBottomOrUp(nums,moveZeroesLeft)
+       let moveZeroesUp = (nums) => {
+            for(let column = 0; column < data.length; column++){
+                let d = data[column];
+                let replaceIndex = d.length-1; //  初始值是列
+                let replaceNumber;
+                for(let row = d.length-1; row >= 0; row--){
+                    // 第一列的每一行 d[row][column]
+                    if(data[row][column]) {
+                        if(row !== replaceIndex){
+                            replaceNumber = data[row][column];
+                            data[row][column] = 0;
+                            data[replaceIndex][column] = replaceNumber;
+                            $(document).trigger('moveZeroestop',{
+                                row,column,replaceIndex
+                            });
+                        }
+                        
+                        replaceIndex--;
+                    }
+                    
+                }
+            }
+       }
         
         // 根据不同方向移动0，返回值为是否移动过
         var moveZeroes = function(nums,direction) {
@@ -207,10 +240,10 @@
         };
 
         let data = [
-            [2, 2, 4, 4],
-            [0, 0, 0, 0],
-            [4, 0, 0, 0],
-            [0, 0, 4, 0]
+            [2, 2, 2, 2],
+            [2, 0, 0, 0],
+            [2, 0, 0, 0],
+            [2, 0, 0, 0]
         ]
         // 随机生成一个数字，数字是2||4，分布在 n行m列的位置
         // 2的几率要比4大
@@ -259,7 +292,7 @@
             let html = '';
             for (let row = 0; row < data.length; row++) { // 循环行
                 for (let column = 0; column < data[row].length; column++) { // 循环列
-                    html += `<div></div>`
+                    html += `<div class="bg"></div>`
                 }
             }
             return html;
@@ -288,10 +321,14 @@
         function createOneElementByrowAndColum(rAndc) {
             let [left, top, index] = positionData[rAndc.row][rAndc.column];
             let div = document.createElement('div');
-            div.className = 'position n'+ rAndc.n;
+            div.className = 'position scale n'+ rAndc.n;
             div.innerText = rAndc.n;
             div.style.left = left + 'px';
             div.style.top = top + 'px';
+            div.setAttribute('data-row-column',`${rAndc.row}-${rAndc.column}`);
+            setTimeout(() => {
+                div.style.transform = 'scale(1)'
+            })
             box.appendChild(div)
         }
 
@@ -305,6 +342,7 @@
                     let div = document.createElement('div');
                     div.className = 'position n'+ data[row][column];
                     div.innerText = data[row][column];
+                    div.setAttribute('data-row-column',`${row}-${column}`)
                     div.style.left = left + 'px';
                     div.style.top = top + 'px';
                     box.appendChild(div);
@@ -315,11 +353,158 @@
         
 
         // 初次加载
-        //createOneElementByrowAndColum(paddingNumber());
-        createElementByrowAndColum();
+        createOneElementByrowAndColum(paddingNumber())
+        let positions = document.getElementsByClassName('position')
         // 开始设置方向
+        let isRun = false;
+        let isMove = false;
+        box.addEventListener('transitionend',(ev) => {
+            if(!isRun){
+                createElementByrowAndColum();
+                isRun = true;
+            }
+            
+        })
+        let zIndex = 0;
+        $(document).on('moveZeroesRight',(ev,{row,column,repalceIndex}) => {
+            isMove = true;
+            let ele = document.querySelector(`.position[data-row-column="${row}-${column}"]`);
+            let ele2 = document.querySelector(`.position[data-row-column="${row}-${repalceIndex}"]`);
+            ele.style.left = positionData[row][repalceIndex][0] + 'px';
+            ele.style.zIndex = ++zIndex;
+            ele.setAttribute('data-row-column',`${row}-${repalceIndex}`)
+            if(ele2){
+                setTimeout(() => {
+                    console.log('要删除');
+                    ele2.remove();
+                },100);
+            }
+            
+        })
+        $(document).on('moveZeroestop',(ev,{row,column,replaceIndex}) => {
+            isMove = true;
+            let ele = document.querySelector(`.position[data-row-column="${row}-${column}"]`);
+            let ele2 = document.querySelector(`.position[data-row-column="${row}-${replaceIndex}"]`);
+            ele.style.top = positionData[replaceIndex][column][1] + 'px';
+            ele.style.zIndex = ++zIndex;
+            ele.setAttribute('data-row-column',`${replaceIndex}-${column}`)
+            if(ele2){
+                setTimeout(() => {
+                    console.log('要删除');
+                    ele2.remove();
+                },100);
+            }
+        })
 
         document.onkeydown = (ev) => {
+            let keyCode = ev.keyCode;
+
+            if(![37,38,39,40].includes(keyCode)) return;
+            if(!isHasZero()){
+                setTimeout(() => {
+                    alert('挂了')
+                })
+            }
+            isRun = false;
+            isMove = false;
+            switch(keyCode){
+                case 38:
+                    moveZeroes(data,38)
+                    for(let column = 0; column < data.length; column++){
+                        let d = data[column];
+                        for(let row = 0; row < d.length-1; row++){
+                            // 第一列的每一行 d[row][column]
+                            let next = data[row][column];
+                            let prev =  data[row+1][column];
+                            if(!(next && prev)) continue;  // 都为0，则不相加
+                            if(next === prev) {
+                                data[row][column] =next+prev;
+                                console.log('next+prev: ', next+prev);
+                                data[row+1][column] = 0;
+                                $(document).trigger('moveZeroestop',{
+                                    row:row+1,column,replaceIndex:row
+                                });
+                            }
+                        }
+                    }
+                    moveZeroes(data,38)
+                break;
+                case 40:
+                    moveZeroes(data,40)
+                    for(let column = 0; column < data.length; column++){
+                        let d = data[column];
+                        for(let row = d.length-1; row > 0; row--){
+                            // 第一列的每一行 d[row][column]
+                            let next = data[row][column];
+                            let prev =  data[row-1][column];
+                            if(!(next && prev)) continue;  // 都为0，则不相加
+                            if(next === prev) {
+                                data[row][column] =next+prev;
+                                data[row-1][column] = 0;
+                                $(document).trigger('moveZeroestop',{
+                                    row:row-1,column,replaceIndex:row
+                                });
+                            }
+                        }
+
+                    }
+
+                    moveZeroes(data,40);
+                break
+                case 37:
+                    moveZeroes(data,37);
+                    for(let row = 0; row < data.length; row++){
+                        for(let column = 0; column < data[row].length - 1; column++){
+                            let next = data[row][column];
+                            let prev =  data[row][column+1];
+                            if(!(next && prev)) continue;  // 都为0，则不相加
+                            if(next === prev){ // 后一个和前一个相同
+                                data[row][column] = next + prev;
+                                data[row][column+1] = 0;
+                                $(document).trigger('moveZeroesRight',{
+                                    row,
+                                    column:column+1,
+                                    repalceIndex: column
+                                })
+                            }
+                        }
+                    };
+                    moveZeroes(data,37);
+                break;
+                
+                case 39:
+                    moveZeroes(data,39);
+
+                    // 从每一行的后面向前找
+                    for(let row = 0; row < data.length; row++){
+                        for(let column = data[row].length - 1; column > 0; column--){
+                            let next = data[row][column];
+                            let prev =  data[row][column-1];
+                            if(!(next && prev)) continue;  // 都为0，则不相加
+                            if(next === prev){ // 后一个和前一个相同
+                                data[row][column] = next + prev;
+                                data[row][column-1] = 0;
+                                $(document).trigger('moveZeroesRight',{
+                                    row,
+                                    column:column-1,
+                                    repalceIndex: column
+                                })
+                            }
+                        }
+                    };
+
+                    //moveZeroes(data,39);
+                    moveZeroes(data,39);
+                break;
+            }
+            console.log(isMove);
+            if(isMove){
+                createOneElementByrowAndColum(paddingNumber())
+            }
+            
+        }
+
+        document.onkeydown2 = (ev) => {
             let keyCode = ev.keyCode;
             if(![37,38,39,40].includes(keyCode)) return;
             if(!isHasZero()){
@@ -398,7 +583,7 @@
                 
             }
             // 要先做运动
-            
+
             // 完成后都要重新渲染
             createElementByrowAndColum();
             if(isMove){ // 只有可以移动，才放入
