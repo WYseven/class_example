@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2048小游戏</title>
+    <style>
+        #box {
+            width: 170px;
+            height: 170px;
+            position: relative;
+        }
+
+        #box div {
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            border: 1px solid #000;
+            display: inline-block;
+            position: relative;
+        }
+
+        #box div.position {
+            position: absolute;
+            left: 0;
+            top: 0;
+            margin: 0;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        .n2 {
+            background: #eee4da;
+            box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0);
+        }
+
+        .n4 {
+            background: #ede0c8;
+            box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0);
+        }
+
+        .n8 {
+            color: #f9f6f2;
+            background: #f2b179;
+        }
+
+        .n16 {
+            color: #f9f6f2;
+            background: #f59563;
+        }
+
+        .n32 {
+            color: #f9f6f2;
+            background: #f67c5f;
+        }
+
+        .n64 {
+            color: #f9f6f2;
+            background: #f65e3b;
+        }
+
+        .n128 {
+            color: #f9f6f2;
+            background: #edcf72;
+            box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.2381), inset 0 0 0 1px rgba(255, 255, 255, 0.14286);
+            font-size: 45px;
+        }
+
+        .n256 {
+            color: #f9f6f2;
+            background: #edcc61;
+            box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.31746), inset 0 0 0 1px rgba(255, 255, 255, 0.19048);
+            font-size: 45px;
+        }
+
+        .n512 {
+            color: #f9f6f2;
+            background: #edc850;
+            box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.39683), inset 0 0 0 1px rgba(255, 255, 255, 0.2381);
+            font-size: 45px;
+        }
+
+        .n1024 {
+            color: #f9f6f2;
+            background: #edc53f;
+            box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.47619), inset 0 0 0 1px rgba(255, 255, 255, 0.28571);
+            font-size: 35px;
+        }
+
+        .n2048 {
+            color: #f9f6f2;
+            background: #edc22e;
+            box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.55556), inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
+            font-size: 35px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        /*
+            4X4 的格子
+        */
+        // 把所有的0移到最右，direction = right;
+        // 把所有的0移到最做，direction = left;
+        let moveZeroesRight = function (nums){
+            let repalceIndex = 0;  // 记录要被交换的位置
+            let replaceElement; // 中间变量，用来存不为0的数字
+            let isMove = false; // 是否移动过。默认没有移动
+            for(let i = 0; i < nums.length; i++){
+                if(nums[i]) {  // 当不为0
+                    if(i != repalceIndex) {  // 第i个和repalceIndex相同，说明要交换的是同一个元素，没必要进行交换操作
+                        replaceElement = nums[i];
+                        nums[i] = 0;
+                        nums[repalceIndex] = replaceElement;
+                        isMove = true; // 移动过
+                    }
+                    repalceIndex++
+                }
+            }
+            return isMove;
+        }
+        let moveZeroesLeft = function (nums){
+            let repalceIndex = nums.length - 1;  // 记录要被交换的位置
+            let replaceElement; // 中间变量，用来存不为0的数字
+            let isMove = false; // 是否移动过。默认没有移动
+            for(let i = nums.length - 1; i >= 0; i--){
+                if(nums[i]) {  // 当不为0
+                    if(i != repalceIndex) {  // 第i个和repalceIndex相同，说明要交换的是同一个元素，没必要进行交换操作
+                        replaceElement = nums[i];
+                        nums[i] = 0;
+                        nums[repalceIndex] = replaceElement;
+                        isMove = true;
+                    }
+                    repalceIndex--;
+                }
+            }
+            console.log(nums);
+            return isMove;
+        }
+
+        let moveBottomOrUp = function(nums,func) {
+            // nums 是一个二维数组
+            let data2 = [];
+            let isMove = false;
+            for(let i = 0; i < nums.length; i++){
+                let a = []
+                for(let j = 0; j < nums.length; j++){
+                   a.push(nums[j][i]);
+                }
+                if(func(a)) {
+                    isMove = true;
+                }
+                // 移动完成之后，直接相加
+                for(let k = 0; k < a.length; k++){
+                    if(a[k] === a[k+1]){
+                        a[k] = a[k] + a[k+1];
+                        a[k+1] = 0;
+                    }
+                }
+                if(func(a)) {
+                    isMove = true;
+                }
+                data2.push(a);
+            };
+            let data3 = [];
+            for(let i = 0; i < data2.length; i++){
+                for(let j = 0; j < nums.length; j++){
+                   
+                   if(!data3[j]) data3[j] = [];
+                   data3[j][i] = data2[i][j];
+                }
+            };
+            // 把0放在右侧
+            nums.length = 0;
+            nums.push(...data3);
+            return isMove;
+        }
+
+        // 把0下移 传入的事二维数组
+        let moveZeroesBottom = (nums) => moveBottomOrUp(nums,moveZeroesRight)
+
+       // 把0下移
+       let moveZeroesUp = (nums) => moveBottomOrUp(nums,moveZeroesLeft)
+        
+        // 根据不同方向移动0，返回值为是否移动过
+        var moveZeroes = function(nums,direction) {
+                switch(direction){
+                    case 37:
+                        return moveZeroesRight(nums);
+                    break;
+                    case 38:
+                        return moveZeroesBottom(nums);
+                    break;
+                    case 39:
+                        return moveZeroesLeft(nums);
+                    break;
+
+                    case 40:
+                        return moveZeroesUp(nums);
+                    break;
+                }
+                
+        };
+
+        let data = [
+            [2, 2, 4, 4],
+            [0, 0, 0, 0],
+            [4, 0, 0, 0],
+            [0, 0, 4, 0]
+        ]
+        // 随机生成一个数字，数字是2||4，分布在 n行m列的位置
+        // 2的几率要比4大
+        function create2or4() {
+            return [2, 4][Math.round(Math.random() - 0.2)]
+        }
+        // 随机行和列
+        function randomRowAndColumn() {
+            return [Math.round(Math.random() * 3), Math.round(Math.random() * 3)];
+        }
+
+        // 根据随机生成的，填在数组中，填充的位置不为0，则重新生成
+        // 返回填充位置的行列数
+        function paddingNumber() {
+            let n = create2or4(),
+                [row, column] = randomRowAndColumn();
+            let hasZero = isHasZero();
+            // 返回null,说明没有0的位置了
+            if(!hasZero) return null;
+            if (data[row][column] === 0) {
+                data[row][column] = n;
+            } else if (hasZero) { // 有空位的情况，在尝试填补0
+                return paddingNumber();
+            }
+            return {
+                row,
+                column,
+                n
+            }
+        }
+
+        // 计算是否还剩余空位
+        function isHasZero() {
+            for (let row = 0; row < data.length; row++) { // 循环行
+                for (let column = 0; column < data[row].length; column++) { // 循环列
+                    if (data[row][column] === 0) { // 如果某行某列有0，则返回true
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        // 映射在页面中
+        function render() {
+            let html = '';
+            for (let row = 0; row < data.length; row++) { // 循环行
+                for (let column = 0; column < data[row].length; column++) { // 循环列
+                    html += `<div></div>`
+                }
+            }
+            return html;
+        }
+
+        box.innerHTML = render();
+
+        // 再生成一批，和底层的16个做个映射，但都是定位的，方便移动
+        // 1. 记录底部16个每一个的位置
+        let divs = box.querySelectorAll('div');
+        // 得到每个元素的定位，4X4方格存
+        let positionData = (function getPosition() {
+            let positionData = [];
+            let n = -1;
+            divs.forEach((item, index) => {
+                if (index % 4 === 0) {
+                    n++;
+                    positionData[n] = [];
+                }
+                positionData[n].push([item.offsetLeft, item.offsetTop, index])
+            })
+            return positionData;
+        })();
+
+        // 根据要填充的位置，拿到填充的行和列，生成一个元素
+        function createOneElementByrowAndColum(rAndc) {
+            let [left, top, index] = positionData[rAndc.row][rAndc.column];
+            let div = document.createElement('div');
+            div.className = 'position n'+ rAndc.n;
+            div.innerText = rAndc.n;
+            div.style.left = left + 'px';
+            div.style.top = top + 'px';
+            box.appendChild(div)
+        }
+
+        function createElementByrowAndColum() {
+            let positions = box.querySelectorAll('.position');
+            positions.forEach(item => item.remove());
+            for(let row = 0; row < data.length; row++){
+                for(let column = 0; column < data[row].length; column++){
+                    if(data[row][column] === 0) continue;
+                    let [left, top] = positionData[row][column];
+                    let div = document.createElement('div');
+                    div.className = 'position n'+ data[row][column];
+                    div.innerText = data[row][column];
+                    div.style.left = left + 'px';
+                    div.style.top = top + 'px';
+                    box.appendChild(div);
+                }
+            };
+        }
+
+        
+
+        // 初次加载
+        //createOneElementByrowAndColum(paddingNumber());
+        createElementByrowAndColum();
+        // 开始设置方向
+
+        document.onkeydown = (ev) => {
+            let keyCode = ev.keyCode;
+            if(![37,38,39,40].includes(keyCode)) return;
+            if(!isHasZero()){
+                setTimeout(() => {
+                    alert('挂了')
+                })
+            }
+            let isMove = false;
+            switch(keyCode){
+                case 37: // 左
+                    // 把所有的0，都放在数组结尾
+                    for(let row = 0; row < data.length; row++){
+                        if(moveZeroes(data[row],37)){
+                           isMove = true;
+                       }
+                    }
+                     // 从每一行的后面向前找
+                     for(let row = 0; row < data.length; row++){
+                        for(let column = 0; column < data[row].length - 1; column++){
+                            let next = data[row][column];
+                            let prev =  data[row][column+1];
+                            if(!(next && prev)) continue;  // 都为0，则不相加
+                            if(next === prev){ // 后一个和前一个相同
+                                data[row][column] = next + prev;
+                                data[row][column+1] = 0;
+                                isMove = true; // 进来说明移动了
+                            }
+                        }
+                    };
+                    for(let row = 0; row < data.length; row++){
+                        if(moveZeroes(data[row],37)){
+                           isMove = true;
+                        }
+                    }
+                    
+                break;
+                case 38: // 上
+                    // 把所有的0都下移
+                    if(moveZeroes(data,38)){
+                        isMove = true;
+                    }
+
+                break;
+                case 39: // 右
+                    // 把所有的0，都放在数组结尾
+                    for(let row = 0; row < data.length; row++){
+                       if(moveZeroes(data[row],39)){
+                           isMove = true;
+                       }
+                    }
+                    // 从每一行的后面向前找
+                    for(let row = 0; row < data.length; row++){
+                        for(let column = data[row].length - 1; column > 0; column--){
+                            let next = data[row][column];
+                            let prev =  data[row][column-1];
+                            if(!(next && prev)) continue;  // 都为0，则不相加
+                            if(next === prev){ // 后一个和前一个相同
+                                data[row][column] = next + prev;
+                                data[row][column-1] = 0;
+                                isMove = true; // 进来说明移动了
+                            }
+                        }
+                    };
+                    for(let row = 0; row < data.length; row++){
+                       if(moveZeroes(data[row],39)){
+                           isMove = true;
+                       }
+                    }
+                break;
+                case 40: // 下
+                     // 把所有的0都上移动
+                     if(moveZeroes(data,40)){
+                        isMove = true;
+                    }
+                break;
+                
+            }
+            // 要先做运动
+            
+            // 完成后都要重新渲染
+            createElementByrowAndColum();
+            if(isMove){ // 只有可以移动，才放入
+                //paddingNumber();
+                createOneElementByrowAndColum(paddingNumber())
+            }
+        };
+
+
+    </script>
+</body>
+
+</html>
