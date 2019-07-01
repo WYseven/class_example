@@ -8,34 +8,38 @@
     <title>2048小游戏</title>
     <style>
         #box {
-            width: 280px;
-            height: 280px;
+            width: 500px;
+            height: 500px;
             position: relative;
             padding: 10px;
             background: #bbada0;
             border-radius: 6px;
+            margin: 0 auto;
+        }
+
+        #box div {
+            width: 110px;
+            height: 110px;
         }
 
         #box div.bg {
-            width: 57.5px;
-            height: 57.5px;
-            margin-right: 10px;
+            margin: 0 10px 10px 0;
             border-radius: 3px;
             background: rgba(238, 228, 218, 0.35);
             display: inline-block;
         }
 
         #box div.position {
-            width: 57.5px;
-            height: 57.5px;
             position: absolute;
             left: 0;
             top: 0;
             margin: 0;
             text-align: center;
-            line-height: 57.5px;
+            line-height: 2;
             transition: .3s;
             border-radius: 3px;
+            font-size: 55px;
+            font-weight: bold;
         }
 
         .scale {
@@ -240,10 +244,10 @@
         };
 
         let data = [
-            [2, 2, 2, 2],
-            [2, 0, 0, 0],
-            [2, 0, 0, 0],
-            [2, 0, 0, 0]
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
         ]
         // 随机生成一个数字，数字是2||4，分布在 n行m列的位置
         // 2的几率要比4大
