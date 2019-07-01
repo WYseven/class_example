@@ -10,7 +10,7 @@ var isValid = function(s) {
     for(let i = 0; i < s.length; i++){
         if(!(s[i] in flagMap)){
             stack.push(s[i]);
-        }else if(stack.length && flagMap[s[i]] !== stack.pop()){
+        }else if(flagMap[s[i]] !== stack.pop()){
             return false
         }
     }
@@ -21,3 +21,4 @@ var isValid = function(s) {
 
 console.log(isValid('(())'));
 console.log(isValid('(([][]{}))'));
+console.log(isValid(']'));
