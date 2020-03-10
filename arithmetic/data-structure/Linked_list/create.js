@@ -83,6 +83,16 @@ class LinkendList {
     createNewNode.next = currentNode.next;
     currentNode.next = createNewNode;
   }
+  // 总共有多少个节点
+  nodesLength(){
+    let currentNode = this.head;
+    let length = 0;
+    while(currentNode){
+      currentNode = currentNode.next;
+      length++;
+    }
+    return length;
+  }
 }
 
 let h = new LinkendList();

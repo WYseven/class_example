@@ -1,0 +1,179 @@
+
+Vue3基本使用
+
+Pre-alpha（准预览版本）
+Pre-alpha版本是一个功能不完整的版本
+
+Vue3现状
+
+目前还没有发布正式版本，处于Pre-alpha（准预览版本），是一个功能不完整的版本。
+仓库地址：https://github.com/vuejs/vue-next
+
+在Vue2中提前使用组合API
+安装模块：@vue/composition-api
+
+仓库地址：https://github.com/vuejs/composition-api
+
+改进：
+1. 逻辑组合与复用
+2. 更好的支持typescript类型推断
+    之前是options API 的方式，现在是 composition api 方式
+...
+
+
+
+逻辑组合与复用
+1. 使用Mixins，抽离逻辑，混合到组件中
+2. 高阶组件 (Higher-order Components, aka HOCs)
+3. Renderless Components (基于 scoped slots / 作用域插槽封装逻辑的组件）
+
+缺点：
+
+1. mixins会
+
+计算值的行为跟计算属性 (computed property) 一样：只有当依赖变化的时候它才会被重新计算。
+watch() API 提供了基于观察状态的变化来执行副作用的能力。
+
+思考题： 如何让下面的程序执行后返回true：
+  obj.n > 5 && obj.n < 5
+
+1. 拦截对象操作的一些方式
+  a. getter/setter
+      优点：写在对象的属性上，简单、直接
+      缺点：需要手动设置每一个属性
+  b. Object.defineProperty
+      优点：可使用循环、递归给属性设置getter/setter
+      缺点：只有可设置获取和设置的操作，没有对增删操作的设置 （看下vue2是怎么实现的）
+  c. Proxy 
+      优点：拦截对对象的操作（增删改查）
+      缺点：对原生的属性操作也被拦截，例如[].push
+
+let target = {a: 1};
+let proxyTarget = new Proxy(target, handler={});
+
+handler中包含的traps（捕获器）：
+
+handler.get(){}
+handler.set(){}
+handler.has()
+handler.deleteProperty()
+handler.apply()
+handler.construct()
+
+具体参考：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler
+
+知识点补充：
+
+  Reflect，提供拦截JavaScript操作对象的方法。
+  优势：
+    1. 操作对象后，返回操作后的结果。
+    2. 让操作对象的方式变成函数式的。例如，查询 key in Object 、 delete Object[prop]
+  常用方法：
+    get set deleteProperty has
+
+  Set
+    有序集合存储任意类型的唯一值。
+    实例化后可调用的方法：delete、get、add、has、size、forEach、...
+  Map 
+    有序键值对的集合，键值可以是任意类型
+    实例化后可调用的方法：delete、get、set、has、size、forEach、...
+  WeakMap 
+    键值对的集合，键只能是对象，保持对键或值的对象“弱引用”， 可被垃圾回收机制回收，不能遍历拿到key值。
+    实例化后可调用的方法：delete、get、set、has
+
+模拟函数“调用栈”
+JavaScript引擎追踪函数执行流的一种机制。
+在执行函数时，会把当前执行的函数压入到一个调用栈中，当调用结束会从调用栈中弹出。
+在函数内部调用了其他的函数，又会把调用的函数压入到调用栈中，就可以找到上一个调用栈中的函数所形成的执行环境，从而找到所需要的变量。
+
+  在Vue3中会把当前执行的effect函数放在一个数组中，形成调用“调用栈”，目的是在track时拿到使用属性所依赖的函数。
+
+简单模拟，靠近Vue3：
+
+参考：https://developer.mozilla.org/zh-CN/docs/Glossary/Call_stack
+
+Vue3的响应式系统
+
+
+
+看源码的方式
+  1. 源码中覆盖功能的测试文件
+  2. 运行，浏览器断点调试
+
+2. 探讨暴露出来的几个方法
+
+这套响应式系统完全独立，可配合任何库都可以使用，主要暴露以下的方法：
+
+reactive： 利用 Proxy，拦截对目标对象的操作，返回代理后的对象
+effect： 可响应对对象的操作，产生一些副作用的变化
+computed: 当依赖的对象属性发生变化，可重新计算。
+ref：可让字面量值为可响应的表现
+
+
+
+收集依赖，收集使用到这个对象某个属性的函数
+触发依赖，属性进行增删改时，调用收集到的函数。
+
+这一部分在reactive 拦截后进行
+
+effect 用来设置依赖的函数
+
+track 追踪器
+在get时候，利用track来收集使用这个属性的effect函数
+trigger 触发器
+在set时候，利用trigger来触发收集到的effect函数
+
+
+
+
+今天下午19层16号会议室 16:00-17:30，前端《 Vue3初探&响应系统源码解析 》分享，欢迎各位抽空参加~
+分享主要内容：
+  Vue3现状&基本使用
+  逻辑组合与复用的几种方式
+  拦截对象操作的方式
+  Vue3中响应系统源码解析
+
+
+主要是调用 Proxy 函数， 返回一个代理对象
+
+定义目标对象和代理对象的双向映射，提高查找效率
+
+当取值时，调用track追踪器，收集依赖函数，并返回，如果是对象，则返回代理对象
+但设置值时，调用trigger 触发器，依次执行依赖函数。
+
+
+传入函数，返回一个effect函数，利用闭包，调用effect， 可以再次执行传入的函数
+
+执行函数过程，会把函数放入“调用栈”中，当获取属性值，此时执行函数收集到dep依赖中
+
+执行函数过程，有赋值行为，如果“调用栈”中已经有当前正在执行的函数，则忽略，防止形成死循环调用
+
+在收集到dep依赖之前，先把effect函数从dep中移除，重新收集，原因是有一些分支判断会重新决定是否取值。
+
+
+
+
+1. 劫持对象的一些方式
+2. Object.defain 的优缺点
+
+
+3. Proxy的使用和优缺点
+
+
+
+
+4. 
+
+先清空，在搜集
+1. 防止track多次添加
+2. 如果effect中有分支条件，则重新收集
+
+设置的时候，执行effect之前，先在执行栈中找一下，如果不存在则执行，存在没必要执行，防止死循环。
+
+问题：不给deps克隆各一份出来，调用cleanup 有问题，会造成递归调用
+
+computed 在get的时候才会取值，所以当取一次值之后，多次取值，不再触发get函数，设置开关，用scheduler来设置
+
+先走computed，后走effect，目的是先打开computed的开关，还能再次进入到computed中
+
+trackChildRun 形成computed的链式引用

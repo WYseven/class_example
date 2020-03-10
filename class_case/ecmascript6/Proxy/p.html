@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  hello
+  <!-- <script src="./proxy4.js"></script> -->
+  <script>
+    // 测试数组的length问题
+    let a = ['a', 'b'];
+
+    const pa = new Proxy(a, {
+      get(target, key){
+        console.log('get', target, key, target.length);
+        return Reflect.get(target, key);
+      },
+      set(target, key, value){
+        console.log('set', target, key, value, target.length);
+        return Reflect.set(target, key, value);
+      }
+    });
+
+    const aa = pa.join(' ');
+
+    pa.shift();
+
+    // 测试内存回收
+
+    let map = new Map();
+
+    function testMap(){
+      for(let i = 0; i < 100000; i++){
+        let o = {};
+        o.abcdef = (new Array(1000)).fill(0).map(() => 'test');
+        map.set(o, 1);
+      }
+    }
+
+    //testMap();
+
+    let weakMap = new WeakMap();
+
+    function testWeakMap(){
+      for(let i = 0; i < 100000; i++){
+        let o = {};
+        o.abcdef = (new Array(1000)).fill(0).map(() => 'test');
+        weakMap.set(o, 1);
+      }
+    }
+    //testWeakMap();
+
+    // 模拟调用栈
+    let stack = [];
+    function e(fn){
+      let ee = function(){
+        try{
+          stack.push(ee);
+          fn();
+        }finally{
+          stack.pop();
+        }
+      }
+      ee();
+    }
+    e(function(){
+      console.log(1);
+      console.log(stack);
+      // 可能会使用到当前正在执行的函数
+      e(function(){
+        console.log(2);
+        console.log(stack);
+      })
+    })
+    
+  </script>
+</body>
+</html>

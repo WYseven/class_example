@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=s, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>index</title>
+  <style>
+    .main {
+      width: 500px;
+      height: 300px;
+      border: 1px solid #000000;
+      position: relative;
+    }
+    #iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+  <script>
+    class History {
+      constructor(){
+        window.addEventListener('popstate', e => {
+          console.log(e);
+        })
+      }
+    }
+  </script>
+</head>
+<body>
+  <button id="home">首页</button>
+  <button id="wallet">钱包</button>
+  <button id="c_position">c位</button>
+  <div class="main">
+      <iframe src="http://localhost:8081/#/" frameborder="0" id="iframe"></iframe>
+  </div>
+  <button id="buttons">跳转</button>
+  <script>
+
+    const config = [
+      { 
+        path: '/',
+        entry: './iframe'
+      },
+      {
+        path: '/wallect',
+        entry: './pages/build1/index.html'
+      },
+      {
+        path: '/c_position',
+        entry: './pages/build1/level.html'
+      }
+    ]
+
+    home.onclick = function(){
+      window.history.pushState(null, '', '/')
+      iframe.src = 'http://localhost:8081/#/';
+    }
+    wallet.onclick = function(){
+      window.history.pushState(null, '', '/wallet')
+      iframe.src = 'http://localhost:8081/#/';
+    }
+    c_position.onclick = function(){
+      window.history.pushState(null, '', '/c_position');
+      iframe.src = 'http://localhost:8081/#/level.html';
+    }
+    function send(){
+
+    }
+
+    const iframe = document.getElementById('iframe');
+    iframe.onload = function(){
+      console.log('parent iframe onload');
+      iframe.contentWindow.postMessage({type: 'change-router', path: '/wallet-income'}, '*');
+      const href = window.location.pathname;
+      // iframe.contentWindow.injection = function(options){
+      //   console.log('执行了');
+      //   this.router.push(href);
+      // }
+    }
+    
+    window.addEventListener('message', (event) => {
+      console.log('接收消息111111', event.data);
+      if(event.data.type === 'change-router') {
+        window.history.pushState(null, '', event.data.path);
+      }
+      
+    })
+    
+  </script>
+</body>
+</html>

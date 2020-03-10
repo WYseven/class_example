@@ -1,0 +1,124 @@
+
+
+思考题： 如果让下面的程序执行后返回true：
+  obj.n > 5 && obj.n < 5
+
+1. 劫持对对象操作的一些方式
+   a. getter/setter
+      优点：写在对象的属性上，简单、直接
+      缺点：需要手动设置每一个属性
+  b. Object.defineProperty
+      优点：可使用循环、递归设置getter/setter
+      缺点： 只有可设置获取和设置的操作，没有对增删操作的设置 （看下vue2是怎么实现的）
+  c. Proxy 
+      优点：“拦截” 对对象的操作（增删改查）
+      缺点：对原生的属性操作也被拦截
+
+let target = {a: 1};
+let proxyTarget = new Proxy(target, handler);
+
+handler中包含的traps（捕获器）：
+
+get(){}
+set(){}
+handler.has()
+handler.deleteProperty()
+handler.apply()
+handler.construct()
+
+具体参考：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler
+
+额外的知识点：
+
+  Reflect，提供拦截js对应操作的方法。
+  优势：
+    1. 操作对象后，返回操作后的结果。
+    2. 让操作对象的方式变成函数式的。例如，查询 key in Object 、 delete Object[prop]
+  常用方法：
+    get set deleteProperty has
+
+  Set 
+    有序集合存储任意类型的唯一值。
+    实例化后可调用的方法：delete、get、add、has、size、forEach、...
+  Map 
+    有序键值对的集合，键值可以是任意类型
+    实例化后可调用的方法：delete、get、set、has、size、forEach、...
+  WeakMap 
+    键值对的集合，键只能是对象，保持对键或值的对象“弱引用”， 可被垃圾回收机制回收，不能遍历拿到key值。
+    实例化后可调用的方法：delete、get、set、has
+
+模拟函数“调用栈”
+JavaScript引擎追踪函数执行流的一种机制。
+在执行函数时，会把当前执行的函数压入到一个调用栈中，当调用结束会从调用栈中弹出。
+在函数内部调用了其他的函数，又会把调用的函数压入到调用栈中，就可以找到上一个调用栈中的函数所形成的执行环境，从而找到所需要的变量。
+
+简单模拟，靠近Vue3：
+
+参考：https://developer.mozilla.org/zh-CN/docs/Glossary/Call_stack
+
+Vue3的响应式系统
+  
+
+
+看源码的方式
+  1. 源码中覆盖功能的测试文件
+  2. 运行，浏览器断点调试
+
+2. 探讨暴露出来的几个方法
+
+reactive： 利用 Proxy，“拦截”对目标对象的操作，返回代理后的对象
+effect： 可响应对对象属性的操作
+computed: 当依赖的对象属性发生变化，可重新计算。
+ref：可让字面量值为可响应的表现
+
+
+
+收集依赖，收集使用到这个对象某个属性的函数，
+触发依赖，属性进行增删改时，调用收集到的函数。
+
+这一部分在reactive 拦截后进行
+
+effect 用来设置依赖的函数
+
+track 追踪器
+在get时候，利用track来收集使用这个属性的effect函数
+trigger 触发器
+在set时候，利用trigger来触发收集到的effect函数
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1. 劫持对象的一些方式
+2. Object.defain 的优缺点
+
+
+3. Proxy的使用和优缺点
+
+
+
+
+4. 
+
+先清空，在搜集
+1. 防止track多次添加
+2. 如果effect中有分支条件，则重新收集
+
+设置的时候，执行effect之前，先在执行栈中找一下，如果不存在则执行，存在没必要执行，防止死循环。
+
+问题：不给deps克隆各一份出来，调用cleanup 有问题，会造成递归调用
+
+computed 在get的时候才会取值，所以当取一次值之后，多次取值，不再触发get函数，设置开关，用scheduler来设置
+
+先走computed，后走effect，目的是先打开computed的开关，还能再次进入到computed中
+
+trackChildRun 形成computed的链式引用

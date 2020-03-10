@@ -21,3 +21,37 @@ var arr2=['角','分','块',"十","百","千","万","亿"];
 		    "7": "佰",
 		    "8": "仟"
 		}
+
+let num = 6500;
+
+function conver(n){
+	// let m = n;
+	// let arr = [];
+	// let leve = -1;
+	// while(m > 0){
+	// 	leve++;
+	// 	arr[leve] = m % 10;
+	// 	m = parseInt(m/10);
+	// }
+	return String(n).split('');
+}
+
+let arr = conver(600050);
+let length = arr.length;
+let len = length;
+let str = '';
+while(len--){
+	let index = length - 1- len;
+	let val = arr[index];
+	if(val != 0){
+		str += val + obj2[len+1]
+	}else {
+		str += val
+	}
+}
+let re = /0+/g;
+str = str.replace(re, function($0){
+	console.log($0);
+	return '0';
+})
+console.log(str);
