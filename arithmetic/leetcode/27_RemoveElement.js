@@ -19,16 +19,25 @@ let arr = [0,1,2,2,3,0,4,2];
 };
 */
 // 以下可以统计删除后的个数，但是nums变得不对了
+// var removeElement = function(nums, val) {
+//   let i = 0;
+//   for (let j = 0; j < nums.length; j++) {
+//     if (nums[j] !== val) {
+//       nums[i] = nums[j];
+//       i++;
+//     }
+//   }
+//   console.log(nums)
+//   return i;
+// };
+
 var removeElement = function(nums, val) {
-  let i = 0;
-  for (let j = 0; j < nums.length; j++) {
-    if (nums[j] !== val) {
-      nums[i] = nums[j];
-      i++;
+  
+  for(let i = 0; i < nums.length; i++){
+    if(nums[i] === val) {
+      
     }
   }
-  console.log(nums)
-  return i;
 };
 
 

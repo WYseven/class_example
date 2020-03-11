@@ -33,23 +33,37 @@
   return nums;
 };*/
 
+// var moveZeroes = function(nums) {
+//   let repalceIndex = 0;  // 记录要被交换的位置
+//   let replaceElement; // 中间变量，用来存不为0的数字
+//   for(let i = 0; i < nums.length; i++){
+//     if(nums[i]) {  // 当不为0
+//       if(i != repalceIndex) {  // 第i个和repalceIndex相同，说明要交换的是同一个元素，没必要进行交换操作
+//         replaceElement = nums[i];
+//         nums[i] = 0;
+//         nums[repalceIndex] = replaceElement;
+//       }
+//       repalceIndex++
+//     }
+//   }
+  
+//   return nums;
+// };
 var moveZeroes = function(nums) {
-  let repalceIndex = 0;  // 记录要被交换的位置
-  let replaceElement; // 中间变量，用来存不为0的数字
+  let k = 0;  // 含义[0，k) 之间为非 0 的元素
+  let mreplace;
   for(let i = 0; i < nums.length; i++){
-    if(nums[i]) {  // 当不为0
-      if(i != repalceIndex) {  // 第i个和repalceIndex相同，说明要交换的是同一个元素，没必要进行交换操作
-        replaceElement = nums[i];
-        nums[i] = 0;
-        nums[repalceIndex] = replaceElement;
+    if(nums[i]) { // 当第 i 这个位置的元素，不为 0 时
+      if( i !== k) { 
+        mreplace = nums[k];
+        nums[k] = nums[i];
+        nums[i] = mreplace;
       }
-      repalceIndex++
+      k++;
     }
   }
-  
   return nums;
 };
-
 let arr = [3,4,0,0,0,0,1,0,3,0,9,0,12,0,0,1];
 
-console.log(moveZeroes(arr)); // [ 1, 3, 9, 12, 0, 0, 0, 0 ]
+console.log(moveZeroes(arr)); // [ 3, 4, 1, 3, 9, 12, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
