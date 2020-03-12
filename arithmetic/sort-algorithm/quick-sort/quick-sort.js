@@ -1,4 +1,4 @@
-let arr = [9, 0, 2, 1, 6, 4, 10, 5, 3];
+let arr = [9, 0, 2, 1, 6, 4, 10, 5, 3, 0, 9, 2];
 
 // [begin,end] 这个区间内没有排序的元素
 function quickSort(arr, begin=0, end= arr.length-1){
